@@ -1,0 +1,98 @@
+{
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "**": false
+    }
+  },
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/ledger",
+      "destination": "/designs/01-ledger/",
+      "permanent": false
+    },
+    {
+      "source": "/tax-year",
+      "destination": "/designs/02-calendar/",
+      "permanent": false
+    },
+    {
+      "source": "/manukau-road",
+      "destination": "/designs/03-epsom/",
+      "permanent": false
+    },
+    {
+      "source": "/structures",
+      "destination": "/designs/04-property/",
+      "permanent": false
+    },
+    {
+      "source": "/index",
+      "destination": "/designs/05-index/",
+      "permanent": false
+    },
+    {
+      "source": "/private-client",
+      "destination": "/designs/06-private/",
+      "permanent": false
+    },
+    {
+      "source": "/toolkit",
+      "destination": "/designs/07-bento/",
+      "permanent": false
+    },
+    {
+      "source": "/kinetic",
+      "destination": "/designs/08-kinetic/",
+      "permanent": false
+    },
+    {
+      "source": "/paperwork",
+      "destination": "/designs/09-paperwork/",
+      "permanent": false
+    },
+    {
+      "source": "/capability",
+      "destination": "/designs/10-capability/",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/designs/(.*)\\.(webp|jpg)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)\\.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, stale-while-revalidate=3600"
+        }
+      ]
+    }
+  ]
+}
