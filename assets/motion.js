@@ -19,7 +19,7 @@
    Pauses on hover and focus, and while off screen. With reduced motion the strip stays static. */
 (function () {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  fallingHeadings();
+  if (!window.gsap) fallingHeadings(); // round-2 concepts choreograph their own headings
   // the list holding the most partner logos (a page may also show one or two logos elsewhere)
   var list = null, best = 0;
   document.querySelectorAll('ul').forEach(function (u) {
@@ -105,6 +105,7 @@ function fallingHeadings() {
   var HIGH = ['01-partners', '03-epsom', '05-studio', '07-bento', '08-kinetic', '11-reveal', '12-story'];
   var slug = document.documentElement.getAttribute('data-concept');
   if (HIGH.indexOf(slug) < 0 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.gsap) return; // the page runs its own GSAP choreography
   var fine = matchMedia('(pointer: fine)').matches && innerWidth >= 900;
   var css = document.createElement('style');
   css.textContent =
