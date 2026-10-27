@@ -16,7 +16,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"AccountingService","name":"Tax Professionals","legalName":"Tax Professionals Ltd","url":"https://www.taxprofessionals.co.nz/","email":"info@taxprofessionals.co.nz","telephone":["+6496250035","+6496250025"],"foundingDate":"1998","logo":"https://www.taxprofessionals.co.nz/logo.png","image":"https://www.taxprofessionals.co.nz/community.jpg","address":{"@type":"PostalAddress","streetAddress":"620 Manukau Road","addressLocality":"Epsom","addressRegion":"Auckland","postalCode":"1023","addressCountry":"NZ"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:30","closes":"17:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"11:30","closes":"15:00"}],"award":"Accountant of the Year 2019-2020, Indian Newslink Indian Business Awards","sameAs":["https://www.facebook.com/TaxProfessionalsNZ/","https://nz.linkedin.com/company/tax-professionals-limited"]}
 </script>
-<script>(function(h){h.classList.add('js');try{var q=/[?&]fx(=|&|$)/.test(location.search),r=matchMedia('(prefers-reduced-motion: reduce)').matches;if(!r&&(q||(matchMedia('(pointer:fine) and (min-width:1024px)').matches&&(navigator.hardwareConcurrency||8)>4)))h.classList.add('fx')}catch(e){}})(document.documentElement)</script>
+<script>(function(h){h.classList.add('js');try{var q=/[?&]fx(=|&|$)/.test(location.search),r=matchMedia('(prefers-reduced-motion: reduce)').matches;if(!r&&(q||(matchMedia('(pointer:fine) and (min-width:1024px)').matches&&(navigator.hardwareConcurrency||8)>4)))h.classList.add('fx');else if(!r)h.classList.add(matchMedia('(min-width:768px)').matches?'tab':'ph')}catch(e){}})(document.documentElement)</script>
 <style>
 :root{
   --deep:#033F66;--blue:#04649F;--green:#4CA442;--green-d:#1B8F25;--green-l:#62B444;
@@ -103,16 +103,17 @@ html.lenis-on{scroll-behavior:auto}
 .hero{position:relative;height:100vh;height:100svh;min-height:540px;overflow:clip;background:#03406a;color:#fff}
 .hero-ph{position:absolute;inset:var(--hdr) 0 0;display:block}
 .hero-ph img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-shade{position:absolute;inset:var(--hdr) 0 0;background:linear-gradient(90deg,rgba(2,42,69,.6) 0%,rgba(2,42,69,.25) 42%,rgba(2,42,69,0) 62%)}
+.hero-shade{position:absolute;inset:var(--hdr) 0 0;background:radial-gradient(52% 62% at 50% 50%,rgba(2,42,69,.66) 0%,rgba(2,42,69,.42) 60%,rgba(2,42,69,.12) 100%)}
 .spot{position:absolute;inset:var(--hdr) 0 0;pointer-events:none;background:radial-gradient(28% 70% at var(--sx) 38%,rgba(214,234,248,.10),rgba(214,234,248,0) 100%)}
-.hero-in{position:absolute;inset:var(--hdr) 0 0;display:flex;align-items:center}
+.hero-in{position:absolute;inset:var(--hdr) 0 0;display:flex;align-items:center;text-align:center}
 .hero-in .wrap{max-width:1240px}
-.hero-tx{max-width:min(600px,46vw)}
+.hero-tx{max-width:min(780px,100%);margin-inline:auto}
+.hero h1{margin-inline:auto}
 .hero h1{font-size:var(--h1)}
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
   .hero h1 .tp-w{background:radial-gradient(70% 190% at var(--sx) 45%,#fff 0%,#fff 34%,#bcd6ea 82%);-webkit-background-clip:text;background-clip:text;color:transparent}
 }
-.hero p{max-width:44ch;margin-top:clamp(14px,2.4vh,22px);font-size:var(--lead);color:rgba(255,255,255,.9)}
+.hero p{max-width:44ch;margin-inline:auto;margin-top:clamp(14px,2.4vh,22px);font-size:var(--lead);color:rgba(255,255,255,.9)}
 .hero .btn{margin-top:clamp(18px,3.4vh,32px)}
 .gl{position:absolute;left:0;right:0;top:var(--hdr);width:100%;height:calc(100% - var(--hdr));z-index:3;display:block;pointer-events:none}
 .doors,.seal{display:none}
@@ -186,17 +187,21 @@ html.lenis-on{scroll-behavior:auto}
 .stage::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(34% 80% at var(--cx) -8%,rgba(200,226,244,.09),rgba(200,226,244,0) 100%),linear-gradient(180deg,rgba(4,100,159,0) 55%,rgba(4,100,159,.22) 100%)}
 .cc-ch{position:relative;padding-block:clamp(72px,10vw,120px)}
 .cc-ch+.cc-ch{border-top:1px solid rgba(255,255,255,.12)}
-.cc-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center}
-.cc-ph{border-radius:18px;width:100%;justify-self:end}
+.cc-g{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(22px,3.4vh,40px);justify-items:center;align-items:center}
+.cc-ph{border-radius:18px;width:100%;justify-self:center}
 .ch1 .cc-ph{max-width:440px;aspect-ratio:1}
 .ch3 .cc-ph{max-width:560px;aspect-ratio:800/488}
-.ch3 figure{justify-self:end;width:100%;max-width:560px}
+.ch3 figure{justify-self:center;width:100%;max-width:560px;text-align:center}
 .ch3 figcaption{color:rgba(255,255,255,.75);font-size:14px;margin-top:12px}
 .cc-n{display:block;font:600 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--green-l);margin-bottom:16px}
+.cc-tx{text-align:center;max-width:62ch;margin-inline:auto}
 .cc-tx h2{font-size:var(--h2)}
-.cc-tx p{color:rgba(255,255,255,.82);margin-top:18px;font-size:var(--lead);max-width:46ch}
+.cc-tx p{color:rgba(255,255,255,.82);margin:18px auto 0;font-size:var(--lead);max-width:56ch}
 .stage .tlink{display:inline-flex;align-items:center;min-height:44px;margin-top:12px;color:#fff;text-decoration-color:var(--green-l)}
-.ch2 .cc-g{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:start}
+.ch2 .cc-g{align-items:start}
+.ch2 .svl{width:100%;max-width:1040px;text-align:left}
+.svl li{align-content:start}
+@media (min-width:861px){.svl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(28px,4vw,56px)}.svl li:nth-last-child(2){border-bottom:1px solid rgba(255,255,255,.16)}}
 .svl{counter-reset:s}
 .svl li{display:grid;grid-template-columns:2.4em minmax(0,1fr);column-gap:14px;padding:clamp(10px,1.6vh,18px) 0;border-top:1px solid rgba(255,255,255,.16)}
 .svl li:last-child{border-bottom:1px solid rgba(255,255,255,.16)}
@@ -204,19 +209,15 @@ html.lenis-on{scroll-behavior:auto}
 .svl h3{color:#fff}
 .svl p{color:rgba(255,255,255,.78);font-size:15px;margin-top:4px;grid-column:2}
 .svl .tlink{grid-column:2;margin-top:0;min-height:40px;font-size:14.5px}
-@media (max-width:860px){
-  .cc-g,.ch2 .cc-g{grid-template-columns:1fr}
-  .cc-ph,.ch3 figure{justify-self:center}
-  .cc-tx{text-align:center}.cc-tx p{margin-inline:auto}
-}
 .cc-doors{display:none}
 html.fx-on .stage{height:100vh;height:100svh;overflow:clip}
 html.fx-on .cc-ch{position:absolute;left:0;right:0;top:var(--hdr);bottom:0;padding-block:clamp(14px,3vh,32px);display:flex;align-items:center;border:0}
 html.fx-on .cc-ch>.wrap{max-height:100%}
 html.fx-on .ch2,html.fx-on .ch3{visibility:hidden;opacity:0}
 html.fx-on .stage .dr{display:none}
-html.fx-on .ch1 .cc-ph{max-width:min(440px,62vh)}
-html.fx-on .ch3 figure,html.fx-on .ch3 .cc-ph{max-width:min(560px,88vh)}
+html.fx-on .ch1 .cc-ph{max-width:min(440px,33vh)}
+html.fx-on .ch3 figure,html.fx-on .ch3 .cc-ph{max-width:min(560px,58vh)}
+html.fx-on .svl li{padding-block:clamp(8px,1.3vh,16px)}
 html.fx-on .cc-doors{display:block;position:absolute;left:0;right:0;top:var(--hdr);bottom:0;z-index:5;perspective:1700px;perspective-origin:50% 45%;pointer-events:none}
 .cc-d{position:absolute;top:0;bottom:0;width:50%;transform-style:preserve-3d;--th:38px;--sh:0}
 .cc-d.l{left:0;transform-origin:0 50%}
@@ -379,6 +380,32 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
   .qb a+a{background:var(--green-l);color:var(--ink)}
   .foot{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
 }
+/* phone tier (under 768px) and touch tablets: the theatre in portrait */
+.de{display:none}
+.ph-bar{display:none}
+@media (prefers-reduced-motion:no-preference){
+  html.ph .doors,html.tab .doors{perspective:820px}
+  html.ph .door,html.tab .door{transform:rotateY(0);transform-style:preserve-3d;transition:transform 1.8s var(--open) .3s,visibility 0s linear 2.1s}
+  html.ph .hero.open .door.l,html.tab .hero.open .door.l{transform:rotateY(100deg)}
+  html.ph .hero.open .door.r,html.tab .hero.open .door.r{transform:rotateY(-100deg)}
+  html.ph .door::after,html.tab .door::after{content:"";position:absolute;inset:0;background:#011a2c;opacity:0;transition:opacity 1.8s var(--open) .3s}
+  html.ph .hero.open .door::after,html.tab .hero.open .door::after{opacity:.5}
+  html.ph .de,html.tab .de{display:block;position:absolute;top:0;bottom:0;width:16px}
+  .door.l .de{right:0;transform-origin:100% 50%;transform:rotateY(-90deg);background:linear-gradient(90deg,#022f4f,#0a5d92 60%,#3e86b8)}
+  .door.r .de{left:0;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(90deg,#7cc36a,#3d9234 40%,#22661d)}
+  html.ph .stage .dr{display:none}
+  html.ph .cc-pd{display:block;position:absolute;left:0;right:0;top:0;height:calc(100svh - var(--hdr));z-index:5;perspective:760px;perspective-origin:50% 45%;overflow:clip;pointer-events:none}
+  html.ph .cc-pd .cc-d{--th:16px}
+  html.ph .cc-pd .fc{padding-inline:20px}
+  html.ph .cc-pd .cc-d.l .lb{font-size:5.4rem}
+  html.ph .cc-pd .cc-d.r .lb{font-size:2.3rem;max-width:6ch}
+  html.ph .cc-pd .fc::before{width:92px}
+  html.ph .pin-spacer+.pin-spacer>.cc-ch{border-top:1px solid rgba(255,255,255,.12)}
+  html.ph .ph-bar{display:block;position:fixed;left:0;right:0;top:var(--hdr);height:3px;z-index:49;background:var(--green-l);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+  html.ph .quote blockquote p{font-size:1.5rem}
+  html.ph .qb a{position:relative;overflow:hidden;isolation:isolate}
+  .rp{position:absolute;left:0;top:0;width:90px;height:90px;margin:-45px 0 0 -45px;border-radius:50%;background:rgba(255,255,255,.5);pointer-events:none;z-index:-1}
+}
 </style>
 </head>
 <body>
@@ -405,6 +432,7 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
     <a class="btn cta" href="#contact">Book a chat</a>
   </div>
 </header>
+<div class="ph-bar" aria-hidden="true"></div>
 
 <main id="main">
   <section class="hero" id="top" aria-labelledby="hero-t">
@@ -421,7 +449,7 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
         <a class="btn" href="#contact">Book a chat</a>
       </div></div>
     </div>
-    <div class="doors" aria-hidden="true"><span class="door l"></span><span class="door r"></span></div>
+    <div class="doors" aria-hidden="true"><span class="door l"><i class="de"></i></span><span class="door r"><i class="de"></i></span></div>
     <div class="seal" aria-hidden="true"><img src="../../assets/logo/logo.webp" width="250" height="46" alt=""></div>
   </section>
 
@@ -655,18 +683,19 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
 
 <script src="../../assets/vendor/gsap.min.js" defer></script>
 <script src="../../assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="../../assets/vendor/SplitText.min.js" defer></script>
 <script src="../../assets/vendor/lenis.min.js" defer></script>
 <script>
 (function(){
   var d = document, h = d.documentElement, b = d.body, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, IO = 'IntersectionObserver' in window;
-  var fx = h.classList.contains('fx'), fine = matchMedia('(pointer: fine)').matches && !reduce;
+  var fx = h.classList.contains('fx'), tab = h.classList.contains('tab'), ph = h.classList.contains('ph'), fine = matchMedia('(pointer: fine)').matches && !reduce;
   var hero = d.querySelector('.hero');
 
   /* hero: the brand panels swing open. Laptops get lit 3D slabs (three.js), everything else the CSS panels */
   var opened = false, glStarted = false;
   function openHero(){ if (opened) return; opened = true; requestAnimationFrame(function(){ hero.classList.add('open'); }); }
   if (reduce) hero.classList.add('open');
-  else if (fx) {
+  else if (fx || tab) {
     setTimeout(function(){ if (!glStarted) openHero(); }, 3200);
     var go = function(){ setTimeout(initGL, 60); };
     if (d.readyState === 'complete') go(); else addEventListener('load', go);
@@ -683,7 +712,7 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
       var hdr = d.getElementById('top-bar').offsetHeight, w = hero.clientWidth, hh = hero.clientHeight - hdr;
       var cv = d.createElement('canvas'); cv.className = 'gl'; cv.setAttribute('aria-hidden', 'true'); hero.appendChild(cv);
       var R = new T.WebGLRenderer({canvas: cv, antialias: true, alpha: true});
-      R.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); R.setSize(w, hh, false); R.setClearColor(0x000000, 0);
+      R.setPixelRatio(Math.min(window.devicePixelRatio || 1, tab ? 1.5 : 2)); R.setSize(w, hh, false); R.setClearColor(0x000000, 0);
       var sc = new T.Scene(), H = 10, fov = 30, asp = w / hh, W = H * asp;
       var cam = new T.PerspectiveCamera(fov, asp, .1, 100); cam.position.set(0, 0, (H / 2) / Math.tan(fov * Math.PI / 360));
       sc.add(new T.AmbientLight(0xffffff, .62));
@@ -775,11 +804,95 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
     location.href = 'mailto:info@taxprofessionals.co.nz?subject=' + encodeURIComponent('Website enquiry from ' + form.name.value.trim()) + '&body=' + encodeURIComponent(body);
   });
 
+  /* touch extra: a soft ripple where a button is tapped */
+  function tapRipple(G){
+    d.addEventListener('pointerdown', function(e){
+      var t = e.target.closest && e.target.closest('.btn,.qb a'); if (!t || e.pointerType === 'mouse') return;
+      var r = t.getBoundingClientRect(), s = d.createElement('span'); s.className = 'rp'; s.setAttribute('aria-hidden', 'true'); t.appendChild(s);
+      G.fromTo(s, {x: e.clientX - r.left, y: e.clientY - r.top, scale: 0, opacity: .55}, {scale: Math.max(r.width, r.height) / 40, opacity: 0, duration: 1.1, ease: 'power2.out', onComplete: function(){ s.remove(); }});
+    }, {passive: true});
+  }
+
+  /* phones (under 768px): the theatre in portrait, native scroll */
+  function phoneTier(G, ST){
+    var SP = window.SplitText;
+    G.registerPlugin(ST); if (SP) G.registerPlugin(SP);
+    ST.config({ignoreMobileResize: true});
+    var hdrH = function(){ return d.getElementById('top-bar').offsetHeight; };
+    G.matchMedia().add('(prefers-reduced-motion: no-preference)', function(){
+      // 1. progress rail under the header
+      G.to('.ph-bar', {scaleX: 1, ease: 'none', scrollTrigger: {trigger: b, start: 'top top', end: 'bottom bottom', scrub: .3}});
+
+      // 2. hero: as you scroll away the stage recedes and the title lifts
+      var htl = G.timeline({scrollTrigger: {trigger: hero, start: 'top top', end: 'bottom top', scrub: true}});
+      htl.to('.hero-ph img', {scale: 1.12, yPercent: 5, ease: 'none'}).to('.hero-tx', {y: -70, opacity: .15, ease: 'none'}, 0);
+
+      // 3. curtain call: a thick pair of brand panels swings open on each act, pinned briefly
+      var st = d.getElementById('stage'), tpl = st.querySelector('.cc-doors'), chs = G.utils.toArray('.cc-ch'), ends = [];
+      chs.forEach(function(ch, i){
+        var dr = tpl.cloneNode(true); dr.className = 'cc-pd';
+        dr.querySelectorAll('.fc').forEach(function(fc){ fc.querySelectorAll('.lb').forEach(function(lb, j){ if (j !== i) lb.remove(); }); });
+        ch.appendChild(dr);
+        var L = dr.querySelector('.cc-d.l'), R = dr.querySelector('.cc-d.r'), img = ch.querySelector('.cc-ph img');
+        var tl = G.timeline({defaults: {ease: 'power2.inOut'}, scrollTrigger: {trigger: ch, start: function(){ return 'top ' + hdrH(); }, end: '+=90%', pin: true, scrub: 1, anticipatePin: 1}});
+        tl.to({}, {duration: .15})
+          .to(L, {rotationY: -96, '--sh': .45, duration: 1}).to(R, {rotationY: 96, '--sh': .45, duration: 1}, '<')
+          .fromTo(ch.querySelector('.wrap'), {scale: .94}, {scale: 1, duration: 1.1, ease: 'power2.out'}, '<.1')
+          .fromTo(st, {'--cx': '12%'}, {'--cx': '88%', duration: 1.2, ease: 'none'}, '<');
+        if (img && i === 0) tl.fromTo(img, {scale: 1.15}, {scale: 1, duration: 1.2, ease: 'power2.out'}, '<');
+        tl.set(dr, {autoAlpha: 0}).to({}, {duration: .2});
+        ends.push(tl.scrollTrigger);
+      });
+      // award photo: curtains part as a clip-path wipe from the centre, with a slow inner settle
+      var aw = st.querySelector('.ch3 .cc-ph');
+      if (aw) G.timeline({scrollTrigger: {trigger: aw, start: 'top 82%'}})
+        .fromTo(aw, {clipPath: 'inset(0% 50% 0% 50% round 18px)'}, {clipPath: 'inset(0% 0% 0% 0% round 18px)', duration: 1.5, ease: 'power3.inOut'})
+        .fromTo(aw.querySelector('img'), {scale: 1.15}, {scale: 1, duration: 2.2, ease: 'power2.out'}, 0);
+      // services rise one by one under the stage light
+      G.utils.toArray('.svl li').forEach(function(li){ G.from(li, {y: 34, opacity: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: {trigger: li, start: 'top 90%'}}); });
+      // chapter links land on the open stage
+      var onClick = function(e){
+        var a = e.target.closest('a[href^="#"]'); if (!a) return;
+        var t = d.querySelector(a.getAttribute('href')), ci = t ? chs.indexOf(t) : -1; if (ci < 0) return;
+        e.preventDefault(); scrollTo({top: ends[ci].end, behavior: 'smooth'});
+      };
+      d.addEventListener('click', onClick);
+
+      // 4. portraits: the panels part (CSS) while the photo settles from 1.15
+      G.utils.toArray('.leader .pv img').forEach(function(im){ G.fromTo(im, {scale: 1.15}, {scale: 1, duration: 2.2, ease: 'power2.out', scrollTrigger: {trigger: im, start: 'top 85%'}}); });
+
+      // 5. promises: each card settles back as the next one lands
+      G.utils.toArray('.card').forEach(function(c, i, all){ if (i === all.length - 1) return; G.to(c, {scale: .955, ease: 'none', scrollTrigger: {trigger: all[i + 1], start: 'top bottom', end: 'top 40%', scrub: true}}); });
+
+      // 6. intros rise line by line; the client quote lights word by word under the spotlight
+      var splits = [];
+      if (SP) {
+        G.utils.toArray('.head p').forEach(function(p){
+          if (p.children.length) return;
+          splits.push(SP.create(p, {type: 'lines', mask: 'lines', aria: 'none', autoSplit: true, onSplit: function(self){
+            return G.from(self.lines, {yPercent: 105, duration: 1.3, stagger: .12, ease: 'power3.out', scrollTrigger: {trigger: p, start: 'top 90%'}});
+          }}));
+        });
+        var q = d.querySelector('.quote blockquote p');
+        if (q) splits.push(SP.create(q, {type: 'words', aria: 'none', onSplit: function(self){
+          return G.fromTo(self.words, {opacity: .5}, {opacity: 1, stagger: .1, ease: 'none', scrollTrigger: {trigger: q, start: 'top 82%', end: 'bottom 48%', scrub: true}});
+        }}));
+      }
+
+      tapRipple(G);
+      return function(){ d.removeEventListener('click', onClick); splits.forEach(function(s){ s.revert(); }); d.querySelectorAll('.cc-pd').forEach(function(n){ n.remove(); }); };
+    });
+    if (d.fonts && d.fonts.ready) d.fonts.ready.then(function(){ ST.refresh(); });
+    addEventListener('load', function(){ ST.refresh(); });
+  }
+
   /* full effects on capable laptops: smooth scroll, the curtain call, page turns, cursor */
   d.addEventListener('DOMContentLoaded', function(){
     var G = window.gsap, ST = window.ScrollTrigger;
-    if (!fx || !G || !ST) return;
+    if (ph && G && ST) { setTimeout(function(){ phoneTier(G, ST); }, 0); return; }
+    if (!(fx || tab) || !G || !ST) return;
     G.registerPlugin(ST);
+    if (tab) ST.config({ignoreMobileResize: true});
     h.classList.add('fx-on');
     var hdrH = function(){ return d.getElementById('top-bar').offsetHeight; };
 
@@ -812,8 +925,16 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
     // promises: each card settles back slightly as the next one lands
     G.utils.toArray('.card').forEach(function(c, i, all){ if (i === all.length - 1) return; G.to(c, {scale: .965, ease: 'none', scrollTrigger: {trigger: all[i + 1], start: 'top bottom', end: 'top 35%', scrub: true}}); });
 
+    // touch tablets: native scroll, chapter links land on the open stage
+    if (tab) d.addEventListener('click', function(e){
+      var a = e.target.closest('a[href^="#"]'); if (!a) return;
+      var t = d.querySelector(a.getAttribute('href')), ci = t ? chs.indexOf(t) : -1; if (ci < 0) return;
+      e.preventDefault(); scrollTo({top: ccST.start + (ccST.end - ccST.start) * (stops[ci] / total), behavior: 'smooth'});
+    });
+    if (tab) tapRipple(G);
+
     // smooth scroll
-    if (window.Lenis) {
+    if (fx && window.Lenis) {
       var lenis = window.__lenis = new Lenis({lerp: .085});
       lenis.on('scroll', ST.update);
       G.ticker.add(function(t){ lenis.raf(t * 1000); }); G.ticker.lagSmoothing(0);
@@ -831,7 +952,7 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
     }
 
     // custom cursor
-    if (fine) {
+    if (fx && fine) {
       var c = d.createElement('div'); c.className = 'cur'; c.setAttribute('aria-hidden', 'true'); b.appendChild(c);
       var xs = G.quickTo(c, 'x', {duration: .45, ease: 'power3'}), ys = G.quickTo(c, 'y', {duration: .45, ease: 'power3'});
       addEventListener('mousemove', function(e){ xs(e.clientX); ys(e.clientY); c.classList.add('on'); c.classList.toggle('hot', !!(e.target.closest && e.target.closest('a,button,summary,select,label,input,textarea'))); }, {passive: true});
