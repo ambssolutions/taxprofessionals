@@ -11,7 +11,23 @@
       if (cs.textAlign === 'center') { p.style.marginLeft = 'auto'; p.style.marginRight = 'auto'; }
     });
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', cap); else cap();
+  /* phones: no reading text below 14px (body copy 15px) and no cramped line spacing */
+  function phone() {
+    if (!matchMedia('(max-width: 760px)').matches) return;
+    document.querySelectorAll('main p,main li,main dd,main blockquote,main figcaption,main small,main span,main a,main td,footer p,footer li,footer a,footer small').forEach(function (e) {
+      if (e.closest('[aria-hidden="true"],nav,button')) return;
+      var own = '';
+      e.childNodes.forEach(function (n) { if (n.nodeType === 3) own += n.textContent; });
+      if (own.trim().length < 25) return;
+      var cs = getComputedStyle(e), fs = parseFloat(cs.fontSize) || 16, body = /^(P|LI|DD|BLOCKQUOTE)$/.test(e.tagName);
+      var min = body && fs >= 13 ? 15 : 14;
+      if (fs < min) { e.style.fontSize = min + 'px'; fs = min; }
+      var lh = parseFloat(cs.lineHeight);
+      if (body && fs < 22 && lh && lh / fs < 1.45) e.style.lineHeight = '1.5';
+    });
+  }
+  function run() { cap(); phone(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
 })();
 
 /* Shared motion for every concept.

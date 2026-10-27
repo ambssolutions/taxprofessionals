@@ -779,7 +779,7 @@ addEventListener('DOMContentLoaded',function(){
   var p0=parts(), dw=p0.d>99?3:2;
   cdEls.d.innerHTML=cells(dw);cdEls.h.innerHTML=cells(2);cdEls.m.innerHTML=cells(2);
   if(p0.d===1)d.getElementById('cd-du').textContent='Day';
-  d.getElementById('cd-sr').textContent=p0.d+(p0.d===1?' day, ':' days, ')+p0.h+' hours and '+p0.m+' minutes to go.';
+  d.getElementById('cd-sr').textContent=p0.d+(p0.d===1?' day, ':' days, ')+p0.h+(p0.h===1?' hour and ':' hours and ')+p0.m+(p0.m===1?' minute to go.':' minutes to go.');
   function tick(){var p=parts();setDigits(cdEls.d,pad(p.d,dw));setDigits(cdEls.h,pad(p.h,2));setDigits(cdEls.m,pad(p.m,2))}
 
   // month panel numerals become flaps
