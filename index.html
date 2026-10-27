@@ -133,6 +133,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .vbar .seg{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}
 .vbar .seg button{color:rgba(255,255,255,.6);padding:7px 12px}
 .vbar .seg button[aria-pressed="true"]{background:rgba(255,255,255,.14);color:#fff}
+.vfont button{white-space:nowrap}.vfont b{font-weight:600;opacity:.7;margin-right:2px}
 .stage{flex:1;display:grid;place-items:center;overflow:hidden;padding:0}
 .stage .frame{width:100%;height:100%;transition:width .5s var(--ease),height .5s var(--ease),border-radius .5s;background:#fff;overflow:hidden}
 .stage[data-dev="tablet"] .frame{width:min(834px,100% - 24px);height:calc(100% - 24px);border-radius:18px}
@@ -281,6 +282,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 120px;color:var(--muted);
       <button type="button" aria-pressed="false" data-dev="tablet">Tablet</button>
       <button type="button" aria-pressed="false" data-dev="mobile">Mobile</button>
     </div>
+    <div class="seg vfont" role="group" aria-label="Font style" id="vFont"></div>
     <button class="btn vbtn-ico" type="button" id="vPrev" aria-label="Previous concept">←</button>
     <button class="btn vbtn-ico" type="button" id="vNext" aria-label="Next concept">→</button>
     <a class="btn hide-sm" id="vDev">Device frames</a>
@@ -461,7 +463,22 @@ function syncViewer(){
   $("#vStar").setAttribute("aria-pressed", on);
   $("#vStar").textContent = on ? "★ Shortlisted" : "☆ Shortlist";
   $("#vPick").textContent = pick === c.id ? "★ Your pick · Send" : "This is the one";
+  paintFonts(c);
 }
+// three font styles per design: the same choice as the Aa menu on the design itself (shared localStorage key)
+function fontNo(c){ let k = 1; try { k = +(localStorage.getItem("tp-font-" + c.id) || 1); } catch (e) {} return k; }
+function paintFonts(c){
+  const k = fontNo(c);
+  $("#vFont").innerHTML = (c.fonts || []).map((f, i) =>
+    `<button type="button" aria-pressed="${i + 1 === k}" data-font="${i + 1}" title="${f[1] === f[2] ? f[1] : f[1] + " + " + f[2]}"><b>Aa</b> ${i ? (f[1].split(" ")[0].length < 4 ? f[1].split(" ").slice(0, 2).join(" ") : f[1].split(" ")[0]) : "Original"}</button>`).join("");
+}
+$("#vFont").addEventListener("click", e => {
+  const b = e.target.closest("button[data-font]"); if (!b || vIndex == null) return;
+  const c = CONCEPTS[vIndex], k = +b.dataset.font;
+  try { localStorage.setItem("tp-font-" + c.id, String(k)); } catch (err) {}
+  try { frame.contentWindow.TP_FONT.set(k - 1); } catch (err) { frame.src = url(c) + "?font=" + k; }
+  paintFonts(c);
+});
 function step(d){ vIndex = (vIndex + d + CONCEPTS.length) % CONCEPTS.length; frame.src = url(CONCEPTS[vIndex]); syncViewer(); }
 function closeViewer(){ viewer.classList.remove("open"); document.body.classList.remove("locked"); vIndex = null; setTimeout(()=>{ if(vIndex==null) frame.src="about:blank"; },350); lastFocus?.focus(); }
 $("#vClose").onclick = closeViewer;
