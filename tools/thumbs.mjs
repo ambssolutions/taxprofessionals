@@ -32,3 +32,10 @@ for (const slug of slugs) {
   await ctx.close();
 }
 await b.close(); srv.kill();
+// new covers: bump the gallery's thumbnail version so browsers fetch them instead of a cached copy
+{
+  const { readFileSync: rf, writeFileSync: wf } = await import("node:fs");
+  const g = path.join(DES, "..", "index.html"), v = new Date().toISOString().replace(/\D/g, "").slice(0, 12);
+  wf(g, rf(g, "utf8").replace(/const THUMB_V = "\d+";/, `const THUMB_V = "${v}";`));
+  console.log("THUMB_V", v);
+}

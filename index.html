@@ -346,6 +346,8 @@ footer{border-top:1px solid var(--line);padding:24px 0 120px;color:var(--muted);
    ============================================================ */
 const FORM_ENDPOINT = "";
 const SEND_TO = "hello@ambs.co.nz";
+// bump when thumbnails change so browsers fetch the new covers (tools/thumbs.mjs does this)
+const THUMB_V = "202610271828";
 
 const CONCEPTS = window.TP_CONCEPTS;
 const url = c => "designs/" + c.slug + "/";
@@ -388,7 +390,7 @@ CONCEPTS.forEach((c,i) => {
   el.innerHTML = `
     <button class="thumb" type="button" aria-label="Preview concept ${c.id}, ${c.name}" style="background:linear-gradient(135deg,${c.sw[0]},${c.sw[2]})">
       <span class="num">${c.id}</span><span class="pick-flag">★ Preferred</span>${c.rec?'<span class="rec">Recommended</span>':''}
-      <img src="designs/${c.slug}/thumb.webp" alt="Concept ${c.id}, ${c.name}: homepage preview" width="720" height="450" loading="${i<3?"eager":"lazy"}" decoding="async">
+      <img src="designs/${c.slug}/thumb.webp?v=${THUMB_V}" alt="Concept ${c.id}, ${c.name}: homepage preview" width="720" height="450" loading="${i<3?"eager":"lazy"}" decoding="async">
     </button>
     <div class="body">
       <h2>${c.name}</h2>
