@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tax Professionals | Tax accountants, Epsom, Auckland</title>
-<meta name="description" content="A director-led tax practice at 620 Manukau Road, Epsom, Auckland, since 1998. Tax returns, property structures, trusts, companies, bookkeeping and payroll, led by Ranjana Gupta CA.">
+<meta name="description" content="A director-led tax practice at 620 Manukau Road, Epsom, Auckland, since 1998. Taxation and accounting compliance, business advisory and planning, employment and HR advisory, and property, led by Ranjana Gupta CA.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#1d3b2f">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231d3b2f'/%3E%3Ctext x='16' y='21' font-family='Georgia' font-size='13' fill='%23f5f0e6' text-anchor='middle'%3ETP%3C/text%3E%3C/svg%3E">
@@ -71,7 +71,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;line-hei
 .brand b{font:600 23px/1 var(--serif);letter-spacing:.005em}
 .brand small{display:block;font:500 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:4px}
 .nav{margin-left:auto}
-.nav ul{display:flex;gap:clamp(16px,2.2vw,34px)}
+.nav ul{display:flex;gap:clamp(14px,2vw,30px)}
 .nav a{display:flex;align-items:center;min-height:44px;text-decoration:none;font-size:15px;font-weight:500;position:relative}
 .nav a::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:1px;background:currentColor;transform:scaleX(0);transition:transform .6s var(--ease)}
 .nav a:hover::after{transform:scaleX(1)}
@@ -142,6 +142,7 @@ html.js .hero .wrap>:nth-child(5){animation-delay:.6s}
 .letter .mono svg{width:100%;height:auto;display:block}
 .letter .mono p{font-size:13px;color:var(--muted);margin-top:12px;line-height:1.4}
 .letter .mono b{display:block;font:600 19px/1.2 var(--serif);color:var(--ink)}
+.letter .award{font-size:12.5px;color:var(--brass-d);margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
 .letter .body p{font-size:clamp(17px,1.4vw,19px);line-height:1.7}
 .letter .body p+p{margin-top:16px}
 .letter .body .sig{font:500 24px/1.2 var(--serif);margin-top:28px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:baseline}
@@ -161,32 +162,33 @@ html.js .hero .wrap>:nth-child(5){animation-delay:.6s}
 .step:nth-child(1){--i:0;--t:#fffdf8}
 .step:nth-child(2){--i:1;--t:var(--sand)}
 .step:nth-child(3){--i:2;--t:var(--sage)}
-.step:nth-child(4){--i:3;--t:var(--sage-d)}
-.step:nth-child(4) .for{color:#3f4b44}
-.step:nth-child(5){--i:4;--t:var(--forest);color:var(--cream);border-color:var(--forest)}
+.step:nth-child(4){--i:3;--t:var(--forest);color:var(--cream);border-color:var(--forest)}
 .step::before{content:attr(data-n);position:absolute;right:clamp(16px,3vw,40px);bottom:-.18em;font:500 clamp(9rem,26vh,17rem)/1 var(--serif);color:rgba(23,35,29,.07);pointer-events:none;font-variant-numeric:lining-nums;letter-spacing:-.02em}
-.step:nth-child(5)::before{color:rgba(245,240,230,.07)}
+.step:nth-child(4)::before{color:rgba(245,240,230,.07)}
 .step-h{flex:none;height:var(--peek);display:flex;align-items:center;gap:clamp(14px,2.4vw,28px);padding-inline:clamp(20px,3.4vw,44px);border-bottom:1px solid var(--line)}
-.step:nth-child(5) .step-h{border-color:var(--line-c)}
+.step:nth-child(4) .step-h{border-color:var(--line-c)}
 .step-n{font:600 clamp(2.4rem,4vw,3.4rem)/1 var(--serif);color:var(--brass-d);min-width:1.4em;font-variant-numeric:lining-nums}
-.step:nth-child(5) .step-n{color:var(--brass)}
-.step h3{font-size:clamp(1.55rem,2.4vw,2.2rem);line-height:1.05}
-.step-h .for{margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap}
-.step:nth-child(5) .for{color:rgba(245,240,230,.7)}
+.step:nth-child(4) .step-n{color:var(--brass)}
+.step h3{font-size:clamp(1.45rem,2.1vw,1.95rem);line-height:1.05}
+.step-h .for{margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
+.step-h .for:hover{color:var(--brass-d)}
+.step:nth-child(4) .for{color:rgba(245,240,230,.75)}
+.step:nth-child(4) .for:hover{color:var(--brass)}
 .step-b{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(20px,4vw,56px);padding:clamp(20px,3vw,36px) clamp(20px,3.4vw,44px) clamp(24px,3.4vw,40px)}
 .step-b>p{font-size:clamp(16px,1.35vw,19px);line-height:1.6}
-.ticks li{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--line);font-size:15.5px;line-height:1.45}
-.step:nth-child(5) .ticks li{border-color:var(--line-c)}
+.ticks li{display:flex;gap:12px;padding:6px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.4}
+.step:nth-child(4) .ticks li{border-color:var(--line-c)}
 .ticks li:last-child{border-bottom:0}
 .ticks li::before{content:"";flex:none;width:14px;height:8px;margin-top:6px;border-left:1.5px solid var(--brass-d);border-bottom:1.5px solid var(--brass-d);transform:rotate(-45deg) translate(1px,-2px)}
-.step:nth-child(5) .ticks li::before{border-color:var(--brass)}
+.step:nth-child(4) .ticks li::before{border-color:var(--brass)}
 @media (max-width:760px){
-  .svc{--sh:84px;--peek:62px;--gapb:calc(86px + env(safe-area-inset-bottom))}
+  .svc{--sh:84px;--peek:58px;--gapb:calc(86px + env(safe-area-inset-bottom))}
   .step-h .for{display:none}
-  .step h3{font-size:1.4rem}
+  .step h3{font-size:1.3rem}
   .step-b{grid-template-columns:1fr;gap:12px}
-  .step-b>p{font-size:15.5px}
-  .ticks li{font-size:14.5px;padding:5px 0}
+  .step-b>p{font-size:15px;line-height:1.5}
+  .ticks li{font-size:14.5px;padding:4px 0}
+  .step-b{padding-top:16px;padding-bottom:18px}
 }
 @media (max-height:760px),(max-width:340px){
   .svc .sec-head{position:static;height:auto;padding-bottom:28px}
@@ -238,22 +240,35 @@ html:not(.js) .fold-in>div{opacity:1;visibility:visible;transform:none}
 .monthly li:first-of-type{border-top:0}
 .monthly b{font-weight:600}
 .note{margin-top:18px;font-size:14px;color:var(--muted)}
+.note a{color:var(--ink);text-underline-offset:3px}
 @media (max-width:860px){.year-g{grid-template-columns:1fr}.dial{position:relative;top:auto;max-width:300px;margin:0 auto}}
 @media (max-width:520px){.dates div{grid-template-columns:1fr;gap:2px}.fold-btn .c{display:none}.fold-btn .pm{margin-left:auto}}
 
 /* people */
 .people{background:var(--paper)}
-.lead{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4vw,48px);align-items:center;max-width:860px;margin:0 auto 48px;padding:clamp(24px,4vw,40px);background:var(--forest);color:var(--cream);border-radius:22px}
+.lead{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4vw,48px);align-items:center;max-width:880px;margin:0 auto 48px;padding:clamp(24px,4vw,40px);background:var(--forest);color:var(--cream);border-radius:22px}
 .lead .ring{width:clamp(110px,13vw,150px)}
 .lead h3{font-size:clamp(2rem,3.2vw,2.7rem)}
-.lead p{color:rgba(245,240,230,.8);margin-top:6px}
+.lead p{color:rgba(245,240,230,.8);margin-top:6px;max-width:48ch}
 .lead p b{color:var(--brass);font-weight:600}
-.team{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,3vw,40px);max-width:1000px;margin:0 auto;text-align:center}
+.team{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(24px,3vw,40px) clamp(16px,2.5vw,32px);max-width:1040px;margin:0 auto;text-align:center}
+.team li{flex:0 1 170px}
+.team li.wide{flex-basis:230px}
 .team .ring{width:clamp(96px,10vw,124px);margin:0 auto 16px}
 .ring svg{width:100%;height:auto;display:block}
 .team h3{font-size:clamp(1.4rem,2vw,1.75rem)}
 .team p{font-size:14.5px;color:var(--muted);margin-top:4px}
-@media (max-width:760px){.lead{grid-template-columns:1fr;text-align:center;justify-items:center}.team{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:36px}}
+@media (max-width:760px){.lead{grid-template-columns:1fr;text-align:center;justify-items:center}.team li,.team li.wide{flex:0 1 calc(50% - 10px)}}
+
+/* insights */
+.ins{background:var(--paper)}
+.ins-l{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:960px;margin:0 auto}
+.ins-l a{display:flex;flex-direction:column;justify-content:space-between;gap:22px;min-height:150px;height:100%;padding:24px 26px;background:var(--cream);border:1px solid var(--line);border-radius:18px;text-decoration:none;transition:background-color .6s,border-color .6s}
+.ins-l a:hover{background:#fff;border-color:var(--brass)}
+.ins-l .t{font:500 clamp(1.3rem,1.8vw,1.6rem)/1.2 var(--serif)}
+.ins-l .r{font-size:13px;font-weight:600;color:var(--brass-d);letter-spacing:.08em;text-transform:uppercase}
+.ins-more{text-align:center;margin-top:32px}
+@media (max-width:640px){.ins-l{grid-template-columns:1fr}.ins-l a{min-height:0}}
 
 /* questions */
 .faq{background:var(--sand)}
@@ -305,7 +320,7 @@ html:not(.js) .fold-in>div{opacity:1;visibility:visible;transform:none}
 .foot .tag{max-width:44ch;margin:0 auto}
 .f-cols{display:flex;justify-content:center;gap:clamp(40px,8vw,120px);margin:44px auto 40px;flex-wrap:wrap}
 .f-cols h2{font:500 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--brass);margin-bottom:12px}
-.f-cols a{display:flex;justify-content:center;align-items:center;min-height:36px;text-decoration:none}
+.f-cols a{display:flex;justify-content:center;align-items:center;min-height:36px;text-decoration:none;max-width:260px;margin-inline:auto;line-height:1.3}
 .f-cols a:hover{color:var(--cream)}
 .legal{border-top:1px solid var(--line-c);padding-top:22px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 28px;font-size:13.5px;color:rgba(245,240,230,.6)}
 
@@ -357,6 +372,7 @@ html.js .rv.in{opacity:1;transform:none}
           <li><a href="#services">Services</a></li>
           <li><a href="#year">Tax year</a></li>
           <li><a href="#people">People</a></li>
+          <li><a href="#insights">Insights</a></li>
           <li><a href="#questions">Questions</a></li>
           <li><a href="#contact">Contact</a></li>
           <li class="m-only"><a class="btn btn--forest" href="#contact">Arrange a conversation</a></li>
@@ -373,7 +389,7 @@ html.js .rv.in{opacity:1;transform:none}
     <div class="wrap">
       <p class="est">Est. 1998 · Manukau Road</p>
       <h1 id="hero-t">Your tax affairs, looked after <span class="tx">personally</span></h1>
-      <p class="lede">A director-led practice in Epsom. Tax returns, property, trusts, companies and payroll, for families, investors and business owners.</p>
+      <p class="lede">A director-led practice in Epsom. Tax and accounting compliance, business advice, employment and HR, and property, for families, investors and business owners.</p>
       <div class="acts">
         <a class="btn btn--cream btn--auto" href="#contact">Arrange a conversation</a>
         <a class="tlink" href="tel:+6496250035">or call 09 625 0035</a>
@@ -396,9 +412,10 @@ html.js .rv.in{opacity:1;transform:none}
         <div class="mono">
           <svg viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="78" fill="#1d3b2f"/><circle cx="80" cy="80" r="68" fill="none" stroke="#c9a46a" stroke-width="1"/><circle cx="80" cy="80" r="64" fill="none" stroke="#c9a46a" stroke-width=".5" stroke-dasharray="1 3"/><text x="80" y="95" font-family="Cormorant Garamond, Georgia, serif" font-size="50" font-weight="500" fill="#f5f0e6" text-anchor="middle">RG</text></svg>
           <p><b>Ranjana Gupta</b>Director<br>Chartered Accountant (CA, NZ)</p>
+          <p class="award">Accountant of the Year 2019 to 2020, Indian Newslink Indian Business Awards</p>
         </div>
         <div class="body">
-          <p>Tax Professionals has worked for the community from Manukau Road in Epsom since 1998. The practice is led by its director, Ranjana Gupta, a Chartered Accountant, with four taxation accountants alongside her.</p>
+          <p>Tax Professionals has worked for the community from Manukau Road in Epsom since 1998. The practice is led by its director, Ranjana Gupta, a Chartered Accountant, with four taxation accountants and a business advisor alongside her. Outside the office Ranjana teaches taxation at AUT as a senior lecturer and writes on New Zealand tax.</p>
           <p>Your own return, a rental property, a family trust, a new company or a business with staff: whatever brings you here, you are welcome to sit down with Ranjana and the team and talk it through.</p>
           <p>Call, email or send a note, and we will find a time that suits you.</p>
           <p class="sig">Tax Professionals Ltd <a class="tlink" href="#contact">Arrange a time</a></p>
@@ -409,36 +426,31 @@ html.js .rv.in{opacity:1;transform:none}
 
   <section class="sec svc" id="services" aria-labelledby="svc-t">
     <div class="wrap">
-      <p class="intro">Five areas of work, each handled in-house by the same small team.</p>
+      <p class="intro">Four areas of work, each handled in-house by the same small team.</p>
       <div class="sec-head">
         <h2 id="svc-t">What we look after</h2>
-        <p>Tax, property, structures, books and people</p>
+        <p>Compliance, advice, employment and property</p>
       </div>
       <ol class="steps">
         <li class="step" data-n="01">
-          <div class="step-h"><span class="step-n">01</span><h3>Tax compliance</h3><span class="for">Individuals, companies, trusts</span></div>
-          <div class="step-b"><p>Income tax returns for individuals, companies, trusts and partnerships, with GST and PAYE returns for businesses.</p>
-            <ul class="ticks"><li>Income tax returns</li><li>GST returns</li><li>PAYE returns</li></ul></div>
+          <div class="step-h"><span class="step-n">01</span><h3>Taxation &amp; Accounting Compliance</h3><a class="for" href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">Read more on our site</a></div>
+          <div class="step-b"><p>Bookkeeping, returns and financial statements for individuals, companies, trusts and partnerships, with tax planning and business structuring. Employment and HR advisory can be added to this package.</p>
+            <ul class="ticks"><li>Bookkeeping</li><li>GST, PAYE and income tax returns</li><li>Financial statements</li><li>Tax planning and business structuring</li><li>Company formation, trusts and payroll</li></ul></div>
         </li>
         <li class="step" data-n="02">
-          <div class="step-h"><span class="step-n">02</span><h3>Property</h3><span class="for">Property investors</span></div>
-          <div class="step-b"><p>Advice on property structures, and managing property investors' affairs, from a first rental onwards.</p>
-            <ul class="ticks"><li>Advice on property structures</li><li>Managing property investors' affairs</li></ul></div>
+          <div class="step-h"><span class="step-n">02</span><h3>Business Advisory &amp; Planning</h3><a class="for" href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">Read more on our site</a></div>
+          <div class="step-b"><p>Advice for business owners from Varun Gupta, our Business Advisor. Business planning begins with a free first meeting, a workshop covering 3-month, 12-month and 3-year plans, with a monthly coaching option after that.</p>
+            <ul class="ticks"><li>Business plans and strategic growth</li><li>Performance and accountability</li><li>Profit improvement and cashflow</li><li>Systems and processes</li><li>Business planning: first meeting free</li></ul></div>
         </li>
         <li class="step" data-n="03">
-          <div class="step-h"><span class="step-n">03</span><h3>Company and trust work</h3><span class="for">New companies, trustees</span></div>
-          <div class="step-b"><p>Forming a new company, and the administration that keeps a trust in order.</p>
-            <ul class="ticks"><li>Company formation</li><li>Trust administration</li></ul></div>
+          <div class="step-h"><span class="step-n">03</span><h3>Employment &amp; HR Advisory</h3><a class="for" href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">Read more on our site</a></div>
+          <div class="step-b"><p>Employment law and HR advice for employers, from agreements and policies through to restructuring, audits and preparing records for a Labour Inspector visit.</p>
+            <ul class="ticks"><li>Employment agreements and policies</li><li>Employment legislation</li><li>Employee policies and procedures</li><li>Restructuring and redundancy</li><li>Employer accreditations</li><li>Audits and investigations</li></ul></div>
         </li>
         <li class="step" data-n="04">
-          <div class="step-h"><span class="step-n">04</span><h3>Bookkeeping and advice</h3><span class="for">Business owners</span></div>
-          <div class="step-b"><p>Bookkeeping through the year, and business advice from the people who already know your numbers.</p>
-            <ul class="ticks"><li>Bookkeeping</li><li>Business advisory</li></ul></div>
-        </li>
-        <li class="step" data-n="05">
-          <div class="step-h"><span class="step-n">05</span><h3>Payroll and people</h3><span class="for">Employers</span></div>
-          <div class="step-b"><p>Payroll services for employers, with employment law and HR advisory alongside. We are a Crystal Payroll recommended partner.</p>
-            <ul class="ticks"><li>Payroll services</li><li>Employment law and HR advisory</li></ul></div>
+          <div class="step-h"><span class="step-n">04</span><h3>Property Investment &amp; Development</h3><a class="for" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">Read more on our site</a></div>
+          <div class="step-b"><p>Strategy, structuring and returns for property investors. The associated-persons rules can make a buy-and-hold property taxable when it is linked to development or trading. The director and partner have published on New Zealand's land tax regime and are active property investors.</p>
+            <ul class="ticks"><li>Investment strategy</li><li>Structuring advice: personal, company or trust</li><li>Tax returns and cash flow tools</li><li>Trust administration</li></ul></div>
         </li>
       </ol>
     </div>
@@ -504,7 +516,7 @@ html.js .rv.in{opacity:1;transform:none}
               <li><b>Payday filing:</b> employment information within 2 working days of payday</li>
             </ul>
           </div>
-          <p class="note">General dates from Inland Revenue. Your own dates may differ; we will confirm them.</p>
+          <p class="note">General dates from Inland Revenue. When a due date falls on a weekend or public holiday it moves to the next working day. Your own dates may differ; we will confirm them. See our <a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">client resources</a> page.</p>
         </div>
       </div>
     </div>
@@ -515,20 +527,38 @@ html.js .rv.in{opacity:1;transform:none}
       <div class="head rv">
         <div class="rule" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M7 0l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="currentColor"/></svg></div>
         <h2 id="pp-t">The people in the office</h2>
-        <p>A small team, so you deal with people who know your file.</p>
+        <p>Six people, so you deal with someone who knows your file.</p>
       </div>
       <div data-need="team photos">
         <div class="lead rv">
           <div class="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#f5f0e6"/><circle cx="60" cy="60" r="51" fill="none" stroke="#8a6a38" stroke-width=".8"/><text x="60" y="71" font-family="Cormorant Garamond, Georgia, serif" font-size="34" font-weight="600" fill="#1d3b2f" text-anchor="middle">RG</text></svg></div>
-          <div><h3>Ranjana Gupta</h3><p><b>Director</b> · Chartered Accountant (CA, NZ)</p></div>
+          <div><h3>Ranjana Gupta</h3><p><b>Director.</b> Chartered Accountant, senior lecturer in taxation at AUT, and a published tax author.</p></div>
         </div>
         <ul class="team">
+          <li class="rv wide"><div class="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#dfe5d6"/><circle cx="60" cy="60" r="51" fill="none" stroke="#8a6a38" stroke-width=".8"/><text x="60" y="71" font-family="Cormorant Garamond, Georgia, serif" font-size="32" font-weight="600" fill="#1d3b2f" text-anchor="middle">VG</text></svg></div><h3>Varun Gupta</h3><p>Business Advisor. Holds a Business Advisor certification, a member of the Institute of Advisors and a registered partner of the Regional Business Partner Network.</p></li>
           <li class="rv"><div class="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#efe7d6"/><circle cx="60" cy="60" r="51" fill="none" stroke="#8a6a38" stroke-width=".8"/><text x="60" y="71" font-family="Cormorant Garamond, Georgia, serif" font-size="32" font-weight="600" fill="#1d3b2f" text-anchor="middle">VK</text></svg></div><h3>Vipul Koradia</h3><p>Taxation Accountant</p></li>
           <li class="rv" style="--d:1"><div class="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#dfe5d6"/><circle cx="60" cy="60" r="51" fill="none" stroke="#8a6a38" stroke-width=".8"/><text x="60" y="71" font-family="Cormorant Garamond, Georgia, serif" font-size="32" font-weight="600" fill="#1d3b2f" text-anchor="middle">DN</text></svg></div><h3>Deepti Nanda</h3><p>Taxation Accountant</p></li>
           <li class="rv" style="--d:2"><div class="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#efe7d6"/><circle cx="60" cy="60" r="51" fill="none" stroke="#8a6a38" stroke-width=".8"/><text x="60" y="71" font-family="Cormorant Garamond, Georgia, serif" font-size="32" font-weight="600" fill="#1d3b2f" text-anchor="middle">MK</text></svg></div><h3>Mandeep Kaur</h3><p>Taxation Accountant</p></li>
           <li class="rv" style="--d:3"><div class="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#dfe5d6"/><circle cx="60" cy="60" r="51" fill="none" stroke="#8a6a38" stroke-width=".8"/><text x="60" y="71" font-family="Cormorant Garamond, Georgia, serif" font-size="32" font-weight="600" fill="#1d3b2f" text-anchor="middle">JP</text></svg></div><h3>Jigar Parikh</h3><p>Taxation Accountant</p></li>
         </ul>
       </div>
+    </div>
+  </section>
+
+  <section class="sec ins" id="insights" aria-labelledby="in-t">
+    <div class="wrap">
+      <div class="head rv">
+        <div class="rule" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M7 0l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="currentColor"/></svg></div>
+        <h2 id="in-t">Recent insights</h2>
+        <p>Articles from our site. Each opens on taxprofessionals.co.nz.</p>
+      </div>
+      <ul class="ins-l">
+        <li class="rv"><a href="https://www.taxprofessionals.co.nz/insights-/-news/why-most-mortgage-structures-in-nz-are-wrong" target="_blank" rel="noopener"><span class="t">Why Most Mortgage Structures in NZ Are Wrong</span><span class="r">Read</span></a></li>
+        <li class="rv" style="--d:1"><a href="https://www.taxprofessionals.co.nz/insights-/-news/kiwisaver-contribution-changes-from-1-april-2026" target="_blank" rel="noopener"><span class="t">KiwiSaver Contribution Changes from 1 April 2026</span><span class="r">Read</span></a></li>
+        <li class="rv" style="--d:2"><a href="https://www.taxprofessionals.co.nz/insights-/-news/inland-revenues-crackdown-is-your-business-ready-for-the-new-wave-of-tax-audits" target="_blank" rel="noopener"><span class="t">Inland Revenue's Crackdown: Is Your Business Ready for the New Wave of Tax Audits?</span><span class="r">Read</span></a></li>
+        <li class="rv" style="--d:3"><a href="https://www.taxprofessionals.co.nz/insights-/-news/how-to-prepare-your-business-for-sale-when-youre-retiring" target="_blank" rel="noopener"><span class="t">How to Prepare Your Business for Sale When You're Retiring</span><span class="r">Read</span></a></li>
+      </ul>
+      <p class="ins-more"><a class="tlink" href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">All insights and news</a></p>
     </div>
   </section>
 
@@ -560,13 +590,14 @@ html.js .rv.in{opacity:1;transform:none}
           <div><dt>Mobile</dt><dd><a href="tel:+64211419135">021 141 9135</a></dd></div>
           <div><dt>Email</dt><dd><a href="mailto:info@taxprofessionals.co.nz">info@taxprofessionals.co.nz</a></dd></div>
           <div><dt>Office</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=620+Manukau+Road+Epsom+Auckland+1023" target="_blank" rel="noopener">620 Manukau Road, Epsom, Auckland 1023</a><small>Opens in Google Maps</small></dd></div>
+          <div><dt>Reception</dt><dd>Monday to Friday, 9:30am to 5:30pm</dd></div>
         </dl>
         <form class="form" id="enquiry" novalidate>
           <div><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
           <div><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
           <div><label for="f-phone">Phone <span>(optional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
           <div><label for="f-topic">Regarding <span>(optional)</span></label>
-            <select id="f-topic" name="topic" autocomplete="off"><option value="">Choose one</option><option>Tax compliance</option><option>Property</option><option>Companies and trusts</option><option>Bookkeeping and business advice</option><option>Payroll, employment and HR</option><option>Something else</option></select></div>
+            <select id="f-topic" name="topic" autocomplete="off"><option value="">Choose one</option><option>Taxation and accounting compliance</option><option>Business advisory and planning</option><option>Employment and HR advisory</option><option>Property investment and development</option><option>Something else</option></select></div>
           <div class="full"><label for="f-msg">Message</label><textarea id="f-msg" name="message" autocomplete="off" required></textarea></div>
           <div class="hp" aria-hidden="true"><label for="f-web">Website</label><input id="f-web" name="website" tabindex="-1" autocomplete="off"></div>
           <div class="full send"><button class="btn btn--forest" type="submit">Send your note</button><p class="status" role="status" aria-live="polite"></p></div>
@@ -582,8 +613,8 @@ html.js .rv.in{opacity:1;transform:none}
     <a class="brand" href="#top"><svg class="seal" aria-hidden="true"><use href="#seal"/></svg><span><b>Tax Professionals</b><small>Epsom · Since 1998</small></span></a>
     <p class="tag">620 Manukau Road, Epsom, Auckland 1023 · <a href="tel:+6496250035" style="white-space:nowrap">09 625 0035</a></p>
     <div class="f-cols">
-      <nav aria-labelledby="fs-t"><h2 id="fs-t">Services</h2><a href="#services">Tax compliance</a><a href="#services">Property</a><a href="#services">Companies and trusts</a><a href="#services">Bookkeeping and advice</a><a href="#services">Payroll and HR</a></nav>
-      <nav aria-labelledby="fe-t"><h2 id="fe-t">Explore</h2><a href="#year">Tax year dates</a><a href="#people">People</a><a href="#questions">Questions</a><a href="#contact">Contact</a><a href="https://www.facebook.com/TaxProfessionalsNZ/" target="_blank" rel="noopener">Facebook</a><a href="https://nz.linkedin.com/company/tax-professionals-limited" target="_blank" rel="noopener">LinkedIn</a></nav>
+      <nav aria-labelledby="fs-t"><h2 id="fs-t">Services</h2><a href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">Taxation &amp; Accounting Compliance</a><a href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">Business Advisory &amp; Planning</a><a href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">Employment &amp; HR Advisory</a><a href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">Property Investment &amp; Development</a></nav>
+      <nav aria-labelledby="fe-t"><h2 id="fe-t">Explore</h2><a href="#year">Tax year dates</a><a href="#people">People</a><a href="#questions">Questions</a><a href="#contact">Contact</a><a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">Client resources</a><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">Insights</a><a href="https://www.taxprofessionals.co.nz/pay-an-invoice" target="_blank" rel="noopener">Pay an invoice</a><a href="https://www.facebook.com/TaxProfessionalsNZ/" target="_blank" rel="noopener">Facebook</a><a href="https://nz.linkedin.com/company/tax-professionals-limited" target="_blank" rel="noopener">LinkedIn</a></nav>
     </div>
     <div class="legal"><span>© Tax Professionals Ltd</span><span>Proudly designed by AMBS Solutions</span></div>
   </div>

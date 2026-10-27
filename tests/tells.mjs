@@ -83,7 +83,7 @@ try { for (const pr of JSON.parse(readFileSync(path.join(SITE, "assets/content/p
 NAMES.push(..."land surveying|rma planning|engineering|landscape architecture|environmental services|project management|send an enquiry|send us an enquiry|book a meeting|what to tell us|faq|contact".split("|"));
 const isName = h => /\b(street|road|avenue|crescent|reserve|park|green|lookout|drive|lane|playground|footbridge|school)\b/.test(h) || NAMES.some(n => n && (h === n || h.startsWith(n) || n.startsWith(h)));
 // Tax Professionals: the firm's four service names must appear as written on every concept (BRIEF.md)
-const PILLAR = /^(taxation (and|&) accounting compliance|business advisory (and|&) planning|employment (and|&) hr advisory|property investment (and|&) development)$/;
+const PILLAR = /^(taxation (and |& )?accounting compliance|business advisory (and |& )?planning|employment (and |& )?hr advisory|property investment (and |& )?development)$/;
 const seen = {};
 for (const s of all) for (const h of new Set(home[s].h2s.map(norm))) if (h.split(" ").length >= 3 && !isName(h) && !/understand the site|design consent|deliver on site|complete hand over/.test(h) && !PILLAR.test(h)) (seen[h] ||= []).push(s.slice(0, 2));
 const dups = Object.entries(seen).filter(([, v]) => v.length > 1);

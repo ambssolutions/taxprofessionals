@@ -127,3 +127,76 @@ Pick the ones that suit the concept's audience (property ones for 04, small-busi
 
 ### Navigation
 Their site's sections: Home, About Us, the four services, Client Resources, Insights / News, Pay an Invoice, Contact Us. Each concept's nav keeps its own labels, but the footer "Explore" column should now include Client resources, Insights and Pay an invoice (linking to the live pages).
+
+## VERIFIED content from the live site (scraped 27 Oct 2026; this section OVERRIDES everything above where they differ)
+
+### Corrections to earlier sections
+- **Varun Gupta is PARTNER**, not "Business Advisor". Credentials: Master of Business Administration (MBA), Chartered Accountant (NZ), Certified Business Advisor. Their site: "an avid property investor and developer with first-hand experience of the pitfalls and challenges". Also: Business Advisor certification, member of the Institute of Advisors, registered Regional Business Partner.
+- **Ranjana Gupta, DIRECTOR.** Credentials as listed on their site: Ph.D, Master of Philosophy, Master of Business (Taxation), Master of Commerce. She "has published commentary, articles and chapters on New Zealand's land tax regime in various accounting and tax textbooks and journals" and is a senior lecturer in taxation at AUT. Do NOT call her a Chartered Accountant (their site does not).
+- Write her line as: "Director. PhD, MPhil, MBus (Taxation), MCom. Published author on New Zealand's land tax regime." Varun's: "Partner. MBA, Chartered Accountant (NZ), Certified Business Advisor."
+- **"First consultation free"** applies to all matters ("First consultation free on all matters"), not only Business Planning. Business Planning additionally says "First meeting free of charge".
+- **Office hours:** Mon to Fri 9:30am to 5:30pm, **Sat 11:30am to 3:00pm**, Sun closed. "Centrally located with abundant free on-site parking."
+- Company name in footer: "© 2026 Tax Professionals". Site title: "Tax Professional Services". CTA label they use: "Book a chat".
+
+### The full team (12 people, in this order; titles exactly as on their site, in sentence case)
+1. Ranjana Gupta, Director
+2. Varun Gupta, Partner
+3. Eshan Gupta, Associate Partner. BCom/LLB, admitted Barrister and Solicitor (NZ). Writes the Insights articles.
+4. Hemant Kumar, Senior Taxation Accountant
+5. Rizwan Sheikh, Senior Taxation Accountant
+6. Vipul Koradia, Taxation Accountant
+7. Deepti Nanda, Taxation Accountant
+8. Mandeep Kaur, Taxation Accountant
+9. Jigar Parikh, Taxation Accountant
+10. Syed Shafi, Junior Accountant
+11. Reeti Patel, Accounts Administrator
+Each has an email first-name@taxprofessionals.co.nz and the office extension on 09 625 0025. Show the three leaders large and the rest as a list or small grid. Photos exist for Ranjana, Varun, Hemant and Rizwan (not downloadable yet, CDN blocked); keep `data-need="team photos"` slots so they can drop in.
+
+### Their own words (use these; they are the client's copy)
+- Home welcome: "We understand how important it is for business owners to know how profitable they are at any given instance. The traditional ways of annual accounting and compliance are clearly inappropriate in today's business environment."
+- About: "Working for the community since 1998." "At Tax Professionals we believe in quality customer service and explaining things in your language. Things can get tricky when it comes to tax so our dedicated team members are there to help and get things done thoroughly and professionally with a smile."
+- "Why Tax Professionals?" (five promises, use as a list or a sticky stack):
+  1. First consultation free on all matters
+  2. Tax experts with over 20 years of experience
+  3. Specialists in property development and structuring
+  4. Fixed fee services. No more shock bills
+  5. Tailored support and service packages based on your needs
+- Services one-liners: Taxation & Accounting Compliance: "Tax compliance and practical consulting services." Business Advisory & Planning: "Create a profitable, thriving and valuable business." Employment & HR Advisory: "Your employment law and HR partner." Property Investment & Development: "Practical advice on optimal structuring of your property investments and developments to keep up with the ever-changing property taxation laws and regulations."
+- Award: "Accountant of the Year 2019-2020, Twelfth Annual Indian Newslink Indian Business Awards (25 November 2019, SkyCity). Also a finalist, Small Business of the Year."
+- Testimonial (published on their About page, attributed): "We have been dealing with Varun Gupta at Tax Professionals for over a year now. The advice we have received from Varun and his team has been on point, on time and meaningful. We truly work as partners that has helped our business navigate through some turbulent times. Cannot recommend them enough." — Infinity Flowers. Use at most once per page; write the attribution as "Infinity Flowers, client".
+
+### Service detail (verified)
+**Taxation & Accounting Compliance**
+- Individuals / rental property / LTCs (monthly fee, enquire): IR3 returns, rental property annual returns, partner or joint-holder returns, Inland Revenue liaison. Fees vary with the property portfolio.
+- Businesses (sole traders, partnerships, companies, trusts; MYOB and Xero): 2- or 6-monthly GST returns, IR4 company returns and up to two shareholders' IR3s, annual imputation credit return (IR4J), end-of-year financial statements, quarterly meeting on business performance, Inland Revenue liaison, free training and ongoing support on accounting software. Add-ons: full PAYE and payroll; Employment & HR Advisory.
+- Other tax services: trust formation and management, standalone PAYE and payroll, company formation and Companies Office records, business planning and forecasts, annual budgeting, management reports, FBT returns, tax pooling.
+- **IRD disputes and resolutions / tax debt:** help with compliance reviews, IRD audits and liaison; negotiating arrears (GST, PAYE, income tax); responding to letters of demand. Tone on the page: "Whatever the tax position, talk to us."
+- **Tax pooling** through Tax Management NZ (TMNZ): pay provisional tax when it suits you.
+**Business Advisory & Planning:** Business Planning (first meeting free; a one-on-one workshop for the next 3 months, 12 months and 3 years, covering business and personal goals), Cashflow Forecasting, Monthly Coaching. Benefits list on their page: "You'll know where you are heading and what the goals are. You'll have a solid plan and an implementation timetable…"
+**Employment & HR Advisory:** Employment relations and policies; Employer accreditation ("mandatory from 2021"); Restructure and redundancy; Personal grievances and disputes; Audit and investigations (Labour Inspector readiness). "The most valuable asset in your business is your staff."
+**Property Investment & Development:** strategy, structuring (personal, look-through company, trust), returns and financial statements, cash-flow tools (hold and trade), introductions to alliance partners and mentoring programmes. Investor questions they list: "How should I own my investment property?", "Should I use a look-through company or invest individually or use a trust?", "How do I break associated person rules…", "How do I keep growing my investing activities safely?" Strategies: buy and hold, trading and flips, development, lease options, rent by the room, land banking, GST implications. **Family Trust Management & Advisory**: about 500,000 trusts in NZ; trained staff in trust and estate management.
+
+### Client resources (verified)
+"Tax payments must be made on or before the due date. Where the due date falls on a weekend or a public holiday, the payment is due on the next working day. GST is an exception and will always be payable on the last working day of the taxable period. Depending on your individual circumstances the due dates that apply to you may be different." Links they give: IRD, Working for Families calculator, PAYE/KiwiSaver calculator, income tax calculator, tax code declaration form, tax credit claim form, GST filing frequency, student loan calculators.
+
+### Pay an invoice (verified)
+Online by Visa or Mastercard; direct deposit to Tax Professionals Limited at ANZ (quote the invoice number); by phone 9:30am to 5:30pm on 09 625 0025 or 09 625 0035, press 0 for reception; direct debit set-up. Do NOT print the bank account number on the concepts.
+
+### Insights / News (verified; author Eshan Gupta; newest first)
+- Repairs vs Improvements: What Can You Deduct? (16 Oct 2026)
+- KiwiSaver Employer Contributions: Are You Getting It Right? (9 Oct 2026)
+- Closing or Winding Up Your Business (28 Sep 2026)
+- Planning Your Next Equipment Purchase (25 Sep 2026)
+- When Should You Buy a Brand-New Vehicle for Your Business? (24 Sep 2026)
+- How to Empower Your Employees to Make Decisions and Grow Your Business (16 Sep 2026)
+- How to Boost Your Sales Growth: Practical Strategies for Business Owners (8 Sep 2026)
+- Bogus Expense Claims: Inland Revenue Warns Taxpayers of Serious Consequences (27 Aug 2026)
+- Smart Ways to Take Money Out of Your Company (24 Jul 2026)
+- MBIE Labour Inspectorate Increasing Payroll Audits: Is Your Business Ready? (21 Jul 2026)
+- IRD Is Now Deducting Tax Debt Directly From Bank Accounts (7 Jul 2026)
+Article URLs follow https://www.taxprofessionals.co.nz/insights-/-news/<slug> (slug = lower-case title with hyphens, e.g. .../repairs-vs-improvements-what-can-you-deduct); the earlier list's URLs remain valid. Show "By Eshan Gupta" and the date where the concept shows dates.
+
+### Technology partners
+Their site shows nine partner logos (names not readable from the scrape). Known from other sources: TMNZ (tax pooling), Crystal Payroll, SmartPayroll, Xero, MYOB. Use TMNZ, Crystal Payroll, Xero and MYOB in text only until the logos are confirmed.
+
+### Still missing (keep data-need): the logo file and brand colours (CDN blocked), photos, the nine partner logos.
