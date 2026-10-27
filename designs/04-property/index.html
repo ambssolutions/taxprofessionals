@@ -6,7 +6,8 @@
 <title>Tax Professionals | Tax accountants, Epsom, Auckland</title>
 <meta name="description" content="Tax accounting for property investors in Auckland. Advice on property structures, trusts and companies, plus income tax, GST, payroll and bookkeeping. Tax Professionals, 620 Manukau Road, Epsom. Since 1998.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0b1624">
+<meta name="theme-color" content="#033F66">
+<link rel="icon" href="../../assets/logo/mark.png" type="image/png">
 <meta property="og:title" content="Tax Professionals | Tax accountants, Epsom, Auckland">
 <meta property="og:description" content="Tax accounting for property investors. Epsom, Auckland. Since 1998.">
 <meta property="og:locale" content="en_NZ">
@@ -16,7 +17,7 @@
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AccountingService","name":"Tax Professionals","legalName":"Tax Professionals Ltd","url":"https://www.taxprofessionals.co.nz/","email":"info@taxprofessionals.co.nz","telephone":["+6496250035","+6496250025","+64211419135"],"foundingDate":"1998","address":{"@type":"PostalAddress","streetAddress":"620 Manukau Road","addressLocality":"Epsom","addressRegion":"Auckland","postalCode":"1023","addressCountry":"NZ"},"sameAs":["https://www.facebook.com/TaxProfessionalsNZ/","https://nz.linkedin.com/company/tax-professionals-limited"]}</script>
 <style>
-:root{--navy:#0b1624;--navy-2:#0f1d2f;--navy-3:#15283f;--brass:#c9a35d;--brass-hi:#e4c88f;--paper:#ece5d6;--sheet:#f3eee3;--muted:#a3afbf;--ink:#0b1624;--line:rgba(201,163,93,.32);--hair:rgba(236,229,214,.13);--hh:72px;--pad:clamp(20px,5vw,72px);--disp:"Space Grotesk",system-ui,sans-serif;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--ease:cubic-bezier(.45,.05,.25,1)}
+:root{--navy:#033F66;--navy-2:#02355a;--navy-3:#0a5486;--brass:#7cc95f;--brass-hi:#8fd477;--paper:#ffffff;--sheet:#eef4f8;--muted:#c2d5e3;--ink:#021f33;--line:rgba(98,180,68,.4);--hair:rgba(255,255,255,.16);--blue:#04649F;--hh:72px;--pad:clamp(20px,5vw,72px);--disp:"Space Grotesk",system-ui,sans-serif;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--ease:cubic-bezier(.45,.05,.25,1)}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hh) + 8px);-webkit-text-size-adjust:100%;color-scheme:dark}
 body{margin:0;background:var(--navy);color:var(--paper);font:400 1.04rem/1.62 var(--sans);overflow-x:clip}
@@ -31,7 +32,7 @@ p{margin:0}
 .lbl{font:600 .76rem/1 var(--disp);letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
 
 /* buttons */
-.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 30px;border-radius:2px;font:600 1rem/1 var(--disp);letter-spacing:.01em;text-decoration:none;border:1px solid var(--brass);cursor:pointer;transition:background .3s,color .3s}
+.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 30px;border-radius:12px;font:600 1rem/1 var(--disp);letter-spacing:.01em;text-decoration:none;border:1px solid var(--brass);cursor:pointer;transition:background .3s,color .3s}
 .btn--brass{background:var(--brass);color:var(--ink)}
 .btn--brass:hover{background:var(--brass-hi)}
 .btn--line{background:transparent;color:var(--paper)}
@@ -44,11 +45,11 @@ p{margin:0}
 .site-header{position:sticky;top:0;z-index:50;height:var(--hh);background:var(--navy);border-bottom:1px solid var(--hair)}
 @media (min-width:1024px) and (pointer:fine){.site-header{background:rgba(11,22,36,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}}
 .hd{height:100%;display:flex;align-items:center;gap:20px;padding:0 var(--pad);max-width:1480px;margin:0 auto}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto;min-height:44px}
-.brand svg{width:30px;height:30px}
-.brand b{font:600 1.2rem/1 var(--disp);letter-spacing:-.01em}
+.brand{display:flex;align-items:center;margin-right:auto;min-height:44px;padding:6px 12px;border-radius:12px;background:#fff}
+.brand img{width:187px;height:34px}
+@media (max-width:420px){.brand img{width:154px;height:28px}}
 .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:2px}
-.nav a{display:flex;align-items:center;min-height:44px;padding:0 14px;text-decoration:none;color:#cfd5de;font:500 .95rem/1 var(--disp);transition:color .25s}
+.nav a{display:flex;align-items:center;min-height:44px;padding:0 14px;text-decoration:none;color:#e1ecf4;font:500 .95rem/1 var(--disp);transition:color .25s}
 .nav a:hover{color:var(--brass-hi)}
 .hd-cta{min-height:46px;padding:0 22px;font-size:.95rem}
 .menu-btn{display:none;width:48px;height:48px;border:1px solid var(--line);background:transparent;color:var(--paper);cursor:pointer;align-items:center;justify-content:center}
@@ -73,47 +74,44 @@ p{margin:0}
 
 /* hero */
 .hero{position:relative;background:var(--navy)}
-.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(236,229,214,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(236,229,214,.035) 1px,transparent 1px);background-size:40px 40px;mask-image:linear-gradient(180deg,#000 40%,transparent)}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:40px 40px;mask-image:linear-gradient(180deg,#000 40%,transparent)}
 .hero-in{position:relative;max-width:1480px;margin:0 auto;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,3vw,56px);padding:0 var(--pad);height:calc(100vh - var(--hh));height:calc(100svh - var(--hh));min-height:600px}
 .hero-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(16px,3vh,40px) 0}
 .hero h1{font-size:clamp(2.4rem,min(4.7vw,9.4vh),5.2rem);line-height:.98;letter-spacing:-.04em;max-width:10ch}
-.hero-lede{margin-top:clamp(16px,3vh,28px);font-size:clamp(1rem,min(1.3vw,2.4vh),1.18rem);color:#c3cbd6;max-width:31rem}
+.hero-lede{margin-top:clamp(16px,3vh,28px);font-size:clamp(1rem,min(1.3vw,2.4vh),1.18rem);color:#d6e4ee;max-width:31rem}
 .hero-act{margin-top:clamp(20px,4vh,40px);display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
 .facts{list-style:none;margin:clamp(22px,4.4vh,48px) 0 0;padding:clamp(14px,2.4vh,20px) 0 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 28px;font-size:.9rem;color:var(--muted)}
 .facts b{color:var(--paper);font-weight:500}
 .roofs{display:none}
 
 /* board (signature) */
-.board{position:relative;align-self:center;display:flex;flex-direction:column;height:calc(100% - clamp(24px,5vh,56px));max-height:640px;background:var(--navy-2);border:1px solid var(--line);padding:clamp(16px,2.4vh,24px) clamp(16px,2vw,26px)}
-.board::before,.board::after{content:"";position:absolute;width:18px;height:18px;border-color:var(--brass);border-style:solid;pointer-events:none}
-.board::before{top:-1px;left:-1px;border-width:2px 0 0 2px}
-.board::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+.board{position:relative;align-self:center;display:flex;flex-direction:column;height:calc(100% - clamp(24px,5vh,56px));max-height:640px;background:var(--navy-2);border:1px solid var(--hair);border-radius:20px;box-shadow:0 40px 80px -40px rgba(0,0,0,.45);padding:clamp(16px,2.4vh,24px) clamp(16px,2vw,26px)}
 .board-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .board h2{font-size:1.12rem;letter-spacing:-.01em}
 .board-top span{font-size:.82rem;color:var(--muted)}
 .choices{margin-top:clamp(10px,1.6vh,16px);display:flex;flex-wrap:wrap;gap:6px}
-.choice{flex:1 1 auto;white-space:nowrap;min-height:44px;padding:8px 12px;border:1px solid var(--hair);background:transparent;color:#cfd5de;font:500 .9rem/1.2 var(--disp);cursor:pointer;text-align:center;transition:background .3s,color .3s,border-color .3s}
+.choice{flex:1 1 auto;white-space:nowrap;min-height:44px;padding:8px 12px;border-radius:10px;border:1px solid var(--hair);background:transparent;color:#e1ecf4;font:500 .9rem/1.2 var(--disp);cursor:pointer;text-align:center;transition:background .3s,color .3s,border-color .3s}
 .choice:hover{border-color:var(--brass);color:var(--paper)}
 .choice[aria-pressed=true]{background:var(--brass);border-color:var(--brass);color:var(--ink)}
 .dia{position:relative;flex:1;min-height:0;margin-top:clamp(8px,1.4vh,14px)}
 .dia svg{position:absolute;inset:0;width:100%;height:100%}
-.gh{fill:none;stroke:rgba(236,229,214,.16);stroke-width:1.5;stroke-dasharray:3 6}
+.gh{fill:none;stroke:rgba(255,255,255,.16);stroke-width:1.5;stroke-dasharray:3 6}
 .ln{fill:none;stroke:var(--brass);stroke-width:2.5;stroke-linecap:square;stroke-dasharray:1;stroke-dashoffset:1}
 .ln.on{stroke-dashoffset:0}
 .dot{fill:var(--brass);opacity:0}
 .dot.on{opacity:1}
 .ll{font:600 11px var(--disp);letter-spacing:.12em;text-transform:uppercase;fill:var(--brass-hi);opacity:0}
 .ll.on{opacity:1}
-.nd rect{fill:var(--navy);stroke:rgba(236,229,214,.22);stroke-width:1}
+.nd rect{fill:var(--navy);stroke:rgba(255,255,255,.22);stroke-width:1}
 .nd .t{font:600 19px var(--disp);fill:#7e8a9b;letter-spacing:-.01em}
 .nd .s{font:400 12.5px var(--sans);fill:#66727f}
 .nd.on rect{fill:var(--navy-3);stroke:var(--brass);stroke-width:1.5}
 .nd.on .t{fill:var(--paper)}
 .nd.on .s{fill:var(--muted)}
-.hs path{fill:none;stroke:rgba(236,229,214,.22);stroke-width:1.5;stroke-linejoin:round}
-.hs.on path{stroke:var(--brass-hi);fill:rgba(201,163,93,.16)}
+.hs path{fill:none;stroke:rgba(255,255,255,.22);stroke-width:1.5;stroke-linejoin:round}
+.hs.on path{stroke:var(--brass-hi);fill:rgba(98,180,68,.16)}
 .explain{margin-top:clamp(8px,1.4vh,14px);padding-top:clamp(10px,1.6vh,14px);border-top:1px solid var(--hair);min-height:calc(4 * 1.5em + 20px)}
-.explain p{font-size:clamp(.88rem,min(1.05vw,2vh),.98rem);line-height:1.5;color:#cfd5de}
+.explain p{font-size:clamp(.88rem,min(1.05vw,2vh),.98rem);line-height:1.5;color:#e1ecf4}
 .explain p b{color:var(--brass-hi);font-weight:500}
 .caveat{margin-top:8px;font-size:.8rem;color:var(--muted)}
 @media (max-width:1023px){.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.choice{white-space:normal}}
@@ -125,7 +123,7 @@ p{margin:0}
   .hero-act{justify-content:center;flex-direction:column;width:100%;max-width:440px;gap:16px}
   .hero-act .btn{width:100%}
   .facts{justify-content:center;font-size:.86rem;gap:6px 20px}
-  .roofs{display:block;width:calc(100% + 2 * var(--pad));max-width:none;margin:auto calc(-1 * var(--pad)) 0;height:auto}
+  .roofs{display:block;width:100%;min-height:0;flex:1 1 0;object-fit:cover;object-position:50% 40%;border-radius:18px;margin:24px 0 20px}
   .board{margin:0 var(--pad) clamp(56px,10vw,96px);height:auto;max-height:none}
   .dia{flex:none;aspect-ratio:560/400}
   .explain{min-height:0}
@@ -141,46 +139,67 @@ p{margin:0}
 
 /* services: floor plan */
 .svc{background:var(--navy-2);border-top:1px solid var(--hair)}
-.plan{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:1px;background:var(--line);border:3px solid var(--brass)}
-.room{position:relative;background:var(--navy-2);padding:clamp(20px,2.4vw,32px);min-height:180px;display:flex;flex-direction:column;justify-content:flex-end;transition:background .4s}
-.room:hover{background:var(--navy-3)}
-.room h3{font-size:clamp(1.2rem,1.6vw,1.45rem);letter-spacing:-.02em;line-height:1.15}
-.room .more{margin-top:14px;font-size:.9rem}
-.room .more a{color:var(--brass-hi)}
-.room p{margin-top:8px;color:var(--muted);font-size:.95rem;line-height:1.5}
-.room .rn{position:absolute;top:16px;left:clamp(20px,2.4vw,32px);font:600 .74rem/1 var(--disp);letter-spacing:.14em;color:var(--brass)}
-.room.door::after{content:"";position:absolute;width:44px;height:44px;border:1px solid var(--line);border-width:1px 1px 0 0;border-radius:0 44px 0 0;top:0;right:0;transform:scaleX(-1)}
-.r1{grid-column:span 5;grid-row:span 2;justify-content:space-between}
-.r1 .big{color:var(--paper);font:500 clamp(1.7rem,2.8vw,2.5rem)/1.05 var(--disp);letter-spacing:-.04em;margin-top:48px}
-.r1 p+p{margin-top:10px}
-.r2{grid-column:span 4}.r3{grid-column:span 3}.r4{grid-column:span 4}.r5{grid-column:span 3}
-@media (max-width:900px){
-  .plan{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .room,.r1,.r2,.r3,.r4,.r5{grid-column:span 1;grid-row:auto;min-height:150px}
-  .r1,.r5{grid-column:span 2}
-  .r1 .big{margin-top:36px}
-}
-@media (max-width:420px){.room{padding:18px 14px}.room h3{font-size:1.08rem}.room p{font-size:.88rem}}
+.prop{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-top:clamp(40px,5vw,64px);border-radius:24px;overflow:hidden;background:#fff;color:var(--ink)}
+.prop figure{margin:0;position:relative;background:var(--navy)}
+.prop figure img{width:100%;height:100%;object-fit:cover}
+.prop-t{padding:clamp(24px,3.4vw,48px)}
+.prop-t h3{font-size:clamp(1.6rem,2.6vw,2.3rem);letter-spacing:-.03em;color:var(--navy);line-height:1.08}
+.prop-t p{margin-top:12px;color:#33495a;font-size:.98rem}
+.prop-t .qs{padding:14px 16px;border-radius:14px;background:#eaf5e4;color:#16361a}
+.prop-t .tlink,.b3 .tlink{color:var(--navy)}
+.b2 .tlink{color:var(--ink);text-decoration-color:var(--blue)}
+.blocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
+.blk{border-radius:24px;overflow:hidden;display:flex;flex-direction:column}
+.blk img{width:100%;aspect-ratio:800/367;object-fit:cover}
+.blk>div{padding:clamp(20px,2.4vw,28px);flex:1}
+.blk h3{font-size:1.3rem;letter-spacing:-.02em;line-height:1.15}
+.blk p{margin-top:10px;font-size:.95rem;line-height:1.5}
+.b1{background:var(--blue)}.b1 p{color:#e3eef6}
+.b2{background:#62B444;color:var(--ink)}.b2 p{color:#0d2a14}
+.b3{background:#fff;color:var(--ink)}.b3 p{color:#33495a}
+.b1 .tlink{color:#fff;text-decoration-color:#8fd477}
+.plogos{list-style:none;margin:clamp(32px,4vw,48px) 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.plogos img{width:132px;height:88px;border-radius:14px;filter:grayscale(1);opacity:.9;transition:filter .4s,opacity .4s}
+.plogos li:hover img{filter:none;opacity:1}
+.more{margin-top:14px}
+@media (max-width:900px){.prop{grid-template-columns:1fr}.prop figure img{aspect-ratio:16/9;height:auto}.blocks{grid-template-columns:1fr}.plogos img{width:104px;height:69px}}
 
 /* people */
 .team{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px}
-.lead,.mate{border:1px solid var(--hair);background:var(--navy-2);display:flex;gap:22px;align-items:center;padding:clamp(20px,2.4vw,32px)}
+.lead,.mate{border:1px solid var(--hair);border-radius:18px;background:var(--navy-2);display:flex;gap:22px;align-items:center;padding:clamp(20px,2.4vw,32px)}
 .leads{display:grid;gap:16px}
 .lead{flex-direction:row;align-items:center;flex-wrap:wrap;border-color:var(--line)}
-.lead>div:not(.plaque){flex:1 1 220px}
-.plaque{flex:none;display:grid;place-items:center;width:72px;height:72px;border:1px solid var(--brass);box-shadow:inset 0 0 0 4px var(--navy-2),inset 0 0 0 5px rgba(201,163,93,.45);font:600 1.5rem/1 var(--disp);letter-spacing:.04em;color:var(--brass-hi)}
-.lead .plaque{width:clamp(96px,9vw,120px);height:clamp(96px,9vw,120px);font-size:clamp(2.2rem,3vw,2.8rem);box-shadow:inset 0 0 0 6px var(--navy-2),inset 0 0 0 7px rgba(201,163,93,.45)}
+.lead>div{flex:1 1 220px}
+.port{flex:none;width:clamp(96px,9vw,120px);height:clamp(96px,9vw,120px);object-fit:cover;border-radius:16px;background:#fff;box-shadow:8px 8px 0 var(--brass)}
+.port.sm{width:60px;height:60px;border-radius:12px;box-shadow:5px 5px 0 var(--blue)}
+.plaque{flex:none;display:grid;place-items:center;width:72px;height:72px;border:1px solid var(--brass);box-shadow:inset 0 0 0 4px var(--navy-2),inset 0 0 0 5px rgba(98,180,68,.45);font:600 1.5rem/1 var(--disp);letter-spacing:.04em;color:var(--brass-hi)}
+.lead .plaque{width:clamp(96px,9vw,120px);height:clamp(96px,9vw,120px);font-size:clamp(2.2rem,3vw,2.8rem);box-shadow:inset 0 0 0 6px var(--navy-2),inset 0 0 0 7px rgba(98,180,68,.45)}
 .lead h3{font-size:clamp(1.5rem,2.2vw,1.9rem)}
 .lead p,.mate p{color:var(--muted);margin-top:4px}
 .lead .cred{margin-top:10px;color:var(--brass-hi);font-weight:500;font-size:.95rem;line-height:1.45;text-wrap:pretty}
-.mates{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.mate h3{font-size:1.3rem}
+.mates{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mate{padding:clamp(16px,1.8vw,22px);gap:16px}
+.mate .plaque{width:60px;height:60px;font-size:1.3rem}
+.mate h3{font-size:1.12rem}
+.mate p{font-size:.92rem}
 @media (max-width:860px){.team{grid-template-columns:1fr}.mates{grid-template-columns:1fr}.lead .plaque{width:96px;height:96px;font-size:2.2rem}}
+
+/* commitments */
+.commit{background:var(--navy-2);border-top:1px solid var(--hair)}
+.spec{list-style:none;margin:clamp(36px,5vw,56px) auto 0;padding:0;max-width:760px;border-radius:20px;overflow:hidden;background:var(--navy)}
+.spec li{display:grid;grid-template-columns:64px minmax(0,1fr);align-items:center;min-height:64px}
+.spec li+li{border-top:1px solid var(--line)}
+.spec .idx{align-self:stretch;display:grid;place-items:center;border-right:1px solid var(--line);font:600 .9rem var(--disp);color:var(--brass)}
+.spec li>span:last-child{padding:14px 20px;font:500 1.08rem/1.35 var(--disp);letter-spacing:-.01em}
+.tq{margin:clamp(40px,6vw,64px) auto 0;max-width:800px;text-align:center}
+.tq blockquote{margin:0;font:400 clamp(1.1rem,1.5vw,1.3rem)/1.55 var(--sans);color:#d9dfe7;text-wrap:pretty}
+.tq blockquote p::before{content:"\201C"}.tq blockquote p::after{content:"\201D"}
+.tq figcaption{margin-top:16px;font:600 .8rem/1 var(--disp);letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
 
 /* calendar sheet */
 .cal{background:var(--sheet);color:var(--ink)}
 .cal .sec-head p{color:#4a5566}
-.gantt{margin-top:clamp(40px,5vw,64px);border:1.5px solid var(--ink);background:#faf7f0}
+.gantt{margin-top:clamp(40px,5vw,64px);border-radius:20px;overflow:hidden;background:#ffffff;box-shadow:0 30px 60px -40px rgba(3,63,102,.5)}
 .g-row{display:grid;grid-template-columns:clamp(150px,16vw,200px) minmax(0,1fr);border-top:1px solid rgba(11,22,36,.18)}
 .g-row:first-child{border-top:0}
 .g-name{padding:16px 18px;font:600 1rem/1.25 var(--disp);border-right:1px solid rgba(11,22,36,.18);display:flex;align-items:center}
@@ -189,43 +208,44 @@ p{margin:0}
 .g-track::after{content:"";position:absolute;top:0;bottom:0;right:0;width:calc(300% / 15);background:repeating-linear-gradient(135deg,rgba(11,22,36,.06) 0 2px,transparent 2px 8px);border-left:1.5px dashed rgba(11,22,36,.45)}
 .months{display:grid;grid-template-columns:repeat(15,minmax(0,1fr));height:100%;align-items:center;font:600 .78rem/1 var(--disp);letter-spacing:.08em;text-transform:uppercase;color:#4a5566}
 .months span{padding-left:6px}
-.months .ny{color:#7a5a1f}
+.months .ny{color:#04649F}
 .g-head .g-track{min-height:52px}
 .g-head .g-name{font-size:.86rem;color:#4a5566;font-weight:500}
 .mk{position:absolute;top:18px;left:calc(var(--x) / 15 * 100%);display:flex;flex-direction:column;align-items:flex-start;max-width:calc(1.9 / 15 * 100%);min-width:84px;padding-left:16px;font-size:.84rem;line-height:1.3;color:#3a4555}
 .mk::before{content:"";position:absolute;left:-6px;top:3px;width:12px;height:12px;background:var(--ink);transform:rotate(45deg)}
-.mk.hollow::before{background:#faf7f0;border:2px solid var(--ink)}
+.mk.hollow::before{background:#ffffff;border:2px solid var(--ink)}
 .mk.flip{left:auto;right:calc((15 - var(--x)) / 15 * 100%);align-items:flex-end;text-align:right;padding-left:0;padding-right:16px}
 .mk.flip::before{left:auto;right:-6px}
 .mk b{font:600 1rem/1.2 var(--disp);color:var(--ink)}
-.band{position:absolute;left:calc(var(--a) / 15 * 100%);width:calc((var(--b) - var(--a)) / 15 * 100%);top:16px;bottom:16px;border:1.5px solid var(--ink);background:repeating-linear-gradient(90deg,rgba(201,163,93,.35) 0 calc(100% / 12 - 2px),transparent calc(100% / 12 - 2px) calc(100% / 12));display:flex;align-items:center;padding:6px 14px;font-size:.88rem;line-height:1.35;color:var(--ink)}
-.band span{background:#faf7f0;padding:4px 8px}
+.band{position:absolute;left:calc(var(--a) / 15 * 100%);width:calc((var(--b) - var(--a)) / 15 * 100%);top:16px;bottom:16px;border:1.5px solid var(--ink);background:repeating-linear-gradient(90deg,rgba(98,180,68,.35) 0 calc(100% / 12 - 2px),transparent calc(100% / 12 - 2px) calc(100% / 12));display:flex;align-items:center;padding:6px 14px;font-size:.88rem;line-height:1.35;color:var(--ink)}
+.band span{background:#ffffff;padding:4px 8px}
 .cal-note{margin-top:20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;font-size:.9rem;color:#4a5566}
 .cal-note i{display:inline-block;width:10px;height:10px;background:var(--ink);transform:rotate(45deg);margin:0 8px 0 2px}
 .cal-note i.h{background:transparent;border:2px solid var(--ink)}
-.cal-note span:last-child{max-width:640px;text-wrap:pretty}
+.cal-note span:last-child{max-width:720px;text-wrap:pretty}
 .cal-link{color:var(--ink);font-weight:500;text-underline-offset:4px;text-decoration-color:var(--brass)}
 @media (max-width:900px){
   .gantt{border-width:1px}
   .g-head{display:none}
   .g-row{grid-template-columns:1fr}
-  .g-name{border-right:0;border-bottom:1px solid rgba(11,22,36,.12);padding:14px 16px;background:#f1ebde}
+  .g-name{border-right:0;border-bottom:1px solid rgba(11,22,36,.12);padding:14px 16px;background:#eef4f8}
   .g-track{min-height:0;background:none;padding:12px 16px 14px;display:grid;gap:10px}
   .g-track::after{display:none}
   .mk,.mk.flip{position:relative;left:auto;right:auto;top:auto;max-width:none;min-width:0;align-items:flex-start;text-align:left;padding:0 0 0 22px}
   .mk::before,.mk.flip::before{left:2px;right:auto}
-  .band{position:relative;left:auto;width:auto;top:auto;bottom:auto;background:rgba(201,163,93,.22);border-width:1px;padding:10px 12px}
+  .band{position:relative;left:auto;width:auto;top:auto;bottom:auto;background:rgba(98,180,68,.22);border-width:1px;padding:10px 12px}
   .band span{background:none;padding:0}
 }
 
 /* insights register */
 .reg{background:var(--navy-2);border-top:1px solid var(--hair)}
-.register{list-style:none;margin:clamp(36px,5vw,56px) auto 0;padding:0;max-width:900px;border:1.5px solid var(--brass)}
+.register{list-style:none;margin:clamp(36px,5vw,56px) auto 0;padding:0;max-width:900px;border-radius:20px;overflow:hidden;background:var(--navy)}
 .register li+li{border-top:1px solid var(--line)}
 .register a{display:grid;grid-template-columns:64px minmax(0,1fr) auto;align-items:center;gap:16px;min-height:72px;padding:14px 20px 14px 0;text-decoration:none;color:var(--paper);transition:background .3s}
 .register a:hover{background:var(--navy-3)}
 .register .idx{align-self:stretch;display:grid;place-items:center;border-right:1px solid var(--line);font:600 .9rem var(--disp);color:var(--brass)}
 .register .ttl{font:500 1.12rem/1.35 var(--disp);letter-spacing:-.01em;text-wrap:pretty}
+.register .ttl small{display:block;margin-top:4px;font:400 .84rem/1.3 var(--sans);color:var(--muted)}
 .register .go{font:600 .76rem/1 var(--disp);letter-spacing:.14em;text-transform:uppercase;color:var(--brass-hi);border-bottom:1px solid var(--brass)}
 .reg-all{text-align:center;margin-top:24px}
 @media (max-width:560px){.register a{grid-template-columns:48px minmax(0,1fr);padding-right:16px}.register .go{display:none}.register .ttl{font-size:1.02rem}}
@@ -241,7 +261,7 @@ p{margin:0}
 .faq-list summary i::before,.faq-list summary i::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;margin:-.75px 0 0 -6px;background:var(--brass)}
 .faq-list summary i::after{transform:rotate(90deg);transition:transform .8s var(--ease)}
 .faq-list details.is-open summary i::after,.faq-list details[open]:not(.js-fold) summary i::after{transform:rotate(0)}
-.fold-in{padding:0 56px 24px 4px;color:#c3cbd6}
+.fold-in{padding:0 56px 24px 4px;color:#d6e4ee}
 .js .fold{display:grid;grid-template-rows:0fr;transition:grid-template-rows 1.4s var(--ease)}
 .js .fold>div{overflow:hidden;min-height:0}
 .js .fold .fold-in{opacity:0;transition:opacity 1s ease .2s}
@@ -251,7 +271,7 @@ p{margin:0}
 /* contact */
 .contact{background:var(--navy-2);border-top:1px solid var(--hair)}
 .contact-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(20px,3vw,40px);margin-top:clamp(36px,5vw,56px);align-items:start}
-.tblock{border:1.5px solid var(--brass)}
+.tblock{border-radius:20px;background:var(--navy-2);overflow:hidden}
 .tblock dl{margin:0;display:grid}
 .tblock dl>div{display:grid;grid-template-columns:110px minmax(0,1fr);border-bottom:1px solid var(--line)}
 .tblock dt{padding:16px 14px;border-right:1px solid var(--line);font:600 .74rem/1.4 var(--disp);letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
@@ -260,11 +280,11 @@ p{margin:0}
 .tblock dd a:hover{border-color:var(--brass);color:var(--brass-hi)}
 .tblock .tb-foot{padding:16px;display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:.86rem;color:var(--muted)}
 .tblock .tb-foot svg{width:44px;height:44px}
-.form{display:grid;gap:16px;border:1px solid var(--hair);background:var(--navy);padding:clamp(22px,3vw,40px)}
+.form{display:grid;gap:16px;border-radius:20px;border:1px solid var(--hair);background:var(--navy);padding:clamp(22px,3vw,40px)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .field label{display:block;font:500 .92rem/1.3 var(--disp);margin-bottom:6px}
 .field label small{font-weight:400;color:var(--muted)}
-.field input,.field select,.field textarea{width:100%;min-height:52px;padding:12px 14px;border:1px solid rgba(236,229,214,.24);border-radius:0;background:var(--navy-2);color:var(--paper);font:inherit;font-size:1rem}
+.field input,.field select,.field textarea{width:100%;min-height:52px;padding:12px 14px;border:1px solid rgba(255,255,255,.24);border-radius:10px;background:var(--navy-2);color:var(--paper);font:inherit;font-size:1rem}
 .field textarea{min-height:120px;resize:vertical}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 1px var(--brass)}
 .field [aria-invalid=true]{border-color:#e08a6c}
@@ -276,16 +296,15 @@ p{margin:0}
 
 /* footer */
 .site-footer{background:var(--navy);border-top:3px solid var(--brass);padding:clamp(48px,6vw,80px) var(--pad) calc(28px + env(safe-area-inset-bottom));text-align:center}
-.f-brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none}
-.f-brand svg{width:32px;height:32px}
-.f-brand b{font:600 1.35rem/1 var(--disp)}
+.f-brand{display:inline-flex;padding:10px 16px;border-radius:14px;background:#fff}
+.f-brand img{width:198px;height:36px}
 .f-line{margin-top:10px;color:var(--muted);font-size:.95rem}
-.f-cols{display:inline-grid;grid-template-columns:auto auto;gap:0;margin-top:36px;border:1px solid var(--line);text-align:left}
+.f-cols{display:inline-grid;grid-template-columns:auto auto;gap:0;margin-top:36px;border:1px solid var(--hair);border-radius:18px;text-align:left}
 .f-cols nav{padding:22px clamp(22px,4vw,48px);max-width:320px}
 .f-cols nav+nav{border-left:1px solid var(--line)}
 .f-cols h2{font:600 .74rem/1 var(--disp);letter-spacing:.14em;text-transform:uppercase;color:var(--brass);margin-bottom:12px}
 .f-cols ul{list-style:none;margin:0;padding:0}
-.f-cols a{display:inline-flex;min-height:36px;align-items:center;text-decoration:none;color:#cfd5de;font-size:.95rem}
+.f-cols a{display:inline-flex;min-height:36px;align-items:center;text-decoration:none;color:#e1ecf4;font-size:.95rem}
 .f-cols a:hover{color:var(--brass-hi)}
 .f-legal{margin-top:36px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 28px;font-size:.88rem;color:var(--muted)}
 @media (max-width:520px){.f-cols nav{padding:18px 16px}}
@@ -332,10 +351,7 @@ p{margin:0}
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header" id="top">
   <div class="hd">
-    <a class="brand" href="#top" aria-label="Tax Professionals, home">
-      <svg viewBox="0 0 30 30" aria-hidden="true"><rect x=".75" y=".75" width="28.5" height="28.5" fill="none" stroke="#c9a35d" stroke-width="1.5"/><path d="M15 7v8M15 15H8v7M15 15h7v7" fill="none" stroke="#c9a35d" stroke-width="1.5"/><rect x="12" y="5" width="6" height="4" fill="#c9a35d"/><rect x="5.5" y="20" width="5" height="4" fill="#ece5d6"/><rect x="19.5" y="20" width="5" height="4" fill="#ece5d6"/></svg>
-      <b>Tax Professionals</b>
-    </a>
+    <a class="brand" href="#top"><img src="../../assets/logo/logo.webp" width="500" height="91" alt="Tax Professionals"></a>
     <nav class="nav" id="site-nav" aria-label="Main">
       <ul>
         <li><a href="#structures">Structures</a></li>
@@ -357,13 +373,13 @@ p{margin:0}
   <div class="hero-in">
     <div class="hero-copy" id="hero">
       <h1 id="hero-title">Tax accounting for property investors</h1>
-      <p class="hero-lede">Investment strategy, structuring advice for property held personally, in a company or in a trust, tax returns and cash flow tools. From a Chartered Accountant-led practice in Epsom, Auckland.</p>
+      <p class="hero-lede">Strategy, structuring for property held personally, through a look-through company or in a trust, returns and cash flow tools. From an Epsom practice whose director has published on New Zealand's land tax regime.</p>
       <div class="hero-act">
         <a class="btn btn--brass btn--sweep" href="#contact">Talk about your property</a>
         <a class="tlink" href="tel:+6496250035">or call 09 625 0035</a>
       </div>
-      <ul class="facts"><li><b>Since 1998</b></li><li>620 Manukau Road, Epsom</li><li>TMNZ Premium Accounting Partner</li></ul>
-      <svg class="roofs" viewBox="0 0 420 110" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g fill="none" stroke="#c9a35d" stroke-width="1.2" stroke-linejoin="round"><path d="M0 108h420"/><path d="M14 108V66l34-28 34 28v42"/><path d="M40 108V84h16v24"/><path d="M96 108V54l46-36 46 36v54"/><path d="M118 70h18v16h-18zM148 70h18v16h-18z"/><path d="M200 108V72l28-22 28 22v36"/><path d="M220 108V88h16v20"/><path d="M270 108V40h60v68"/><path d="M282 52h14v12h-14zM304 52h14v12h-14zM282 76h14v12h-14zM304 76h14v12h-14z"/><path d="M344 108V64l32-26 32 26v44"/><path d="M368 108V86h16v22"/></g><g fill="#c9a35d"><circle cx="142" cy="18" r="2.5"/><circle cx="300" cy="40" r="2.5"/></g></svg>
+      <ul class="facts"><li><b>Since 1998</b></li><li>620 Manukau Road, Epsom</li><li>First consultation free on all matters</li></ul>
+      <img class="roofs" src="../../assets/img/office-meeting-800.webp" width="800" height="450" alt="Varun Gupta with a client at the Epsom office">
     </div>
 
     <div class="board" id="structures">
@@ -404,10 +420,10 @@ p{margin:0}
             <text class="ll" data-l="e" x="114" y="290">owns</text>
             <text class="ll" data-l="f" x="446" y="290" text-anchor="end">owns</text>
           </g>
-          <g class="nd on" data-n="you"><rect x="200" y="14" width="160" height="58"/><text class="t" x="280" y="42" text-anchor="middle">You</text><text class="s" x="280" y="60" text-anchor="middle">Alone or jointly</text></g>
-          <g class="nd" data-n="trust"><rect x="20" y="152" width="170" height="60"/><text class="t" x="105" y="180" text-anchor="middle">Trust</text><text class="s" x="105" y="199" text-anchor="middle">Run by trustees</text></g>
-          <g class="nd" data-n="co"><rect x="370" y="152" width="170" height="60"/><text class="t" x="455" y="180" text-anchor="middle">Company / LTC</text><text class="s" x="455" y="199" text-anchor="middle">A separate entity</text></g>
-          <g class="nd on" data-n="props"><rect x="130" y="300" width="300" height="92"/><text class="t" x="146" y="326">Properties</text></g>
+          <g class="nd on" data-n="you"><rect x="200" y="14" width="160" height="58" rx="12"/><text class="t" x="280" y="42" text-anchor="middle">You</text><text class="s" x="280" y="60" text-anchor="middle">Alone or jointly</text></g>
+          <g class="nd" data-n="trust"><rect x="20" y="152" width="170" height="60" rx="12"/><text class="t" x="105" y="180" text-anchor="middle">Trust</text><text class="s" x="105" y="199" text-anchor="middle">Run by trustees</text></g>
+          <g class="nd" data-n="co"><rect x="370" y="152" width="170" height="60" rx="12"/><text class="t" x="455" y="180" text-anchor="middle">Company / LTC</text><text class="s" x="455" y="199" text-anchor="middle">A separate entity</text></g>
+          <g class="nd on" data-n="props"><rect x="130" y="300" width="300" height="92" rx="12"/><text class="t" x="146" y="326">Properties</text></g>
           <g>
             <g class="hs on" data-h="1"><path d="M152 380v-26l17-14 17 14v26z"/></g>
             <g class="hs" data-h="2"><path d="M196 380v-26l17-14 17 14v26z"/></g>
@@ -429,16 +445,34 @@ p{margin:0}
 <section class="sec svc" id="services" aria-labelledby="svc-title">
   <div class="wrap">
     <div class="sec-head rv">
-      <h2 id="svc-title">Four areas of work</h2>
-      <p>Property first. If you also run a business, employ people or need your compliance looked after, the same team does that too.</p>
+      <h2 id="svc-title">Property first, and the rest of your tax</h2>
+      <p>If you also run a business, employ people or need your compliance looked after, the same team does that too.</p>
     </div>
-    <div class="plan rv">
-      <div class="room r1"><span class="rn">Lead area</span><div><h3 class="big">Property Investment &amp; Development</h3><p>Investment strategy, structuring advice (personal, company or trust), tax returns and cash flow tools. The associated-persons rules can make a buy-and-hold property taxable when it is linked to development or trading, so we look at the whole picture before you buy or sell.</p><p>The director and partner have published on New Zealand's land tax regime and are active property investors.</p><p class="more"><a class="tlink" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">More on our site</a></p></div></div>
-      <div class="room r2 door"><h3>Taxation &amp; Accounting Compliance</h3><p>Bookkeeping, GST, PAYE and income tax returns, financial statements, tax planning and business structuring. Payroll services, company formation and trust administration sit here too.</p><p class="more"><a class="tlink" href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">More on our site</a></p></div>
-      <div class="room r3"><h3>Business Advisory &amp; Planning</h3><p>Business plans and strategic growth, performance and accountability, profit improvement and cashflow, systems and processes. First meeting free for Business Planning.</p><p class="more"><a class="tlink" href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">More on our site</a></p></div>
-      <div class="room r4"><h3>Employment &amp; HR Advisory</h3><p>Employment agreements and policies, employment legislation, restructuring and redundancy, employer accreditations, audits and investigations, and preparing records for a Labour Inspector visit.</p><p class="more"><a class="tlink" href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">More on our site</a></p></div>
-      <div class="room r5 door"><h3>Partners</h3><p>TMNZ Premium Accounting Partner for tax pooling. Crystal Payroll recommended partner for payroll.</p></div>
+    <article class="prop rv">
+      <figure><img src="../../assets/img/office-meeting-1600.webp" srcset="../../assets/img/office-meeting-800.webp 800w, ../../assets/img/office-meeting-1600.webp 1600w" sizes="(max-width:900px) 100vw, 50vw" width="1600" height="900" loading="lazy" decoding="async" alt="Varun Gupta with a client at the Epsom office"></figure>
+      <div class="prop-t">
+        <h3>Property Investment &amp; Development</h3>
+        <p>Practical advice on optimal structuring of your property investments and developments, to keep up with the ever-changing property taxation laws and regulations.</p>
+        <p class="qs">Questions investors bring us: How should I own my investment property? Should I use a look-through company, invest individually or use a trust? How do I break associated person rules? How do I keep growing my investing activities safely?</p>
+        <p>Strategies we work with: buy and hold, trading and flips, development, lease options, rent by the room, land banking, and the GST implications of each. Family Trust Management &amp; Advisory, with staff trained in trust and estate management.</p>
+        <p class="more"><a class="tlink" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">More on our site</a></p>
+      </div>
+    </article>
+    <div class="blocks">
+      <article class="blk b1 rv"><img src="../../assets/img/svc-compliance-800.webp" width="800" height="367" loading="lazy" decoding="async" alt="Illustrative photo for tax compliance"><div><h3>Taxation &amp; Accounting Compliance</h3><p>Tax compliance and practical consulting services. Returns, GST, financial statements and Inland Revenue liaison on Xero or MYOB, plus payroll, company and trust formation, FBT and tax pooling through TMNZ. IRD disputes and tax debt too. Whatever the tax position, talk to us.</p><p class="more"><a class="tlink" href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">More on our site</a></p></div></article>
+      <article class="blk b2 rv" style="--rd:.06s"><img src="../../assets/img/svc-advisory-800.webp" width="800" height="367" loading="lazy" decoding="async" alt="Illustrative photo for business advisory"><div><h3>Business Advisory &amp; Planning</h3><p>Create a profitable, thriving and valuable business. Business Planning (a one-on-one workshop for the next 3 months, 12 months and 3 years; first meeting free of charge), cashflow forecasting and monthly coaching.</p><p class="more"><a class="tlink" href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">More on our site</a></p></div></article>
+      <article class="blk b3 rv" style="--rd:.12s"><img src="../../assets/img/svc-hr-800.webp" width="800" height="367" loading="lazy" decoding="async" alt="Illustrative photo for employment and HR advice"><div><h3>Employment &amp; HR Advisory</h3><p>Your employment law and HR partner. Employment relations and policies, employer accreditation, restructure and redundancy, personal grievances and disputes, audits and Labour Inspector readiness.</p><p class="more"><a class="tlink" href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">More on our site</a></p></div></article>
     </div>
+    <ul class="plogos rv" aria-label="Partners">
+      <li><img src="../../assets/logo/partner-01.png" width="300" height="200" loading="lazy" decoding="async" alt="SuiteFiles"></li>
+      <li><img src="../../assets/logo/partner-02.png" width="300" height="200" loading="lazy" decoding="async" alt="MYOB Diamond Partner"></li>
+      <li><img src="../../assets/logo/partner-03.png" width="300" height="200" loading="lazy" decoding="async" alt="iPayroll"></li>
+      <li><img src="../../assets/logo/partner-04.png" width="300" height="200" loading="lazy" decoding="async" alt="Xero Silver Partner"></li>
+      <li><img src="../../assets/logo/partner-06.png" width="300" height="200" loading="lazy" decoding="async" alt="TMNZ Premium Partner"></li>
+      <li><img src="../../assets/logo/partner-07.png" width="300" height="200" loading="lazy" decoding="async" alt="SmartPayroll"></li>
+      <li><img src="../../assets/logo/partner-08.png" width="300" height="200" loading="lazy" decoding="async" alt="Crystal Payroll"></li>
+      <li><img src="../../assets/logo/partner-09.png" width="300" height="200" loading="lazy" decoding="async" alt="Institute of Advisors"></li>
+    </ul>
   </div>
 </section>
 
@@ -446,20 +480,45 @@ p{margin:0}
   <div class="wrap">
     <div class="sec-head rv">
       <h2 id="people-title">Who looks after your file</h2>
-      <p>The practice is led by its director, a Chartered Accountant, with a business advisor and four taxation accountants in the Epsom office. Accountant of the Year 2019–2020, Indian Newslink Indian Business Awards.</p>
+      <p>Led by the director, a partner and an associate partner, with a team of accountants and administrators in the Epsom office. Accountant of the Year 2019-2020, Twelfth Annual Indian Newslink Indian Business Awards, and a finalist for Small Business of the Year.</p>
     </div>
     <div class="team" data-need="team photos">
       <div class="leads">
-        <article class="lead rv"><div class="plaque" aria-hidden="true">RG</div><div><h3>Ranjana Gupta</h3><p>Director</p><p class="cred">Chartered Accountant, senior lecturer in taxation at AUT, and a published tax author.</p></div></article>
-        <article class="lead rv" style="--rd:.06s"><div class="plaque" aria-hidden="true">VG</div><div><h3>Varun Gupta</h3><p>Business Advisor</p><p class="cred">Certified Business Advisor, member of the Institute of Advisors and a registered partner of the Regional Business Partner Network.</p></div></article>
+        <article class="lead rv"><img class="port" src="../../assets/img/ranjana-800.webp" width="500" height="500" loading="lazy" decoding="async" alt="Ranjana Gupta"><div><h3>Ranjana Gupta</h3><p>Director</p><p class="cred">PhD, MPhil, MBus (Taxation), MCom. Published author on New Zealand's land tax regime.</p></div></article>
+        <article class="lead rv" style="--rd:.06s"><img class="port" src="../../assets/img/varun-800.webp" width="500" height="500" loading="lazy" decoding="async" alt="Varun Gupta"><div><h3>Varun Gupta</h3><p>Partner</p><p class="cred">MBA, Chartered Accountant (NZ), Certified Business Advisor.</p></div></article>
+        <article class="lead rv" style="--rd:.12s"><img class="port" src="../../assets/img/eshan-800.webp" width="499" height="499" loading="lazy" decoding="async" alt="Eshan Gupta"><div><h3>Eshan Gupta</h3><p>Associate Partner</p><p class="cred">BCom/LLB, admitted Barrister and Solicitor (NZ). Writes our Insights articles.</p></div></article>
       </div>
       <div class="mates">
-        <article class="mate rv" style="--rd:.06s"><div class="plaque" aria-hidden="true">VK</div><div><h3>Vipul Koradia</h3><p>Taxation Accountant</p></div></article>
-        <article class="mate rv" style="--rd:.12s"><div class="plaque" aria-hidden="true">DN</div><div><h3>Deepti Nanda</h3><p>Taxation Accountant</p></div></article>
+        <article class="mate rv" style="--rd:.06s"><img class="port sm" src="../../assets/img/hemant-800.webp" width="499" height="499" loading="lazy" decoding="async" alt="Hemant Kumar"><div><h3>Hemant Kumar</h3><p>Senior Taxation Accountant</p></div></article>
+        <article class="mate rv" style="--rd:.09s"><img class="port sm" src="../../assets/img/rizwan-800.webp" width="499" height="499" loading="lazy" decoding="async" alt="Rizwan Sheikh"><div><h3>Rizwan Sheikh</h3><p>Senior Taxation Accountant</p></div></article>
+        <article class="mate rv" style="--rd:.12s"><div class="plaque" aria-hidden="true">VK</div><div><h3>Vipul Koradia</h3><p>Taxation Accountant</p></div></article>
+        <article class="mate rv" style="--rd:.15s"><div class="plaque" aria-hidden="true">DN</div><div><h3>Deepti Nanda</h3><p>Taxation Accountant</p></div></article>
         <article class="mate rv" style="--rd:.18s"><div class="plaque" aria-hidden="true">MK</div><div><h3>Mandeep Kaur</h3><p>Taxation Accountant</p></div></article>
-        <article class="mate rv" style="--rd:.24s"><div class="plaque" aria-hidden="true">JP</div><div><h3>Jigar Parikh</h3><p>Taxation Accountant</p></div></article>
+        <article class="mate rv" style="--rd:.21s"><div class="plaque" aria-hidden="true">JP</div><div><h3>Jigar Parikh</h3><p>Taxation Accountant</p></div></article>
+        <article class="mate rv" style="--rd:.24s"><div class="plaque" aria-hidden="true">SS</div><div><h3>Syed Shafi</h3><p>Junior Accountant</p></div></article>
+        <article class="mate rv" style="--rd:.27s"><div class="plaque" aria-hidden="true">RP</div><div><h3>Reeti Patel</h3><p>Accounts Administrator</p></div></article>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="sec commit" id="commitments" aria-labelledby="com-title">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 id="com-title">Five commitments</h2>
+      <p>What every client gets, in the firm's own words.</p>
+    </div>
+    <ol class="spec rv">
+      <li><span class="idx">01</span><span>First consultation free on all matters</span></li>
+      <li><span class="idx">02</span><span>Tax experts with over 20 years of experience</span></li>
+      <li><span class="idx">03</span><span>Specialists in property development and structuring</span></li>
+      <li><span class="idx">04</span><span>Fixed fee services. No more shock bills</span></li>
+      <li><span class="idx">05</span><span>Tailored support and service packages based on your needs</span></li>
+    </ol>
+    <figure class="tq rv">
+      <blockquote><p>We have been dealing with Varun Gupta at Tax Professionals for over a year now. The advice we have received from Varun and his team has been on point, on time and meaningful. We truly work as partners that has helped our business navigate through some turbulent times. Cannot recommend them enough.</p></blockquote>
+      <figcaption>Infinity Flowers, client</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -477,7 +536,7 @@ p{margin:0}
       <div class="g-row" role="row"><div class="g-name" role="rowheader"><div>GST<small>If registered</small></div></div><div class="g-track" role="cell"><div class="band" style="--a:0;--b:12"><span>Due the 28th of the month after each period ends. Periods ending November: 15 January. Periods ending March: 7 May.</span></div></div></div>
       <div class="g-row" role="row"><div class="g-name" role="rowheader"><div>PAYE<small>If you employ staff</small></div></div><div class="g-track" role="cell"><div class="band" style="--a:0;--b:12"><span>Payday filing within 2 working days of payday. Small employers pay by the 20th of the following month.</span></div></div></div>
     </div>
-    <div class="cal-note"><span><i aria-hidden="true"></i>Standard date <i class="h" aria-hidden="true"></i>With a tax agent's extension</span><span>General dates from Inland Revenue. When a due date falls on a weekend or public holiday it moves to the next working day. Your own dates may differ; we will confirm them. <a class="cal-link" href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">Client resources</a></span></div>
+    <div class="cal-note"><span><i aria-hidden="true"></i>Standard date <i class="h" aria-hidden="true"></i>With a tax agent's extension</span><span>General dates from Inland Revenue. Tax payments must be made on or before the due date. Where the due date falls on a weekend or a public holiday, the payment is due on the next working day. GST is an exception and is always payable on the last working day of the taxable period. Your own dates may differ; we will confirm them. <a class="cal-link" href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">Client resources</a></span></div>
   </div>
 </section>
 
@@ -485,13 +544,13 @@ p{margin:0}
   <div class="wrap">
     <div class="sec-head rv">
       <h2 id="ins-title">Reading for investors</h2>
-      <p>From our Insights page. Each opens on our main site.</p>
+      <p>From our Insights page, written by Eshan Gupta. Each opens on our main site.</p>
     </div>
     <ol class="register rv">
-      <li><a href="https://www.taxprofessionals.co.nz/insights-/-news/why-most-mortgage-structures-in-nz-are-wrong" target="_blank" rel="noopener"><span class="idx">01</span><span class="ttl">Why Most Mortgage Structures in NZ Are Wrong</span><span class="go">Read</span></a></li>
-      <li><a href="https://www.taxprofessionals.co.nz/insights-/-news/inland-revenues-crackdown-is-your-business-ready-for-the-new-wave-of-tax-audits" target="_blank" rel="noopener"><span class="idx">02</span><span class="ttl">Inland Revenue's Crackdown: Is Your Business Ready for the New Wave of Tax Audits?</span><span class="go">Read</span></a></li>
-      <li><a href="https://www.taxprofessionals.co.nz/insights-/-news/crypto-investors-urged-to-get-tax-compliant-ird-steps-up-enforcement" target="_blank" rel="noopener"><span class="idx">03</span><span class="ttl">Crypto Investors Urged to Get Tax Compliant</span><span class="go">Read</span></a></li>
-      <li><a href="https://www.taxprofessionals.co.nz/insights-/-news/how-to-prepare-your-business-for-sale-when-youre-retiring" target="_blank" rel="noopener"><span class="idx">04</span><span class="ttl">How to Prepare Your Business for Sale When You're Retiring</span><span class="go">Read</span></a></li>
+      <li><a href="https://www.taxprofessionals.co.nz/insights-/-news/repairs-vs-improvements-what-can-you-deduct" target="_blank" rel="noopener"><span class="idx">01</span><span class="ttl">Repairs vs Improvements: What Can You Deduct?<small>By Eshan Gupta, 16 October 2026</small></span><span class="go">Read</span></a></li>
+      <li><a href="https://www.taxprofessionals.co.nz/insights-/-news/smart-ways-to-take-money-out-of-your-company" target="_blank" rel="noopener"><span class="idx">02</span><span class="ttl">Smart Ways to Take Money Out of Your Company<small>By Eshan Gupta, 24 July 2026</small></span><span class="go">Read</span></a></li>
+      <li><a href="https://www.taxprofessionals.co.nz/insights-/-news/ird-is-now-deducting-tax-debt-directly-from-bank-accounts" target="_blank" rel="noopener"><span class="idx">03</span><span class="ttl">IRD Is Now Deducting Tax Debt Directly From Bank Accounts<small>By Eshan Gupta, 7 July 2026</small></span><span class="go">Read</span></a></li>
+      <li><a href="https://www.taxprofessionals.co.nz/insights-/-news/bogus-expense-claims-inland-revenue-warns-taxpayers-of-serious-consequences" target="_blank" rel="noopener"><span class="idx">04</span><span class="ttl">Bogus Expense Claims: Inland Revenue Warns Taxpayers of Serious Consequences<small>By Eshan Gupta, 27 August 2026</small></span><span class="go">Read</span></a></li>
     </ol>
     <p class="reg-all rv"><a class="tlink" href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">All insights and news</a></p>
   </div>
@@ -503,7 +562,7 @@ p{margin:0}
       <h2 id="faq-title">Questions property investors ask</h2>
     </div>
     <div class="faq-list rv">
-      <details><summary>Can you look at how my properties are held now?<i aria-hidden="true"></i></summary><div class="fold"><div><div class="fold-in"><p>Yes. Advice on property structures is one of our services. Bring what you have and we will explain how things are set up now and what your options are. We talk any change through with you before anything is done.</p></div></div></div></details>
+      <details><summary>Can you look at how my properties are held now?<i aria-hidden="true"></i></summary><div class="fold"><div><div class="fold-in"><p>Yes. Advice on property structures is one of our services, and the first consultation is free on all matters. Bring what you have and we will explain how things are set up now and what your options are. We talk any change through with you before anything is done.</p></div></div></div></details>
       <details><summary>Do you prepare returns for trusts and companies?<i aria-hidden="true"></i></summary><div class="fold"><div><div class="fold-in"><p>Yes. We prepare income tax returns for individuals, companies, trusts and partnerships, and we offer trust administration.</p></div></div></div></details>
       <details><summary>I bought to hold. Can the property still be taxed when I sell?<i aria-hidden="true"></i></summary><div class="fold"><div><div class="fold-in"><p>Possibly. The associated-persons rules can make a buy-and-hold property taxable when it is linked to development or trading. Every case is different, so talk to us before you buy or sell.</p></div></div></div></details>
       <details><summary>Do you work with tax pooling?<i aria-hidden="true"></i></summary><div class="fold"><div><div class="fold-in"><p>We are a TMNZ Premium Accounting Partner. TMNZ offers tax pooling, which some people use for provisional tax. Ask us whether it makes sense for you.</p></div></div></div></details>
@@ -525,10 +584,10 @@ p{margin:0}
           <div><dt>Phone</dt><dd><a href="tel:+6496250035">09 625 0035</a><a href="tel:+6496250025">09 625 0025</a></dd></div>
           <div><dt>Mobile</dt><dd><a href="tel:+64211419135">021 141 9135</a></dd></div>
           <div><dt>Email</dt><dd><a href="mailto:info@taxprofessionals.co.nz">info@taxprofessionals.co.nz</a></dd></div>
-          <div><dt>Reception</dt><dd>Monday to Friday, 9:30am to 5:30pm</dd></div>
+          <div><dt>Hours</dt><dd>Monday to Friday, 9:30am to 5:30pm<br>Saturday, 11:30am to 3:00pm</dd></div>
+          <div><dt>Parking</dt><dd>Free on-site parking</dd></div>
           <div><dt>Social</dt><dd><a href="https://www.facebook.com/TaxProfessionalsNZ/" target="_blank" rel="noopener">Facebook</a><a href="https://nz.linkedin.com/company/tax-professionals-limited" target="_blank" rel="noopener">LinkedIn</a></dd></div>
         </dl>
-        <div class="tb-foot"><span>Tax Professionals Ltd. Since 1998.</span><svg viewBox="0 0 30 30" aria-hidden="true"><rect x=".75" y=".75" width="28.5" height="28.5" fill="none" stroke="#c9a35d" stroke-width="1.5"/><path d="M15 7v8M15 15H8v7M15 15h7v7" fill="none" stroke="#c9a35d" stroke-width="1.5"/></svg></div>
       </div>
       <form class="form rv" id="enquiry" novalidate>
         <div class="row">
@@ -551,13 +610,13 @@ p{margin:0}
 </main>
 
 <footer class="site-footer">
-  <a class="f-brand" href="#top"><svg viewBox="0 0 30 30" aria-hidden="true"><rect x=".75" y=".75" width="28.5" height="28.5" fill="none" stroke="#c9a35d" stroke-width="1.5"/><path d="M15 7v8M15 15H8v7M15 15h7v7" fill="none" stroke="#c9a35d" stroke-width="1.5"/><rect x="12" y="5" width="6" height="4" fill="#c9a35d"/><rect x="5.5" y="20" width="5" height="4" fill="#ece5d6"/><rect x="19.5" y="20" width="5" height="4" fill="#ece5d6"/></svg><b>Tax Professionals</b></a>
-  <p class="f-line">620 Manukau Road, Epsom, Auckland. Since 1998.</p>
+  <a class="f-brand" href="#top"><img src="../../assets/logo/logo.webp" width="500" height="91" loading="lazy" decoding="async" alt="Tax Professionals"></a>
+  <p class="f-line">620 Manukau Road, Epsom, Auckland. Working for the community since 1998.</p>
   <div class="f-cols">
     <nav aria-label="Services"><h2>Services</h2><ul><li><a href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">Property Investment &amp; Development</a></li><li><a href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">Taxation &amp; Accounting Compliance</a></li><li><a href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">Business Advisory &amp; Planning</a></li><li><a href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">Employment &amp; HR Advisory</a></li></ul></nav>
     <nav aria-label="Explore"><h2>Explore</h2><ul><li><a href="#people">People</a></li><li><a href="#calendar">Tax calendar</a></li><li><a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">Client resources</a></li><li><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">Insights</a></li><li><a href="https://www.taxprofessionals.co.nz/pay-an-invoice" target="_blank" rel="noopener">Pay an invoice</a></li><li><a href="#contact">Contact</a></li><li><a href="https://www.facebook.com/TaxProfessionalsNZ/" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://nz.linkedin.com/company/tax-professionals-limited" target="_blank" rel="noopener">LinkedIn</a></li></ul></nav>
   </div>
-  <div class="f-legal"><span>© Tax Professionals Ltd</span><span>Proudly designed by <a class="tlink" href="https://ambs.co.nz" target="_blank" rel="noopener">AMBS Solutions</a></span></div>
+  <div class="f-legal"><span>© 2026 Tax Professionals</span><span>Some images may be stock images.</span><span>Proudly designed by <a class="tlink" href="https://ambs.co.nz" target="_blank" rel="noopener">AMBS Solutions</a></span></div>
 </footer>
 
 <nav class="qbar" aria-label="Quick contact"><a class="q1" href="tel:+6496250035">Call</a><a class="q2" href="mailto:info@taxprofessionals.co.nz">Email</a></nav>

@@ -6,14 +6,14 @@
 <title>Tax Professionals · Website concepts</title>
 <meta name="description" content="Ten website concepts for Tax Professionals. Preview them, shortlist your favourites and send us your preferred design.">
 <meta name="robots" content="noindex">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%23052C31%22/%3E%3Ctext x=%2216%22 y=%2222%22 font-family=%22Georgia%22 font-size=%2216%22 fill=%22%23fff%22 text-anchor=%22middle%22%3ETP%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="assets/logo/mark.png"><link rel="alternate icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%23052C31%22/%3E%3Ctext x=%2216%22 y=%2222%22 font-family=%22Georgia%22 font-size=%2216%22 fill=%22%23fff%22 text-anchor=%22middle%22%3ETP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F5F4EF;--surface:#FFFFFF;--surface-2:#EDECE5;--ink:#052C31;--muted:#5E6A62;--line:rgba(21,32,26,.12);
-  --green:#77A22F;--green-d:#5E8424;--green-ink:#2E4A12;--teal:#052C31;--gold:#E7B008;--danger:#C2410C;
+  --bg:#F5F4EF;--surface:#FFFFFF;--surface-2:#EDECE5;--ink:#033F66;--muted:#5E6A62;--line:rgba(21,32,26,.12);
+  --green:#4CA442;--green-d:#1B8F25;--green-ink:#14641B;--teal:#04649F;--gold:#E7B008;--danger:#C2410C;
   --r:18px;--shadow:0 1px 2px rgba(21,32,26,.06),0 12px 32px -12px rgba(21,32,26,.18);
   --ease:cubic-bezier(.22,1,.36,1);
   --serif:"Instrument Serif",Georgia,serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -47,7 +47,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 /* ---------- intro ---------- */
 .intro{padding:clamp(48px,8vw,96px) 0 32px}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--green-ink)}
-.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(109,171,60,.2)}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(76,164,66,.2)}
 .intro h1{font:400 clamp(2.6rem,6.4vw,5.4rem)/1 var(--serif);letter-spacing:-.02em;margin:18px 0 18px;max-width:15ch}
 .intro h1 em{color:var(--green-d)}
 .intro p{color:var(--muted);font-size:clamp(15px,1.4vw,17px);max-width:62ch;margin:0}
@@ -77,7 +77,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .card:hover .thumb img{transform:scale(1.035)}
 .rec{position:absolute;left:12px;bottom:12px;z-index:2;background:var(--green-ink);color:#fff;font-weight:700;font-size:12px;padding:5px 10px;border-radius:99px}
 .rec::before{content:"★ "}
-.tags li.mo{background:rgba(109,171,60,.16);color:var(--green-ink)}
+.tags li.mo{background:rgba(76,164,66,.16);color:var(--green-ink)}
 .why{font-size:13px!important;background:var(--bg);border-radius:12px;padding:10px 12px}
 .why b{color:var(--ink)}
 .thumb::after{content:"Preview";position:absolute;right:12px;bottom:12px;background:rgba(10,14,12,.78);color:#fff;font-size:12px;font-weight:600;padding:6px 12px;border-radius:99px;opacity:0;transform:translateY(6px);transition:.3s var(--ease)}
@@ -159,7 +159,7 @@ dialog[open]{animation:pop .45s var(--ease)}
 fieldset{border:0;padding:0;margin:0 0 14px}
 .opts{display:grid;gap:8px;max-height:240px;overflow:auto;padding:2px}
 .opt{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:14px;padding:10px 12px;cursor:pointer;transition:border-color .2s,background .2s}
-.opt:has(input:checked){border-color:var(--green-d);background:rgba(109,171,60,.09)}
+.opt:has(input:checked){border-color:var(--green-d);background:rgba(76,164,66,.09)}
 .opt input{accent-color:var(--green-d);width:18px;height:18px;flex:none}
 .opt b{font-weight:600}
 .opt small{color:var(--muted);display:block;font-size:12px}
@@ -183,6 +183,10 @@ footer{border-top:1px solid var(--line);padding:24px 0 120px;color:var(--muted);
   .bar .hint{display:none}
   .top .wrap{height:58px}
   .brand span{display:none}
+  .brand img{height:26px!important}
+  .top nav{gap:6px}
+  .top nav .btn{min-height:38px}
+  #shareBtn{padding:0 10px}
   .tray{flex-wrap:wrap;padding:12px}
   .tray .chips{order:3;flex-basis:100%}
   .tray .grow{flex:1}
@@ -203,7 +207,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 120px;color:var(--muted);
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#"><b class="wm">Tax Professionals</b><span>· Website concepts</span></a>
+    <a class="brand" href="#"><img src="assets/logo/logo.webp" alt="Tax Professionals" width="198" height="36" style="height:36px;width:auto;display:block"><span>· Website concepts</span></a>
     <nav aria-label="Actions">
       <a class="btn ghost hide-sm" href="preview.html" title="See every concept in laptop, tablet and phone frames">Device preview</a>
       <button class="btn ghost" id="shareBtn" type="button" title="Copy a link that includes your shortlist">
@@ -218,8 +222,8 @@ footer{border-top:1px solid var(--line);padding:24px 0 120px;color:var(--muted);
 <main class="wrap">
   <section class="intro" aria-labelledby="h1">
     <span class="eyebrow">Design review · 10 concepts</span>
-    <h1 id="h1">Ten new directions for <em>taxprofessionals.co.nz</em></h1>
-    <p>Each concept is a working homepage built from your real services, people and contact details, with its own look, layout and motion. Open any of them full screen, switch between laptop, tablet and mobile, shortlist the ones you like, then send us your favourite. The logo shown is a placeholder until we have your original file.</p>
+    <h1 id="h1">Ten new directions for <em>Tax Professionals</em></h1>
+    <p>Each concept is a working homepage built from your real services, team and contact details, with its own look, layout and motion. Open any of them full screen, switch between laptop, tablet and mobile, shortlist the ones you like, then send us your favourite. Every concept uses your logo, brand blue and green, and the photos from your current site.</p>
     <ol class="steps">
       <li><b>Explore</b><span>Click any preview to open the live site. Scroll and click through the pages to see the motion.</span></li>
       <li><b>Shortlist</b><span>Tap the star on the designs you like. Compare up to 3 side by side.</span></li>
@@ -245,7 +249,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 120px;color:var(--muted);
   </section>
 </main>
 
-<footer><div class="wrap">Concepts prepared for Tax Professionals Ltd by AMBS Solutions. Design directions only. The wordmark and colours are placeholders until we receive your logo; no photos are used yet. <a href="preview.html">Device preview</a></div></footer>
+<footer><div class="wrap">Concepts prepared for Tax Professionals Ltd by AMBS Solutions. Design directions only. Logo, colours and photos are from taxprofessionals.co.nz; some service photos are stock images. <a href="preview.html">Device preview</a></div></footer>
 
 <!-- shortlist tray -->
 <div class="tray" id="tray" role="region" aria-label="Your shortlist">

@@ -8,8 +8,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
-      "source": "/ledger",
-      "destination": "/designs/01-ledger/",
+      "source": "/partners",
+      "destination": "/designs/01-partners/",
       "permanent": false
     },
     {
@@ -28,8 +28,8 @@
       "permanent": false
     },
     {
-      "source": "/index",
-      "destination": "/designs/05-index/",
+      "source": "/studio",
+      "destination": "/designs/05-studio/",
       "permanent": false
     },
     {
@@ -48,8 +48,8 @@
       "permanent": false
     },
     {
-      "source": "/paperwork",
-      "destination": "/designs/09-paperwork/",
+      "source": "/packages",
+      "destination": "/designs/09-packages/",
       "permanent": false
     },
     {
