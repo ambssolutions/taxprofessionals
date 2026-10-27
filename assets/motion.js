@@ -162,7 +162,8 @@ function fallingHeadings() {
     if (m >= 4 || (hero && hero.contains(img)) || img.closest('.tp-marquee,header,nav')) return;
     if ((+img.getAttribute('width') || 0) < 480) return;
     var box = img.closest('figure') || img;
-    if (box.closest('.rv,.reveal,[data-rv]')) return; // the concept already animates this one
+    if (box.closest('.rv,.reveal,[data-rv],[role=tabpanel],[hidden],.slide,.slides,.panels')) return; // the concept already animates or swaps this one
+    if (getComputedStyle(box).animationName !== 'none') return;
     var wide = box.getBoundingClientRect().width > innerWidth * .7;
     box.classList.add(fine && !wide ? 'tp-book' : 'tp-wipe'); watch(box); m++;
   });

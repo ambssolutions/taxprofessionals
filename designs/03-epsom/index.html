@@ -168,7 +168,12 @@ html:not(.js) .slide+.slide{margin-top:20px}
 .plogos img{width:132px;height:88px;border-radius:14px;filter:grayscale(1);opacity:.85;transition:filter .4s,opacity .4s}
 .plogos li:hover img{filter:none;opacity:1}
 @media (max-width:860px){
-  .svc-tabs{display:flex;overflow-x:auto;scrollbar-width:none;gap:12px;padding-bottom:4px;scroll-snap-type:x proximity}
+  .svc-bar{grid-template-columns:1fr;gap:10px}
+  .svc-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 14px;overflow:visible}
+  .tab{font-size:.92rem;min-height:0;padding:12px 0 4px;text-align:center;align-items:center}
+  .svc-bar>button,.svc-bar .pause,.svc-bar [aria-label*="ause"]{justify-self:center;width:44px;height:44px}
+  .slide .copy{text-align:center;align-items:center}
+  .slide .copy ul{text-align:left;align-self:stretch}
   .svc-tabs::-webkit-scrollbar{display:none}
   .tab{flex:none;width:auto;scroll-snap-align:start;min-width:160px}
   .slide{grid-template-columns:1fr;border-radius:22px}
