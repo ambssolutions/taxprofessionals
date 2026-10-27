@@ -200,3 +200,40 @@ Article URLs follow https://www.taxprofessionals.co.nz/insights-/-news/<slug> (s
 Their site shows nine partner logos (names not readable from the scrape). Known from other sources: TMNZ (tax pooling), Crystal Payroll, SmartPayroll, Xero, MYOB. Use TMNZ, Crystal Payroll, Xero and MYOB in text only until the logos are confirmed.
 
 ### Still missing (keep data-need): the logo file and brand colours (CDN blocked), photos, the nine partner logos.
+
+## BRAND AND PHOTOS (fetched 27 Oct 2026). This section overrides every palette and "no photos" note above.
+
+### Logo (real, use it everywhere; no more wordmark placeholders)
+- `assets/logo/logo.png` / `logo.webp`: 500×91, full lock-up: a green gradient "TP" disc + "Tax Professionals" in blue + "www.taxprofessionals.co.nz" in green underneath. In headers, show it at about 36 to 44px tall (`width="220" height="40"` style ratio 500:91) with `alt="Tax Professionals"`. On dark backgrounds put it on a small white pill or use the mark only.
+- `assets/logo/mark.png`: the 91×91 "TP" disc only, for the favicon, compact headers and phones.
+- It is a raster (no SVG supplied); keep it at or below its natural size × 2 density, never upscale beyond 250px wide on screen. Add "Vector logo (SVG)" to CONTENT-NEEDED.
+
+### Brand colours (measured from the logo; use these, not invented palettes)
+- Brand blue `#04649F` (logo wordmark). Deep blue for text/dark surfaces: `#033F66`.
+- Brand green `#4CA442` (logo, main). Dark green `#1B8F25` (logo shadow side; use for green text so it passes contrast). Light green `#62B444`.
+- Each concept keeps its own design language but its accent colours must come from this blue and green (plus neutrals). Text on green buttons: white on `#1B8F25` or dark ink on `#62B444`; check 4.5:1.
+- Their site's graphic motif: overlapping flat blue and green squares at a photo's corner. Concepts may use it as a quiet brand device (one per section at most), never as decoration everywhere.
+
+### Photos (all real, from their site; in `assets/img/` as `<name>-800.webp` and `<name>-1600.webp` when the source is big enough; use srcset/sizes, width/height, lazy except the hero)
+| name | what it shows | size | use |
+|---|---|---|---|
+| community | the whole team standing outside the office at 620 Manukau Road under the Tax Professionals sign, Varun holding the award | 960×960 | the best hero or "about" photo |
+| office-team | office floor, four staff at desks (has their teal-green tint baked in) | 1920×1080 | hero background, full bleed |
+| office-desk | two staff at a computer (tinted) | 1920×1080 | hero or section background |
+| office-meeting | Varun with a client signing papers (tinted) | 1920×1080 | hero or advisory section |
+| award | Varun receiving Accountant of the Year on stage with Grant Robertson (Finance Minister) and Paul Goldsmith MP, plus the brand squares | 1280×780 | award section |
+| about-tall | Varun holding the award, white background | 960×1358 | award or partner feature |
+| ranjana | Ranjana Gupta portrait | 500×500 | people |
+| varun | Varun Gupta portrait (white bg) | 500×500 | people |
+| eshan | Eshan Gupta portrait (white bg) | 499×499 | people |
+| hemant | Hemant Kumar portrait (white bg) | 499×499 | people |
+| rizwan | Rizwan Sheikh portrait (white bg) | 499×499 | people |
+| welcome | a team member at his desk with the brand squares | 780×780 | welcome/about |
+| svc-compliance / svc-advisory / svc-hr / svc-property / svc-pay / home-banner | blue-tinted stock-style service photos with the brand squares baked in | 960×440 | service cards or tabs only |
+- Only those five portraits exist. Everyone else keeps a monogram (designed, in brand colours). Never use a stock face for a named person.
+- Alt text: describe what is shown with real names, e.g. "The Tax Professionals team outside the office at 620 Manukau Road".
+- Footer line now applies: "Some images may be stock images." (the service photos are stock).
+- `.qbar`, header and every image must keep CLS at 0: always width and height attributes.
+
+### Technology partners (now confirmed, logos in `assets/logo/partner-NN.png`, 300×200 on light grey)
+01 SuiteFiles · 02 MYOB Diamond Partner · 03 iPayroll · 04 Xero Silver Partner · 06 TMNZ Premium Partner · 07 SmartPayroll · 08 Crystal Payroll · 09 Institute of Advisors. A slim partner strip is welcome on every concept (greyscale until hover is fine; alt = the partner name).
