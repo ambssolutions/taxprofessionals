@@ -15,7 +15,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"AccountingService","name":"Tax Professionals","legalName":"Tax Professionals Ltd","url":"https://www.taxprofessionals.co.nz/","email":"info@taxprofessionals.co.nz","telephone":["+6496250035","+6496250025","+64211419135"],"foundingDate":"1998","logo":"https://www.taxprofessionals.co.nz/logo.png","image":"https://www.taxprofessionals.co.nz/community.jpg","address":{"@type":"PostalAddress","streetAddress":"620 Manukau Road","addressLocality":"Epsom","addressRegion":"Auckland","postalCode":"1023","addressCountry":"NZ"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:30","closes":"17:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"11:30","closes":"15:00"}],"sameAs":["https://www.facebook.com/TaxProfessionalsNZ/","https://nz.linkedin.com/company/tax-professionals-limited"]}
 </script>
-<script>(function(h){h.classList.add('js');try{var q=/[?&]fx\b/.test(location.search),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,w=matchMedia('(min-width: 981px)').matches,fine=matchMedia('(pointer: fine)').matches,c=(navigator.hardwareConcurrency||8)>4;if(!rm&&w&&(q||(fine&&c)))h.classList.add('fx')}catch(e){}})(document.documentElement)</script>
+<script>(function(h){h.classList.add('js');try{var q=/[?&]fx\b/.test(location.search),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,w=matchMedia('(min-width: 981px)').matches,fine=matchMedia('(pointer: fine)').matches,c=(navigator.hardwareConcurrency||8)>4;if(!rm&&w&&(q||(fine&&c)))h.classList.add('fx');else if(!rm&&matchMedia('(min-width: 768px)').matches&&(!fine||!w))h.classList.add('fx','tab');else if(!rm&&!matchMedia('(min-width: 768px)').matches)h.classList.add('ph')}catch(e){}})(document.documentElement)</script>
 <style>
 :root{
   --ink:#0e1c26;--deep:#033F66;--deep-2:#022c48;--blue:#04649F;--green:#4CA442;--green-d:#1B8F25;--green-l:#62B444;
@@ -121,10 +121,23 @@ html.fx .prog{display:none}
   .hero .cta{order:5}
   .squares{width:44px;right:-14px;top:-14px}
 }
-html.js:not(.fx) .hero h1 .w{display:inline-block;opacity:0;transform:translateY(.32em);animation:rise 1.2s var(--ease) forwards;animation-delay:calc(120ms + var(--i)*110ms)}
-html.js:not(.fx) .hero .fade{opacity:0;animation:fadein 1.2s ease forwards;animation-delay:.9s}
-html.js:not(.fx) .cov-in{animation:sq 1.6s var(--ease) both .15s}
-html.js:not(.fx) .squares i{transform:scale(0);transform-origin:100% 0;animation:pop 1.4s var(--ease) forwards 1s}
+/* laptops: the cover is centred too, the photo sits between the headline and the lede */
+@media (min-width:981px){
+  .hero-g{grid-template-columns:1fr;justify-items:center;text-align:center;gap:0;max-width:1100px}
+  .hero-tx{display:contents}
+  .hero .place{order:1}
+  .hero h1{order:2;font-size:clamp(44px,min(5.6vw,8.6vh),104px)}
+  .hero h1 .ln{display:inline-block}
+  .hero h1 .ln:nth-child(2){padding-left:0}
+  .cov{order:3;width:clamp(200px,calc(100svh - 600px),320px);margin-top:clamp(30px,4.4vh,44px)}
+  .squares{top:-12px}
+  .hero .lede{order:4;margin:clamp(14px,2.4vh,24px) auto clamp(16px,2.8vh,28px)}
+  .hero .cta{order:5}
+}
+html.js:not(.fx):not(.ph) .hero h1 .w{display:inline-block;opacity:0;transform:translateY(.32em);animation:rise 1.2s var(--ease) forwards;animation-delay:calc(120ms + var(--i)*110ms)}
+html.js:not(.fx):not(.ph) .hero .fade{opacity:0;animation:fadein 1.2s ease forwards;animation-delay:.9s}
+html.js:not(.fx):not(.ph) .cov-in{animation:sq 1.6s var(--ease) both .15s}
+html.js:not(.fx):not(.ph) .squares i{transform:scale(0);transform-origin:100% 0;animation:pop 1.4s var(--ease) forwards 1s}
 @keyframes rise{to{opacity:1;transform:none}}
 @keyframes fadein{to{opacity:1}}
 @keyframes pop{to{transform:none}}
@@ -210,10 +223,10 @@ html.fx .op{display:flex;flex-direction:column;justify-content:center;height:cal
 /* scroll-lit words (fallback mode) */
 html.js .lit .w{white-space:nowrap}
 @supports (animation-timeline:view()){
-  html.js.sda:not(.fx) .lit .w{animation:lit linear both;animation-timeline:view();animation-range:entry 0% cover 42%}
+  html.js.sda:not(.fx):not(.ph) .lit .w{animation:lit linear both;animation-timeline:view();animation-range:entry 0% cover 42%}
 }
-html.js.nosda:not(.fx) .lit .w{opacity:var(--dim);transition:opacity 1s ease calc(var(--i)*30ms)}
-html.js.nosda:not(.fx) .lit.in .w{opacity:1}
+html.js.nosda:not(.fx):not(.ph) .lit .w{opacity:var(--dim);transition:opacity 1s ease calc(var(--i)*30ms)}
+html.js.nosda:not(.fx):not(.ph) .lit.in .w{opacity:1}
 @keyframes lit{from{opacity:var(--dim)}to{opacity:1}}
 html.js:not(.fx) .lit .key .w{animation:none;opacity:1}
 
@@ -350,6 +363,60 @@ html.fx .ring{display:flex;position:fixed;right:16px;bottom:16px;z-index:55;alig
 .cur.on{opacity:1}
 .cur.hot{background:rgba(76,164,66,.14)}
 .cur.hot span{opacity:0}
+
+/* centre line: chapter headings, intros and openers; lists stay left-aligned */
+.ch-h{justify-content:center}
+.ch>.lit,.ch>.more{text-align:center;margin-inline:auto}
+.ch>.tlink{display:flex;width:fit-content;margin-inline:auto}
+.leaders,.team,.posts{margin-inline:auto}
+.team-h{text-align:center}
+html.fx .op{align-items:center;text-align:center}
+.op-n{transform-origin:50% 100%}
+
+/* touch: tap ripple on buttons (tablet and phone tiers) */
+.rip{position:absolute;left:0;top:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:currentColor;opacity:.28;pointer-events:none;animation:rip .9s var(--ease) forwards}
+@keyframes rip{from{transform:scale(0)}to{transform:scale(24);opacity:0}}
+
+/* tablet tier (touch, 768 px and wider): the laptop scenes; portrait keeps one column with inline photos */
+@media (max-width:980px){html.tab .op-n{font-size:clamp(120px,22vh,240px)}html.tab .op{height:calc(78vh - var(--hdr))}}
+
+/* phone tier (under 768 px) */
+@media (max-width:760px){
+  .hero{padding-bottom:calc(140px + env(safe-area-inset-bottom))}
+  .cov{width:min(27svh,66vw)}
+  .cov figcaption,.c-dl dt,.f-cols h2{font-size:14px}
+}
+html.ph{scroll-padding-top:calc(var(--hdr) + 46px)}
+html.ph .prog{display:none}
+html.ph .hero h1 .ln{clip-path:inset(-.3em -.6em -.24em -.6em)}
+html.ph .hero h1 .w{display:inline-block}
+html.ph:not(.ph-go) .hero h1{visibility:hidden}
+html.ph:not(.ph-go) .hero .fade,html.ph:not(.ph-go) .cov figcaption{opacity:0}
+html.ph:not(.ph-go) .cov-in{clip-path:inset(41% 41% 41% 41%)}
+html.ph:not(.ph-go) .squares i{transform:scale(0)}
+html.ph .ch-ph,html.ph .pil-ph,html.tab .ch-ph{overflow:hidden}
+html.ph main,html.tab main{overflow-x:clip}
+html.ph .qb a{position:relative;overflow:hidden}
+.phc{display:none}
+html.ph .phc{display:flex;position:fixed;left:0;right:0;top:var(--hdr);z-index:58;height:34px;align-items:center;justify-content:center;background:var(--ivory);border-bottom:1px solid var(--line);font:600 14px/1 var(--sans);color:var(--ink);transform:translateY(-102%);transition:transform .9s var(--ease);pointer-events:none}
+html.ph .phc.on{transform:none}
+.phc-m{display:flex;gap:10px;overflow:hidden;height:18px;align-items:center}
+.phc-n{font-family:var(--display);color:var(--blue)}
+.phc i{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--green);transform:scaleX(0);transform-origin:0 50%}
+html.ph .tl{height:100svh;padding:calc(var(--hdr) + 50px) 0 20px;display:flex;flex-direction:column;overflow:hidden}
+html.ph .tl-head{margin-bottom:18px}
+html.ph .tl-head h2.tt{font-size:32px}
+html.ph .tl-view{position:relative;flex:1;min-height:0;width:100%;max-width:none;margin:0;padding:0;overflow:hidden}
+html.ph .tl-line{display:block;position:absolute;left:0;right:0;top:25px;height:1px;background:var(--blue);transform:scaleX(0);transform-origin:0 50%}
+html.ph .tl-track{position:relative;z-index:1;display:flex;gap:0;width:max-content;padding-inline:var(--pad)}
+html.ph .tl-p{flex:none;width:calc(100vw - 2*var(--pad));margin-right:28px;padding-top:0;border-top:0}
+html.ph .tl-p:last-child{margin-right:0}
+html.ph .tl-p::before{display:none}
+html.ph .yr{display:inline-block;background:var(--white);padding-right:14px}
+html.ph .tl-b{margin-top:14px;gap:16px}
+html.ph .tl-fig{max-width:min(100%,44svh)}
+html.ph .tl-sq{width:96px}
+html.ph .pq{min-height:100svh;display:grid;place-items:center;padding:calc(var(--hdr) + 40px) 0 24px}
 
 /* gentle reveals for non-story blocks */
 html.js .rv{opacity:0;transform:translateY(16px);transition:opacity 1.1s ease,transform 1.3s var(--ease)}
@@ -655,10 +722,13 @@ html.js .rv.in{opacity:1;transform:none}
 
 <nav class="qb" aria-label="Quick contact"><a href="tel:+6496250035">Call</a><a href="#contact">Book</a></nav>
 
+<div class="phc" aria-hidden="true"><span class="phc-m"><span class="phc-n">00</span><span class="phc-t">Cover</span></span><i></i></div>
+
 <div class="ring" aria-hidden="true"><svg viewBox="0 0 46 46"><circle class="r-bg" cx="23" cy="23" r="21"/><circle class="r-fg" cx="23" cy="23" r="21"/></svg><span class="r-n">00</span><span class="r-t">Cover</span></div>
 
 <script src="../../assets/vendor/gsap.min.js" defer></script>
 <script src="../../assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="../../assets/vendor/SplitText.min.js" defer></script>
 <script src="../../assets/vendor/lenis.min.js" defer></script>
 <script>
 (function(){
@@ -699,7 +769,9 @@ html.js .rv.in{opacity:1;transform:none}
   });
 
   /* fallback mode: CSS scroll-lit words and a crossfading photo, no pins */
+  var basicDone = false;
   function basic(){
+    if (basicDone) return; basicDone = true;
     var lits = d.querySelectorAll('.lit');
     if (!sda && !reduce && IO) {
       var lio = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); lio.unobserve(e.target); } }); }, {rootMargin:'0px 0px -30% 0px'});
@@ -716,17 +788,19 @@ html.js .rv.in{opacity:1;transform:none}
       gr.marks.forEach(function(m){ sio.observe(m); });
     });
   }
-  if (!fx) basic();
+  var ph = h.classList.contains('ph'), tab = h.classList.contains('tab');
+  if (!fx && !ph) basic();
 
   /* full effects: GSAP ScrollTrigger scenes, Lenis, ring and cursor */
   if (fx) d.addEventListener('DOMContentLoaded', function(){
     var G = window.gsap, ST = window.ScrollTrigger;
     if (!G || !ST) { h.classList.remove('fx'); fx = false; basic(); return; }
     G.registerPlugin(ST);
+    if (tab) ST.config({ignoreMobileResize: true});
     var top = d.querySelector('.top');
     function hdr(){ return top.offsetHeight; }
 
-    if (window.Lenis && !matchMedia('(pointer: coarse)').matches) {
+    if (window.Lenis && !tab && !matchMedia('(pointer: coarse)').matches) {
       var lenis = window.__lenis = new Lenis({lerp: .09});
       lenis.on('scroll', ST.update);
       G.ticker.add(function(t){ lenis.raf(t * 1000); }); G.ticker.lagSmoothing(0);
@@ -753,17 +827,26 @@ html.js .rv.in{opacity:1;transform:none}
     /* pinned and scrubbed: the cover lines part, the photo settles closer */
     G.timeline({scrollTrigger: {trigger: '.hero', start: 'top top', end: '+=70%', pin: true, scrub: .8}})
       .to(lines, {x: function(i){ return (i % 2 ? 1 : -1) * innerWidth * .1; }, ease: 'none'}, 0)
-      .to('.hero-tx', {opacity: .12, ease: 'none'}, 0)
+      .to('.hero .place, .hero h1, .hero .lede, .hero .cta', {opacity: .12, ease: 'none'}, 0)
       .to('.cov', {scale: 1.12, ease: 'none'}, 0);
 
     /* 2. chapter openers: pinned briefly while the number and title scale in and the photo changes */
     function openers(gr){
-      G.set(gr.figs, {clipPath: 'inset(0% 0% 0% 100%)'});
+      /* touch tablets in portrait have no photo column: each chapter photo wipes open in place instead */
+      var inline = tab && getComputedStyle(gr.figs[0].parentNode).display === 'none';
+      if (!inline) G.set(gr.figs, {clipPath: 'inset(0% 0% 0% 100%)'});
       gr.marks.forEach(function(m, k){
         var op = m.querySelector('.op'), f = gr.figs[k];
         var tl = G.timeline({scrollTrigger: {trigger: op, start: function(){ return 'top ' + hdr(); }, end: '+=80%', pin: true, pinSpacing: true, scrub: .8}});
         tl.fromTo(op.querySelector('.op-n'), {scale: .3, opacity: 0}, {scale: 1, opacity: 1, duration: 1, ease: 'power2.out'}, 0)
           .fromTo(op.querySelector('.op-t'), {yPercent: 70, opacity: 0}, {yPercent: 0, opacity: 1, duration: .8, ease: 'power2.out'}, .3);
+        if (inline) {
+          var ip = m.querySelector('.ch-ph'), st = {trigger: ip, start: 'top 92%', end: 'top 35%', scrub: .8};
+          G.fromTo(ip, {clipPath: 'inset(0% 0% 0% 100%)'}, {clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut', scrollTrigger: st});
+          G.fromTo(ip.querySelectorAll(':scope > img'), {scale: 1.18}, {scale: 1, ease: 'none', scrollTrigger: st});
+          tl.to({}, {duration: .3});
+          return;
+        }
         if (k > 0) tl.to(gr.figs[k - 1], {xPercent: -40, opacity: 0, duration: .9, ease: 'power1.in'}, 0);
         tl.fromTo(f, {clipPath: 'inset(0% 0% 0% 100%)'}, {clipPath: 'inset(0% 0% 0% 0%)', duration: 1, ease: 'power2.inOut'}, .2)
           .fromTo(f.querySelectorAll('img'), {scale: 1.18}, {scale: 1, duration: 1.1, ease: 'power2.out'}, .2)
@@ -820,7 +903,7 @@ html.js .rv.in{opacity:1;transform:none}
     G.to('.r-fg', {strokeDashoffset: 0, ease: 'none', scrollTrigger: {start: 0, end: 'max', scrub: .3}});
     var lastY = -1, frame = 0;
     G.ticker.add(function(){ if (++frame % 6) return; var y = scrollY; if (y === lastY) return; lastY = y; setCh(); });
-    if (matchMedia('(pointer: fine)').matches) {
+    if (!tab && matchMedia('(pointer: fine)').matches) {
       var c = d.createElement('div'); c.className = 'cur'; c.setAttribute('aria-hidden', 'true'); c.innerHTML = '<span></span>'; d.body.appendChild(c); cn = c.firstChild; cn.textContent = rn.textContent;
       var xs = G.quickTo(c, 'x', {duration: .5, ease: 'power3'}), ys = G.quickTo(c, 'y', {duration: .5, ease: 'power3'});
       addEventListener('mousemove', function(e){ xs(e.clientX); ys(e.clientY); c.classList.add('on'); c.classList.toggle('hot', !!(e.target.closest && e.target.closest('a,button,summary,select,input,textarea,label'))); }, {passive: true});
@@ -829,6 +912,114 @@ html.js .rv.in{opacity:1;transform:none}
 
     addEventListener('load', function(){ ST.refresh(); });
   });
+
+  /* phone tier (under 768 px, touch or not): portrait versions of the laptop scenes, native scroll */
+  if (ph) d.addEventListener('DOMContentLoaded', function(){
+    var G = window.gsap, ST = window.ScrollTrigger, SP = window.SplitText;
+    if (!G || !ST) { h.classList.remove('ph'); basic(); return; }
+    G.registerPlugin(ST); if (SP) G.registerPlugin(SP);
+    ST.config({ignoreMobileResize: true});
+    var mm = G.matchMedia();
+    mm.add('(max-width: 767px)', function(){
+      var top = d.querySelector('.top'), band = d.querySelector('.phc');
+      function hdr(){ return top.offsetHeight; }
+
+      /* 1. cover: each line rises through its own mask, the blue square opens into the team photo */
+      G.timeline({defaults: {ease: 'expo.out'}})
+        .fromTo('.hero h1 .w', {yPercent: 135}, {yPercent: 0, duration: 1.5, stagger: .09}, .1)
+        .fromTo('.cov-in', {clipPath: 'inset(41% 41% 41% 41%)'}, {clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'power3.inOut'}, .35)
+        .fromTo('.cov-in img', {clipPath: 'inset(50% 50% 50% 50%)', scale: 1.25}, {clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 1.6, ease: 'power3.inOut'}, 1)
+        .fromTo('.hero .fade', {y: 16, opacity: 0}, {y: 0, opacity: 1, duration: 1.2, stagger: .12, ease: 'power2.out'}, .9)
+        .fromTo('.cov .squares i', {scale: 0, transformOrigin: '100% 0%'}, {scale: 1, duration: 1.2, stagger: .15}, 1.9)
+        .fromTo('.cov figcaption', {opacity: 0}, {opacity: 1, duration: 1}, 2.1);
+      h.classList.add('ph-go');
+      /* the cover drifts apart as you scroll away from it */
+      G.timeline({scrollTrigger: {trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6}})
+        .to('.hero h1', {yPercent: -40, ease: 'none'}, 0)
+        .to('.cov', {y: -50, scale: 1.08, ease: 'none'}, 0);
+
+      /* 2. sticky chapter band under the header: chapter number, name and a reading progress line */
+      var bn = band.querySelector('.phc-n'), bt = band.querySelector('.phc-t'), bm = band.querySelector('.phc-m'), cur = null;
+      ST.create({trigger: '.hero', start: 'bottom 30%', onToggle: function(s){ band.classList.toggle('on', s.isActive); }, end: 'max'});
+      G.to(band.querySelector('i'), {scaleX: 1, ease: 'none', scrollTrigger: {start: 0, end: 'max', scrub: .3}});
+      G.utils.toArray('[data-ch]').forEach(function(el){
+        ST.create({trigger: el, start: 'top 45%', end: 'bottom 45%', onToggle: function(s){
+          if (!s.isActive || cur === el) return; cur = el;
+          G.fromTo(bm, {yPercent: s.direction > 0 ? 100 : -100, opacity: 0}, {yPercent: 0, opacity: 1, duration: .7, ease: 'power3.out', onStart: function(){ bn.textContent = el.dataset.ch; bt.textContent = el.dataset.name; }});
+        }});
+      });
+
+      /* 3. headings rise through line masks */
+      var splits = [];
+      if (SP) G.utils.toArray('.story-intro h2, .tl-head h2, .faq .head h2, .contact .head h2, .ch-h').forEach(function(el){
+        splits.push(SP.create(el, {type: 'lines', mask: 'lines', aria: 'none', autoSplit: true, onSplit: function(self){
+          return G.from(self.lines, {yPercent: 110, duration: 1.3, stagger: .12, ease: 'expo.out', scrollTrigger: {trigger: el, start: 'top 88%', toggleActions: 'play none none none'}});
+        }}));
+      });
+
+      /* 4. chapter and service photos wipe open from the right while the photo settles from 1.15 */
+      G.utils.toArray('.ch-ph, .pil-ph').forEach(function(f){
+        var st = {trigger: f, start: 'top 95%', end: 'top 40%', scrub: .7};
+        G.fromTo(f, {clipPath: 'inset(0% 0% 0% 100%)'}, {clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut', scrollTrigger: st});
+        G.fromTo(f.querySelectorAll(':scope > img'), {scale: 1.15}, {scale: 1, ease: 'none', scrollTrigger: st});
+        var tri = f.querySelectorAll('.trio img');
+        if (tri.length) G.fromTo(tri, {yPercent: 30, opacity: 0}, {yPercent: 0, opacity: 1, stagger: .15, ease: 'power2.out', scrollTrigger: st});
+      });
+
+      /* 5. scrubbed text lighting: words go from .35 to full as they cross the screen */
+      G.utils.toArray('.lit').forEach(function(el){
+        if (el.closest('.pq')) return;
+        var ws = el.querySelectorAll('.w:not(.key .w)');
+        G.fromTo(ws, {opacity: .35}, {opacity: 1, stagger: .1, ease: 'none', scrollTrigger: {trigger: el, start: 'top 88%', end: 'bottom 55%', scrub: .6}});
+      });
+      G.utils.toArray('.promises .n').forEach(function(n){
+        G.fromTo(n, {yPercent: 60, opacity: 0}, {yPercent: 0, opacity: 1, duration: 1.1, ease: 'expo.out', scrollTrigger: {trigger: n, start: 'top 88%', toggleActions: 'play none none none'}});
+      });
+
+      /* 6. pinned: the 1998 to today timeline runs sideways as you scroll down */
+      var track = d.querySelector('.tl-track'), view = d.querySelector('.tl-view'), line = d.querySelector('.tl-line');
+      function dist(){ return Math.max(0, track.scrollWidth - view.clientWidth); }
+      var tlTween = G.to(track, {x: function(){ return -dist(); }, ease: 'none',
+        scrollTrigger: {trigger: '.tl', start: 'top top', end: function(){ return '+=' + dist(); }, pin: true, anticipatePin: 1, scrub: .6, invalidateOnRefresh: true,
+          onUpdate: function(s){ line.style.transform = 'scaleX(' + s.progress + ')'; }}});
+      G.utils.toArray('.tl-p').forEach(function(p){
+        G.from(p.querySelector('.yr'), {yPercent: 40, opacity: .15, ease: 'none', scrollTrigger: {trigger: p, containerAnimation: tlTween, start: 'left 95%', end: 'left 45%', scrub: true}});
+      });
+      G.fromTo('.tl-award img', {scale: 1.15}, {scale: 1, ease: 'none', scrollTrigger: {trigger: '.tl-award', containerAnimation: tlTween, start: 'left right', end: 'center center', scrub: true}});
+      G.from('.faces li', {scale: .5, opacity: 0, stagger: .1, ease: 'back.out(1.6)', scrollTrigger: {trigger: '.faces', containerAnimation: tlTween, start: 'left 95%', end: 'left 35%', scrub: true}});
+      G.from('.tl-sq i', {scale: 0, transformOrigin: '0% 100%', stagger: .2, ease: 'none', scrollTrigger: {trigger: '.tl-sq', containerAnimation: tlTween, start: 'left 100%', end: 'left 60%', scrub: true}});
+
+      /* 7. pinned briefly: the client's words light up one by one */
+      G.timeline({scrollTrigger: {trigger: '.pq', start: 'top top', end: '+=100%', pin: true, anticipatePin: 1, scrub: .5}})
+        .fromTo('.pq-m', {scale: .6, opacity: 0}, {scale: 1, opacity: 1, duration: .5}, 0)
+        .fromTo('.pq .w', {opacity: .2}, {opacity: 1, duration: .4, stagger: .05, ease: 'none'}, 0)
+        .fromTo('.pq figcaption', {opacity: 0, y: 12}, {opacity: 1, y: 0, duration: .5}, '>-0.2');
+
+      /* insights rows slide in one after another */
+      G.utils.toArray('.posts li').forEach(function(li){
+        G.fromTo(li, {xPercent: 12, opacity: 0}, {xPercent: 0, opacity: 1, duration: 1.1, ease: 'expo.out', scrollTrigger: {trigger: li, start: 'top 92%', toggleActions: 'play none none none'}});
+      });
+
+      var onLoad = function(){ ST.refresh(); };
+      addEventListener('load', onLoad);
+      return function(){
+        removeEventListener('load', onLoad);
+        splits.forEach(function(s){ s.revert(); });
+        band.classList.remove('on');
+        /* left the phone width (rotation): hand over to the static fallback */
+        h.classList.remove('ph'); basic();
+      };
+    });
+  });
+
+  /* touch tiers: a soft ripple where a button is tapped */
+  if (ph || tab) d.addEventListener('pointerdown', function(e){
+    var b = e.target.closest && e.target.closest('.btn, .qb a'); if (!b) return;
+    var r = b.getBoundingClientRect(), s = d.createElement('span');
+    s.className = 'rip'; s.setAttribute('aria-hidden', 'true');
+    s.style.left = (e.clientX - r.left) + 'px'; s.style.top = (e.clientY - r.top) + 'px';
+    b.appendChild(s); setTimeout(function(){ s.remove(); }, 950);
+  }, {passive: true});
 
   /* menu */
   var btn = d.querySelector('.menu-btn'), nav = d.getElementById('site-nav');

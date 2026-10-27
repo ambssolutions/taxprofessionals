@@ -215,13 +215,12 @@ ul,ol{margin:0;padding:0;list-style:none}
 /* award */
 .aw{background:var(--ivory-2)}
 .aw-stage{position:relative}
-.aw-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,530px);gap:clamp(32px,5vw,80px);align-items:center}
-.aw h2{font-size:var(--h2);line-height:1.12;color:var(--deep)}
+.aw-grid{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;gap:clamp(28px,4vw,48px);text-align:center}
+.aw h2{font-size:var(--h2);line-height:1.12;color:var(--deep);max-width:20ch;margin-inline:auto}
 .aw h2 em{color:var(--blue)}
-.aw p{margin-top:20px;color:var(--muted);max-width:44ch}
-.aw-frame{overflow:hidden;border-radius:2px}
+.aw p{margin:20px auto 0;color:var(--muted);max-width:min(62ch,100%)}
+.aw-frame{overflow:hidden;border-radius:2px;width:min(100%,530px,calc((100svh - var(--hh)) * .62))}
 .aw-frame img{width:100%;aspect-ratio:800/488;object-fit:cover;transform-origin:42% 42%}
-@media (max-width:899px){.aw-grid{grid-template-columns:1fr;text-align:center}.aw p{margin-inline:auto}}
 .fx .aw{padding:0}
 .fx .aw-stage{height:calc(100svh - var(--hh));display:flex;align-items:center}
 
@@ -327,6 +326,28 @@ details.js:not(.on) .pm::after{transform:rotate(90deg)}
 .has-cur input,.has-cur textarea{cursor:text}
 .cur.big i{transform:scale(1.8)}
 .cur.off i{opacity:0}
+
+/* touch tiers (phones and tablets): tap ripple and a reading progress hairline */
+.tch .btn,.tch .qbar a{position:relative;overflow:hidden;isolation:isolate}
+.rip{position:absolute;border-radius:50%;background:currentColor;pointer-events:none;z-index:-1}
+.pgb{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--blue);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+/* phone tier: the hero card opens into the deep-blue field, the portraits pass in a short pinned strip */
+.ph .hero-field{display:block;position:absolute;inset:0;z-index:1;background:var(--deep);clip-path:inset(50% 50% 50% 50%)}
+.ph .hero-cap{display:block;position:absolute;z-index:3;left:var(--pad);right:var(--pad);bottom:clamp(20px,4.5svh,44px);color:var(--ivory);text-align:center;opacity:0}
+.ph .hero-cap b{font-size:1.4rem;margin-bottom:6px}
+html.ph-gal .gal-stage{height:calc(100svh - var(--hh));display:flex;flex-direction:column;padding:clamp(14px,2.4svh,40px) 0 calc(clamp(4px,1svh,16px) + 64px);overflow:hidden}
+html.ph-gal .gal-head{margin-bottom:clamp(8px,1.6svh,20px)}
+html.ph-gal .gal-hint{display:none}
+html.ph-gal .gal-track{flex:1;min-height:0;display:flex;align-items:flex-start;gap:0;width:max-content;overflow:visible;scroll-snap-type:none;padding:0 var(--pad)}
+html.ph-gal .panel{flex:0 0 min(82vw,340px);gap:clamp(12px,2svh,20px);padding-right:20px}
+html.ph-gal .g-shot{width:min(100%,24svh,300px)}
+html.ph-gal .g-num{display:block;position:absolute;right:20px;top:-.12em;font:400 clamp(5rem,24vw,8rem)/1 var(--serif);color:transparent;-webkit-text-stroke:1px rgba(247,243,234,.24);pointer-events:none;z-index:0}
+html.ph-gal .g-shot,html.ph-gal .g-text{position:relative;z-index:1}
+html.ph-gal .gal-bar{display:block;position:relative;order:1;flex:none;margin:0 var(--pad) clamp(6px,1.4svh,16px);height:1px;background:var(--line-i)}
+html.ph-gal .gal-track{order:2}
+/* touch tablets: each portrait panel fits inside the screen, its text column wraps */
+html.tab.fx .panel{flex-basis:min(clamp(780px,64vw,1020px),calc(100vw - 2*var(--pad)));grid-template-columns:min(300px,34vw) minmax(0,1fr);gap:clamp(28px,3.4vw,48px);padding-right:clamp(56px,6vw,96px)}
+html.ph-gal .gal-bar i{position:absolute;inset:0;background:var(--ivory);transform-origin:left;transform:scaleX(0)}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation:none!important}html{scroll-behavior:auto}}
 </style>
@@ -687,11 +708,23 @@ document.addEventListener('DOMContentLoaded', function () {
     var hero = $('.hero'), h1 = $('h1', hero), img = $('.hero-card img');
     var mm = gsap.matchMedia();
 
-    /* laptops: pinned scenes and smooth scroll (created first, top to bottom, so later triggers measure the pin spacing) */
-    mm.add('(min-width: 900px) and (pointer: fine) and (min-height: 560px)', function () {
+    /* three tiers, created first and top to bottom so later triggers measure the pin spacing:
+       laptops get the pinned scenes with smooth scroll; touch tablets get the same scenes on native scroll;
+       phones get portrait versions. ?fx forces the laptop tier. */
+    var LAPQ = /[?&]fx\b/.test(location.search) ? '(min-width: 768px)' : '(min-width: 900px) and (pointer: fine) and (min-height: 560px)';
+    ScrollTrigger.config({ ignoreMobileResize: true });
+    mm.add({ lap: LAPQ, tab: '(min-width: 768px) and (min-height: 560px)', any: 'all' }, function (ctx) {
+      var c = ctx.conditions, a, b;
+      if (c.lap) return scenes(true);
+      if (c.tab) { H.classList.add('tab'); a = scenes(false); b = touch(); return function () { b(); a(); H.classList.remove('tab') } }
+      a = phone(); b = touch(); return function () { b(); a() };
+    });
+
+    /* laptop scenes (tablets run them too, without Lenis) */
+    function scenes(useLenis) {
       H.classList.add('fx');
       var lenis = null, raf, onA;
-      if (window.Lenis) {
+      if (useLenis && window.Lenis) {
         lenis = new Lenis({ duration: 1.2, easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)) } });
         lenis.on('scroll', ScrollTrigger.update);
         raf = function (t) { lenis.raf(t * 1000) };
@@ -768,7 +801,102 @@ document.addEventListener('DOMContentLoaded', function () {
         $('.hero-card').appendChild(img); track.setAttribute('tabindex', '0');
         if (lenis) { gsap.ticker.remove(raf); lenis.destroy(); d.removeEventListener('click', onA) }
       };
-    });
+    }
+
+    /* touch reveal: a clip-path wipe while the photo settles from 1.15 to 1 inside it */
+    function wipe(im, from, to, st, stg) {
+      return gsap.fromTo(im, { scale: 1.15, clipPath: from }, { scale: 1, clipPath: to, duration: 1.6, ease: 'expo.inOut', stagger: stg || 0, scrollTrigger: st });
+    }
+
+    /* phones (and short landscape screens): portrait versions of the laptop scenes */
+    function phone() {
+      H.classList.add('ph');
+
+      /* hero: a short pin while the photo card opens into the deep-blue field */
+      var ghost = $('.hero-card .ghost'), field = $('.hero-field'), g = {};
+      function geo() {
+        var hr = hero.getBoundingClientRect(), gr = ghost.getBoundingClientRect();
+        g.W = hr.width; g.H = hr.height; g.x = gr.left - hr.left; g.y = gr.top - hr.top; g.s = gr.width || 1;
+        g.S = Math.round(Math.min(g.W - 32, g.H * 0.56, 440)); g.cy = g.H * 0.44;
+      }
+      geo();
+      gsap.timeline({ scrollTrigger: { trigger: hero, start: function () { return 'top ' + hh() }, end: '+=85%', pin: true, scrub: 1, anticipatePin: 1, invalidateOnRefresh: true, onRefreshInit: geo } })
+        .fromTo(field, { clipPath: function () { return 'inset(' + g.y + 'px ' + (g.W - g.x - g.s) + 'px ' + (g.H - g.y - g.s) + 'px ' + g.x + 'px)' } }, { clipPath: 'inset(0px 0px 0px 0px)', ease: 'power2.inOut', duration: 0.8 }, 0)
+        .fromTo(img, { x: 0, y: 0, scale: 1 }, { x: function () { return g.W / 2 - g.x - g.s / 2 }, y: function () { return g.cy - g.y - g.s / 2 }, scale: function () { return g.S / g.s }, ease: 'power2.inOut', duration: 1 }, 0)
+        .fromTo(h1, { yPercent: 0, opacity: 1 }, { yPercent: -40, opacity: 0, ease: 'power1.in', duration: 0.35, immediateRender: false }, 0)
+        .fromTo(['.hero .lede', '.hero .act'], { y: 0, opacity: 1 }, { y: -30, opacity: 0, ease: 'power1.in', duration: 0.25, immediateRender: false }, 0)
+        .fromTo('.hero-cap', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.28 }, 0.72);
+
+      /* the signature in portrait: a short pinned strip of portraits scrubbed by vertical scroll */
+      var stage = $('.gal-stage'), track = $('.gal-track'), panels = $$('.panel');
+      H.classList.add('ph-gal');
+      var tallest = Math.max.apply(null, panels.map(function (p) { return p.offsetHeight }));
+      var pinned = innerHeight >= 600 && tallest <= track.clientHeight;
+      if (!pinned) H.classList.remove('ph-gal');
+      if (pinned) {
+        track.removeAttribute('tabindex');
+        var dist = function () { return Math.max(0, track.scrollWidth - stage.clientWidth) };
+        var len = function () { return Math.min(dist(), innerHeight * 1.45) };
+        var tw = gsap.to(track, { x: function () { return -dist() }, ease: 'none', scrollTrigger: { trigger: stage, start: function () { return 'top ' + hh() }, end: function () { return '+=' + len() }, pin: true, scrub: 0.6, anticipatePin: 1, invalidateOnRefresh: true } });
+        gsap.fromTo('.gal-bar i', { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: stage, start: function () { return 'top ' + hh() }, end: function () { return '+=' + len() }, scrub: 0.6, invalidateOnRefresh: true } });
+        panels.forEach(function (p) {
+          gsap.fromTo($('.g-num', p), { xPercent: 45 }, { xPercent: -45, ease: 'none', scrollTrigger: { trigger: p, containerAnimation: tw, start: 'left right', end: 'right left', scrub: true } });
+          wipe($('.g-shot img', p), 'inset(100% 6.5% 6.5% 6.5%)', 'inset(-4% -4% -4% -4%)', { trigger: $('.g-shot', p), containerAnimation: tw, start: 'left 92%', toggleActions: 'play none none reverse' });
+          var s = SplitText.create($$('.g-role, .g-name, .g-cred', p), { type: 'lines', mask: 'lines', aria: 'none' });
+          gsap.timeline({ scrollTrigger: { trigger: $('.g-text', p), containerAnimation: tw, start: 'left 85%', toggleActions: 'play none none reverse' } })
+            .from(s.lines, { yPercent: 110, duration: 1.2, ease: 'expo.out', stagger: 0.07 })
+            .from($('.g-mail', p), { opacity: 0, y: 14, duration: 0.9, ease: 'expo.out' }, 0.35);
+        });
+      } else {
+        wipe($$('.g-shot img'), 'inset(100% 6.5% 6.5% 6.5%)', 'inset(-4% -4% -4% -4%)', { trigger: track, start: 'top 85%', once: true }, 0.12);
+      }
+
+      /* promises: opaque cards stack (CSS sticky); each title rises word by word, the one beneath steps back */
+      var ph2 = SplitText.create('#why-h', { type: 'lines', mask: 'lines', aria: 'none' });
+      gsap.from(ph2.lines, { yPercent: 105, duration: 1.4, ease: 'expo.out', stagger: 0.1, scrollTrigger: { trigger: '#why-h', start: 'top 88%', once: true } });
+      var slides = $$('.pr-slide');
+      slides.forEach(function (s, i) {
+        var w = SplitText.create($('h3', s), { type: 'words', mask: 'words', aria: 'none' });
+        gsap.timeline({ scrollTrigger: { trigger: s, start: 'top 72%', toggleActions: 'play none none reverse' } })
+          .from(w.words, { yPercent: 105, duration: 1.1, ease: 'expo.out', stagger: 0.05 })
+          .from($$('p, .pr-n', s), { y: 24, opacity: 0, duration: 0.9, ease: 'expo.out' }, 0.25);
+        if (i) gsap.to($('.pr-in', slides[i - 1]), { scale: 0.9, opacity: 0.3, ease: 'none', scrollTrigger: { trigger: s, start: 'top bottom', end: function () { return 'top ' + hh() }, scrub: true } });
+      });
+
+      /* award: the photo opens from a close crop as it arrives (scrubbed, no pin) */
+      gsap.timeline({ scrollTrigger: { trigger: '.aw-frame', start: 'top 92%', end: 'center 50%', scrub: 1 } })
+        .fromTo('.aw-frame', { clipPath: 'inset(14% 18% 14% 18%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut' }, 0)
+        .fromTo('.aw-frame img', { scale: 1.4 }, { scale: 1, ease: 'power2.inOut' }, 0);
+
+      return function () {
+        H.classList.remove('ph', 'ph-gal'); track.setAttribute('tabindex', '0');
+      };
+    }
+
+    /* phones and tablets: tap ripples, a reading progress hairline, and scroll reveals in place of hover effects */
+    function touch() {
+      H.classList.add('tch');
+      var pg = d.createElement('i'); pg.className = 'pgb'; pg.setAttribute('aria-hidden', 'true'); $('.site-head').appendChild(pg);
+      gsap.fromTo(pg, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.3 } });
+      $$('.svc-thumb').forEach(function (im) {
+        wipe(im, 'inset(6.5% 100% 6.5% 6.5%)', 'inset(0% 0% 0% 0%)', { trigger: im, start: 'top 88%', toggleActions: 'play none none reverse' });
+      });
+      $$('.tm li').forEach(function (li) {
+        var tn = $('.tn', li);
+        gsap.set(tn, { transition: 'none' });
+        gsap.from(tn, { yPercent: 60, clipPath: 'inset(0% 0% 100% 0%)', duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: li, start: 'top 92%', once: true } });
+      });
+      function rip(e) {
+        var bt = e.target.closest && e.target.closest('.btn, .qbar a'); if (!bt) return;
+        var r = bt.getBoundingClientRect(), z = Math.max(r.width, r.height) * 2.2, s = d.createElement('span');
+        s.className = 'rip'; s.setAttribute('aria-hidden', 'true');
+        s.style.cssText = 'width:' + z + 'px;height:' + z + 'px;left:' + (e.clientX - r.left - z / 2) + 'px;top:' + (e.clientY - r.top - z / 2) + 'px';
+        bt.appendChild(s);
+        gsap.fromTo(s, { scale: 0, opacity: 0.28 }, { scale: 1, opacity: 0, duration: 0.9, ease: 'power2.out', onComplete: function () { s.remove() } });
+      }
+      d.addEventListener('pointerdown', rip, { passive: true });
+      return function () { H.classList.remove('tch'); d.removeEventListener('pointerdown', rip); pg.remove() };
+    }
 
     /* choreographed intro: the headline by characters, then the photo card and the words */
     var sp = SplitText.create(h1, { type: 'words,chars' });
