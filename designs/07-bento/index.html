@@ -202,14 +202,21 @@ html:not(.js) .kit{grid-template-columns:1fr}
 .result .btn[hidden]{display:none}
 @media (max-height:880px){.chooser{position:static}}
 
-.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-flow:dense;gap:var(--gap);list-style:none;margin:0;padding:0}
-.svc{display:flex;flex-direction:column;gap:10px;min-height:200px;transition:background .5s,color .5s}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap);list-style:none;margin:0;padding:0}
+.svc{display:flex;flex-direction:column;gap:10px;transition:background .5s,color .5s}
 .svc.wide{grid-column:span 2}
-.svc .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.6);margin-bottom:auto}
+.svc .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.6)}
 .svc.t-ink .ic{background:var(--ink-2);color:var(--mint)}
 .svc .ic svg{width:26px;height:26px}
-.svc h3{font-size:clamp(20px,1.7vw,24px);margin-top:18px}
+.svc h3{font-size:clamp(20px,1.7vw,24px);margin-top:8px;padding-right:96px}
 .svc p{font-size:15px;color:var(--muted);max-width:44ch}
+.subs{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.subs li{font-size:13.5px;font-weight:600;line-height:1.25;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.65);color:var(--ink)}
+.svc.t-white .subs li{background:var(--sand)}
+.svc .more{font-size:14px;color:var(--muted);margin-top:4px;max-width:48ch}
+.svc .more b{font-weight:600;color:var(--ink)}
+.svc .out{margin-top:auto;padding-top:10px;align-self:flex-start;font-weight:600;font-size:14px;color:var(--ink);text-underline-offset:4px;min-height:36px;display:inline-flex;align-items:center}
+.svc.pick .more,.svc.pick .more b{color:var(--ink)}
 .svc.t-ink p{color:#C9D7D0}
 .svc .tag{position:absolute;top:18px;right:18px;background:var(--ink);color:#fff;font-weight:600;font-size:13px;border-radius:999px;padding:5px 12px;opacity:0;transform:scale(.8);transition:opacity .4s,transform .4s var(--ease)}
 .svc.pick{background:var(--coral);color:var(--ink);box-shadow:none}
@@ -221,9 +228,8 @@ html:not(.js) .kit{grid-template-columns:1fr}
   .kit{grid-template-columns:1fr}
   .chooser{position:static}
   .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .svc.wide{grid-column:auto}
 }
-@media (max-width:560px){.svc{min-height:0}.svc .ic{margin-bottom:6px}.svc h3{margin-top:6px}}
+@media (max-width:640px){.tiles{grid-template-columns:1fr}.svc h3{padding-right:0}.svc .tag{position:static;align-self:flex-start;order:-1}}
 
 /* story tabs */
 .story{background:var(--sand);border-radius:calc(var(--r) + 10px);padding:clamp(18px,3vw,40px)}
@@ -288,7 +294,8 @@ html.js .story-ctl{display:flex}
 .trio{display:flex;gap:8px;flex-wrap:wrap}
 .trio .leaf{min-width:0;flex:1 1 0;padding:20px 8px 10px}
 .trio .leaf b{font-size:clamp(1.8rem,2.6vw,2.4rem)}
-.cal-note{margin-top:22px;text-align:center;color:#C9D7D0;font-size:15px}
+.cal-note{margin-top:22px;text-align:center;color:#C9D7D0;font-size:15px;max-width:70ch;margin-inline:auto}
+.cal-note a{color:var(--mint);font-weight:600;text-underline-offset:4px}
 .cal-year{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:var(--gap);padding:16px 20px;border-radius:var(--r);background:var(--ink-2);font-weight:600;color:#E6EEE9;text-align:center}
 .cal-year b{color:var(--mint)}
 @media (max-width:900px){.cal{grid-template-columns:1fr 1fr}.cal .tile{grid-column:span 1}.cal .c-gst,.cal .c-paye{grid-column:span 2}.cal .c-term{grid-column:span 2}}
@@ -299,17 +306,31 @@ html.js .story-ctl{display:flex}
 .lead{grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:360px}
 .person{display:flex;align-items:center;gap:18px}
 .person .mono{margin:0;box-shadow:none;width:72px;font-size:24px;flex:none}
+.varun .mono{background:var(--ink);color:#fff}
 .lead .mono{box-shadow:none;margin:0;width:clamp(96px,10vw,140px);font-size:clamp(32px,3.4vw,46px);background:var(--coral);color:var(--ink)}
 .person h3{font-size:22px}
 .person p{color:var(--muted);font-size:15px}
 .lead h3{font-size:clamp(28px,2.8vw,38px);color:#fff}
-.lead p{color:#C9D7D0;font-size:16px;margin-top:6px}
+.lead p{color:#C9D7D0;font-size:16px;margin-top:6px;max-width:34ch}
 .lead .cred{display:inline-block;margin-top:14px;background:var(--mint);color:var(--ink);font-weight:600;border-radius:10px;padding:6px 12px;font-size:14px}
-.partners{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;text-align:center;font:600 18px/1.3 var(--display)}
+.varun p{max-width:34ch;color:var(--ink)}
+.partners{grid-column:2/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;font:600 17px/1.3 var(--display)}
 .partners span{display:inline-flex;align-items:center;gap:10px}
 .partners span::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--ink)}
-@media (max-width:900px){.team{grid-template-columns:1fr 1fr}.lead{grid-column:1/-1;grid-row:auto;min-height:0}}
-@media (max-width:560px){.team{grid-template-columns:1fr}.partners{flex-direction:column;align-items:center;font-size:16px}}
+@media (max-width:900px){.team{grid-template-columns:1fr 1fr}.lead{grid-column:1/-1;grid-row:auto;min-height:0}.varun,.partners{grid-column:1/-1}}
+@media (max-width:560px){.team{grid-template-columns:1fr}.partners{font-size:16px}}
+
+/* insights */
+.reads{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap)}
+.reads .tile{display:flex;min-height:180px;padding:0;transition:transform .5s var(--ease)}
+.reads a{flex:1;display:flex;align-items:flex-end;padding:clamp(18px,2vw,26px);font:600 clamp(18px,1.5vw,21px)/1.25 var(--display);letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
+.reads a::before{content:"";position:absolute;top:18px;left:18px;width:14px;height:14px;border-radius:4px;background:var(--coral)}
+.reads .tile:hover{transform:translateY(-4px)}
+.reads a:hover{text-decoration:underline;text-underline-offset:4px}
+.reads-more{text-align:center;margin-top:22px;font-weight:600}
+.reads-more a{text-underline-offset:4px}
+@media (max-width:900px){.reads{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.reads{grid-template-columns:1fr}.reads .tile{min-height:120px}}
 
 /* faq */
 .faq{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
@@ -399,7 +420,7 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span></button>
     <nav class="nav" id="site-nav" aria-label="Main">
       <a href="#toolkit">Services</a>
-      <a href="#work">How it fits</a>
+      <a href="#insights">Insights</a>
       <a href="#dates">Dates</a>
       <a href="#team">Team</a>
       <a href="#faq">FAQ</a>
@@ -479,62 +500,47 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
             </div>
           </fieldset>
           <div class="result" aria-live="polite">
-            <p id="res-text">Pick an answer for each question to see what we suggest.</p>
+            <p id="res-text">Pick an answer for each question to see which service areas fit.</p>
             <ul id="res-list"></ul>
             <a class="btn btn-mint" id="res-btn" href="#contact" hidden>Put this in my enquiry</a>
           </div>
         </form>
 
         <ul class="tiles" id="tiles" aria-label="Services">
-          <li class="tile svc t-mint wide" data-s="income" style="view-transition-name:s-income">
+          <li class="tile svc t-mint" data-s="compliance" style="view-transition-name:s-compliance">
             <span class="tag" aria-hidden="true">Suggested</span>
             <span class="ic" aria-hidden="true"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h14v20l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M10 9h6M10 13h6M10 17h3"/></svg></span>
-            <h3>Income tax</h3><p>Returns for individuals, companies, trusts and partnerships.</p>
+            <h3>Taxation &amp; Accounting Compliance</h3>
+            <p>The returns and records every business and taxpayer needs, kept up to date through the year.</p>
+            <ul class="subs"><li>Bookkeeping</li><li>GST returns</li><li>PAYE returns</li><li>Income tax returns</li><li>Financial statements</li><li>Tax planning</li><li>Business structuring</li><li>Payroll services</li><li>Company formation</li></ul>
+            <span class="more">Employment &amp; HR Advisory can be added to this package.</span>
+            <a class="out" href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">More on the live site</a>
           </li>
-          <li class="tile svc t-pale" data-s="gst" style="view-transition-name:s-gst">
+          <li class="tile svc t-sand" data-s="advisory" style="view-transition-name:s-advisory">
             <span class="tag" aria-hidden="true">Suggested</span>
-            <span class="ic" aria-hidden="true"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 7 7 19"/><circle cx="8" cy="8" r="2.5"/><circle cx="18" cy="18" r="2.5"/></svg></span>
-            <h3>GST returns</h3><p>Prepared and filed for your GST period.</p>
-          </li>
-          <li class="tile svc t-sand" data-s="paye" style="view-transition-name:s-paye">
-            <span class="tag" aria-hidden="true">Suggested</span>
-            <span class="ic" aria-hidden="true"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="20" height="14" rx="3"/><circle cx="10" cy="12" r="2.2"/><path d="M6.5 17c.8-1.6 2-2.3 3.5-2.3s2.7.7 3.5 2.3M16 11h4M16 14h3"/></svg></span>
-            <h3>PAYE returns</h3><p>Employer returns for the staff you pay.</p>
-          </li>
-          <li class="tile svc t-ink wide" data-s="payroll" style="view-transition-name:s-payroll">
-            <span class="tag" aria-hidden="true">Suggested</span>
-            <span class="ic" aria-hidden="true"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="20" height="17" rx="3"/><path d="M3 10h20M8 3v4M18 3v4M8 15h3M14 15h4"/></svg></span>
-            <h3>Payroll services</h3><p>Running your pays. We are a Crystal Payroll recommended partner.</p>
-          </li>
-          <li class="tile svc t-mint wide" data-s="books" style="view-transition-name:s-books">
-            <span class="tag" aria-hidden="true">Suggested</span>
-            <span class="ic" aria-hidden="true"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c3-1.3 6-1.3 9 0v17c-3-1.3-6-1.3-9 0zM22 5c-3-1.3-6-1.3-9 0v17c3-1.3 6-1.3 9 0z"/></svg></span>
-            <h3>Bookkeeping</h3><p>Your records kept up to date through the year.</p>
-          </li>
-          <li class="tile svc t-white" data-s="company" style="view-transition-name:s-company">
-            <span class="tag" aria-hidden="true">Suggested</span>
-            <span class="ic" aria-hidden="true" style="background:var(--sand)"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V8l7-4v18M11 22V10l11 3v9M2 22h22M7 11h1M7 15h1M15 16h3M15 19h3"/></svg></span>
-            <h3>Company formation</h3><p>Setting up a new company the right way from the start.</p>
+            <span class="ic" aria-hidden="true"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22h20M6 18v-5M11 18V9M16 18v-7M21 18V5"/></svg></span>
+            <h3>Business Advisory &amp; Planning</h3>
+            <p>A plan for the business, then the numbers and habits to keep it on track.</p>
+            <ul class="subs"><li>Business plans and strategic growth</li><li>Performance and accountability</li><li>Profit improvement and cashflow</li><li>Systems and processes</li><li>Monthly coaching option</li></ul>
+            <span class="more"><b>Business Planning: first meeting free.</b> A workshop covering 3-month, 12-month and 3-year planning.</span>
+            <a class="out" href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">More on the live site</a>
           </li>
           <li class="tile svc t-pale" data-s="hr" style="view-transition-name:s-hr">
             <span class="tag" aria-hidden="true">Suggested</span>
             <span class="ic" aria-hidden="true"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="18" cy="9" r="2.5"/><path d="M3 21c.6-3.6 3-5.5 6-5.5s5.4 1.9 6 5.5M15.5 15c3.4-.6 6 1 6.5 4.5"/></svg></span>
-            <h3>HR advice</h3><p>Employment law and HR advisory: help with the people side of running a business.</p>
+            <h3>Employment &amp; HR Advisory</h3>
+            <p>The people side of running a business, from the first agreement to a restructure.</p>
+            <ul class="subs"><li>Employment agreements and policies</li><li>Employment legislation</li><li>Employee policies and procedures</li><li>Restructuring and redundancy</li><li>Employer accreditations</li><li>Audits and investigations</li><li>Records for a Labour Inspector visit</li></ul>
+            <a class="out" href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">More on the live site</a>
           </li>
-          <li class="tile svc t-sand wide" data-s="advice" style="view-transition-name:s-advice">
+          <li class="tile svc t-white" data-s="property" style="view-transition-name:s-property">
             <span class="tag" aria-hidden="true">Suggested</span>
-            <span class="ic" aria-hidden="true"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22h20M6 18v-5M11 18V9M16 18v-7M21 18V5"/></svg></span>
-            <h3>Business advisory</h3><p>A second view before you make a business decision.</p>
-          </li>
-          <li class="tile svc t-mint wide" data-s="property" style="view-transition-name:s-property">
-            <span class="tag" aria-hidden="true">Suggested</span>
-            <span class="ic" aria-hidden="true"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 13 4l10 8M6 10v12h14V10M11 22v-6h4v6"/></svg></span>
-            <h3>Property</h3><p>Advice on property structures and managing property investors' affairs.</p>
-          </li>
-          <li class="tile svc t-white" data-s="trust" style="view-transition-name:s-trust">
-            <span class="tag" aria-hidden="true">Suggested</span>
-            <span class="ic" aria-hidden="true" style="background:var(--mint)"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 4 7v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V7z"/><path d="m9 13 3 3 5-6"/></svg></span>
-            <h3>Trust administration</h3><p>Keeping a family trust's records and returns in order.</p>
+            <span class="ic" aria-hidden="true" style="background:var(--mint)"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 13 4l10 8M6 10v12h14V10M11 22v-6h4v6"/></svg></span>
+            <h3>Property Investment &amp; Development</h3>
+            <p>For investors and developers: how to hold property, and what each choice means for tax.</p>
+            <ul class="subs"><li>Investment strategy</li><li>Structuring advice: personal, company or trust</li><li>Tax returns</li><li>Cash flow tools</li><li>Trust administration</li></ul>
+            <span class="more">The associated-persons rules can make a buy-and-hold property taxable when it is linked to development or trading. Worth checking before you buy.</span>
+            <a class="out" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">More on the live site</a>
           </li>
         </ul>
       </div>
@@ -544,15 +550,15 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
   <section class="sec" id="work" aria-labelledby="work-title" style="padding-top:0">
     <div class="wrap">
       <div class="head rv">
-        <h2 id="work-title">A closer look at the work</h2>
-        <p>Most small businesses use a few of these together. Here is how they fit.</p>
+        <h2 id="work-title">Four service areas, one office</h2>
+        <p>Most small businesses use two or three of these together. Here is what each one covers.</p>
       </div>
       <div class="story rv" id="story">
         <div class="sbars" role="tablist" aria-label="Service areas">
-          <button class="sbar" role="tab" id="tb1" aria-label="Tax returns" aria-controls="sl1" aria-selected="true"><i></i><span>Tax returns</span></button>
-          <button class="sbar" role="tab" id="tb2" aria-label="Payroll and staff" aria-controls="sl2" aria-selected="false" tabindex="-1"><i></i><span>Payroll and staff</span></button>
-          <button class="sbar" role="tab" id="tb3" aria-label="Books and advice" aria-controls="sl3" aria-selected="false" tabindex="-1"><i></i><span>Books and advice</span></button>
-          <button class="sbar" role="tab" id="tb4" aria-label="Property and trusts" aria-controls="sl4" aria-selected="false" tabindex="-1"><i></i><span>Property and trusts</span></button>
+          <button class="sbar" role="tab" id="tb1" aria-label="Compliance" aria-controls="sl1" aria-selected="true"><i></i><span>Compliance</span></button>
+          <button class="sbar" role="tab" id="tb2" aria-label="Advisory and planning" aria-controls="sl2" aria-selected="false" tabindex="-1"><i></i><span>Advisory and planning</span></button>
+          <button class="sbar" role="tab" id="tb3" aria-label="Employment and HR" aria-controls="sl3" aria-selected="false" tabindex="-1"><i></i><span>Employment and HR</span></button>
+          <button class="sbar" role="tab" id="tb4" aria-label="Property" aria-controls="sl4" aria-selected="false" tabindex="-1"><i></i><span>Property</span></button>
         </div>
         <div class="slides">
           <div class="slide on" id="sl1" role="tabpanel" aria-labelledby="tb1">
@@ -560,46 +566,48 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
               <div class="prow">Individuals<code>IR3</code></div>
               <div class="prow">Companies<code>IR4</code></div>
               <div class="prow">Trusts<code>IR6</code></div>
-              <div class="prow">Partnerships<code>IR7</code></div>
+              <div class="prow">Every GST period<code>GST</code></div>
+              <div class="prow">Every payday<code>PAYE</code></div>
             </div>
             <div class="tile t-white txt">
-              <h3>Tax returns</h3>
-              <p>The core of the practice: tax compliance for people and the entities they own.</p>
-              <ul class="ticks"><li>Income tax returns for individuals, companies, trusts and partnerships</li><li>GST returns</li><li>PAYE returns</li></ul>
+              <h3>Compliance, month by month</h3>
+              <p>Taxation &amp; Accounting Compliance is the core package. Most clients start here.</p>
+              <ul class="ticks"><li>Bookkeeping, GST, PAYE and income tax returns</li><li>Financial statements and tax planning</li><li>Business structuring, company formation and payroll</li><li>Employment &amp; HR Advisory can be added on</li></ul>
             </div>
           </div>
           <div class="slide" id="sl2" role="tabpanel" aria-labelledby="tb2">
             <div class="tile t-ink vis flow" aria-hidden="true">
-              <div><b>Pay</b><span>Payday for your staff</span></div>
-              <div><b>2</b><span>Payday filing within 2 working days</span></div>
-              <div><b>20th</b><span>PAYE paid by the 20th of the following month</span></div>
+              <div><b>3 mo</b><span>What happens next quarter</span></div>
+              <div><b>12 mo</b><span>The year ahead, with numbers</span></div>
+              <div><b>3 yr</b><span>Where the business is heading</span></div>
             </div>
             <div class="tile t-white txt">
-              <h3>Payroll and staff</h3>
-              <p>Paying people brings its own filing. We can run it with you.</p>
-              <ul class="ticks"><li>Payroll services</li><li>PAYE returns</li><li>Employment law and HR advisory</li><li>Crystal Payroll recommended partner</li></ul>
+              <h3>Planning, with the first meeting free</h3>
+              <p>Business Advisory &amp; Planning starts with a planning workshop covering 3-month, 12-month and 3-year horizons. The first meeting is free of charge.</p>
+              <ul class="ticks"><li>Business plans and strategic growth</li><li>Performance and accountability</li><li>Profit improvement and cashflow</li><li>Systems and processes, with a monthly coaching option</li></ul>
             </div>
           </div>
           <div class="slide" id="sl3" role="tabpanel" aria-labelledby="tb3">
             <div class="tile t-ink vis" aria-hidden="true">
-              <div class="prow">Records kept up to date<code>Books</code></div>
-              <div class="prow">A new company, set up<code>Setup</code></div>
-              <div class="prow">A second view on a decision<code>Advice</code></div>
+              <div class="prow">Employment agreements<code>Hire</code></div>
+              <div class="prow">Policies and procedures<code>Run</code></div>
+              <div class="prow">Restructuring and redundancy<code>Change</code></div>
+              <div class="prow">Labour Inspector visit<code>Check</code></div>
             </div>
             <div class="tile t-white txt">
-              <h3>Books and advice</h3>
-              <p>Good records make every return easier. Ask us before big decisions, too.</p>
-              <ul class="ticks"><li>Bookkeeping</li><li>Company formation</li><li>Business advisory</li></ul>
+              <h3>Employers, covered</h3>
+              <p>Employment &amp; HR Advisory for businesses with staff, whether you have one employee or a team.</p>
+              <ul class="ticks"><li>Employment agreements, policies and legislation</li><li>Restructuring and redundancy</li><li>Employer accreditations, audits and investigations</li><li>Help preparing records for a Labour Inspector visit</li></ul>
             </div>
           </div>
           <div class="slide" id="sl4" role="tabpanel" aria-labelledby="tb4">
             <div class="tile t-ink vis stack3" aria-hidden="true">
-              <div>You</div><i></i><div>Trust or company</div><i></i><div>Rental property</div>
+              <div>You</div><i></i><div>Personal, company or trust</div><i></i><div>The property</div>
             </div>
             <div class="tile t-white txt">
-              <h3>Property and trusts</h3>
-              <p>For property investors and families with a trust.</p>
-              <ul class="ticks"><li>Advice on property structures</li><li>Managing property investors' affairs</li><li>Trust administration</li></ul>
+              <h3>Property, held the right way</h3>
+              <p>Property Investment &amp; Development: the director and partner have published on New Zealand's land tax regime and are active property investors themselves.</p>
+              <ul class="ticks"><li>Investment strategy and structuring advice</li><li>Tax returns and cash flow tools</li><li>Trust administration</li><li>Associated-persons rules checked before you buy</li></ul>
             </div>
           </div>
         </div>
@@ -646,7 +654,7 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
         </article>
       </div>
       <p class="cal-year">The NZ tax year runs <b>1 April</b> to <b>31 March</b></p>
-      <p class="cal-note">General dates from Inland Revenue. Your own dates may differ; we will confirm them.</p>
+      <p class="cal-note">General dates from Inland Revenue. Your own dates may differ; we will confirm them. When a due date falls on a weekend or public holiday it moves to the next working day. <a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">Client resources</a></p>
     </div>
   </section>
 
@@ -654,14 +662,14 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
     <div class="wrap">
       <div class="head rv">
         <h2 id="team-title">The team on Manukau Road</h2>
-        <p>You deal with the same people each year. Ask for any of them by name.</p>
+        <p>Six people, and you deal with the same ones each year. Ask for any of them by name.</p>
       </div>
       <div class="team">
         <article class="tile t-ink lead rv">
           <span class="mono" aria-hidden="true">RG</span>
           <div>
             <h3>Ranjana Gupta</h3>
-            <p>Director</p>
+            <p>Director. Chartered Accountant, senior lecturer in taxation at AUT, and a published tax author.</p>
             <span class="cred">Chartered Accountant (CA, NZ)</span>
           </div>
         </article>
@@ -669,11 +677,29 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
         <article class="tile t-sand person rv" style="--rd:.1s"><span class="mono m2" aria-hidden="true">DN</span><div><h3>Deepti Nanda</h3><p>Taxation Accountant</p></div></article>
         <article class="tile t-pale person rv" style="--rd:.15s"><span class="mono m4" aria-hidden="true">MK</span><div><h3>Mandeep Kaur</h3><p>Taxation Accountant</p></div></article>
         <article class="tile t-white person rv" style="--rd:.2s"><span class="mono m5" aria-hidden="true">JP</span><div><h3>Jigar Parikh</h3><p>Taxation Accountant</p></div></article>
+        <article class="tile t-coral person varun rv" style="--rd:.25s"><span class="mono m1" aria-hidden="true">VG</span><div><h3>Varun Gupta</h3><p>Business Advisor. Certified Business Advisor, member of the Institute of Advisors, and a registered partner of the Regional Business Partner Network.</p></div></article>
         <div class="tile t-sand partners rv">
           <span>TMNZ Premium Accounting Partner</span>
           <span>Crystal Payroll recommended partner</span>
+          <span>Accountant of the Year 2019–2020, Indian Newslink Indian Business Awards</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="sec" id="insights" aria-labelledby="ins-title" style="padding-top:0">
+    <div class="wrap">
+      <div class="head rv">
+        <h2 id="ins-title">Reading for business owners</h2>
+        <p>Recent articles from the team. They open on the live site.</p>
+      </div>
+      <ul class="reads">
+        <li class="tile t-mint rv"><a href="https://www.taxprofessionals.co.nz/insights-/-news/gst-tips-for-small-businesses" target="_blank" rel="noopener">GST Tips for Small Businesses</a></li>
+        <li class="tile t-sand rv" style="--rd:.06s"><a href="https://www.taxprofessionals.co.nz/insights-/-news/kiwisaver-contribution-changes-from-1-april-2026" target="_blank" rel="noopener">KiwiSaver Contribution Changes from 1 April 2026</a></li>
+        <li class="tile t-pale rv" style="--rd:.12s"><a href="https://www.taxprofessionals.co.nz/insights-/-news/buying-a-business-in-2026-whats-changed" target="_blank" rel="noopener">Buying a Business in 2026: What's Changed?</a></li>
+        <li class="tile t-white rv" style="--rd:.18s"><a href="https://www.taxprofessionals.co.nz/insights-/-news/how-to-prepare-your-business-for-sale-when-youre-retiring" target="_blank" rel="noopener">How to Prepare Your Business for Sale When You're Retiring</a></li>
+      </ul>
+      <p class="reads-more"><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">All insights on the live site</a></p>
     </div>
   </section>
 
@@ -701,7 +727,7 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
         </details>
         <details>
           <summary>Can I come into the office?</summary>
-          <div class="ans"><p>We are at 620 Manukau Road, Epsom. Please call 09 625 0035 before you visit so the right person is available.</p></div>
+          <div class="ans"><p>We are at 620 Manukau Road, Epsom. Reception is open Monday to Friday, 9:30am to 5:30pm. Please call 09 625 0035 before you visit so the right person is available.</p></div>
         </details>
       </div>
     </div>
@@ -720,6 +746,7 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
             <div><dt>Mobile</dt><dd><a href="tel:+64211419135">021 141 9135</a></dd></div>
             <div><dt>Email</dt><dd><a href="mailto:info@taxprofessionals.co.nz">info@taxprofessionals.co.nz</a></dd></div>
             <div><dt>Office</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=620+Manukau+Road+Epsom+Auckland+1023" target="_blank" rel="noopener">620 Manukau Road</a><span>Epsom, Auckland 1023 (opens Google Maps)</span></dd></div>
+            <div><dt>Reception</dt><dd>Monday to Friday<span>9:30am to 5:30pm</span></dd></div>
           </dl>
           <p class="visit">Please call before visiting so the right person is free to see you.</p>
           <div class="addr-mark" aria-hidden="true"><span>620</span><i></i><i></i><i></i></div>
@@ -753,11 +780,10 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
       <div>
         <h2>Services</h2>
         <ul>
-          <li><a href="#toolkit">Income tax returns</a></li>
-          <li><a href="#toolkit">GST and PAYE</a></li>
-          <li><a href="#toolkit">Payroll and bookkeeping</a></li>
-          <li><a href="#toolkit">Company formation</a></li>
-          <li><a href="#toolkit">Property and trusts</a></li>
+          <li><a href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" rel="noopener">Taxation &amp; Accounting Compliance</a></li>
+          <li><a href="https://www.taxprofessionals.co.nz/business-advisory-planning" rel="noopener">Business Advisory &amp; Planning</a></li>
+          <li><a href="https://www.taxprofessionals.co.nz/employment-hr-advisory" rel="noopener">Employment &amp; HR Advisory</a></li>
+          <li><a href="https://www.taxprofessionals.co.nz/property-investment-development" rel="noopener">Property Investment &amp; Development</a></li>
         </ul>
       </div>
       <div>
@@ -767,6 +793,9 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
           <li><a href="#team">Our team</a></li>
           <li><a href="#faq">Questions</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="https://www.taxprofessionals.co.nz/client-resources" rel="noopener">Client resources</a></li>
+          <li><a href="https://www.taxprofessionals.co.nz/insights-/-news" rel="noopener">Insights</a></li>
+          <li><a href="https://www.taxprofessionals.co.nz/pay-an-invoice" rel="noopener">Pay an invoice</a></li>
           <li><a href="https://www.facebook.com/TaxProfessionalsNZ/" rel="noopener">Facebook</a></li>
           <li><a href="https://nz.linkedin.com/company/tax-professionals-limited" rel="noopener">LinkedIn</a></li>
         </ul>
@@ -807,9 +836,9 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
   } else {$$('.rv').forEach(function(el){el.classList.add('in')});quick.classList.remove('hide')}
 
   // chooser
-  var NAMES={income:'Income tax returns',gst:'GST returns',paye:'PAYE returns',payroll:'Payroll services',books:'Bookkeeping',company:'Company formation',hr:'Employment law and HR advisory',advice:'Business advisory',property:'Property',trust:'Trust administration'};
-  var NEED={tax:['income'],gst:['gst','paye'],pay:['payroll','paye','hr'],books:['books'],setup:['company'],advice:['advice']};
-  var WHO={me:['income'],sole:['income','gst'],co:['income','gst'],trust:['trust','property']};
+  var NAMES={compliance:'Taxation & Accounting Compliance',advisory:'Business Advisory & Planning',hr:'Employment & HR Advisory',property:'Property Investment & Development'};
+  var NEED={tax:['compliance'],gst:['compliance'],pay:['compliance','hr'],books:['compliance'],setup:['compliance','advisory'],advice:['advisory']};
+  var WHO={me:['compliance'],sole:['compliance'],co:['compliance'],trust:['property','compliance']};
   var LBL={who:{me:'me or my family',sole:'a sole trader',co:'a company or partnership',trust:'a trust or rental property'},
     need:{tax:'tax returns',gst:'GST or PAYE',pay:'paying staff',books:'keeping the books',setup:'setting something up',advice:'advice on a decision'},
     when:{due:'something is due soon',months:'in the next few months',plan:'planning ahead'}};
@@ -817,14 +846,15 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
   var state={}, picks=[];
   function compute(){
     var p=[];
-    if(state.need){p=p.concat(NEED[state.need]);if(state.need==='setup'&&state.who==='trust')p.unshift('trust');if(state.need==='advice'&&state.who==='trust')p.push('property')}
+    if(state.who==='trust')p.push('property');
+    if(state.need)p=p.concat(NEED[state.need]);
     if(state.who)p=p.concat(WHO[state.who]);
     return p.filter(function(v,i){return p.indexOf(v)===i}).slice(0,3);
   }
   function apply(){
     var all=$$('.svc',tiles);
     var sorted=all.slice().sort(function(a,b){var x=picks.indexOf(a.dataset.s),y=picks.indexOf(b.dataset.s);x=x<0?99+all.indexOf(a):x;y=y<0?99+all.indexOf(b):y;return x-y});
-    sorted.forEach(function(t,i){var r=Math.floor(i/2);t.style.order=i;t.classList.toggle('wide',(i%2===0)===(r%2===0));t.classList.toggle('pick',picks.indexOf(t.dataset.s)>-1)});
+    sorted.forEach(function(t,i){t.style.order=i;t.classList.toggle('pick',picks.indexOf(t.dataset.s)>-1)});
   }
   function update(){
     $$('fieldset',form).forEach(function(f){f.classList.toggle('done',!!state[f.dataset.q])});
@@ -847,7 +877,7 @@ footer{background:var(--ink);color:#D5E2DB;padding:clamp(56px,7vw,88px) 0 calc(2
   }
   form.addEventListener('change',function(e){state[e.target.name]=e.target.value;update()});
   resBtn.addEventListener('click',function(){
-    var msg='Hi, this enquiry is for '+LBL.who[state.who]+'. I need help with '+LBL.need[state.need]+', and the timing is: '+LBL.when[state.when]+'.\n\nServices I am interested in: '+picks.map(function(k){return NAMES[k]}).join(', ')+'.\n\n';
+    var msg='Hi, this enquiry is for '+LBL.who[state.who]+'. I need help with '+LBL.need[state.need]+', and the timing is: '+LBL.when[state.when]+'.\n\nService areas I am interested in: '+picks.map(function(k){return NAMES[k]}).join(', ')+'.\n\n';
     var ta=$('#f-msg');ta.value=msg;
     setTimeout(function(){$('#f-name').focus({preventScroll:true})},reduce?0:700);
     $('#f-status').textContent='Your answers are in the message box. Add your name and email to send.';
