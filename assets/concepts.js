@@ -103,7 +103,7 @@ window.TP_CONCEPTS = [
     'backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);border-radius:999px;' +
     'padding:4px;box-shadow:0 12px 32px -12px rgba(0,0,0,.5);transition:opacity .3s,transform .3s}' +
     '.bar.tuck{opacity:.35}.bar:hover,.bar:focus-within{opacity:1}' +
-    '.bar.gone{opacity:0;pointer-events:none;transform:translate(-50%,24px)}' +
+    '.bar.gone,.bar.chat{opacity:0;pointer-events:none;transform:translate(-50%,24px)}' +
     'a,button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:999px;color:#fff;white-space:nowrap}' +
     'a:hover,button:hover{background:rgba(255,255,255,.12)}' +
     'a:focus-visible,button:focus-visible{outline:2px solid #8BC75A;outline-offset:1px}' +
@@ -215,6 +215,17 @@ window.TP_CONCEPTS = [
       lastY = y; ticking = false;
     });
   }, { passive: true });
+
+  // a page's chat window opens over the same corner on phones and tablets: step aside while it is open
+  var chatCheck = function () {
+    var pnl = document.querySelector('.ac-panel'), r = pnl && pnl.getBoundingClientRect();
+    var open = !!(r && r.width > 0 && r.height > 0 && getComputedStyle(pnl).visibility !== 'hidden' && +getComputedStyle(pnl).opacity > 0.1);
+    bar.classList.toggle('chat', open && phone.matches);
+  };
+  var chatRaf = 0;
+  new MutationObserver(function () { if (!chatRaf) chatRaf = requestAnimationFrame(function () { chatRaf = 0; chatCheck(); }); })
+    .observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['class', 'hidden', 'open', 'aria-hidden'] });
+  addEventListener('click', function () { setTimeout(chatCheck, 400); });
 
   // mount after the page has loaded and gone idle so it never competes with the page's own first paint
   function mount() { document.body.appendChild(host); }

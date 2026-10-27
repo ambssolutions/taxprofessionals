@@ -1,0 +1,297 @@
+{
+ "enabled": true,
+ "name": "Tax Professionals assistant",
+ "business": {
+  "name": "Tax Professionals",
+  "phone": "09 625 0035",
+  "email": "info@taxprofessionals.co.nz",
+  "location": "620 Manukau Road, Epsom, Auckland 1023",
+  "book": "#contact",
+  "timezone": "Pacific/Auckland"
+ },
+ "form": {
+  "web3forms_key": "",
+  "lead_url": ""
+ },
+ "brand_color": "#04649F",
+ "storage_key": "taxpro-05-chat",
+ "default_lang": "en",
+ "avoid": ".qb",
+ "exclude": [],
+ "greeting": "Kia ora. I'm the Tax Professionals assistant. I can answer questions about our services, fees, office hours, tax dates and booking a chat with the team. How can I help?",
+ "suggestions": [
+  "What services do you offer?",
+  "Is the first consultation free?",
+  "What are your opening hours?",
+  "When is my tax return due?",
+  "Where are you, and is there parking?"
+ ],
+ "not_found": "I couldn't find a clear answer to that on our website. The team can answer it properly: leave your question for us, or give us a call on 09 625 0035.",
+ "nudge": {
+  "enabled": true,
+  "delay": 15,
+  "open": true,
+  "text": "Kia ora. I'm the Tax Professionals assistant. Can I help with a tax or accounting question?"
+ },
+ "chat": {
+  "offtopic": "I couldn't find that on our website. Our team is happy to help:",
+  "how_are_you": "I'm well, thanks for asking. How can I help today?",
+  "who": "I'm the {name} assistant. I answer questions from our website at any time of day. For anything I can't answer, a person from our team will help.",
+  "human": "I'm an automated assistant, not a person. To talk with the team, leave a message or call 09 625 0035.",
+  "thanks": "You're welcome. Is there anything else I can help with?",
+  "ok": "Good. Anything else I can help with?",
+  "bye": "Thanks for stopping by. Have a good day.",
+  "good": "Glad to hear it. What can I help you with?",
+  "bad": "Sorry to hear that. If a tax or accounts matter is worrying you, tell me about it and I'll point you to the right help.",
+  "joke": "I'm better with tax dates than jokes. What can I help you with?",
+  "weather": "I can't check the weather, sorry. I can help with anything about {name} though.",
+  "time": "It's {time} in Auckland right now.",
+  "knowledge": "Yes. I know {name} well: our services, how fees work, office hours, general tax dates and how to book a chat. Ask me anything, or tap one of these to start.",
+  "help": "Ask me anything about {name}, or tap one of these to get started.",
+  "sorry": "No problem at all. What would you like to know?",
+  "test": "I'm here and working. Ask me anything about {name}.",
+  "quality": "Here's what you can expect from us:",
+  "quality_end": "The easiest way to see if we suit you is a first chat, which is free on all matters."
+ },
+ "labels": {
+  "launcher": "Ask us",
+  "title": "{name}",
+  "subtitle": "Website assistant",
+  "placeholder": "Type your question…",
+  "send": "Send",
+  "book": "Book a chat",
+  "message": "Leave a message",
+  "contact": "Call or email",
+  "read": "Read more",
+  "related": "These pages might help:",
+  "also_ask": "People also ask:",
+  "name": "Your name",
+  "email": "Your email",
+  "phone": "Phone (optional)",
+  "question": "Your question",
+  "send_msg": "Send message",
+  "sent": "Thanks. Your message is with the team, and we'll get back to you soon.",
+  "error": "Sorry, that didn't send. Please try again, or email info@taxprofessionals.co.nz.",
+  "helpful": "Anything else I can help with?",
+  "in_english": "Reply in English",
+  "yes": "Yes.",
+  "more_on": "More on this:",
+  "langs_line": "I also speak {langs}. Just type in your language, or tap one below.",
+  "restart": "Start again",
+  "close": "Close",
+  "voice": "Speak your question",
+  "listening": "Listening… speak now",
+  "mic_blocked": "To speak your question, allow the microphone in your browser, or type it instead."
+ },
+ "why": [
+  "First consultation free on all matters",
+  "Tax experts with over 20 years of experience",
+  "Specialists in property development and structuring",
+  "Fixed fee services. No more shock bills",
+  "Tailored support and service packages based on your needs"
+ ],
+ "promises": [],
+ "qa": [
+  {
+   "id": "services",
+   "q": "What services do you offer?",
+   "also": "what do you do, services, help with, accountant, accounting, tax help, what can you do",
+   "a": "We work in four areas: Taxation & Accounting Compliance (tax returns, GST, PAYE, financial statements, bookkeeping and tax planning), Business Advisory & Planning (business plans, cashflow forecasting and coaching), Employment & HR Advisory (agreements, policies, accreditation, restructures and disputes) and Property Investment & Development (strategy, structuring, returns and cash flow tools).",
+   "link": "#services",
+   "link_label": "See our services"
+  },
+  {
+   "id": "free",
+   "q": "Is the first consultation free?",
+   "also": "free consultation, first meeting free, free chat, no charge, first appointment cost, initial consultation",
+   "a": "The first consultation is free on all matters. For Business Planning, the first meeting is also free of charge.",
+   "link": "#contact",
+   "link_label": "Book a chat"
+  },
+  {
+   "id": "fees",
+   "q": "How much do you charge?",
+   "also": "price, prices, cost, fees, how much, rates, quote, expensive, fixed fee, monthly fee, charges",
+   "a": "We work on fixed fees, so there are no shock bills. Fees depend on what you need (for rental property clients, for example, they vary with the size of the portfolio), so our prices aren't on the website. The first consultation is free, and we'll give you the fee before any work starts.",
+   "link": "#contact",
+   "link_label": "Ask for a fee"
+  },
+  {
+   "id": "hours",
+   "q": "What are your opening hours?",
+   "also": "hours, open, opening times, when are you open, saturday, weekend, office hours, what time do you close, close, closing time, what time do you open, open today, open now",
+   "a": "We're open Monday to Friday, 9:30am to 5:30pm, and Saturday, 11:30am to 3:00pm. We're closed on Sunday.",
+   "link": "",
+   "link_label": ""
+  },
+  {
+   "id": "sunday",
+   "q": "Are you open on Sunday?",
+   "also": "sunday, sundays, open sunday, closed sunday, public holiday open, after hours, evenings, late",
+   "a": "No, we're closed on Sunday. We're open Monday to Friday, 9:30am to 5:30pm, and Saturday, 11:30am to 3:00pm.",
+   "link": "",
+   "link_label": ""
+  },
+  {
+   "id": "where",
+   "q": "Where are you, and is there parking?",
+   "also": "where are you, address, location, office, epsom, manukau road, parking, park, directions, find you",
+   "a": "Our office is at 620 Manukau Road, Epsom, Auckland 1023. It's central, with plenty of free on-site parking.",
+   "link": "https://www.google.com/maps/search/?api=1&query=620+Manukau+Road+Epsom+Auckland+1023",
+   "link_label": "Open in Google Maps"
+  },
+  {
+   "id": "contact",
+   "q": "How do I contact you?",
+   "also": "phone, phone number, call, email, contact, ring, reach, talk to someone, number",
+   "a": "Call us on 09 625 0035 or 09 625 0025 (press 0 for reception), or email info@taxprofessionals.co.nz. Each team member can also be reached through reception on 09 625 0025.",
+   "link": "#contact",
+   "link_label": "Contact details"
+  },
+  {
+   "id": "book",
+   "q": "How do I book an appointment?",
+   "also": "book, booking, appointment, meeting, make a time, see someone, come in, book a chat",
+   "a": "Use the Book a chat form on this page, or call 09 625 0035. The first consultation is free on all matters.",
+   "link": "#contact",
+   "link_label": "Book a chat"
+  },
+  {
+   "id": "ir3",
+   "q": "Can you do my personal tax return?",
+   "also": "ir3, personal tax return, individual return, income tax return, rental return, rental property, landlord, tax refund, my taxes, ird tax return, my tax return, do my tax return, file my return, tax return for me, individual tax",
+   "a": "We prepare IR3 returns for individuals, rental property annual returns, returns for partners or joint holders, and look-through company returns, and we deal with Inland Revenue for you.",
+   "link": "#services",
+   "link_label": "Tax and accounting"
+  },
+  {
+   "id": "business",
+   "q": "Can you do accounts for my business?",
+   "also": "business accounts, company accounts, sole trader, partnership, company tax return, ir4, financial statements, annual accounts, small business, bookkeeping",
+   "a": "We look after sole traders, partnerships, companies and trusts: 2- or 6-monthly GST returns, IR4 company returns and up to two shareholders' IR3s, the annual imputation return, end-of-year financial statements, a quarterly meeting on how the business is going, and liaison with Inland Revenue.",
+   "link": "#services",
+   "link_label": "Tax and accounting"
+  },
+  {
+   "id": "gst",
+   "q": "Can you do my GST returns?",
+   "also": "gst, gst return, gst filing, register for gst, gst period, goods and services tax",
+   "a": "We prepare 2- or 6-monthly GST returns as part of our business compliance service, and we can help with GST questions on property too.",
+   "link": "#services",
+   "link_label": "Tax and accounting"
+  },
+  {
+   "id": "payroll",
+   "q": "Do you do payroll and PAYE?",
+   "also": "payroll, paye, wages, payday filing, staff pay, kiwisaver employer, employees pay",
+   "a": "We offer full PAYE and payroll, either added to a business package or on its own.",
+   "link": "#services",
+   "link_label": "Tax and accounting"
+  },
+  {
+   "id": "software",
+   "q": "Do you work with Xero and MYOB?",
+   "also": "xero, myob, accounting software, cloud accounting, training, software help",
+   "a": "We work with businesses on MYOB and Xero, and our business clients get free training and ongoing support on their accounting software.",
+   "link": "",
+   "link_label": ""
+  },
+  {
+   "id": "company",
+   "q": "Can you set up a company or a trust?",
+   "also": "company formation, set up a company, start a company, companies office, register a company, trust, family trust, set up a trust, trust administration",
+   "a": "We handle company formation and Companies Office records, and trust formation and management, including Family Trust Management & Advisory.",
+   "link": "#services",
+   "link_label": "Our services"
+  },
+  {
+   "id": "property",
+   "q": "Can you help with property investment tax?",
+   "also": "property, rental, investment property, look-through company, ltc, structure, structuring, developer, development, flip, trading, buy and hold, bright line, associated persons",
+   "a": "We specialise in property: investment strategy, structuring (personally, through a look-through company or a trust), returns and financial statements, and cash flow tools for holding and trading. Our director and partner are property investors themselves, and our director has published on New Zealand's land tax rules.",
+   "link": "#services",
+   "link_label": "Property services"
+  },
+  {
+   "id": "ird",
+   "q": "Can you help with an IRD audit or tax debt?",
+   "also": "ird audit, ird debt, inland revenue audit, audit, tax debt, arrears, owe tax, letter of demand, dispute, compliance review, behind on tax",
+   "a": "We help with Inland Revenue compliance reviews and audits, negotiating arrears for GST, PAYE and income tax, and replying to letters of demand. Whatever the tax position, talk to us.",
+   "link": "#contact",
+   "link_label": "Talk to us"
+  },
+  {
+   "id": "pooling",
+   "q": "What is tax pooling?",
+   "also": "tax pooling, tmnz, tax management nz, provisional tax, use of money interest, pay provisional tax later",
+   "a": "Tax pooling lets you pay provisional tax when it suits you. We offer it through Tax Management NZ (TMNZ).",
+   "link": "",
+   "link_label": ""
+  },
+  {
+   "id": "hr",
+   "q": "Can you help with employment and HR?",
+   "also": "employment, hr, human resources, employment agreement, staff, redundancy, restructure, personal grievance, dispute, labour inspector, accreditation, employer accreditation, policies",
+   "a": "Our Employment & HR Advisory covers employment agreements and policies, employer accreditation, restructures and redundancy, personal grievances and disputes, and getting ready for a Labour Inspector audit.",
+   "link": "#services",
+   "link_label": "Employment & HR"
+  },
+  {
+   "id": "planning",
+   "q": "Do you help with business planning?",
+   "also": "business plan, business planning, growth, strategy, coaching, cashflow forecast, cash flow, budget, forecasts, profit",
+   "a": "Business Planning starts with a free first meeting: a one-on-one workshop on where you want the business to be in 3 months, 12 months and 3 years. We also offer cashflow forecasting, annual budgets, management reports and monthly coaching.",
+   "link": "#services",
+   "link_label": "Business advisory"
+  },
+  {
+   "id": "dates",
+   "q": "When is my tax return due?",
+   "also": "due date, tax return due, deadline, when do i pay, terminal tax, provisional tax dates, gst due, 7 july, extension, tax agent extension",
+   "a": "In general, with a 31 March balance date: income tax returns are due 7 July, or 31 March the following year if you're with a tax agent; terminal tax is due 7 February (7 April with a tax agent's extension); standard provisional tax is due 28 August, 15 January and 7 May; GST is due on the 28th of the month after the period ends, except periods ending November (15 January) and March (7 May). Your own dates may differ, and we'll confirm them.",
+   "link": "#dates",
+   "link_label": "See the dates"
+  },
+  {
+   "id": "holiday",
+   "q": "What if a due date falls on a weekend?",
+   "also": "weekend, public holiday, due on a sunday, due on a holiday, next working day",
+   "a": "If a payment is due on a weekend or public holiday, it's due on the next working day. GST is the exception: it's due on the last working day of the period.",
+   "link": "#dates",
+   "link_label": "See the dates"
+  },
+  {
+   "id": "pay",
+   "q": "How do I pay an invoice?",
+   "also": "pay invoice, pay my bill, payment, credit card, visa, mastercard, direct debit, bank transfer, how to pay",
+   "a": "You can pay online by Visa or Mastercard, by direct deposit quoting your invoice number, by phone on 09 625 0025 or 09 625 0035 between 9:30am and 5:30pm, or by setting up a direct debit.",
+   "link": "https://www.taxprofessionals.co.nz/pay-an-invoice",
+   "link_label": "Pay an invoice"
+  },
+  {
+   "id": "team",
+   "q": "Who will I deal with?",
+   "also": "team, staff, who works there, director, partner, ranjana, varun, eshan, accountants, people, chartered accountant",
+   "a": "Our team is led by Ranjana Gupta (Director; PhD, MPhil, MBus (Taxation), MCom), Varun Gupta (Partner; MBA, Chartered Accountant (NZ), Certified Business Advisor) and Eshan Gupta (Associate Partner; BCom/LLB, Barrister and Solicitor), with a team of taxation accountants and an accounts administrator.",
+   "link": "#people",
+   "link_label": "Meet the team"
+  },
+  {
+   "id": "experience",
+   "q": "How long have you been in business?",
+   "also": "how long, since when, experience, established, history, years, trustworthy, award, been around, how long have you been around, how old is the firm, when did you start, in business",
+   "a": "We've been working for the community since 1998, and our tax experts have over 20 years of experience. We were named Accountant of the Year 2019-2020 at the Indian Newslink Indian Business Awards.",
+   "link": "",
+   "link_label": ""
+  },
+  {
+   "id": "advice",
+   "q": "Can you tell me exactly what tax I owe?",
+   "also": "how much tax do i owe, calculate my tax, my refund amount, personal advice, specific advice",
+   "a": "No, I can't work that out here: it depends on your own situation. The team can, and the first consultation is free on all matters.",
+   "link": "#contact",
+   "link_label": "Book a chat"
+  }
+ ],
+ "translations": {}
+}
