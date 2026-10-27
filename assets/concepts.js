@@ -122,7 +122,7 @@ window.TP_CONCEPTS = [
     '.fmenu{min-width:280px}.fmenu button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;box-sizing:border-box;height:auto;padding:10px 12px;border-radius:10px}' +
     '.fmenu button[aria-checked="true"]{background:rgba(109,171,60,.22)}.fmenu .s{font-size:19px;line-height:1.15}.fmenu small{color:#A9B8AE;font:400 12px/1.3 Inter,system-ui,sans-serif}' +
     '.fmenu p{margin:4px 12px 8px;color:#A9B8AE;font-size:12px}' +
-    '@media (max-width:760px){.bar{left:50%;transform:translateX(-50%);bottom:calc(76px + env(safe-area-inset-bottom))}.sub{display:none}}' +
+    '@media (max-width:760px),(pointer:coarse) and (max-width:1366px){.bar{left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom))}.sub{display:none}}' +
     '@media print{.bar{display:none}}' +
     '</style>' +
     '<nav class="bar" aria-label="Design concepts">' +
@@ -205,7 +205,7 @@ window.TP_CONCEPTS = [
 
   // fade a little while scrolling down so it never blocks content
   // hide while scrolling down (fully on phones, faded on desktop); show again on scroll up or near the end
-  var lastY = scrollY, ticking = false, phone = matchMedia('(max-width:760px)');
+  var lastY = scrollY, ticking = false, phone = matchMedia('(max-width:760px),(pointer:coarse) and (max-width:1366px)');
   addEventListener('scroll', function () {
     if (ticking) return; ticking = true;
     requestAnimationFrame(function () {
