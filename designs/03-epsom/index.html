@@ -16,7 +16,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500..800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <script>
 (function(){var H=document.documentElement;H.classList.add('js');
-try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&matchMedia('(pointer: fine) and (min-width: 900px) and (min-height: 540px)').matches&&((navigator.hardwareConcurrency||8)>4||/[?&]fx\b/.test(location.search)))H.classList.add('fx')}catch(e){}})();
+/* tiers: fx = laptop (fine pointer, enough cores, or ?fx); fx tablet = the same scenes on touch tablets 768px+ without smooth scroll, cursor or hover; mo = the portrait tier for phones and everything else. Reduced motion: none of them. */
+try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){if(/[?&]fx\b/.test(location.search)||(matchMedia('(pointer: fine) and (min-width: 900px) and (min-height: 540px)').matches&&(navigator.hardwareConcurrency||8)>4))H.classList.add('fx');else if(matchMedia('(min-width: 768px) and (min-height: 500px) and (pointer: coarse), (min-width: 768px) and (max-width: 899px) and (min-height: 500px)').matches)H.classList.add('fx','tablet');else H.classList.add('mo')}}catch(e){}})();
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AccountingService","name":"Tax Professionals","legalName":"Tax Professionals Ltd","url":"https://www.taxprofessionals.co.nz/","email":"info@taxprofessionals.co.nz","telephone":["+6496250035","+6496250025","+64211419135"],"foundingDate":"1998","openingHours":["Mo-Fr 09:30-17:30","Sa 11:30-15:00"],"address":{"@type":"PostalAddress","streetAddress":"620 Manukau Road","addressLocality":"Epsom","addressRegion":"Auckland","postalCode":"1023","addressCountry":"NZ"},"sameAs":["https://www.facebook.com/TaxProfessionalsNZ/","https://nz.linkedin.com/company/tax-professionals-limited"]}</script>
 <style>
@@ -130,8 +131,9 @@ section[id]{scroll-margin-top:88px}
 
 /* arrive */
 .arrive{position:relative;background:var(--deep);color:#fff;padding:clamp(64px,9vw,120px) 0}
-.arrive-in{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:minmax(0,520px) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center}
+.arrive-in{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;align-items:center;gap:clamp(28px,4vw,44px);text-align:center}
 .arrive-photo{margin:0;border-radius:28px;overflow:hidden;aspect-ratio:1;max-width:520px;width:100%;background:#0b4f7c}
+.arrive-copy{max-width:62ch;margin:0 auto}
 .arrive-photo img{width:100%;height:100%;object-fit:cover}
 .arrive h2{color:#fff}
 .arrive-copy p{margin-top:18px;font-size:1.1875rem;color:#D9E7F1}
@@ -144,7 +146,8 @@ section[id]{scroll-margin-top:88px}
 .fx .cam{perspective:1000px;perspective-origin:50% 30%}
 .fx .plane{will-change:transform;transform-style:preserve-3d}
 .fx .arrive{position:absolute;inset:0;z-index:4;display:flex;align-items:center;padding:calc(var(--hd) + 20px) 0 32px;clip-path:circle(0% at 50% 42%)}
-.fx .arrive-in{width:100%;grid-template-columns:minmax(0,min(520px,64vh)) minmax(0,1fr)}
+.fx .arrive-in{width:100%;gap:24px}
+.fx .arrive-photo{width:max(200px,min(520px,calc(100vh - var(--hd) - 370px)));flex:none}
 .fx .pin-rise{transform:scale(0);opacity:0}
 .fx .pin-card{opacity:0}
 .fx .map-note{left:auto;right:24px}
@@ -158,8 +161,7 @@ section[id]{scroll-margin-top:88px}
   .acts{gap:10px 20px}
   .map-note{left:16px;bottom:16px}
   .hero-wash{background:linear-gradient(180deg,rgba(247,244,236,.97) 0%,rgba(247,244,236,.94) 52%,rgba(247,244,236,0) 72%)}
-  .arrive-in{grid-template-columns:1fr;padding:0 20px}
-  .arrive-photo{max-width:520px;margin:0 auto}
+  .arrive-in{padding:0 20px}
   .wrap{padding:0 20px}
 }
 @media (min-width:900px){html:not(.fx) .pin-bb{transform:scale(1.4)}}
@@ -259,8 +261,9 @@ section[id]{scroll-margin-top:88px}
 
 /* award */
 .award{background:var(--deep);color:#fff}
-.award-grid{display:grid;grid-template-columns:minmax(0,520px) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center}
-.award figure{margin:0}
+.award-grid{display:flex;flex-direction:column;align-items:center;gap:clamp(32px,4vw,52px)}
+.award-copy{max-width:62ch;margin:0 auto;text-align:center}
+.award figure{margin:0 auto;width:100%;max-width:640px;text-align:center}
 .award figure img{border-radius:24px;width:100%}
 .award figcaption{margin-top:12px;font-size:.9375rem;color:#C9DCEA}
 .award h2{color:#fff}
@@ -378,9 +381,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--blue);outline-of
   .cards{grid-template-columns:1fr}
   .card:nth-child(even){margin-top:0}
   .leads{grid-template-columns:minmax(0,300px)}
-  .award-grid,.visit-grid{grid-template-columns:1fr}
-  .award figure{max-width:520px;margin:0 auto}
-  .award-copy{text-align:center}
+  .visit-grid{grid-template-columns:1fr}
   .crew li{flex-direction:column;align-items:flex-start;gap:2px}
   .crew .cr{text-align:left}
   .ins a{grid-template-columns:1fr;gap:4px;padding:18px 12px}
@@ -394,6 +395,27 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--blue);outline-of
   .services{border-radius:28px 28px 0 0}
 }
 @media (max-width:420px){.dgrid{grid-template-columns:1fr}}
+
+/* touch tablets (fx tablet): the laptop scenes, no cursor, no hover-only effects */
+.tablet .plane{left:50%;top:50%}
+
+/* phones and other screens (mo): portrait versions of the scenes, native scroll */
+.mo .cam{perspective:900px;perspective-origin:50% 58%}
+.mo .plane{transform-style:preserve-3d}
+.mo .fly-cap{left:16px;right:16px;bottom:64px;margin:0 auto;max-width:max-content;white-space:normal;text-align:center;font-size:1.25rem}
+.mo .arrive-photo,.mo .card-media img{transition:none!important}
+.mo .route i{transform:scaleY(0)}
+.mo .pr-list li{color:#5C7080}
+.mo .pr-list li::before{border-color:#C9BFA9}
+.mo .pr-list li.on{color:var(--deep);transform:translateX(8px)}
+.mo .pr-list li.on::before,.mo .pr-list li.done::before{border-color:var(--green-d)}
+.mo .pr-list li.on::before{background:var(--green-l);transform:scale(1.25)}
+
+/* shared touch extras (tablet and mo) */
+.prog{position:fixed;left:0;right:0;top:var(--hd);z-index:49;height:3px;background:linear-gradient(90deg,var(--green-d),var(--blue));transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+.qbar a{position:relative;overflow:hidden;isolation:isolate}
+.rip{position:absolute;border-radius:50%;background:currentColor;opacity:.28;transform:scale(0);pointer-events:none;animation:rip .9s cubic-bezier(.22,1,.36,1) forwards;z-index:-1}
+@keyframes rip{to{transform:scale(1);opacity:0}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js .w>span,.js .lede,.js .acts,.js .m-draw,.js .m-fade,.js .pin-drop,.js .pin-card{animation:none!important;opacity:1;stroke-dashoffset:0}
@@ -616,11 +638,11 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--blue);outline-of
 <section class="sec award" id="recognition" aria-labelledby="rec-title">
   <div class="wrap">
     <div class="award-grid">
-      <figure><img class="wipe" src="../../assets/img/award-800.webp" width="800" height="488" loading="lazy" decoding="async" alt="Varun Gupta receiving the Accountant of the Year award on stage with Grant Robertson and Paul Goldsmith MP"><figcaption>SkyCity, 25 November 2019</figcaption></figure>
       <div class="award-copy rv">
         <h2 id="rec-title">Accountant of the Year 2019-2020</h2>
         <p class="award-s">Twelfth Annual Indian Newslink Indian Business Awards. Also a finalist, Small Business of the Year.</p>
       </div>
+      <figure><img class="wipe" src="../../assets/img/award-800.webp" width="800" height="488" decoding="async" alt="Varun Gupta receiving the Accountant of the Year award on stage with Grant Robertson and Paul Goldsmith MP"><figcaption>SkyCity, 25 November 2019</figcaption></figure>
     </div>
     <figure class="quote rv">
       <blockquote><p>We have been dealing with Varun Gupta at Tax Professionals for over a year now. The advice we have received from Varun and his team has been on point, on time and meaningful. We truly work as partners that has helped our business navigate through some turbulent times. Cannot recommend them enough.</p></blockquote>
@@ -738,13 +760,16 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--blue);outline-of
 
 <script src="../../assets/vendor/gsap.min.js" defer></script>
 <script src="../../assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="../../assets/vendor/SplitText.min.js" defer></script>
 <script src="../../assets/vendor/lenis.min.js" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
   var d=document,H=d.documentElement,b=d.body,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,IO='IntersectionObserver' in window;
-  var G=window.gsap,ST=window.ScrollTrigger;
-  if(H.classList.contains('fx')&&!(G&&ST))H.classList.remove('fx');
-  var fx=H.classList.contains('fx');
+  var G=window.gsap,ST=window.ScrollTrigger,SPL=window.SplitText;
+  if(!(G&&ST))H.classList.remove('fx','tablet','mo');
+  var fx=H.classList.contains('fx'),tab=H.classList.contains('tablet'),mo=H.classList.contains('mo'),touch=tab||mo,heroST=null;
+  /* touch tiers choreograph headings and the crew list with GSAP instead of the block reveal */
+  if(touch)d.querySelectorAll('.sh.rv,.award-copy.rv,.crew.rv,.quote.rv').forEach(function(el){el.classList.remove('rv')});
 
   /* menu */
   var mb=d.querySelector('.menu-btn'),nav=d.getElementById('site-nav');
@@ -754,12 +779,13 @@ document.addEventListener('DOMContentLoaded',function(){
   d.addEventListener('keydown',function(e){if(e.key==='Escape'&&mb.getAttribute('aria-expanded')==='true'){setMenu(false);mb.focus()}});
 
   /* reveals */
-  var rv=d.querySelectorAll('.rv,.wipe,.arrive-photo');
+  var rv=d.querySelectorAll(mo?'.rv,.wipe':'.rv,.wipe,.arrive-photo');
   if(IO&&!reduce){
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
-    rv.forEach(function(el){io.observe(el)});
+    /* clipped elements never intersect, so watch their parent box (the wipe photo, the team photo) */
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){(e.target._rv||e.target).classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    rv.forEach(function(el){var t=el;if(el.classList.contains('wipe')||el.classList.contains('arrive-photo')){t=el.parentNode;t._rv=el}io.observe(t)});
   }else rv.forEach(function(el){el.classList.add('in')});
-  if(IO)new IntersectionObserver(function(es){b.classList.toggle('in-hero',es[0].isIntersecting)},{threshold:.35}).observe(d.getElementById('hero'));
+  if(IO)new IntersectionObserver(function(es){b.classList.toggle('in-hero',es[0].isIntersecting&&!(heroST&&heroST.progress>.22))},{threshold:.35}).observe(d.getElementById('hero'));
   else b.classList.remove('in-hero');
 
   /* faq: slow opens */
@@ -785,12 +811,15 @@ document.addEventListener('DOMContentLoaded',function(){
     st.textContent='Your email app should open with your message ready to send. If it does not, email info@taxprofessionals.co.nz.';
   });
 
-  if(!fx)return;
-  G.registerPlugin(ST);
+  if(!(fx||mo))return;
+  G.registerPlugin(ST);if(SPL)G.registerPlugin(SPL);
+  if(touch)ST.config({ignoreMobileResize:true});
+  /* touch extras are created after the pinned scenes so their positions include the pin spacing */
+  if(mo){phoneScenes();touchExtras();return}
 
   /* Lenis on laptops */
   var lenis=null;
-  if(window.Lenis){
+  if(window.Lenis&&!tab){
     lenis=new Lenis({lerp:.09});
     lenis.on('scroll',ST.update);
     G.ticker.add(function(t){lenis.raf(t*1000)});G.ticker.lagSmoothing(0);
@@ -839,6 +868,8 @@ document.addEventListener('DOMContentLoaded',function(){
     items.forEach(function(li,i){li.classList.toggle('on',i===k);li.classList.toggle('done',i<k)});
   }});
 
+  if(tab){touchExtras();refreshLater();return}
+
   /* team list: portrait follows the cursor */
   var crew=d.querySelector('.crew'),peek=d.createElement('div');peek.className='peek';peek.setAttribute('aria-hidden','true');b.appendChild(peek);
   G.set(peek,{xPercent:-50,yPercent:-118});
@@ -859,8 +890,108 @@ document.addEventListener('DOMContentLoaded',function(){
   d.addEventListener('pointerover',function(e){var t=e.target,link=!!t.closest('a,button,summary,label,input,select,textarea');cur.classList.toggle('is-link',link);cur.classList.toggle('is-pin',!link&&!!t.closest('.hero'))});
   H.addEventListener('pointerleave',function(){cur.classList.remove('on')});
 
-  if(d.fonts&&d.fonts.ready)d.fonts.ready.then(function(){ST.refresh()});
-  addEventListener('load',function(){ST.refresh()});
+  refreshLater();
+
+  function refreshLater(){
+    if(d.fonts&&d.fonts.ready)d.fonts.ready.then(function(){ST.refresh()});
+    addEventListener('load',function(){ST.refresh()});
+  }
+
+  /* map captions shared by the flyover scenes */
+  function captioner(caps){
+    var el=d.querySelector('.fly-cap'),last=null;
+    return function(self){var p=self.progress,t='';caps.forEach(function(c){if(p>=c[0])t=c[1]});if(t!==last){last=t;el.classList.remove('on');el.textContent=t;if(t)requestAnimationFrame(function(){el.classList.add('on')})}};
+  }
+
+  /* ===== touch extras: tablets and phones ===== */
+  function touchExtras(){
+    /* headings rise through line masks, intros follow */
+    var heads=d.querySelectorAll(mo?'.sh h2,.award-copy h2,.arrive-copy h2':'.sh h2,.award-copy h2');
+    heads.forEach(function(h){
+      var trig={trigger:h,start:'top 88%',once:true};
+      if(SPL)SPL.create(h,{type:'lines',mask:'lines',autoSplit:true,onSplit:function(s){return G.from(s.lines,{yPercent:118,duration:1.3,stagger:.12,ease:'power4.out',scrollTrigger:trig})}});
+      else G.from(h,{y:40,autoAlpha:0,duration:1.2,ease:'power3.out',scrollTrigger:trig});
+      var p=h.nextElementSibling;
+      if(p&&p.tagName==='P')G.from(p,{y:26,autoAlpha:0,duration:1.2,delay:.3,ease:'power3.out',scrollTrigger:{trigger:h,start:'top 88%',once:true}});
+    });
+    /* client's words light up word by word, dimmed only while on screen */
+    var qp=d.querySelector('.quote blockquote p');
+    if(qp&&SPL){
+      var qs=SPL.create(qp,{type:'words',aria:'none'}),ws=qs.words,n=ws.length;
+      var lit=function(pr){var k=pr*(n+8)-4;for(var i=0;i<n;i++){var o=Math.max(.35,Math.min(1,.35+(k-i)*.16));ws[i].style.opacity=o>=1?'':o.toFixed(3)}};
+      var clear=function(){for(var i=0;i<n;i++)ws[i].style.opacity=''};
+      ST.create({trigger:qp,start:'top 88%',end:'bottom 52%',onUpdate:function(s){lit(s.progress)},onToggle:function(s){if(!s.isActive)clear();else lit(s.progress)}});
+    }
+    /* team: credentials slide up as each portrait arrives (hover on laptops) */
+    G.utils.toArray('.lp-more').forEach(function(el){
+      G.fromTo(el,{yPercent:101},{yPercent:0,duration:1.2,ease:'power3.out',scrollTrigger:{trigger:el.parentNode,start:'top 55%',once:true}});
+    });
+    G.from('.crew li',{x:-28,autoAlpha:0,duration:.9,stagger:.07,ease:'power3.out',scrollTrigger:{trigger:'.crew',start:'top 85%',once:true}});
+    /* reading progress under the header */
+    var pg=d.createElement('div');pg.className='prog';pg.setAttribute('aria-hidden','true');b.appendChild(pg);
+    G.to(pg,{scaleX:1,ease:'none',scrollTrigger:{trigger:b,start:'top top',end:'bottom bottom',scrub:.3}});
+    /* tap ripples on buttons */
+    d.addEventListener('pointerdown',function(e){
+      var t=e.target.closest('.btn,.qbar a');if(!t)return;
+      var r=t.getBoundingClientRect(),z=Math.max(r.width,r.height)*2.2,sp=d.createElement('span');
+      sp.className='rip';sp.setAttribute('aria-hidden','true');
+      sp.style.cssText='width:'+z+'px;height:'+z+'px;left:'+(e.clientX-r.left-z/2)+'px;top:'+(e.clientY-r.top-z/2)+'px';
+      t.appendChild(sp);sp.addEventListener('animationend',function(){sp.remove()});
+    },{passive:true});
+  }
+
+  /* ===== phone tier: the flyover and scenes in portrait ===== */
+  function phoneScenes(){
+    var plane=d.querySelector('.plane'),bb=d.querySelector('.pin-bb'),hero=d.getElementById('hero');
+    var mm=G.matchMedia();
+    mm.add({sm:'(max-width: 899px)',lg:'(min-width: 900px)'},function(c){
+      var sm=c.conditions.sm;
+      /* start where the static map sits, end tilted in 3D over number 620 */
+      var A=sm?{x:.40,y:.77,s:.46,px:1224,py:888,b:2}:{x:.5,y:.5,s:.66,px:1000,py:640,b:1.4};
+      var Z={x:sm?.33:.5,y:sm?.6:.64,s:sm?1:1.15,b:sm?.85:1};
+      var S={k:0};
+      function draw(){
+        var k=S.k,W=hero.clientWidth,Hh=hero.clientHeight;
+        var cx=W*(A.x+(Z.x-A.x)*k),cy=Hh*(A.y+(Z.y-A.y)*k),sc=A.s+(Z.s-A.s)*k,px=A.px+(1224-A.px)*k,py=A.py+(888-A.py)*k,rx=54*k,rz=-12*Math.sin(k*Math.PI);
+        plane.style.transform='translate('+cx.toFixed(1)+'px,'+cy.toFixed(1)+'px) rotateX('+rx.toFixed(2)+'deg) rotateZ('+rz.toFixed(2)+'deg) scale('+sc.toFixed(4)+') translate('+(-px)+'px,'+(-py)+'px)';
+        bb.style.transform='rotateZ('+(-rz).toFixed(2)+'deg) rotateX('+(-rx).toFixed(2)+'deg) scale('+(A.b+(Z.b-A.b)*k).toFixed(3)+')';
+      }
+      plane.style.left='0';plane.style.top='0';draw();
+      var cap=captioner([[0,''],[.3,'Heading north on Manukau Road'],[.68,'Number 620, free on-site parking']]);
+      var tl=G.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:hero,start:'top top',end:function(){return '+='+Math.round(innerHeight*1.3)},pin:true,scrub:.8,anticipatePin:1,invalidateOnRefresh:true,
+        onUpdate:function(s){cap(s);b.classList.toggle('in-hero',s.progress<=.22)},onRefresh:draw}});
+      heroST=tl.scrollTrigger;
+      tl.to('.hero-copy',{y:-60,autoAlpha:0,duration:.24,ease:'power1.in'},0)
+        .to('.hero-wash',{autoAlpha:0,duration:.3},.06)
+        .to(S,{k:1,duration:.72,ease:'power2.inOut',onUpdate:draw},.1)
+        .to('.pin-rise',{scale:1.22,duration:.07,ease:'power2.out'},.8)
+        .to('.pin-rise',{scale:1,duration:.11,ease:'back.out(3)'},.87)
+        .to({},{duration:.04});
+      return function(){plane.style.cssText='';bb.style.transform='';heroST=null};
+    });
+
+    /* the team photo opens in a circle as it arrives */
+    var ap=d.querySelector('.arrive-photo'),apt={trigger:ap,start:'top 92%',end:'center 52%',scrub:.6};
+    G.fromTo(ap,{clipPath:'circle(10% at 50% 45%)'},{clipPath:'circle(75% at 50% 45%)',ease:'none',scrollTrigger:apt});
+    G.fromTo(ap.querySelector('img'),{scale:1.15},{scale:1,ease:'none',scrollTrigger:apt});
+    G.from('.arrive-copy > :not(h2)',{y:30,autoAlpha:0,duration:1.1,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:'.arrive-copy',start:'top 85%',once:true}});
+
+    /* service photos wipe open and settle */
+    G.utils.toArray('.card-media').forEach(function(m){
+      var t={trigger:m,start:'top 96%',end:'top 40%',scrub:.6};
+      G.fromTo(m,{clipPath:'inset(16% 10% 16% 10% round 22px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:t});
+      G.fromTo(m.querySelector('img'),{scale:1.15},{scale:1,ease:'none',scrollTrigger:t});
+    });
+
+    /* the five promises: the route fills as you read down it */
+    var items=[].slice.call(d.querySelectorAll('.pr-list li')),fill=d.querySelector('.route i');
+    ST.create({trigger:'.pr-wrap',start:'top 72%',end:'bottom 48%',onUpdate:function(s){
+      G.set(fill,{scaleY:s.progress});var k=Math.min(items.length-1,Math.floor(s.progress*items.length*.999));
+      items.forEach(function(li,i){li.classList.toggle('on',i===k);li.classList.toggle('done',i<k)});
+    }});
+
+    refreshLater();
+  }
 });
 </script>
 <script src="../../assets/motion.js" defer></script>
