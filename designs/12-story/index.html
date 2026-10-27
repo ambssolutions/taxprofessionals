@@ -169,18 +169,98 @@ html.js:not(.fx):not(.ph) .squares i{transform:scale(0);transform-origin:100% 0;
 .leaders li{padding-left:18px;border-left:3px solid var(--green)}
 .leaders b{display:block;font:600 20px/1.25 var(--display)}
 .leaders span{color:#2c3740;font-size:16px}
+.leaders .pt{display:none}
+/* phones and portrait tablets: the three partners as centred cards, portrait on top, name and title under it */
+@media (max-width:980px){
+  #people .ch-ph{display:none!important}
+  .leaders{gap:30px;max-width:420px}
+  .leaders li{padding-left:0;border-left:0;text-align:center}
+  .leaders .pt{display:block;width:148px;height:148px;margin:0 auto 14px;border-radius:12px;background:#fff}
+}
 .team{margin-top:28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 24px;max-width:640px;font-size:15.5px}
 .team li{padding:8px 0;border-top:1px solid var(--line)}
 .team b{font-weight:600}
 .team span{display:block;color:var(--muted);font-size:14.5px}
 .team-h{margin-top:30px;font:600 15px/1.2 var(--sans);color:var(--blue)}
 
+/* chapter 03: services. Plain list (reduced motion and fallback), an open book on laptops and tablets, a one-page book on phones */
+.svc{max-width:1180px;margin-inline:auto}
+.svc-lead{text-align:center;margin-inline:auto;max-width:30ch}
 .pillars{margin-top:clamp(28px,5vh,48px)}
 .pillar{padding-block:clamp(36px,7vh,72px);border-top:1px solid var(--line)}
 .pil-ph{margin-bottom:20px;max-width:440px;overflow:hidden;border-radius:12px}
 .pil-ph img{width:100%;height:auto}
 .pillar h3{font:500 clamp(26px,min(3vw,5.4vh),46px)/1.1 var(--display);letter-spacing:-.025em}
 .pillar p{margin-top:12px;max-width:52ch;color:#2c3740;font-size:17.5px}
+.ticks{margin-top:16px;display:grid;gap:8px;max-width:52ch}
+.ticks li,.bk-ticks li{position:relative;padding-left:22px;color:#2c3740;font-size:16.5px;line-height:1.5}
+.ticks li::before,.bk-ticks li::before{content:"";position:absolute;left:0;top:.5em;width:9px;height:9px;background:var(--green)}
+.pillar .tlink{margin-top:10px}
+@media (min-width:981px){
+  .svc{min-height:0!important;display:block!important}
+  .svc .pillars{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 clamp(32px,4vw,64px)}
+}
+.svc.has-bk .svc-lead{max-width:62ch;font:500 clamp(17px,1.45vw,21px)/1.45 var(--sans);letter-spacing:0}
+.svc.has-bk .ch-h{margin-bottom:12px}
+.svc.has-bk .svc-lead .key,.svc.has-bk .svc-lead .key .w{color:#15731e!important}
+
+/* the open book (laptops and touch tablets) */
+.bk{position:relative;height:min(calc(100svh - var(--hdr) - 150px),620px);min-height:380px;max-width:1100px;margin:clamp(16px,2.6vh,28px) auto 0;perspective:3200px;perspective-origin:50% 45%}
+.bk::before{content:"";position:absolute;inset:7px -6px -10px;border-radius:20px;background:#d3dde6;box-shadow:0 36px 60px -40px rgba(3,40,66,.55)}
+.bk-page,.bk-leaf{position:absolute;top:0;bottom:0;width:50%}
+.bk-left{left:0;border-radius:16px 0 0 16px;overflow:hidden}
+.bk-right{left:50%;border-radius:0 16px 16px 0;overflow:hidden}
+.bk-leaf{left:50%;transform-origin:0 50%;transform-style:preserve-3d}
+.bk-face{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:0 16px 16px 0}
+.bk-back{transform:rotateY(180deg);border-radius:16px 0 0 16px}
+.bk-paper{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,3.6vw,56px);background:linear-gradient(270deg,#fff 0,#fff 88%,#edf1f4 100%);color:var(--ink);text-align:left}
+.bk-left .bk-paper,.bk-back .bk-paper{background:linear-gradient(90deg,#fff 0,#fff 88%,#edf1f4 100%)}
+.bk-no{font:600 clamp(40px,min(4.6vw,8vh),76px)/1 var(--display);letter-spacing:-.04em;color:var(--green-d);font-variant-numeric:tabular-nums}
+.bk-paper h3{font:500 clamp(24px,min(2.4vw,4.6vh),38px)/1.1 var(--display);letter-spacing:-.025em;margin:clamp(10px,2vh,20px) 0 12px;max-width:16ch}
+.bk-paper p{color:#2c3740;font-size:clamp(15.5px,1.2vw,17px);line-height:1.55;max-width:40ch}
+.bk-more{align-self:flex-start;margin-top:clamp(16px,3vh,28px);display:inline-flex;gap:10px;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;background:var(--deep);color:var(--ivory);text-decoration:none;font-weight:600;font-size:15px}
+.bk-more:hover{background:var(--blue)}
+.bk-folio{position:absolute;left:0;right:0;bottom:clamp(12px,2.2vh,20px);text-align:center;font:600 12px/1 var(--sans);letter-spacing:.2em;color:#6d7a84}
+.bk-pic{justify-content:flex-start;padding:0}
+.bk-ph{margin:0;flex:none;overflow:hidden;aspect-ratio:800/367}
+.bk-ph img{display:block;width:100%;height:100%;object-fit:cover}
+.bk-list{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(14px,2.4vh,26px) clamp(24px,3.2vw,48px) clamp(30px,4.6vh,44px)}
+.bk-lbl{font:600 14px/1.2 var(--sans)!important;color:var(--blue)!important;letter-spacing:.02em;margin-bottom:10px}
+.bk-ticks{display:grid;gap:clamp(4px,.9vh,8px)}
+.bk-ticks li{font-size:clamp(15px,1.15vw,16.5px);line-height:1.45}
+.bk-face::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;opacity:var(--sh,0);background:linear-gradient(90deg,rgba(3,40,66,.72),rgba(3,40,66,.22))}
+.bk-back::after{background:linear-gradient(270deg,rgba(3,40,66,.6),rgba(3,40,66,.12))}
+.bk-spine{position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;z-index:60;pointer-events:none;background:linear-gradient(rgba(3,40,66,.12),rgba(3,40,66,.32),rgba(3,40,66,.12))}
+.bk::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:50%;z-index:9;pointer-events:none;opacity:var(--cast,0);border-radius:0 16px 16px 0;background:linear-gradient(90deg,rgba(3,40,66,.6),rgba(3,40,66,0) 70%)}
+@media (max-width:980px){.bk{height:min(calc(100svh - var(--hdr) - 150px),600px)}.bk-paper{padding:26px 24px}.bk-list{padding:16px 22px 34px}}
+@media (max-height:560px){.bk{height:calc(100svh - var(--hdr) - 100px);min-height:0}.bk-ph,.bk-no,.bk-folio{display:none}.bk-paper h3{font-size:22px;margin-top:0}.bk-paper p{font-size:14px}}
+
+/* the one-page book (phones): a tall track with a sticky stage, pages turn one at a time */
+.pbk-track{position:relative;height:calc(100svh + var(--pages) * 60svh);margin-top:22px}
+.pbk-sticky{position:sticky;top:calc(var(--hdr) + 34px);height:calc(100svh - var(--hdr) - 34px - 70px - env(safe-area-inset-bottom));display:flex;flex-direction:column;justify-content:center;padding-block:10px 6px}
+.pbk{position:relative;flex:1;min-height:0;max-height:660px;perspective:1600px}
+.pbk::before,.pbk::after{content:"";position:absolute;left:6px;right:-4px;top:5px;bottom:-5px;border-radius:16px;background:#dce4eb}
+.pbk::after{left:12px;right:-8px;top:10px;bottom:-10px;background:#c9d5df;z-index:-1}
+.pbk-leaf{position:absolute;inset:0;z-index:1;transform-origin:0 50%;display:none}
+.pbk-leaf.is-cur,.pbk-leaf.is-under{display:block}
+.pbk-leaf.turning{transform-style:preserve-3d}
+.pbk-leaf:not(.turning) .pbk-back{display:none}
+.pbk .bk-face{border-radius:16px;background:#fff;box-shadow:0 22px 40px -30px rgba(3,40,66,.55)}
+.pbk-front{display:flex;flex-direction:column}
+.pbk-front .bk-ph{border-radius:16px 16px 0 0}
+.pbk-front .bk-paper{position:relative;inset:auto;flex:1;min-height:0;justify-content:flex-start;padding:18px 20px 16px;background:#fff}
+.pbk .bk-paper h3{font-size:24px;margin:0 0 10px;max-width:none}
+.pbk .bk-paper p{font-size:16px;line-height:1.55}
+.pbk .bk-ticks{margin-top:14px;gap:6px}
+.pbk .bk-ticks li{font-size:15px;line-height:1.45;padding-left:20px}
+.pbk .bk-ticks li::before{width:7px;height:7px;top:.55em}
+.pbk .bk-more{margin-top:auto;min-height:44px;padding:0 18px;font-size:14.5px}
+.pbk-back{display:grid;place-items:center;background:#f3f6f8!important}
+.pbk-back span:first-child{font:600 18px/1 var(--display);letter-spacing:-.01em;color:#b4c2cd}
+.pbk-nav{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:14px}
+.pbk-nav button{width:46px;height:46px;border-radius:50%;border:1px solid var(--ink);background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.pbk-nav button:disabled{opacity:.35}
+.pbk-count{font:600 14px/1 var(--sans);letter-spacing:.14em;color:var(--muted);min-width:70px;text-align:center;font-variant-numeric:tabular-nums}
 
 .promises{margin-top:clamp(28px,5vh,44px);display:grid;gap:clamp(22px,4vh,36px)}
 .promises li{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:baseline}
@@ -372,6 +452,8 @@ html.fx .ring{display:flex;position:fixed;right:16px;bottom:16px;z-index:55;alig
 .team-h{text-align:center}
 html.fx .op{align-items:center;text-align:center}
 .op-n{transform-origin:50% 100%}
+/* the number's glyph box is taller than its .8 line box: clip it at the line box so it never reaches the title (digits sit on the baseline, nothing is cut) */
+.op-n{clip-path:inset(-.4em -.3em 0 -.3em)}
 
 /* touch: tap ripple on buttons (tablet and phone tiers) */
 .rip{position:absolute;left:0;top:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:currentColor;opacity:.28;pointer-events:none;animation:rip .9s var(--ease) forwards}
@@ -480,7 +562,7 @@ html.js .rv.in{opacity:1;transform:none}
       <div class="col">
 
         <section class="ch" data-ch="01" data-name="Since 1998" aria-labelledby="c1">
-          <div class="op" aria-hidden="true"><span class="op-n">01</span><span class="op-t">Since 1998</span></div>
+          <div class="op" aria-hidden="true"><span class="op-n"><span>01</span></span><span class="op-t">Since 1998</span></div>
           <figure class="ch-ph"><img src="../../assets/img/office-team-800.webp" srcset="../../assets/img/office-team-800.webp 800w, ../../assets/img/office-team-1600.webp 1600w" sizes="(min-width:981px) 42vw, 100vw" width="1920" height="1080" alt="Four of the team at their desks on the office floor" loading="lazy" decoding="async"><figcaption>Our office floor on Manukau Road</figcaption></figure>
           <h2 class="ch-h" id="c1"><span class="n">01</span> Since 1998</h2>
           <p class="lit">Working for the community <em class="key">since 1998</em>. We believe in quality customer service and explaining things <em class="key">in your language</em>.</p>
@@ -488,7 +570,7 @@ html.js .rv.in{opacity:1;transform:none}
         </section>
 
         <section class="ch" id="people" data-ch="02" data-name="The people" aria-labelledby="c2">
-          <div class="op" aria-hidden="true"><span class="op-n">02</span><span class="op-t">The people</span></div>
+          <div class="op" aria-hidden="true"><span class="op-n"><span>02</span></span><span class="op-t">The people</span></div>
           <figure class="ch-ph">
             <div class="trio">
               <img src="../../assets/img/ranjana-800.webp" width="500" height="500" alt="Ranjana Gupta, Director" loading="lazy" decoding="async">
@@ -500,9 +582,9 @@ html.js .rv.in{opacity:1;transform:none}
           <h2 class="ch-h" id="c2"><span class="n">02</span> The people</h2>
           <p class="lit">Things can get tricky when it comes to tax, so our dedicated team is there to get things done <em class="key">thoroughly and professionally</em>, with a smile.</p>
           <ul class="leaders">
-            <li><b>Ranjana Gupta</b><span>Director. PhD, MPhil, MBus (Taxation), MCom. Published author on New Zealand's land tax regime.</span></li>
-            <li><b>Varun Gupta</b><span>Partner. MBA, Chartered Accountant (NZ), Certified Business Advisor.</span></li>
-            <li><b>Eshan Gupta</b><span>Associate Partner. BCom/LLB, admitted Barrister and Solicitor (NZ).</span></li>
+            <li><img class="pt" src="../../assets/img/ranjana-800.webp" width="500" height="500" alt="" loading="lazy" decoding="async"><b>Ranjana Gupta</b><span>Director. PhD, MPhil, MBus (Taxation), MCom. Published author on New Zealand's land tax regime.</span></li>
+            <li><img class="pt" src="../../assets/img/varun-800.webp" width="500" height="500" alt="" loading="lazy" decoding="async"><b>Varun Gupta</b><span>Partner. MBA, Chartered Accountant (NZ), Certified Business Advisor.</span></li>
+            <li><img class="pt" src="../../assets/img/eshan-800.webp" width="500" height="500" alt="" loading="lazy" decoding="async"><b>Eshan Gupta</b><span>Associate Partner. BCom/LLB, admitted Barrister and Solicitor (NZ).</span></li>
           </ul>
           <h3 class="team-h">With</h3>
           <ul class="team">
@@ -518,37 +600,77 @@ html.js .rv.in{opacity:1;transform:none}
           <p class="more">Everyone can be reached through reception on <a href="tel:+6496250025">09 625 0025</a>.</p>
         </section>
 
-        <section class="ch" id="services" data-ch="03" data-name="What we do" aria-labelledby="c3">
-          <div class="op" aria-hidden="true"><span class="op-n">03</span><span class="op-t">What we do</span></div>
-          <figure class="ch-ph"><img src="../../assets/img/office-desk-800.webp" srcset="../../assets/img/office-desk-800.webp 800w, ../../assets/img/office-desk-1600.webp 1600w" sizes="(min-width:981px) 42vw, 100vw" width="1920" height="1080" alt="Two of the team working together at a computer" loading="lazy" decoding="async"><figcaption>Two of the team at work</figcaption></figure>
-          <h2 class="ch-h" id="c3"><span class="n">03</span> What we do</h2>
-          <p class="lit">Four areas of work, from your own tax return to your business, <em class="key">your staff and your property</em>.</p>
-          <div class="pillars">
-            <article class="pillar">
-              <figure class="pil-ph"><img src="../../assets/img/svc-compliance-800.webp" width="960" height="440" alt="Stock photo for taxation and accounting compliance" loading="lazy" decoding="async"></figure>
-              <h3 class="lit">Taxation &amp; Accounting Compliance</h3>
-              <p>Tax compliance and practical consulting services, for individuals, rental property owners, sole traders, partnerships, companies and trusts.</p>
-            </article>
-            <article class="pillar">
-              <figure class="pil-ph"><img src="../../assets/img/svc-advisory-800.webp" width="960" height="440" alt="Stock photo for business advisory and planning" loading="lazy" decoding="async"></figure>
-              <h3 class="lit">Business Advisory &amp; Planning</h3>
-              <p>Create a profitable, thriving and valuable business, with business planning, cashflow forecasting and monthly coaching.</p>
-            </article>
-            <article class="pillar">
-              <figure class="pil-ph"><img src="../../assets/img/svc-hr-800.webp" width="960" height="440" alt="Stock photo for employment and HR advisory" loading="lazy" decoding="async"></figure>
-              <h3 class="lit">Employment &amp; HR Advisory</h3>
-              <p>Your employment law and HR partner: employment relations and policies, employer accreditation, restructures, personal grievances and Labour Inspector readiness.</p>
-            </article>
-            <article class="pillar">
-              <figure class="pil-ph"><img src="../../assets/img/svc-property-800.webp" width="960" height="440" alt="Stock photo for property investment and development" loading="lazy" decoding="async"></figure>
-              <h3 class="lit">Property Investment &amp; Development</h3>
-              <p>Practical advice on optimal structuring of your property investments and developments to keep up with the ever-changing property taxation laws and regulations.</p>
-            </article>
-          </div>
-        </section>
+      </div>
+      <div class="stage" aria-label="Chapter photos" role="group"></div>
+    </div>
+
+    <section class="ch svc" id="services" data-ch="03" data-name="What we do" aria-labelledby="c3">
+      <div class="op" aria-hidden="true"><span class="op-n"><span>03</span></span><span class="op-t">What we do</span></div>
+      <div class="svc-in">
+        <h2 class="ch-h" id="c3"><span class="n">03</span> What we do</h2>
+        <p class="lit svc-lead">Four areas of work, from your own tax return to your business, <em class="key">your staff and your property</em>.</p>
+        <div class="pillars">
+          <article class="pillar">
+            <figure class="pil-ph"><img src="../../assets/img/svc-compliance-800.webp" width="800" height="367" alt="Stock photo for taxation and accounting compliance" loading="lazy" decoding="async"></figure>
+            <h3>Taxation &amp; Accounting Compliance</h3>
+            <p>Tax compliance and practical consulting services, for individuals, rental property owners, sole traders, partnerships, companies and trusts.</p>
+            <ul class="ticks">
+              <li>Bookkeeping</li>
+              <li>GST, PAYE and income tax returns</li>
+              <li>Financial statements</li>
+              <li>Tax planning and business structuring</li>
+              <li>Payroll and company formation</li>
+            </ul>
+            <a class="tlink" href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">More on compliance</a>
+          </article>
+          <article class="pillar">
+            <figure class="pil-ph"><img src="../../assets/img/svc-advisory-800.webp" width="800" height="367" alt="Stock photo for business advisory and planning" loading="lazy" decoding="async"></figure>
+            <h3>Business Advisory &amp; Planning</h3>
+            <p>Create a profitable, thriving and valuable business, with business planning, cashflow forecasting and monthly coaching.</p>
+            <ul class="ticks">
+              <li>Business plans and strategic growth</li>
+              <li>Performance and accountability</li>
+              <li>Profit improvement and cashflow</li>
+              <li>Systems and processes</li>
+              <li>Business planning: first meeting free</li>
+            </ul>
+            <a class="tlink" href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">More on business advisory</a>
+          </article>
+          <article class="pillar">
+            <figure class="pil-ph"><img src="../../assets/img/svc-hr-800.webp" width="800" height="367" alt="Stock photo for employment and HR advisory" loading="lazy" decoding="async"></figure>
+            <h3>Employment &amp; HR Advisory</h3>
+            <p>Your employment law and HR partner: employment relations and policies, employer accreditation, restructures, personal grievances and Labour Inspector readiness.</p>
+            <ul class="ticks">
+              <li>Employment agreements and policies</li>
+              <li>Employment legislation</li>
+              <li>Restructuring and redundancy</li>
+              <li>Employer accreditations</li>
+              <li>Audits, investigations and Labour Inspector visits</li>
+            </ul>
+            <a class="tlink" href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">More on HR advisory</a>
+          </article>
+          <article class="pillar">
+            <figure class="pil-ph"><img src="../../assets/img/svc-property-800.webp" width="800" height="367" alt="Stock photo for property investment and development" loading="lazy" decoding="async"></figure>
+            <h3>Property Investment &amp; Development</h3>
+            <p>Practical advice on optimal structuring of your property investments and developments to keep up with the ever-changing property taxation laws and regulations.</p>
+            <ul class="ticks">
+              <li>Investment strategy</li>
+              <li>Structuring: personal, company or trust</li>
+              <li>Property tax returns</li>
+              <li>Cash flow tools</li>
+              <li>Trust administration</li>
+            </ul>
+            <a class="tlink" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">More on property</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <div class="col">
 
         <section class="ch" id="promises" data-ch="04" data-name="Why us" aria-labelledby="c4">
-          <div class="op" aria-hidden="true"><span class="op-n">04</span><span class="op-t">Why Tax Professionals</span></div>
+          <div class="op" aria-hidden="true"><span class="op-n"><span>04</span></span><span class="op-t">Why Tax Professionals</span></div>
           <figure class="ch-ph"><img src="../../assets/img/office-meeting-800.webp" srcset="../../assets/img/office-meeting-800.webp 800w, ../../assets/img/office-meeting-1600.webp 1600w" sizes="(min-width:981px) 42vw, 100vw" width="1920" height="1080" alt="Varun Gupta with a client signing papers" loading="lazy" decoding="async"><figcaption>Varun Gupta with a client</figcaption></figure>
           <h2 class="ch-h" id="c4"><span class="n">04</span> Why Tax Professionals</h2>
           <ol class="promises">
@@ -617,7 +739,7 @@ html.js .rv.in{opacity:1;transform:none}
       <div class="col">
 
         <section class="ch" id="dates" data-ch="06" data-name="The dates" aria-labelledby="c6">
-          <div class="op" aria-hidden="true"><span class="op-n">06</span><span class="op-t">The dates that matter</span></div>
+          <div class="op" aria-hidden="true"><span class="op-n"><span>06</span></span><span class="op-t">The dates that matter</span></div>
           <figure class="ch-ph"><img src="../../assets/img/welcome-800.webp" width="780" height="780" alt="A Tax Professionals team member at his desk" loading="lazy" decoding="async"><figcaption>At work in the office</figcaption></figure>
           <h2 class="ch-h" id="c6"><span class="n">06</span> The dates that matter</h2>
           <p class="lit">Tax payments must be made <em class="key">on or before the due date</em>.</p>
@@ -627,7 +749,7 @@ html.js .rv.in{opacity:1;transform:none}
         </section>
 
         <section class="ch" id="insights" data-ch="07" data-name="Insights" aria-labelledby="c7">
-          <div class="op" aria-hidden="true"><span class="op-n">07</span><span class="op-t">Insights</span></div>
+          <div class="op" aria-hidden="true"><span class="op-n"><span>07</span></span><span class="op-t">Insights</span></div>
           <figure class="ch-ph"><img class="por" src="../../assets/img/eshan-800.webp" width="499" height="499" alt="Eshan Gupta, Associate Partner" loading="lazy" decoding="async"><figcaption>Eshan Gupta writes our Insights</figcaption></figure>
           <h2 class="ch-h" id="c7"><span class="n">07</span> Insights</h2>
           <p class="lit"><em class="key">Eshan Gupta</em>, our Associate Partner, writes about the tax changes that reach your desk.</p>
@@ -768,6 +890,27 @@ html.js .rv.in{opacity:1;transform:none}
     return {marks: marks, figs: figs};
   });
 
+  /* chapter 03 services book: built from the plain list, which stays as the reduced-motion and fallback version */
+  var svcSec = d.getElementById('services'), svcIn = svcSec.querySelector('.svc-in');
+  function esc(t){ return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  var svc = [].slice.call(svcSec.querySelectorAll('.pillar')).map(function(a, i){
+    var im = a.querySelector('img'), ln = a.querySelector('.tlink');
+    return {n: (i < 9 ? '0' : '') + (i + 1), img: im.getAttribute('src'), alt: esc(im.alt), title: esc(a.querySelector('h3').textContent.trim()),
+      p: esc(a.querySelector('p').textContent.trim()), ticks: [].slice.call(a.querySelectorAll('.ticks li')).map(function(li){ return '<li>' + esc(li.textContent.trim()) + '</li>'; }).join(''),
+      href: ln.getAttribute('href'), more: esc(ln.textContent.trim())};
+  });
+  var SN = svc.length, SNN = (SN < 10 ? '0' : '') + SN;
+  var ARW = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+  function bkPhoto(k){ var v = svc[k]; return '<figure class="bk-ph" aria-hidden="true"><img src="' + v.img + '" width="800" height="367" alt="" decoding="async"></figure>'; }   /* decorative inside the book, which is one centred group */
+  function bkMore(k){ var v = svc[k]; return '<a class="bk-more" href="' + v.href + '" target="_blank" rel="noopener">' + v.more + ' ' + ARW + '</a>'; }
+  function bkWords(k){ var v = svc[k]; return '<div class="bk-paper"><span class="bk-no" aria-hidden="true">' + v.n + '</span><h3>' + v.title + '</h3><p>' + v.p + '</p>' + bkMore(k) + '<span class="bk-folio" aria-hidden="true">' + v.n + ' / ' + SNN + '</span></div>'; }
+  function bkPic(k){ return '<div class="bk-paper bk-pic">' + bkPhoto(k) + '<div class="bk-list"><p class="bk-lbl">What this covers</p><ul class="bk-ticks">' + svc[k].ticks + '</ul></div></div>'; }
+  var SHADE = '';
+  /* the book is a visual presentation: hidden from screen readers and out of the tab order; the plain list stays in the page, visually hidden, for them */
+  function bookOn(root){ root.querySelectorAll('a, button').forEach(function(x){ x.tabIndex = -1; }); svcSec.querySelector('.pillars').classList.add('sr'); }
+  function bookOff(){ svcSec.querySelector('.pillars').classList.remove('sr'); }
+
+
   /* fallback mode: CSS scroll-lit words and a crossfading photo, no pins */
   var basicDone = false;
   function basic(){
@@ -843,17 +986,68 @@ html.js .rv.in{opacity:1;transform:none}
         if (inline) {
           var ip = m.querySelector('.ch-ph'), st = {trigger: ip, start: 'top 92%', end: 'top 35%', scrub: .8};
           G.fromTo(ip, {clipPath: 'inset(0% 0% 0% 100%)'}, {clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut', scrollTrigger: st});
-          G.fromTo(ip.querySelectorAll(':scope > img'), {scale: 1.18}, {scale: 1, ease: 'none', scrollTrigger: st});
+          G.fromTo(ip.querySelectorAll(':scope > img'), {scale: 1.18, transformOrigin: '50% 100%'}, {scale: 1, ease: 'none', scrollTrigger: st});
           tl.to({}, {duration: .3});
           return;
         }
         if (k > 0) tl.to(gr.figs[k - 1], {xPercent: -40, opacity: 0, duration: .9, ease: 'power1.in'}, 0);
         tl.fromTo(f, {clipPath: 'inset(0% 0% 0% 100%)'}, {clipPath: 'inset(0% 0% 0% 0%)', duration: 1, ease: 'power2.inOut'}, .2)
-          .fromTo(f.querySelectorAll('img'), {scale: 1.18}, {scale: 1, duration: 1.1, ease: 'power2.out'}, .2)
+          .fromTo(f.querySelectorAll('img'), {scale: 1.18, transformOrigin: '50% 100%'}, {scale: 1, duration: 1.1, ease: 'power2.out'}, .2)
           .to({}, {duration: .3});
       });
     }
     openers(grids[0]);
+
+    /* 3. chapter 03: the opener, then an open book pinned while each scroll stretch turns a page.
+       Left page = a service's words, right page = its photo and what it covers. The right leaf turns over the spine
+       and its back lands on the left as the next service's words; the lifting page darkens and casts a shadow. */
+    (function(){
+      var op = svcSec.querySelector('.op');
+      G.timeline({scrollTrigger: {trigger: op, start: function(){ return 'top ' + hdr(); }, end: '+=80%', pin: true, pinSpacing: true, scrub: .8}})
+        .fromTo(op.querySelector('.op-n'), {scale: .3, opacity: 0}, {scale: 1, opacity: 1, duration: 1, ease: 'power2.out'}, 0)
+        .fromTo(op.querySelector('.op-t'), {yPercent: 70, opacity: 0}, {yPercent: 0, opacity: 1, duration: .8, ease: 'power2.out'}, .3)
+        .to({}, {duration: .3});
+      var bk = d.createElement('div'); bk.className = 'bk'; bk.setAttribute('aria-hidden', 'true');
+      var html = '<div class="bk-page bk-left" style="z-index:1">' + bkWords(0) + '</div><div class="bk-page bk-right" style="z-index:1">' + bkPic(SN - 1) + '</div>';
+      for (var k = 0; k < SN - 1; k++) html += '<div class="bk-leaf" style="z-index:' + (SN - k + 1) + '"><div class="bk-face bk-front">' + bkPic(k) + SHADE + '</div><div class="bk-face bk-back">' + bkWords(k + 1) + SHADE + '</div></div>';
+      bk.innerHTML = html + '<span class="bk-spine" aria-hidden="true"></span>';
+      svcIn.appendChild(bk); svcSec.classList.add('has-bk'); bookOn(bk);
+      var leaves = [].slice.call(bk.querySelectorAll('.bk-leaf'));
+      G.from(bk, {opacity: 0, duration: 1.2, ease: 'power2.out', scrollTrigger: {trigger: bk, start: 'top 90%', once: true}});
+      var turn = G.timeline({scrollTrigger: {trigger: svcIn, start: function(){ return 'top ' + (hdr() + 12); }, end: function(){ return '+=' + Math.round(innerHeight * .9 * SN); },
+        pin: true, scrub: .7, anticipatePin: 1, invalidateOnRefresh: true}});
+      leaves.forEach(function(lf, k){
+        var fs = lf.querySelector('.bk-front'), bs = lf.querySelector('.bk-back');
+        var nextImg = k < SN - 2 ? leaves[k + 1].querySelector('.bk-front .bk-ph img') : bk.querySelector('.bk-right .bk-ph img');
+        turn.fromTo(lf, {rotationY: 0}, {rotationY: -180, duration: 1, ease: 'power2.inOut'}, k)
+          .set(lf, {zIndex: 20 + k}, k + .5)
+          .fromTo(fs, {'--sh': 0}, {'--sh': .55, duration: .5, ease: 'power1.in'}, k)
+          .fromTo(bs, {'--sh': .5}, {'--sh': 0, duration: .5, ease: 'power1.out'}, k + .5)
+          .fromTo(bk, {'--cast': 0}, {'--cast': .5, duration: .5, ease: 'power1.in'}, k)
+          .to(bk, {'--cast': 0, duration: .5, ease: 'power1.out'}, k + .5)
+          .fromTo(nextImg, {scale: 1.1}, {scale: 1, duration: 1, ease: 'power2.out'}, k);
+      });
+      turn.to({}, {duration: .8});
+      /* a page in mid-turn is a moving picture, not reading text: keep it out of the accessibility tree until it lands */
+      var mid = leaves.map(function(){ return false; });
+      turn.eventCallback('onUpdate', function(){
+        leaves.forEach(function(lf, k){ var r = G.getProperty(lf, 'rotationY'), m = r < -2 && r > -178;
+          if (m !== mid[k]) { mid[k] = m; lf.inert = m; if (m) lf.setAttribute('aria-hidden', 'true'); else lf.removeAttribute('aria-hidden'); } });
+        showFaces();
+      });
+      /* only the faces a reader can see are shown: the top page on each side, plus a page while it turns */
+      var pL = bk.querySelector('.bk-left'), pR = bk.querySelector('.bk-right'), shown = new Map();
+      function setV(el, on) { if (shown.get(el) === on) return; shown.set(el, on); el.style.visibility = on ? '' : 'hidden'; }
+      function showFaces() {
+        var rs = leaves.map(function (lf) { return G.getProperty(lf, 'rotationY'); }), flat = -1, done = -1;
+        rs.forEach(function (r, k) { if (r > -2 && flat < 0) flat = k; if (r < -178) done = k; });
+        setV(pL, done < 0); setV(pR, flat < 0);
+        leaves.forEach(function (lf, k) { var moving = rs[k] <= -2 && rs[k] >= -178;
+          setV(lf.querySelector('.bk-front'), k === flat || moving); setV(lf.querySelector('.bk-back'), k === done || moving); });
+      }
+      showFaces();
+    })();
+    openers(grids[1]);
 
     /* 4. horizontal pinned timeline: 1998, the 2019 award, today */
     var track = d.querySelector('.tl-track'), view = d.querySelector('.tl-view'), line = d.querySelector('.tl-line');
@@ -869,13 +1063,13 @@ html.js .rv.in{opacity:1;transform:none}
       .fromTo('.pq figcaption', {opacity: 0, y: 12}, {opacity: 1, y: 0, duration: .6}, '>-0.2')
       .fromTo('.pq-m', {scale: .6, opacity: 0}, {scale: 1, opacity: 1, duration: .6}, 0);
     /* pins are created in page order so each one allows for the space of those above it */
-    openers(grids[1]);
+    openers(grids[2]);
 
     /* timeline details ride the horizontal scroll */
     G.utils.toArray('.tl-p').forEach(function(p){
       G.from(p.querySelector('.yr'), {yPercent: 40, opacity: .15, ease: 'none', scrollTrigger: {trigger: p, containerAnimation: tlTween, start: 'left 95%', end: 'left 55%', scrub: true}});
     });
-    G.fromTo('.tl-award img', {scale: 1.22}, {scale: 1, ease: 'none', scrollTrigger: {trigger: '.tl-award', containerAnimation: tlTween, start: 'left right', end: 'center center', scrub: true}});
+    G.fromTo('.tl-award img', {scale: 1.22, transformOrigin: '50% 0%'}, {scale: 1, ease: 'none', scrollTrigger: {trigger: '.tl-award', containerAnimation: tlTween, start: 'left right', end: 'center center', scrub: true}});
     G.from('.faces li', {scale: .5, opacity: 0, stagger: .1, ease: 'back.out(1.6)', scrollTrigger: {trigger: '.faces', containerAnimation: tlTween, start: 'left 90%', end: 'left 50%', scrub: true}});
     G.from('.tl-sq i', {scale: 0, transformOrigin: '0% 100%', stagger: .2, ease: 'none', scrollTrigger: {trigger: '.tl-sq', containerAnimation: tlTween, start: 'left 100%', end: 'left 70%', scrub: true}});
 
@@ -924,6 +1118,53 @@ html.js .rv.in{opacity:1;transform:none}
       var top = d.querySelector('.top'), band = d.querySelector('.phc');
       function hdr(){ return top.offsetHeight; }
 
+      /* 0. chapter 03: a one-page book in a tall track. The stage stays on screen with CSS sticky (native scroll);
+         the scroll position picks the page and pages turn one at a time until the book shows it. Arrows scroll there too. */
+      var pb = d.createElement('div'); pb.className = 'pbk'; pb.setAttribute('aria-hidden', 'true');
+      var ph = '';
+      for (var k = 0; k < SN; k++) ph += '<div class="pbk-leaf" style="z-index:' + (SN - k) + '"><div class="bk-face bk-front pbk-front">' + bkPhoto(k) +
+        '<div class="bk-paper"><h3>' + svc[k].title + '</h3><p>' + svc[k].p + '</p><ul class="bk-ticks">' + svc[k].ticks + '</ul>' + bkMore(k) + '</div>' + SHADE +
+        '</div><div class="bk-face bk-back pbk-back" aria-hidden="true"><span>Tax Professionals</span>' + SHADE + '</div></div>';
+      pb.innerHTML = ph;
+      var nav = d.createElement('div'); nav.className = 'pbk-nav'; nav.setAttribute('aria-hidden', 'true');
+      nav.innerHTML = '<button type="button" aria-label="Previous service"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg></button>' +
+        '<span class="pbk-count">01 / ' + SNN + '</span>' +
+        '<button type="button" aria-label="Next service"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>';
+      var trk = d.createElement('div'); trk.className = 'pbk-track'; trk.style.setProperty('--pages', SN);
+      var stk = d.createElement('div'); stk.className = 'pbk-sticky';
+      stk.append(pb, nav); trk.appendChild(stk); svcIn.appendChild(trk); svcSec.classList.add('has-bk'); bookOn(stk);
+      var pLeaves = [].slice.call(pb.querySelectorAll('.pbk-leaf')), pCount = nav.querySelector('.pbk-count'), pBtn = nav.querySelectorAll('button');
+      var pCur = 0, pTarget = 0, pBusy = false, pTl = null;
+      function pNum(k){ return (k < 9 ? '0' : '') + (k + 1) + ' / ' + SNN; }
+      function pMark(){ pLeaves.forEach(function(l, j){ l.classList.toggle('is-cur', j === pCur); l.classList.toggle('is-under', j === pCur + 1); }); }
+      function pShow(){ pCount.textContent = pNum(pCur); pBtn[0].disabled = pCur === 0; pBtn[1].disabled = pCur === SN - 1; }
+      function pFlip(dir){
+        var k = dir > 0 ? pCur : pCur - 1; if (pBusy || k < 0 || k >= SN - 1) return;
+        pBusy = true;
+        var lf = pLeaves[k], fs = lf.querySelector('.pbk-front'), bs = lf.querySelector('.pbk-back');
+        /* during the turn: the turning page (3D on) over the page it reveals */
+        pLeaves.forEach(function(l, j){ l.classList.toggle('is-cur', j === k); l.classList.toggle('is-under', j === k + 1); });
+        lf.classList.add('turning'); G.set(lf, {zIndex: 50});
+        pTl = G.timeline({onComplete: function(){ pBusy = false; lf.classList.remove('turning'); G.set(lf, {zIndex: SN - k, clearProps: 'transform'}); pMark(); pTl = null; }});
+        pTl.timeScale(1 + Math.min(2, Math.abs(pTarget - pCur) - 1) * 1.1);
+        if (dir > 0) pTl.fromTo(lf, {rotationY: 0}, {rotationY: -180, duration: .9, ease: 'power2.inOut'})
+          .fromTo(fs, {'--sh': 0}, {'--sh': .55, duration: .45, ease: 'power1.in'}, 0).fromTo(bs, {'--sh': .5}, {'--sh': 0, duration: .45}, .45);
+        else pTl.fromTo(lf, {rotationY: -180}, {rotationY: 0, duration: .9, ease: 'power2.inOut'})
+          .fromTo(bs, {'--sh': 0}, {'--sh': .5, duration: .45}, 0).fromTo(fs, {'--sh': .55}, {'--sh': 0, duration: .45, ease: 'power1.out'}, .45);
+        pCur += dir; pShow();
+      }
+      function pStep(){ if (!pBusy && pCur !== pTarget) pFlip(pTarget > pCur ? 1 : -1); }
+      function pSpan(){ return trk.offsetHeight - stk.offsetHeight; }
+      function pAt(){ var span = pSpan(), prog = span > 0 ? (hdr() + 34 - trk.getBoundingClientRect().top + 10) / span : 0;
+        return Math.max(0, Math.min(SN - 1, Math.floor(prog / .75 * (SN - 1) + .15))); }   /* all turns happen in the first 75% */
+      ST.create({trigger: trk, start: 'top bottom', end: 'bottom top', onUpdate: function(){ var t = pAt(); if (t !== pTarget) { pTarget = t; pStep(); } }});
+      G.ticker.add(pStep);
+      function pGo(k){ k = Math.max(0, Math.min(SN - 1, k)); var y = trk.getBoundingClientRect().top + scrollY - hdr() - 34 + pSpan() * .75 * (k + .25) / (SN - 1); scrollTo({top: y, behavior: 'smooth'}); }
+      pBtn[0].addEventListener('click', function(){ pGo(pCur - 1); });
+      pBtn[1].addEventListener('click', function(){ pGo(pCur + 1); });
+      G.from(pb, {y: 40, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: {trigger: trk, start: 'top 85%', once: true}});
+      pMark(); pShow();
+
       /* 1. cover: each line rises through its own mask, the blue square opens into the team photo */
       G.timeline({defaults: {ease: 'expo.out'}})
         .fromTo('.hero h1 .w', {yPercent: 135}, {yPercent: 0, duration: 1.5, stagger: .09}, .1)
@@ -961,7 +1202,7 @@ html.js .rv.in{opacity:1;transform:none}
       G.utils.toArray('.ch-ph, .pil-ph').forEach(function(f){
         var st = {trigger: f, start: 'top 95%', end: 'top 40%', scrub: .7};
         G.fromTo(f, {clipPath: 'inset(0% 0% 0% 100%)'}, {clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut', scrollTrigger: st});
-        G.fromTo(f.querySelectorAll(':scope > img'), {scale: 1.15}, {scale: 1, ease: 'none', scrollTrigger: st});
+        G.fromTo(f.querySelectorAll(':scope > img'), {scale: 1.15, transformOrigin: '50% 100%'}, {scale: 1, ease: 'none', scrollTrigger: st});
         var tri = f.querySelectorAll('.trio img');
         if (tri.length) G.fromTo(tri, {yPercent: 30, opacity: 0}, {yPercent: 0, opacity: 1, stagger: .15, ease: 'power2.out', scrollTrigger: st});
       });
@@ -1005,6 +1246,7 @@ html.js .rv.in{opacity:1;transform:none}
       return function(){
         removeEventListener('load', onLoad);
         splits.forEach(function(s){ s.revert(); });
+        G.ticker.remove(pStep); if (pTl) pTl.kill(); trk.remove(); svcSec.classList.remove('has-bk'); bookOff();
         band.classList.remove('on');
         /* left the phone width (rotation): hand over to the static fallback */
         h.classList.remove('ph'); basic();

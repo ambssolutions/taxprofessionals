@@ -96,6 +96,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 .hero .lede{margin-top:clamp(14px,2.4vh,24px);max-width:46ch;font-size:clamp(1.02rem,1.2vw,1.15rem);color:var(--muted)}
 .act{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 18px;margin-top:clamp(14px,2.6vh,26px)}
 .hero-card{margin:clamp(18px,3vh,30px) 0 0;flex:1 1 0;min-height:150px;width:100%;container-type:size;display:grid;place-items:center;position:relative}
+.hero-card .ghost{visibility:hidden}
 .hero-card .ghost,.hero-card img{grid-area:1/1;width:min(calc(100cqw - 20px),calc(100cqh - 20px),640px);aspect-ratio:1;height:auto}
 .hero-card img{object-fit:cover;border-radius:2px;outline:1px solid var(--line-2);outline-offset:7px}
 .hero-field,.hero-photo,.hero-cap{display:none}
@@ -198,8 +199,8 @@ ul,ol{margin:0;padding:0;list-style:none}
 .svc .one{margin-top:12px;color:var(--muted);max-width:46ch}
 .sub{display:flex;flex-wrap:wrap;gap:8px 10px;align-content:start}
 .sub li{font-size:.95rem;padding:6px 12px;border:1px solid var(--line);border-radius:999px}
-.svc-thumb{grid-column:2/-1;width:min(100%,530px);aspect-ratio:800/367;object-fit:cover;border-radius:2px}
-.hov .svc-thumb{display:none}
+.svc-thumb{grid-column:1/-1;justify-self:center;width:min(100%,530px);aspect-ratio:800/367;object-fit:cover;border-radius:2px}
+.hov .svc-thumb,.svc.sr .svc-thumb{display:none}
 .hov .svc>li{transition:padding .9s var(--ease)}
 .hov .svc>li:hover{padding-left:14px}
 @media (max-width:799px){.svc>li{grid-template-columns:1fr}.svc-thumb{grid-column:1}.svc .num{line-height:1}}
@@ -207,6 +208,63 @@ ul,ol{margin:0;padding:0;list-style:none}
 .hov .svc-float{display:block}
 .svc-float img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s}
 .svc-float img.on{opacity:1}
+/* services as a book: an open book on laptops and tablets, a one-page book on phones (the list above stays for reduced motion) */
+.svc-stage.has-bk .sh{margin-bottom:0}
+.fx .svc-stage.has-bk{height:calc(100svh - var(--hh));display:flex;flex-direction:column;justify-content:center;padding:clamp(14px,3vh,32px) 0 clamp(14px,2.6vh,28px)}
+.fx .svc-stage.has-bk .sh h2{font-size:clamp(1.6rem,2.4vw,2.2rem)}
+.fx .svc-stage.has-bk .sh p{margin-top:6px}
+.bk{position:relative;flex:1;min-height:0;max-height:640px;width:100%;max-width:1120px;margin:clamp(14px,2.6vh,28px) auto 0;perspective:3200px;perspective-origin:50% 45%}
+.bk::before{content:"";position:absolute;inset:6px -5px -9px;border-radius:4px;background:#e3dac8;box-shadow:0 34px 60px -40px rgba(2,44,73,.6)}
+.bk-page,.bk-leaf{position:absolute;top:0;bottom:0;width:50%}
+.bk-left{left:0;border-radius:3px 0 0 3px;overflow:hidden}
+.bk-right{left:50%;border-radius:0 3px 3px 0;overflow:hidden}
+.bk-leaf{left:50%;transform-origin:0 50%;transform-style:preserve-3d}
+.bk-face{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:0 3px 3px 0}
+.bk-back{transform:rotateY(180deg);border-radius:3px 0 0 3px}
+.bk-paper{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,3.8vw,60px);background:linear-gradient(270deg,#fcfaf5 0,#fcfaf5 88%,#efe8da 100%);color:var(--ink);text-align:left}
+.bk-left .bk-paper,.bk-back .bk-paper{background:linear-gradient(90deg,#fcfaf5 0,#fcfaf5 88%,#efe8da 100%)}
+.bk-no{font:400 clamp(3rem,min(5vw,9vh),5.2rem)/1 var(--serif);color:var(--blue);letter-spacing:-.02em}
+.bk-paper h3{font-size:clamp(1.7rem,min(2.6vw,5vh),2.6rem);line-height:1.12;color:var(--deep);margin:clamp(12px,2.4vh,24px) 0 0;max-width:15ch}
+.bk-paper h3 a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;text-decoration-color:var(--line-2)}
+.bk-paper h3 a:hover{text-decoration-color:currentColor}
+.bk-one{margin-top:14px;color:var(--muted);max-width:40ch}
+.bk-folio{position:absolute;left:0;right:0;bottom:clamp(12px,2.2vh,20px);text-align:center;font:500 .75rem/1 var(--sans);letter-spacing:.22em;color:#6b7880}
+.bk-pic{justify-content:flex-start;padding:clamp(20px,2.6vw,36px) clamp(20px,2.6vw,36px) clamp(30px,4.4vh,44px)}
+.bk-ph{margin:0;flex:none;overflow:hidden;aspect-ratio:800/367;border-radius:2px}
+.bk-ph img{display:block;width:100%;height:100%;object-fit:cover}
+.bk-lbl{margin-top:clamp(14px,2.6vh,26px);font-weight:500;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.bk-sub{margin-top:8px;columns:2;column-gap:clamp(18px,2vw,28px)}
+.bk-sub li{break-inside:avoid;padding:7px 0;border-top:1px solid var(--line);font-size:.98rem;line-height:1.4}
+.bk-face::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;opacity:var(--sh,0);background:linear-gradient(90deg,rgba(2,44,73,.72),rgba(2,44,73,.2))}
+.bk-back::after{background:linear-gradient(270deg,rgba(2,44,73,.6),rgba(2,44,73,.12))}
+.bk-spine{position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;z-index:60;pointer-events:none;background:linear-gradient(rgba(2,44,73,.1),rgba(2,44,73,.3),rgba(2,44,73,.1))}
+.bk::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:50%;z-index:9;pointer-events:none;opacity:var(--cast,0);background:linear-gradient(90deg,rgba(2,44,73,.6),rgba(2,44,73,0) 70%)}
+@media (max-width:1023px){.bk-sub{columns:1}.bk-paper{padding:26px 24px}.bk-pic{padding:20px 20px 34px}}
+@media (max-height:600px){.bk-ph,.bk-no,.bk-folio,.bk-lbl{display:none}.bk-sub{margin-top:0}}
+/* phones: a tall track, a sticky stage (native scroll) and one page that turns at a time */
+.pbk-track{position:relative;height:calc(100svh + var(--pages) * 60svh);margin-top:18px}
+.pbk-sticky{position:sticky;top:calc(var(--hh) + 8px);height:calc(100svh - var(--hh) - 8px - 84px - env(safe-area-inset-bottom));display:flex;flex-direction:column;justify-content:center;padding-block:8px 4px}
+.pbk{position:relative;flex:1;min-height:0;max-height:660px;perspective:1600px}
+.pbk::before,.pbk::after{content:"";position:absolute;left:6px;right:-4px;top:5px;bottom:-5px;border-radius:3px;background:#e9e1d1}
+.pbk::after{left:12px;right:-8px;top:10px;bottom:-10px;background:#dbd1bd;z-index:-1}
+.pbk-leaf{position:absolute;inset:0;z-index:1;transform-origin:0 50%;display:none}
+.pbk-leaf.is-cur,.pbk-leaf.is-under{display:block}
+.pbk-leaf.turning{transform-style:preserve-3d}
+.pbk-leaf:not(.turning) .pbk-back{display:none}
+.pbk .bk-face{border-radius:3px;background:#fcfaf5;box-shadow:0 22px 40px -30px rgba(2,44,73,.55)}
+.pbk-front{display:flex;flex-direction:column;padding:14px 14px 0}
+.pbk-front .bk-paper{position:relative;inset:auto;flex:1;min-height:0;justify-content:flex-start;padding:16px 6px 14px;background:#fcfaf5}
+.pbk .bk-no{font-size:1.1rem;letter-spacing:.06em}
+.pbk .bk-paper h3{font-size:1.6rem;margin-top:6px;max-width:none}
+.pbk .bk-one{margin-top:8px;font-size:1rem;line-height:1.5}
+.pbk .bk-sub{columns:1;margin-top:12px}
+.pbk .bk-sub li{padding:5px 0;font-size:.95rem}
+.pbk-back{display:grid;place-items:center;background:#f4efe4!important}
+.pbk-back span:first-child{font:400 1.3rem/1 var(--serif);color:#b9b09d}
+.pbk-nav{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:14px}
+.pbk-nav button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line-2);background:transparent;color:var(--deep);display:grid;place-items:center;cursor:pointer}
+.pbk-nav button:disabled{opacity:.35}
+.pbk-count{font:500 .9rem/1 var(--sans);letter-spacing:.14em;color:var(--muted);min-width:70px;text-align:center;font-variant-numeric:tabular-nums}
 .plogos{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 24px;margin-top:clamp(48px,6vw,80px)}
 .plogos li{width:clamp(110px,13vw,150px)}
 .plogos img{width:100%;height:auto;filter:grayscale(1);opacity:.8;mix-blend-mode:multiply;transition:filter .6s,opacity .6s}
@@ -220,7 +278,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 .aw h2 em{color:var(--blue)}
 .aw p{margin:20px auto 0;color:var(--muted);max-width:min(62ch,100%)}
 .aw-frame{overflow:hidden;border-radius:2px;width:min(100%,530px,calc((100svh - var(--hh)) * .62))}
-.aw-frame img{width:100%;aspect-ratio:800/488;object-fit:cover;transform-origin:42% 42%}
+.aw-frame img{width:100%;aspect-ratio:800/488;object-fit:cover;transform-origin:42% 0%}
 .fx .aw{padding:0}
 .fx .aw-stage{height:calc(100svh - var(--hh));display:flex;align-items:center}
 
@@ -341,7 +399,7 @@ html.ph-gal .gal-hint{display:none}
 html.ph-gal .gal-track{flex:1;min-height:0;display:flex;align-items:flex-start;gap:0;width:max-content;overflow:visible;scroll-snap-type:none;padding:0 var(--pad)}
 html.ph-gal .panel{flex:0 0 min(82vw,340px);gap:clamp(12px,2svh,20px);padding-right:20px}
 html.ph-gal .g-shot{width:min(100%,24svh,300px)}
-html.ph-gal .g-num{display:block;position:absolute;right:20px;top:-.12em;font:400 clamp(5rem,24vw,8rem)/1 var(--serif);color:transparent;-webkit-text-stroke:1px rgba(247,243,234,.24);pointer-events:none;z-index:0}
+html.ph-gal .g-num{display:block;position:absolute;right:14px;top:-.12em;font:400 clamp(4.5rem,22vw,7rem)/1 var(--serif);color:transparent;-webkit-text-stroke:1px rgba(247,243,234,.24);pointer-events:none;z-index:0}
 html.ph-gal .g-shot,html.ph-gal .g-text{position:relative;z-index:1}
 html.ph-gal .gal-bar{display:block;position:relative;order:1;flex:none;margin:0 var(--pad) clamp(6px,1.4svh,16px);height:1px;background:var(--line-i)}
 html.ph-gal .gal-track{order:2}
@@ -486,6 +544,7 @@ html.ph-gal .gal-bar i{position:absolute;inset:0;background:var(--ivory);transfo
 
   <section class="sec" id="services" aria-labelledby="services-h">
     <div class="wrap">
+      <div class="svc-stage">
       <div class="sh"><h2 id="services-h">Four areas of work</h2><p>Each heading opens the full page on our main site.</p></div>
       <ol class="svc">
         <li id="tax" data-i="0">
@@ -513,6 +572,7 @@ html.ph-gal .gal-bar i{position:absolute;inset:0;background:var(--ivory);transfo
           <img class="svc-thumb" src="../../assets/img/svc-property-800.webp" width="800" height="367" alt="" loading="lazy" decoding="async">
         </li>
       </ol>
+      </div>
       <ul class="plogos" aria-label="Technology partners">
         <li><img src="../../assets/logo/partner-01.png" width="300" height="200" alt="SuiteFiles" loading="lazy" decoding="async"></li>
         <li><img src="../../assets/logo/partner-02.png" width="300" height="200" alt="MYOB Diamond Partner" loading="lazy" decoding="async"></li>
@@ -708,6 +768,119 @@ document.addEventListener('DOMContentLoaded', function () {
     var hero = $('.hero'), h1 = $('h1', hero), img = $('.hero-card img');
     var mm = gsap.matchMedia();
 
+    /* services as a book, built from the list (which stays as the reduced-motion version) */
+    var svcStage = $('.svc-stage');
+    function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') }
+    var svc = $$('.svc > li').map(function (li) {
+      var a = $('h3 a', li);
+      return { n: $('.num', li).textContent.trim(), href: a.getAttribute('href'), title: esc(a.textContent.trim()), one: esc($('.one', li).textContent.trim()),
+        sub: $$('.sub li', li).map(function (x) { return '<li>' + esc(x.textContent.trim()) + '</li>' }).join(''), img: $('.svc-thumb', li).getAttribute('src') };
+    });
+
+    /* the book is a visual presentation: hidden from screen readers and out of the tab order; the plain list stays in the page, visually hidden, for them */
+    function bookOn(root){ root.querySelectorAll('a, button').forEach(function(x){ x.tabIndex = -1; }); svcStage.querySelector('.svc').classList.add('sr'); }
+    function bookOff(){ svcStage.querySelector('.svc').classList.remove('sr'); }
+    var SN = svc.length, SNN = (SN < 10 ? '0' : '') + SN, SHADE = '';
+    function bkTitle(k) { return '<h3><a href="' + svc[k].href + '" target="_blank" rel="noopener">' + svc[k].title + '</a></h3>' }
+    function bkPhoto(k) { return '<figure class="bk-ph" aria-hidden="true"><img src="' + svc[k].img + '" width="800" height="367" alt="" decoding="async"></figure>' }
+    function bkWords(k) { return '<div class="bk-paper"><span class="bk-no" aria-hidden="true">' + svc[k].n + '</span>' + bkTitle(k) + '<p class="bk-one">' + svc[k].one + '</p><span class="bk-folio" aria-hidden="true">' + svc[k].n + ' / ' + SNN + '</span></div>' }
+    function bkPic(k) { return '<div class="bk-paper bk-pic">' + bkPhoto(k) + '<p class="bk-lbl">What this covers</p><ul class="bk-sub">' + svc[k].sub + '</ul></div>' }
+
+    /* laptops and tablets: an open book pinned while each stretch of scroll turns the right page over the spine.
+       Left page = a service's words, right page = its photo and what it covers; the leaf's back lands on the left as the next service. */
+    function book() {
+      var bk = d.createElement('div'); bk.className = 'bk'; bk.setAttribute('aria-hidden', 'true');
+      var html = '<div class="bk-page bk-left" style="z-index:1">' + bkWords(0) + '</div><div class="bk-page bk-right" style="z-index:1">' + bkPic(SN - 1) + '</div>';
+      for (var k = 0; k < SN - 1; k++) html += '<div class="bk-leaf" style="z-index:' + (SN - k + 1) + '"><div class="bk-face bk-front">' + bkPic(k) + SHADE + '</div><div class="bk-face bk-back">' + bkWords(k + 1) + SHADE + '</div></div>';
+      bk.innerHTML = html + '<span class="bk-spine" aria-hidden="true"></span>';
+      svcStage.appendChild(bk); svcStage.classList.add('has-bk'); bookOn(bk);
+      var leaves = $$('.bk-leaf', bk);
+      gsap.from(bk, { opacity: 0, duration: 1.2, ease: 'power2.out', scrollTrigger: { trigger: svcStage, start: 'top 80%', once: true } });
+      var turn = gsap.timeline({ scrollTrigger: { trigger: svcStage, start: function () { return 'top ' + hh() }, end: function () { return '+=' + Math.round(innerHeight * 0.9 * SN) }, pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+      leaves.forEach(function (lf, k) {
+        var fs = $('.bk-front', lf), bs = $('.bk-back', lf);
+        var nextImg = k < SN - 2 ? $('.bk-front .bk-ph img', leaves[k + 1]) : $('.bk-right .bk-ph img', bk);
+        turn.fromTo(lf, { rotationY: 0 }, { rotationY: -180, duration: 1, ease: 'power2.inOut' }, k)
+          .set(lf, { zIndex: 20 + k }, k + 0.5)
+          .fromTo(fs, {'--sh': 0}, {'--sh': 0.55, duration: 0.5, ease: 'power1.in' }, k)
+          .fromTo(bs, {'--sh': 0.5}, {'--sh': 0, duration: 0.5, ease: 'power1.out' }, k + 0.5)
+          .fromTo(bk, {'--cast': 0}, {'--cast': 0.5, duration: 0.5, ease: 'power1.in' }, k)
+          .to(bk, {'--cast': 0, duration: 0.5, ease: 'power1.out' }, k + 0.5)
+          .fromTo(nextImg, { scale: 1.1 }, { scale: 1, duration: 1, ease: 'power2.out' }, k);
+      });
+      turn.to({}, { duration: 0.8 });
+      /* a page in mid-turn is a moving picture, not reading text: keep it out of the accessibility tree until it lands */
+      var mid = leaves.map(function () { return false });
+      turn.eventCallback('onUpdate', function () {
+        leaves.forEach(function (lf, k) { var r = gsap.getProperty(lf, 'rotationY'), m = r < -2 && r > -178;
+          if (m !== mid[k]) { mid[k] = m; lf.inert = m; if (m) lf.setAttribute('aria-hidden', 'true'); else lf.removeAttribute('aria-hidden') } });
+        showFaces();
+      });
+      /* only the faces a reader can see are shown: the top page on each side, plus a page while it turns */
+      var pL = bk.querySelector('.bk-left'), pR = bk.querySelector('.bk-right'), shown = new Map();
+      function setV(el, on) { if (shown.get(el) === on) return; shown.set(el, on); el.style.visibility = on ? '' : 'hidden'; }
+      function showFaces() {
+        var rs = leaves.map(function (lf) { return gsap.getProperty(lf, 'rotationY'); }), flat = -1, done = -1;
+        rs.forEach(function (r, k) { if (r > -2 && flat < 0) flat = k; if (r < -178) done = k; });
+        setV(pL, done < 0); setV(pR, flat < 0);
+        leaves.forEach(function (lf, k) { var moving = rs[k] <= -2 && rs[k] >= -178;
+          setV(lf.querySelector('.bk-front'), k === flat || moving); setV(lf.querySelector('.bk-back'), k === done || moving); });
+      }
+      showFaces();
+      return function () { bk.remove(); svcStage.classList.remove('has-bk'); bookOff() };
+    }
+
+    /* phones: a one-page book in a tall track; the stage stays on screen with CSS sticky (native scroll).
+       The scroll position picks the page and pages turn one at a time until the book shows it; the arrows scroll there too. */
+    function phoneBook() {
+      var pb = d.createElement('div'); pb.className = 'pbk'; pb.setAttribute('aria-hidden', 'true');
+      var html = '';
+      for (var k = 0; k < SN; k++) html += '<div class="pbk-leaf" style="z-index:' + (SN - k) + '"><div class="bk-face bk-front pbk-front">' + bkPhoto(k) +
+        '<div class="bk-paper"><span class="bk-no" aria-hidden="true">' + svc[k].n + '</span>' + bkTitle(k) + '<p class="bk-one">' + svc[k].one + '</p><ul class="bk-sub">' + svc[k].sub + '</ul></div>' + SHADE +
+        '</div><div class="bk-face bk-back pbk-back" aria-hidden="true"><span>Tax Professionals</span>' + SHADE + '</div></div>';
+      pb.innerHTML = html;
+      var nav = d.createElement('div'); nav.className = 'pbk-nav'; nav.setAttribute('aria-hidden', 'true');
+      nav.innerHTML = '<button type="button" aria-label="Previous service"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg></button>' +
+        '<span class="pbk-count">01 / ' + SNN + '</span>' +
+        '<button type="button" aria-label="Next service"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>';
+      var trk = d.createElement('div'); trk.className = 'pbk-track'; trk.style.setProperty('--pages', SN);
+      var stk = d.createElement('div'); stk.className = 'pbk-sticky';
+      stk.append(pb, nav); trk.appendChild(stk); svcStage.appendChild(trk); svcStage.classList.add('has-bk'); bookOn(stk);
+      var leaves = $$('.pbk-leaf', pb), count = $('.pbk-count', nav), bt = $$('button', nav);
+      var cur = 0, target = 0, busy = false, tl = null;
+      function num(k) { return (k < 9 ? '0' : '') + (k + 1) + ' / ' + SNN }
+      function mark() { leaves.forEach(function (l, j) { l.classList.toggle('is-cur', j === cur); l.classList.toggle('is-under', j === cur + 1) }) }
+      function show() { count.textContent = num(cur); bt[0].disabled = cur === 0; bt[1].disabled = cur === SN - 1 }
+      function flip(dir) {
+        var k = dir > 0 ? cur : cur - 1; if (busy || k < 0 || k >= SN - 1) return;
+        busy = true;
+        var lf = leaves[k], fs = $('.pbk-front', lf), bs = $('.pbk-back', lf);
+        /* during the turn: the turning page (3D on) over the page it reveals */
+        leaves.forEach(function (l, j) { l.classList.toggle('is-cur', j === k); l.classList.toggle('is-under', j === k + 1) });
+        lf.classList.add('turning'); gsap.set(lf, { zIndex: 50 });
+        tl = gsap.timeline({ onComplete: function () { busy = false; lf.classList.remove('turning'); gsap.set(lf, { zIndex: SN - k, clearProps: 'transform' }); mark(); tl = null } });
+        tl.timeScale(1 + Math.min(2, Math.abs(target - cur) - 1) * 1.1);
+        if (dir > 0) tl.fromTo(lf, { rotationY: 0 }, { rotationY: -180, duration: 0.9, ease: 'power2.inOut' })
+          .fromTo(fs, {'--sh': 0}, {'--sh': 0.55, duration: 0.45, ease: 'power1.in' }, 0).fromTo(bs, {'--sh': 0.5}, {'--sh': 0, duration: 0.45 }, 0.45);
+        else tl.fromTo(lf, { rotationY: -180 }, { rotationY: 0, duration: 0.9, ease: 'power2.inOut' })
+          .fromTo(bs, {'--sh': 0}, {'--sh': 0.5, duration: 0.45 }, 0).fromTo(fs, {'--sh': 0.55}, {'--sh': 0, duration: 0.45, ease: 'power1.out' }, 0.45);
+        cur += dir; show();
+      }
+      function step() { if (!busy && cur !== target) flip(target > cur ? 1 : -1) }
+      function span() { return trk.offsetHeight - stk.offsetHeight }
+      function stickTop() { return hh() + 8 }
+      function at() { var sp = span(), prog = sp > 0 ? (stickTop() - trk.getBoundingClientRect().top + 10) / sp : 0;
+        return Math.max(0, Math.min(SN - 1, Math.floor(prog / 0.75 * (SN - 1) + 0.15))) }   /* all turns happen in the first 75% */
+      ScrollTrigger.create({ trigger: trk, start: 'top bottom', end: 'bottom top', onUpdate: function () { var t = at(); if (t !== target) { target = t; step() } } });
+      gsap.ticker.add(step);
+      function go(k) { k = Math.max(0, Math.min(SN - 1, k)); scrollTo({ top: trk.getBoundingClientRect().top + scrollY - stickTop() + span() * 0.75 * (k + 0.25) / (SN - 1), behavior: 'smooth' }) }
+      function prev() { go(cur - 1) } function next() { go(cur + 1) }
+      bt[0].addEventListener('click', prev); bt[1].addEventListener('click', next);
+      gsap.from(pb, { y: 40, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: trk, start: 'top 85%', once: true } });
+      mark(); show();
+      return function () { gsap.ticker.remove(step); if (tl) tl.kill(); trk.remove(); svcStage.classList.remove('has-bk'); bookOff() };
+    }
+
     /* three tiers, created first and top to bottom so later triggers measure the pin spacing:
        laptops get the pinned scenes with smooth scroll; touch tablets get the same scenes on native scroll;
        phones get portrait versions. ?fx forces the laptop tier. */
@@ -791,13 +964,16 @@ document.addEventListener('DOMContentLoaded', function () {
       });
       ptl.to({}, { duration: 0.4 });
 
+      /* services: the open book (created here so the pins stay in page order) */
+      var unBook = book();
+
       /* award: the photo zooms out from a close crop */
       gsap.timeline({ scrollTrigger: { trigger: '#award .aw-stage', start: function () { return 'top ' + hh() }, end: '+=60%', pin: true, scrub: 1 } })
         .fromTo('.aw-frame', { clipPath: 'inset(14% 18% 14% 18%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut' }, 0)
         .fromTo('.aw-frame img', { scale: 1.4 }, { scale: 1, ease: 'power2.inOut' }, 0);
 
       return function () {
-        H.classList.remove('fx');
+        unBook(); H.classList.remove('fx');
         $('.hero-card').appendChild(img); track.setAttribute('tabindex', '0');
         if (lenis) { gsap.ticker.remove(raf); lenis.destroy(); d.removeEventListener('click', onA) }
       };
@@ -863,13 +1039,16 @@ document.addEventListener('DOMContentLoaded', function () {
         if (i) gsap.to($('.pr-in', slides[i - 1]), { scale: 0.9, opacity: 0.3, ease: 'none', scrollTrigger: { trigger: s, start: 'top bottom', end: function () { return 'top ' + hh() }, scrub: true } });
       });
 
+      /* services: the one-page book */
+      var unBook = phoneBook();
+
       /* award: the photo opens from a close crop as it arrives (scrubbed, no pin) */
       gsap.timeline({ scrollTrigger: { trigger: '.aw-frame', start: 'top 92%', end: 'center 50%', scrub: 1 } })
         .fromTo('.aw-frame', { clipPath: 'inset(14% 18% 14% 18%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut' }, 0)
         .fromTo('.aw-frame img', { scale: 1.4 }, { scale: 1, ease: 'power2.inOut' }, 0);
 
       return function () {
-        H.classList.remove('ph', 'ph-gal'); track.setAttribute('tabindex', '0');
+        unBook(); H.classList.remove('ph', 'ph-gal'); track.setAttribute('tabindex', '0');
       };
     }
 
