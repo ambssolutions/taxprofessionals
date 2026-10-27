@@ -522,12 +522,18 @@ function collect(){
   const id = (dlg.querySelector('input[name="pick"]:checked')||{}).value;
   return { name: $("#fName").value.trim(), email: $("#fEmail").value.trim(), pick: id, shortlist: [...shortlist], notes: $("#fNotes").value.trim() };
 }
+function fontOf(c){
+  let k = 1; try { k = +(localStorage.getItem("tp-font-" + c.id) || 1); } catch (e) {}
+  const f = (c.fonts || [])[k - 1];
+  return f ? `option ${k} of 3 (${f[1] === f[2] ? f[1] : f[1] + " + " + f[2]}${k === 1 ? ", the original" : ""})` : "original";
+}
 function summary(d){
   const c = byId(d.pick);
   return [
     "Tax Professionals · website concept selection", "",
     `Preferred design: ${d.pick} · ${c.name} (inspired by ${c.insp})`,
-    `Link: ${new URL(url(c), location.href).href}`, "",
+    `Link: ${new URL(url(c), location.href).href}`,
+    `Font style: ${fontOf(c)}`, "",
     `Shortlist: ${d.shortlist.length ? d.shortlist.map(id=>`${id} ${byId(id).name}`).join(", ") : "(none)"}`, "",
     `Notes: ${d.notes || "(none)"}`, "",
     `From: ${d.name || "-"}${d.email ? " <"+d.email+">" : ""}`,
