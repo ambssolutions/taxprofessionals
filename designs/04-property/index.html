@@ -14,7 +14,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<script>(function(h){h.classList.add('js');try{if(matchMedia('(pointer:fine) and (min-width:1024px)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&(navigator.hardwareConcurrency||8)>4)h.classList.add('cap3d')}catch(e){}})(document.documentElement)</script>
+<!-- Motion tiers. m3 = the 3D structure scene runs (every tier except reduced motion).
+     lap = laptops with a fine pointer and more than 4 cores, or forced with ?fx: smooth scroll, cursor, pointer parallax, long pin.
+     tablet = touch tablets 768px and wider: the same scenes without smooth scroll, cursor or hover-only effects.
+     lite = phones and everything else: the same 3D scene, lighter canvas, short pin, touch extras. -->
+<script>(function(h){h.classList.add('js');try{var r=matchMedia('(prefers-reduced-motion: reduce)').matches,q=/[?&]fx(=|&|$)/.test(location.search);if(r)return;h.classList.add('m3');if(q||(matchMedia('(pointer:fine) and (min-width:1024px)').matches&&(navigator.hardwareConcurrency||8)>4))h.classList.add('lap');else if(matchMedia('(pointer:coarse) and (min-width:768px) and (min-height:600px)').matches)h.classList.add('tablet');else h.classList.add('lite')}catch(e){}})(document.documentElement)</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AccountingService","name":"Tax Professionals","legalName":"Tax Professionals Ltd","url":"https://www.taxprofessionals.co.nz/","email":"info@taxprofessionals.co.nz","telephone":["+6496250035","+6496250025","+64211419135"],"foundingDate":"1998","address":{"@type":"PostalAddress","streetAddress":"620 Manukau Road","addressLocality":"Epsom","addressRegion":"Auckland","postalCode":"1023","addressCountry":"NZ"},"openingHours":["Mo-Fr 09:30-17:30","Sa 11:30-15:00"],"sameAs":["https://www.facebook.com/TaxProfessionalsNZ/","https://nz.linkedin.com/company/tax-professionals-limited"]}</script>
 <style>
 :root{
@@ -99,7 +103,7 @@ h1,h2,h3{font-family:var(--disp);font-weight:500;letter-spacing:-.03em;text-wrap
 /* stage: hero + structures share one 3D space */
 .stage{position:relative;background:radial-gradient(120% 90% at 72% 40%,#06507f 0,var(--deep) 46%,var(--space) 100%)}
 .gl{display:none}
-.cap3d .gl{display:block;position:sticky;top:0;height:100vh;margin-bottom:-100vh;z-index:0;pointer-events:none;overflow:hidden}
+.m3 .gl{display:block;position:sticky;top:0;height:100vh;margin-bottom:-100vh;z-index:0;pointer-events:none;overflow:hidden}
 .gl canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1.6s ease}
 .gl.ready canvas{opacity:1}
 .gl::after{content:"";position:absolute;inset:0;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -110,45 +114,41 @@ h1,h2,h3{font-family:var(--disp);font-weight:500;letter-spacing:-.03em;text-wrap
 .gl.ready .tag{opacity:.38}
 .gl.ready .tag.on{opacity:1}
 
-/* hero */
+/* hero: centred copy, the 3D structure (or the photo) sits below it */
 .hero{position:relative;z-index:1}
-.hero-in{max-width:1480px;margin:0 auto;padding:0 var(--pad);min-height:calc(100vh - var(--hh));min-height:calc(100svh - var(--hh));display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(24px,4vw,64px)}
-.hero-copy{padding:clamp(20px,4vh,48px) 0}
-.hero h1{font-size:clamp(2.6rem,min(5.2vw,10vh),5.4rem);line-height:1;letter-spacing:-.045em;max-width:11ch;font-weight:500}
+.hero-in{max-width:1480px;margin:0 auto;padding:clamp(24px,5vh,64px) var(--pad) clamp(16px,3vh,32px);min-height:calc(100vh - var(--hh));min-height:calc(100svh - var(--hh));display:flex;flex-direction:column;align-items:center;text-align:center}
+.hero-copy{display:flex;flex-direction:column;align-items:center;width:100%}
+.hero h1{font-size:clamp(2.4rem,min(5vw,8.6vh),5.2rem);line-height:1;letter-spacing:-.045em;max-width:15ch;font-weight:500}
 .hero h1 .m{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
 .hero h1 .w{display:inline-block}
 .hero h1 em{font-style:normal;color:var(--green-t)}
-.lede{margin-top:clamp(16px,3vh,28px);max-width:33rem;font-size:clamp(1rem,min(1.3vw,2.5vh),1.16rem);color:#cfdee9}
-.hero-act{margin-top:clamp(22px,4vh,40px);display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
-.hero-note{margin-top:clamp(20px,4vh,40px);color:var(--mute);display:flex;gap:10px 22px;flex-wrap:wrap}
+.lede{margin:clamp(14px,2.6vh,26px) auto 0;max-width:62ch;font-size:clamp(1rem,min(1.3vw,2.5vh),1.16rem);color:#cfdee9}
+.hero-act{margin-top:clamp(18px,3.4vh,36px);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 26px}
+.hero-note{margin-top:clamp(14px,2.6vh,28px);color:var(--mute);display:flex;justify-content:center;gap:10px 22px;flex-wrap:wrap}
 .hero-note span::before{content:"";display:inline-block;width:6px;height:6px;margin:0 9px 2px 0;background:var(--green-l)}
-.hero-visual{position:relative;justify-self:end;width:100%;max-width:480px}
-.hero-visual img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:28px}
-.hero-visual::after{content:"";position:absolute;right:-14px;bottom:-14px;width:84px;height:84px;background:var(--green);z-index:-1}
-.hero-visual::before{content:"";position:absolute;right:30px;bottom:-30px;width:60px;height:60px;background:var(--blue);z-index:-2}
-.cap3d .hero-visual{display:none}
-.cap3d .hero-in{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+.hero-visual{position:relative;flex:1 1 auto;width:100%;max-width:640px;min-height:clamp(150px,24vh,300px);margin-top:clamp(18px,3vh,32px)}
+.hero-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%;border-radius:22px}
+.m3 .hero-visual img{display:none}
+.m3.nogl .hero-visual img{display:block}
 @media (max-width:1023px){
-  .hero-in{grid-template-columns:1fr;align-content:start;text-align:center;justify-items:center;gap:0;padding-top:clamp(28px,5vh,56px);padding-bottom:20px}
-  .hero-copy{padding:0;display:flex;flex-direction:column;align-items:center}
   .hero h1{font-size:clamp(2.4rem,min(11vw,6.4vh),4.2rem);max-width:12ch}
-  .hero-act{justify-content:center;flex-direction:column;width:100%;max-width:420px;gap:14px}
+  .hero-act{flex-direction:column;width:100%;max-width:420px;gap:14px}
   .hero-act .btn{width:100%}
-  .hero-note{justify-content:center;font-size:.72rem;margin-top:18px}
-  .hero-visual{justify-self:center;max-width:none;margin-top:22px;height:clamp(150px,calc(100svh - var(--hh) - 560px),420px)}
-  .hero-visual img{height:100%;aspect-ratio:auto;border-radius:22px;object-position:50% 38%}
-  .hero-visual::after,.hero-visual::before{display:none}
+  .hero-note{font-size:.72rem}
 }
 
-/* structures */
+/* structures: centred heading, then the situations panel and the diagram (the 3D scene frames itself on .dia) */
 .structs{position:relative;z-index:1;padding:clamp(72px,10vw,120px) var(--pad);border-top:1px solid var(--hair)}
-.cap3d .structs{height:100vh;padding:calc(var(--hh) + 2vh) var(--pad) 3vh;border-top:0;display:flex;align-items:center}
-.s-in{max-width:1480px;width:100%;margin:0 auto;display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:clamp(24px,4vw,64px);align-items:center}
-.panel{max-width:500px}
-.panel .count{display:flex;align-items:center;gap:12px;color:var(--green-t)}
-.panel .count i{flex:none;display:block;width:120px;height:1px;background:var(--hair);position:relative}
-.panel .count i::after{content:"";position:absolute;left:0;top:0;height:1px;width:calc(var(--p,1) * 25%);background:var(--green-l);transition:width .9s var(--ease)}
-.panel h2{margin-top:16px;font-size:clamp(1.9rem,min(3.2vw,6.4vh),3rem);line-height:1.05}
+.m3 .structs{height:100vh;padding:calc(var(--hh) + 2vh) var(--pad) 3vh;border-top:0;display:flex;align-items:center}
+.s-in{max-width:1480px;width:100%;margin:0 auto;display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);grid-template-areas:"head head" "panel dia";gap:clamp(14px,3vh,36px) clamp(24px,4vw,64px);align-items:center}
+.s-head{grid-area:head;text-align:center}
+.s-head .count{justify-content:center}
+.panel{grid-area:panel;max-width:500px;width:100%;justify-self:end}
+.dia{grid-area:dia}
+.s-head .count{display:flex;align-items:center;gap:12px;color:var(--green-t)}
+.s-head .count i{flex:none;display:block;width:120px;height:1px;background:var(--hair);position:relative}
+.s-head .count i::after{content:"";position:absolute;left:0;top:0;height:1px;width:calc(var(--p,1) * 25%);background:var(--green-l);transition:width .9s var(--ease)}
+.s-head h2{margin-top:12px;font-size:clamp(1.9rem,min(3.2vw,6.4vh),3rem);line-height:1.05}
 .choices{margin-top:clamp(16px,3vh,26px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .choice{min-height:46px;padding:8px 14px;border-radius:12px;border:1px solid var(--hair);background:rgba(2,31,53,.55);color:#d7e5ef;font:500 .93rem/1.2 var(--sans);text-align:left;cursor:pointer;display:flex;align-items:center;gap:10px;transition:border-color .4s,background .4s,color .4s}
 .choice span{font:500 .72rem/1 var(--mono);color:var(--mute);transition:color .4s}
@@ -181,23 +181,35 @@ html:not(.js) .ex+.ex{margin-top:14px}
 .hs path{fill:none;stroke:rgba(234,242,247,.22);stroke-width:1.4;stroke-linejoin:round}
 .hs.on path{stroke:var(--green-t);fill:rgba(98,180,68,.18)}
 @media (max-width:1023px){
-  .s-in{grid-template-columns:1fr}
-  .panel{max-width:640px;margin:0 auto;width:100%}
-  .panel .count,.panel h2{justify-content:center;text-align:center}
-  .dia{grid-row:2}
+  .s-in{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "dia" "panel"}
+  .panel{max-width:640px;margin:0 auto;justify-self:center}
   .nd .t{font-size:23px}.nd .s{font-size:15px}.ll{font-size:13px}
+  /* phones and portrait tablets: the pinned scene is one screen, the diagram takes the space that is left */
+  .m3 .structs{height:100vh;height:100svh;padding:calc(var(--hh) + 12px) var(--pad) 16px}
+  .m3 .s-in{height:100%;grid-template-rows:auto minmax(0,1fr) auto;align-items:stretch;gap:12px}
+  .m3 .dia{aspect-ratio:auto;max-width:none;width:100%;height:100%;min-height:110px}
+}
+@media (max-width:767px){
+  .m3 .structs{padding-bottom:calc(82px + env(safe-area-inset-bottom))}
+  .m3 .s-head h2{margin-top:8px;font-size:clamp(1.6rem,7.6vw,2rem)}
+  .m3 .choices,.m3 .exs{margin-top:12px}
+  .m3 .caveat{margin-top:10px;padding-top:8px;font-size:.8rem;line-height:1.45}
+  .tag small{display:none}
+  .tag b{font-size:.86rem}
 }
 @media (max-width:420px){.choice{font-size:.88rem;padding:8px 10px}}
 
 /* experience: horizontal wipe */
 .xp{background:var(--ice);color:var(--dark)}
-.xp-in{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(28px,5vw,80px);align-items:center}
+.xp-in{margin-top:clamp(36px,5vw,56px);display:grid;justify-items:center;gap:clamp(28px,4vw,48px)}
+.xp-ph{width:100%;max-width:880px}
+.xp-t{width:100%;max-width:620px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.xp-t .ticks{width:100%;text-align:left}
 .xp-ph{position:relative;margin:0;border-radius:24px;overflow:hidden;background:var(--deep)}
-.xp-ph img{width:100%;aspect-ratio:4/3.4;object-fit:cover;object-position:40% 50%}
+.xp-ph img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:40% 50%}
 .xp-ph figcaption{position:absolute;left:16px;bottom:16px;padding:8px 12px;border-radius:8px;background:rgba(2,31,53,.86);color:#fff;font-size:.82rem}
-.xp-t h2{font-size:clamp(2rem,min(3.8vw,7vh),3.2rem);line-height:1.06}
-.xp-t>p{margin-top:18px;color:var(--dmute);font-size:1.08rem}
-.xp-t .who{margin-top:22px;display:flex;align-items:center;gap:14px}
+.xp .sec-head p{color:var(--dmute);max-width:62ch;margin-left:auto;margin-right:auto}
+.xp-t .who{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
 .xp-t .who img{width:56px;height:56px;border-radius:50%;object-fit:cover;background:#fff;border:1px solid var(--dline)}
 .xp-t .who b{display:block;font:500 1.02rem/1.3 var(--disp)}
 .xp-t .who span{font-size:.9rem;color:var(--dmute)}
@@ -205,7 +217,7 @@ html:not(.js) .ex+.ex{margin-top:14px}
 .ticks li{position:relative;padding:11px 0 11px 30px;border-bottom:1px solid var(--dline);font-size:.98rem}
 .ticks li::before{content:"";position:absolute;left:2px;top:19px;width:12px;height:7px;border-left:2px solid var(--green-d);border-bottom:2px solid var(--green-d);transform:rotate(-45deg)}
 .xp-t .more{margin-top:20px}
-@media (max-width:900px){.xp-in{grid-template-columns:1fr}.xp-ph img{aspect-ratio:16/10}}
+
 
 /* investor questions: hover reveal rows */
 .qs-sec{background:var(--ice);color:var(--dark);padding-top:0}
@@ -260,20 +272,21 @@ html:not(.js) .ex+.ex{margin-top:14px}
 /* people */
 .people{background:var(--space)}
 .leads{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.lead{border:1px solid var(--hair);border-radius:22px;padding:clamp(20px,2.4vw,30px);background:var(--deep);text-align:left}
-.lead img{width:112px;height:112px;border-radius:50%;object-fit:cover;background:#fff;border:1px solid var(--line)}
+.lead{border:1px solid var(--hair);border-radius:22px;padding:clamp(20px,2.4vw,30px);background:var(--deep);text-align:center}
+.lead img{margin:0 auto;width:112px;height:112px;border-radius:50%;object-fit:cover;background:#fff;border:1px solid var(--line)}
 .lead h3{margin-top:18px;font-size:1.45rem}
 .lead .role{margin-top:4px;color:var(--green-t)}
 .lead .cred{margin-top:10px;color:#cddce7;font-size:.95rem;text-wrap:pretty}
 .mates{margin-top:16px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-.mate{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;border:1px solid var(--hair);text-align:left}
+.mate{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 12px;border-radius:16px;border:1px solid var(--hair);text-align:center}
 .mate img,.mono-av{flex:none;width:48px;height:48px;border-radius:50%;object-fit:cover;background:#fff}
 .mono-av{display:grid;place-items:center;background:var(--deep);border:1px solid var(--line);font:500 .9rem/1 var(--mono);color:var(--green-t)}
 .mate b{display:block;font:500 .98rem/1.25 var(--disp)}
 .mate span{display:block;font-size:.84rem;color:var(--mute)}
+.mate .mono-av{display:grid;font-size:.9rem;color:var(--green-t)}
 @media (max-width:1100px){.mates{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:860px){.leads{grid-template-columns:1fr}}
-@media (max-width:520px){.mates{grid-template-columns:1fr}}
+@media (max-width:520px){.mate{padding:14px 8px}}
 
 /* promises: sticky stack */
 .prom{background:var(--deep)}
@@ -292,17 +305,15 @@ html:not(.js) .ex+.ex{margin-top:14px}
 
 /* award + testimonial */
 .award{background:var(--abyss)}
-.aw{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,80px);align-items:center}
-.aw figure{position:relative;max-width:460px;justify-self:center;width:100%}
-.aw figure img{border-radius:20px;width:100%}
-.aw figure::after{content:"";position:absolute;left:-12px;top:-12px;width:56px;height:56px;background:var(--green);z-index:-1}
-.aw figure{z-index:0}
-.aw h2{font-size:clamp(1.9rem,min(3.4vw,6.4vh),2.9rem);line-height:1.08}
-.aw .sub{margin-top:14px;color:var(--mute)}
-.tq{margin-top:clamp(28px,4vw,44px);padding-top:clamp(24px,3vw,36px);border-top:1px solid var(--hair)}
+.aw{margin-top:clamp(36px,5vw,56px);display:grid;justify-items:center;gap:clamp(28px,4vw,48px)}
+.aw-ph{position:relative;z-index:0;max-width:560px;width:100%}
+.aw-ph img{border-radius:20px;width:100%}
+.aw-ph::after{content:"";position:absolute;left:-12px;top:-12px;width:56px;height:56px;background:var(--green);z-index:-1}
+.award .sec-head h2{font-size:clamp(1.9rem,min(3.4vw,6.4vh),2.9rem);line-height:1.08}
+.tq{max-width:62ch;padding-top:clamp(22px,3vw,32px);border-top:1px solid var(--hair);text-align:center}
 .tq blockquote{font:400 clamp(1.12rem,1.7vw,1.42rem)/1.55 var(--disp);color:#fff;letter-spacing:-.01em;text-wrap:pretty}
 .tq figcaption{margin-top:16px;color:var(--green-t)}
-@media (max-width:900px){.aw{grid-template-columns:1fr}.aw .txt{text-align:center}}
+
 
 /* dates */
 .cal .sec-head p{color:var(--dmute)}
@@ -417,6 +428,15 @@ html:not(.js) .ex+.ex{margin-top:14px}
   .site-footer{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
 }
 
+/* touch tiers: tap ripple, reading progress, rows that light as they pass the middle of the screen */
+.btn,.choice{position:relative;overflow:hidden;isolation:isolate}
+.rp{position:absolute;z-index:-1;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:currentColor;opacity:0;pointer-events:none}
+.prog{display:none}
+.lite .prog,.tablet .prog{display:block;position:fixed;left:0;right:0;top:var(--hh);z-index:59;height:2px;background:var(--green-l);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+.qrow.lit::before{transform:none}
+.qrow.lit h3{color:var(--blue)}
+.qrow h3{transition:transform .8s var(--ease),color .8s}
+
 /* cursor */
 .cur{position:fixed;left:0;top:0;z-index:90;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1px solid var(--green-l);pointer-events:none;opacity:0;transition:opacity .4s,width .5s var(--ease),height .5s var(--ease),margin .5s var(--ease),background .5s}
 .cur.on{opacity:1}
@@ -446,6 +466,7 @@ html:not(.js) .ex+.ex{margin-top:14px}
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="prog" aria-hidden="true"></div>
 <header class="site-header" id="top">
   <div class="hd">
     <a class="brand" href="#top"><img src="../../assets/logo/logo.webp" width="500" height="91" alt="Tax Professionals"></a>
@@ -488,15 +509,17 @@ html:not(.js) .ex+.ex{margin-top:14px}
         </div>
         <p class="hero-note mono"><span>First consultation free on all matters</span></p>
       </div>
-      <figure class="hero-visual"><img src="../../assets/img/community-800.webp" width="800" height="800" fetchpriority="high" alt="The Tax Professionals team outside the office at 620 Manukau Road"></figure>
+      <figure class="hero-visual"><img src="../../assets/img/community-800.webp" width="800" height="800" decoding="async" alt="The Tax Professionals team outside the office at 620 Manukau Road"></figure>
     </div>
   </section>
 
   <section class="structs" id="structures" aria-labelledby="st-title">
     <div class="s-in">
-      <div class="panel">
+      <div class="s-head">
         <p class="count mono" aria-hidden="true"><span class="cn">01</span><i></i><span>04</span></p>
         <h2 id="st-title">How property can be held</h2>
+      </div>
+      <div class="panel">
         <div class="choices" role="group" aria-label="Choose a situation">
           <button class="choice" type="button" data-s="one" aria-pressed="true"><span>01</span>One rental</button>
           <button class="choice" type="button" data-s="several" aria-pressed="false"><span>02</span>Several rentals</button>
@@ -543,21 +566,25 @@ html:not(.js) .ex+.ex{margin-top:14px}
 </div>
 
 <section class="sec xp ice" id="property" aria-labelledby="xp-title">
-  <div class="wrap xp-in">
-    <figure class="xp-ph"><img src="../../assets/img/office-meeting-1600.webp" srcset="../../assets/img/office-meeting-800.webp 800w, ../../assets/img/office-meeting-1600.webp 1600w" sizes="(max-width:900px) 92vw, 640px" width="1600" height="900" loading="lazy" decoding="async" alt="Varun Gupta with a client signing papers at the Epsom office"><figcaption>Varun Gupta with a client in Epsom</figcaption></figure>
-    <div class="xp-t">
+  <div class="wrap">
+    <div class="sec-head">
       <h2 class="rv" id="xp-title">Advice from someone who invests and develops too</h2>
       <p class="rv">Varun Gupta, our partner, is an avid property investor and developer with first-hand experience of the pitfalls and challenges. Practical advice on optimal structuring of your property investments and developments, to keep up with the ever-changing property taxation laws and regulations.</p>
-      <div class="who rv"><img src="../../assets/img/varun-800.webp" width="500" height="500" loading="lazy" decoding="async" alt="Varun Gupta"><div><b>Varun Gupta, Partner</b><span>MBA, Chartered Accountant (NZ), Certified Business Advisor</span></div></div>
-      <ul class="ticks rv">
-        <li>Property strategy</li>
-        <li>Structuring: personal, look-through company or trust</li>
-        <li>Returns and financial statements</li>
-        <li>Cash flow tools for hold and trade</li>
-        <li>Introductions to alliance partners and mentoring programmes</li>
-        <li>Family Trust Management &amp; Advisory</li>
-      </ul>
-      <p class="more rv"><a class="tlink" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">Property Investment &amp; Development on our site</a></p>
+    </div>
+    <div class="xp-in">
+      <figure class="xp-ph"><img src="../../assets/img/office-meeting-1600.webp" srcset="../../assets/img/office-meeting-800.webp 800w, ../../assets/img/office-meeting-1600.webp 1600w" sizes="(max-width:900px) 92vw, 640px" width="1600" height="900" loading="lazy" decoding="async" alt="Varun Gupta with a client signing papers at the Epsom office"><figcaption>Varun Gupta with a client in Epsom</figcaption></figure>
+      <div class="xp-t">
+        <div class="who rv"><img src="../../assets/img/varun-800.webp" width="500" height="500" loading="lazy" decoding="async" alt="Varun Gupta"><div><b>Varun Gupta, Partner</b><span>MBA, Chartered Accountant (NZ), Certified Business Advisor</span></div></div>
+        <ul class="ticks rv">
+          <li>Property strategy</li>
+          <li>Structuring: personal, look-through company or trust</li>
+          <li>Returns and financial statements</li>
+          <li>Cash flow tools for hold and trade</li>
+          <li>Introductions to alliance partners and mentoring programmes</li>
+          <li>Family Trust Management &amp; Advisory</li>
+        </ul>
+        <p class="more rv"><a class="tlink" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">Property Investment &amp; Development on our site</a></p>
+      </div>
     </div>
   </div>
 </section>
@@ -652,11 +679,13 @@ html:not(.js) .ex+.ex{margin-top:14px}
 </section>
 
 <section class="sec award" id="award" aria-labelledby="aw-title">
-  <div class="wrap aw">
-    <figure class="rv"><img src="../../assets/img/award-800.webp" width="800" height="488" loading="lazy" decoding="async" alt="Varun Gupta receiving Accountant of the Year on stage with Grant Robertson and Paul Goldsmith"></figure>
-    <div class="txt">
+  <div class="wrap">
+    <div class="sec-head">
       <h2 class="rv" id="aw-title">Accountant of the Year 2019-2020</h2>
       <p class="sub rv">Twelfth Annual Indian Newslink Indian Business Awards, 25 November 2019, SkyCity. Also a finalist, Small Business of the Year.</p>
+    </div>
+    <div class="aw">
+      <figure class="aw-ph rv"><img src="../../assets/img/award-800.webp" width="800" height="488" loading="lazy" decoding="async" alt="Varun Gupta receiving Accountant of the Year on stage with Grant Robertson and Paul Goldsmith"></figure>
       <figure class="tq">
         <blockquote><p class="tq-p">We have been dealing with Varun Gupta at Tax Professionals for over a year now. The advice we have received from Varun and his team has been on point, on time and meaningful. We truly work as partners that has helped our business navigate through some turbulent times. Cannot recommend them enough.</p></blockquote>
         <figcaption class="mono">Infinity Flowers, client</figcaption>
@@ -766,13 +795,14 @@ html:not(.js) .ex+.ex{margin-top:14px}
 
 <script src="../../assets/vendor/gsap.min.js" defer></script>
 <script src="../../assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="../../assets/vendor/SplitText.min.js" defer></script>
 <script src="../../assets/vendor/lenis.min.js" defer></script>
 <script>
 (function(){
   var d=document,h=d.documentElement,b=d.body;
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine=matchMedia('(pointer: fine)').matches&&!reduce;
-  var cap=h.classList.contains('cap3d');
+  var m3=h.classList.contains('m3'),lap=h.classList.contains('lap'),tablet=h.classList.contains('tablet');
   if(fine)h.classList.add('fine-ui');
 
   // menu
@@ -818,7 +848,7 @@ html:not(.js) .ex+.ex{margin-top:14px}
     if(pin){var y=pin.start+(i+.5)/4*(pin.end-pin.start);if(window.__lenis)window.__lenis.scrollTo(y,{duration:1.8});else scrollTo({top:y,behavior:'smooth'})}
     else apply(x.dataset.s);
   })});
-  if(IO&&!reduce&&!cap){
+  if(IO&&!reduce&&!m3){
     q('.ln,.dot,.ll,.nd,.hs').forEach(function(el){el.classList.remove('on')});
     var bo=new IntersectionObserver(function(es){if(es[0].isIntersecting){bo.disconnect();setTimeout(function(){apply(cur,true)},150)}},{threshold:.35});
     bo.observe(dia);
@@ -858,13 +888,14 @@ html:not(.js) .ex+.ex{margin-top:14px}
   }
 
   d.addEventListener('DOMContentLoaded',function(){
-    var G=window.gsap,ST=window.ScrollTrigger;
+    var G=window.gsap,ST=window.ScrollTrigger,SPL=window.SplitText;
     if(reduce||!G||!ST){return}
-    G.registerPlugin(ST);
+    G.registerPlugin(ST);if(SPL)G.registerPlugin(SPL);
+    ST.config({ignoreMobileResize:true});
 
-    // smooth scroll on laptops
+    // smooth scroll on laptops only (touch keeps native scroll)
     var lenis=null;
-    if(cap&&window.Lenis){
+    if(lap&&window.Lenis){
       lenis=window.__lenis=new Lenis({lerp:.085});
       lenis.on('scroll',ST.update);
       G.ticker.add(function(t){lenis.raf(t*1000)});G.ticker.lagSmoothing(0);
@@ -879,16 +910,21 @@ html:not(.js) .ex+.ex{margin-top:14px}
       });
     }
 
-    // signature scene: pin the structures and move through the four situations
-    if(cap){
+    var mm=G.matchMedia();
+
+    // signature scene: pin the structures and move the camera through the four situations.
+    // Laptops and tablets get the long pin; phones a short one (150% of the screen).
+    if(m3){
       apply('one',true);
-      pin=ST.create({trigger:sec,start:'top top',end:'+=300%',pin:true,anticipatePin:1,
-        onUpdate:function(s){var i=Math.min(3,Math.floor(s.progress*4));if(KEYS[i]!==cur)apply(KEYS[i]);if(GL)GL.prog=s.progress}});
+      mm.add({phone:'(max-width:767px)',wide:'(min-width:768px)'},function(ctx){
+        pin=ST.create({trigger:sec,start:'top top',end:ctx.conditions.phone?'+=150%':'+=300%',pin:true,anticipatePin:1,
+          onUpdate:function(s){var i=Math.min(3,Math.floor(s.progress*4));if(KEYS[i]!==cur)apply(KEYS[i]);if(GL)GL.prog=s.progress}});
+        if(GL)GL.measure();
+        return function(){pin=null}
+      });
       var start3d=function(){initGL()};
-      if(d.readyState==='complete')setTimeout(start3d,60);else addEventListener('load',function(){setTimeout(start3d,60)});
-      cursor();
-    } else {
-      // phones and smaller screens: the SVG draws on its own
+      if(d.readyState==='complete')setTimeout(start3d,lap?60:240);else addEventListener('load',function(){setTimeout(start3d,lap?60:240)});
+      if(lap)cursor();
     }
 
     // section transition: the experience panel opens out of the 3D space
@@ -910,13 +946,49 @@ html:not(.js) .ex+.ex{margin-top:14px}
       tr.style.transform='translate3d('+x.toFixed(2)+'px,0,0) skewX('+sk.toFixed(2)+'deg)';
     });
 
-    // testimonial lights up word by word
-    var tp=d.querySelector('.tq-p');
-    tp.innerHTML=tp.textContent.trim().split(/\s+/).map(function(w){return '<span class="tw">'+w+'</span>'}).join(' ');
-    G.fromTo('.tw',{opacity:.22},{opacity:1,stagger:.06,ease:'none',scrollTrigger:{trigger:'.tq',start:'top 82%',end:'bottom 52%',scrub:true}});
+    // testimonial lights up word by word. Words are only dimmed while the quote is on screen.
+    var tp=d.querySelector('.tq-p'),tw;
+    if(SPL){tw=SPL.create(tp,{type:'words',aria:'none'}).words}
+    else{tp.innerHTML=tp.textContent.trim().split(/\s+/).map(function(w){return '<span class="tw">'+w+'</span>'}).join(' ');tw=tp.querySelectorAll('.tw')}
+    var twTl=G.timeline({paused:true}).fromTo(tw,{opacity:.3},{opacity:1,stagger:.06,ease:'none',immediateRender:false});
+    function twBright(){twTl.pause();G.set(tw,{opacity:1})}
+    ST.create({trigger:'.tq',start:'top bottom',end:'bottom 50%',
+      onUpdate:function(s){if(s.isActive)twTl.progress(Math.max(.0001,s.progress))},
+      onLeave:twBright,onLeaveBack:twBright});
 
     // promises: each card settles back slightly as the next one lands
     G.utils.toArray('.pc').forEach(function(c,i,all){if(i===all.length-1)return;G.to(c,{scale:.96,ease:'none',scrollTrigger:{trigger:all[i+1],start:'top bottom',end:'top 30%',scrub:true}})});
+
+    // touch tiers (phones, tablets and lighter laptops): the laptop scenes stay as they are,
+    // these moments replace the hover and cursor effects with scroll and tap ones
+    if(!lap){
+      // section headings rise line by line through masks
+      if(SPL)G.utils.toArray('main h2:not(#st-title)').forEach(function(el){
+        SPL.create(el,{type:'lines',mask:'lines',autoSplit:true,linesClass:'ln-t',onSplit:function(self){
+          return G.from(self.lines,{yPercent:110,duration:1.2,stagger:.1,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}});
+        }});
+      });
+      // photos open with a clip-path wipe and settle from a slow inner scale
+      G.utils.toArray('.card figure,.aw-ph').forEach(function(f){
+        var im=f.querySelector('img');
+        var aw=f.classList.contains('aw-ph');
+        G.fromTo(f,{clipPath:'inset(0% 0% 100% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:1.4,ease:'power3.inOut',clearProps:aw?'clipPath':'',scrollTrigger:{trigger:f,start:'top 88%',once:true}});
+        // the award figure does not clip (its brand square sits outside), so only the clipped card photos scale
+        if(!aw)G.fromTo(im,{scale:1.15},{scale:1,ease:'none',scrollTrigger:{trigger:f,start:'top bottom',end:'bottom top',scrub:true}});
+      });
+      // investor questions: the row in the middle of the screen lights up (the hover effect on laptops)
+      G.utils.toArray('.qrow').forEach(function(r){ST.create({trigger:r,start:'top 64%',end:'bottom 40%',toggleClass:'lit'})});
+      // reading progress under the header
+      G.to('.prog',{scaleX:1,ease:'none',scrollTrigger:{trigger:d.documentElement,start:0,end:'max',scrub:.3}});
+      // tap ripple on buttons and situation choices
+      d.addEventListener('pointerdown',function(e){
+        var t=e.target.closest('.btn,.choice');if(!t||e.pointerType==='mouse')return;
+        var r=t.getBoundingClientRect(),s=d.createElement('span');s.className='rp';s.setAttribute('aria-hidden','true');
+        s.style.left=(e.clientX-r.left)+'px';s.style.top=(e.clientY-r.top)+'px';t.appendChild(s);
+        var sc=Math.hypot(r.width,r.height)/8;
+        G.fromTo(s,{scale:0,opacity:.32},{scale:sc,opacity:0,duration:1.1,ease:'power2.out',onComplete:function(){s.remove()}});
+      },{passive:true});
+    }
 
     addEventListener('load',function(){ST.refresh()});
   });
@@ -929,12 +1001,12 @@ html:not(.js) .ex+.ex{margin-top:14px}
     d.addEventListener('mouseleave',function(){c.classList.remove('on')});
   }
 
-  // three.js scene, laptops only, after load
+  // three.js scene, after load: one canvas, capped at DPR 2 on laptops and 1.5 on tablets and phones
   function initGL(){
     var wrap=d.querySelector('.gl'),cv=wrap.querySelector('canvas');
     import('../../assets/vendor/three.module.min.js').then(function(T){
       var R=new T.WebGLRenderer({canvas:cv,antialias:true,alpha:true,powerPreference:'high-performance'});
-      R.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+      R.setPixelRatio(Math.min(window.devicePixelRatio||1,lap?2:1.5));
       R.setClearColor(0x000000,0);
       var scene=new T.Scene();scene.fog=new T.Fog(0x033F66,14,30);
       var cam=new T.PerspectiveCamera(34,1,.1,90);
@@ -990,7 +1062,7 @@ html:not(.js) .ex+.ex{margin-top:14px}
         wrap.querySelectorAll('.tag').forEach(function(t){t.classList.toggle('on',s.n.indexOf(t.dataset.k)>-1)});
       }
       var label='';
-      GL={prog:0,state:function(k){if(label!=='hero')setState(S[k]);label2=k}};
+      GL={prog:0,state:function(k){if(label!=='hero')setState(S[k]);label2=k},measure:function(){measure()}};
       var label2=cur;
 
       // camera keyframes: overview, then the four situations
@@ -1000,15 +1072,48 @@ html:not(.js) .ex+.ex{margin-top:14px}
       function camAt(t){var k=t+1,i=Math.max(0,Math.min(3,Math.floor(k))),f=sm(k-i);if(k>=4){i=3;f=1}tp.copy(K[i].p).lerp(K[i+1].p,f);tt.copy(K[i].t).lerp(K[i+1].t,f)}
       camAt(-1);cp.copy(tp);ctg.copy(tt);
 
-      var W=0,Hh=0;
-      function size(){W=wrap.clientWidth;Hh=wrap.clientHeight;R.setSize(W,Hh,false);cam.aspect=W/Hh;cam.setViewOffset(W,Hh,-W*.2,0,W,Hh);cam.updateProjectionMatrix()}
+      // framing: the scene centres itself on the hero's visual box, then on the diagram box of the pinned
+      // section, and scales to fit each box, so the same scene works on laptops, tablets and phones
+      var W=0,Hh=0,heroH=1,BX={hero:{x:0,y:0,w:1,h:1},dia:{x:0,y:0,w:1,h:1}},tagW={},tagH={};
+      var hv=d.querySelector('.hero-visual');
+      function measure(){
+        var sy=window.scrollY,r=hv.getBoundingClientRect(),q=dia.getBoundingClientRect(),sr=sec.getBoundingClientRect();
+        heroH=d.getElementById('hero').offsetHeight||1;
+        BX.hero={x:r.left+r.width/2,y:r.top+sy+r.height/2,w:r.width,h:r.height};
+        BX.dia={x:q.left+q.width/2,y:q.top-sr.top+q.height/2,w:q.width,h:q.height};
+        BX.headTop=sec.querySelector('.s-head').getBoundingClientRect().top-sr.top;
+        Object.keys(tags).forEach(function(k){tagW[k]=tags[k].offsetWidth;tagH[k]=tags[k].offsetHeight});
+      }
+      function size(){W=wrap.clientWidth;Hh=wrap.clientHeight;R.setSize(W,Hh,false);cam.aspect=W/Hh;measure()}
+      var tags={};wrap.querySelectorAll('.tag').forEach(function(t){tags[t.dataset.k]=t});
       size();new ResizeObserver(size).observe(wrap);
+      if(window.ScrollTrigger)ScrollTrigger.addEventListener('refresh',measure);
+      if(d.fonts&&d.fonts.ready)d.fonts.ready.then(measure);
+      var bx={x:0,y:0,w:0,h:0},clipT=0,clipB=0;
+      function frameTo(f){
+        var a=BX.hero,b=BX.dia;f=sm(f);
+        bx.x=a.x+(b.x-a.x)*f;bx.y=a.y+(b.y-a.y)*f;bx.w=a.w+(b.w-a.w)*f;bx.h=a.h+(b.h-a.h)*f;
+        // the hero box sits low on the first screen: the structure fills it and bleeds a little below the fold
+        var ph=W<768,col=W<1024,lift=bx.h*(.12-(col?.1:.02)*f);
+        // once the pin lets go, the scene leaves with its section
+        if(pin&&window.scrollY>pin.end)lift-=window.scrollY-pin.end;
+        var fw=ph?8.2:4.78+1.8*f,fh=3.82+(col?3.4:2)*f;
+        cam.zoom=Math.max(.2,Math.min(bx.h/fh,bx.w/fw)*6.725/Hh);
+        cam.setViewOffset(W,Hh,W/2-bx.x,Hh/2-(bx.y+lift),W,Hh);cam.updateProjectionMatrix();
+        // single-column layouts: the canvas is cut away over the section heading and below the diagram box,
+        // following the section as it arrives, pins and leaves, so the scene and its labels never run over text
+        if(col&&pin){
+          var yy=window.scrollY,off=yy<pin.start?pin.start-yy:yy>pin.end?pin.end-yy:0;
+          var A=Math.round(Math.min(Hh,Math.max(0,BX.headTop+off))),Bv=Math.round(Math.min(Hh,Math.max(0,BX.dia.y-BX.dia.h/2+off))),Cv=Math.round(Math.min(Hh,Math.max(0,BX.dia.y+BX.dia.h/2+off)));
+          var key=A+','+Bv+','+Cv;
+          if(key!==clipT){clipT=key;wrap.style.clipPath='polygon(0 0,100% 0,100% '+A+'px,0 '+A+'px,0 '+Bv+'px,100% '+Bv+'px,100% '+Cv+'px,0 '+Cv+'px)'}
+        }else if(clipT){clipT=0;wrap.style.clipPath=''}
+      }
 
       var mx=0,my=0,rx=0,ry=0;
-      addEventListener('mousemove',function(e){mx=e.clientX/innerWidth*2-1;my=e.clientY/innerHeight*2-1},{passive:true});
+      if(lap)addEventListener('mousemove',function(e){mx=e.clientX/innerWidth*2-1;my=e.clientY/innerHeight*2-1},{passive:true});
       var visible=true;new IntersectionObserver(function(es){visible=es[0].isIntersecting}).observe(d.querySelector('.stage'));
 
-      var tags={};wrap.querySelectorAll('.tag').forEach(function(t){tags[t.dataset.k]=t});
       var tmp=V(0,0,0),last=performance.now(),born=last,started=false;
       function ease(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}
       function frame(now){
@@ -1016,11 +1121,12 @@ html:not(.js) .ex+.ex{margin-top:14px}
         if(!visible||d.hidden){last=now;return}
         var dt=Math.min(.05,(now-last)/1000);last=now;
         // where are we: hero overview (-1) through the four situations (0..3)
-        var heroH=d.getElementById('hero').offsetHeight,y=window.scrollY,t;
+        var y=window.scrollY,t;
         if(pin&&y>=pin.start){var p4=pin.progress*4,i=Math.min(3,Math.floor(p4));t=i+sm((p4-i-.62)/.38);if(t>3)t=3}
         else t=-1+sm(y/Math.max(1,heroH));
         var want=t<-.45?'hero':label2;
         if(want!==label){label=want;setState(want==='hero'?HERO:S[want])}
+        frameTo(t+1);
         camAt(t);var k=1-Math.pow(.0016,dt);cp.lerp(tp,k);ctg.lerp(tt,k);cam.position.copy(cp);cam.lookAt(ctg);
         // cursor parallax and a slow orbit
         var tm=now/1000;rx+=(mx*.26+Math.sin(tm*.13)*.12-rx)*.04;ry+=(my*.07-ry)*.04;root.rotation.y=rx;root.rotation.x=ry;
@@ -1053,7 +1159,7 @@ html:not(.js) .ex+.ex{margin-top:14px}
           if(kk==='props')tmp.y-=.55;else tmp.y+=.95*o.g.scale.y;
           tmp.project(cam);
           var sx=(tmp.x*.5+.5)*W,sy=(-tmp.y*.5+.5)*Hh;
-          tg.style.transform='translate('+(sx-tg.offsetWidth/2).toFixed(1)+'px,'+(sy-(kk==='props'?0:tg.offsetHeight)).toFixed(1)+'px)';
+          tg.style.transform='translate('+(sx-tagW[kk]/2).toFixed(1)+'px,'+(sy-(kk==='props'?0:tagH[kk])).toFixed(1)+'px)';
         });
         if(!started){started=true;wrap.classList.add('ready');h.classList.add('gl-on')}
       }

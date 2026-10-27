@@ -55,3 +55,23 @@ Keep left-aligned: tick lists, FAQs, timelines, tables, forms, card body text. A
 or a photo grid, but the heading above them is centred.
 Check with /tmp/claude-0/-home-user-taxprofessionals/57a6ea05-06aa-58b8-9de9-8d26dcd3a61c/scratchpad/audit/align.mjs NN
 (prints headings and intros that are off-centre at 1440 and 390; aim for 0).
+
+## Photos are centred too (owner, angry: "told you 100 times")
+Centring covers PHOTOS, not only text. On every screen size:
+- Team and people cards: portrait centred at the top of the card, name, title and credentials centred under it.
+  No avatar-left / text-right rows. A list of names without photos may stay left-aligned.
+- Single photos (award, office, meeting, service photos, the director): centred on the column, above or below
+  centred copy. Never a photo pushed to one side beside text, on laptops either.
+- A row of several photos is fine if the row as a group is centred.
+- Full-bleed photos are fine.
+Check: node /tmp/claude-0/-home-user-taxprofessionals/57a6ea05-06aa-58b8-9de9-8d26dcd3a61c/scratchpad/audit/photos.mjs NN
+(must print 0 for both 1440 and 390), plus align.mjs NN at 0.
+
+## No text over background components (owner)
+Text must never sit on top of decorative shapes, cubes, big outline numbers, 3D canvases, SVG art, photos or other
+text, at any moment of the scroll, on phone, tablet or laptop. Allowed only: text on a full-bleed backdrop that fills
+its section (a hero photo with a scrim), and text inside its own opaque chip or card. Decorative numbers and shapes go
+beside, above or below the text, or are clipped so they never reach it; in pinned scenes the text and the art each
+keep their own box.
+Check: node /tmp/claude-0/-home-user-taxprofessionals/57a6ea05-06aa-58b8-9de9-8d26dcd3a61c/scratchpad/audit/overlap.mjs NN
+(390, 820 and 1440; aim for 0, and look at any flagged frame).

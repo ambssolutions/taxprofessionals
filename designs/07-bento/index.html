@@ -16,7 +16,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>(function(h){h.classList.add('js');try{var q=/[?&]fx\b/.test(location.search),rm=matchMedia('(prefers-reduced-motion: reduce)').matches;if(rm)h.classList.add('rm');if(!rm&&matchMedia('(min-width:1024px) and (min-height:600px)').matches&&(q||(matchMedia('(pointer:fine)').matches&&(navigator.hardwareConcurrency||8)>4)))h.classList.add('fx')}catch(e){}})(document.documentElement)</script>
+<!-- motion tiers: fx = laptop scenes (Lenis, cursor tilt); fx tablet = the same scenes on touch tablets 768px and wider, native scroll, no cursor; mo = phones and small or slower screens, portrait versions of the scenes; rm = reduced motion, static. -->
+<script>(function(h){h.classList.add('js');try{var q=/[?&]fx\b/.test(location.search),rm=matchMedia('(prefers-reduced-motion: reduce)').matches;if(rm){h.classList.add('rm');return}if(matchMedia('(min-width:1024px) and (min-height:600px)').matches&&(q||(matchMedia('(pointer:fine)').matches&&(navigator.hardwareConcurrency||8)>4)))h.classList.add('fx');else if(matchMedia('(pointer:coarse) and (min-width:768px)').matches)h.classList.add('fx','tablet');else h.classList.add('mo')}catch(e){}})(document.documentElement)</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"AccountingService","name":"Tax Professionals","legalName":"Tax Professionals Ltd","url":"https://www.taxprofessionals.co.nz/","email":"info@taxprofessionals.co.nz","telephone":["+6496250035","+6496250025","+64211419135"],"foundingDate":"1998","address":{"@type":"PostalAddress","streetAddress":"620 Manukau Road","addressLocality":"Epsom","addressRegion":"Auckland","postalCode":"1023","addressCountry":"NZ"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:30","closes":"17:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"11:30","closes":"15:00"}],"sameAs":["https://www.facebook.com/TaxProfessionalsNZ/","https://nz.linkedin.com/company/tax-professionals-limited"]}
 </script>
@@ -357,7 +358,7 @@ html.js .cal .rv.in{opacity:1;transform:none}
 .contact dd a{text-underline-offset:3px}
 .visit{margin-top:18px;font-size:.94rem;color:var(--muted);max-width:30em}
 .contact .face{padding:clamp(22px,3vw,32px)}
-.contact .c-mint .sq{--s:60px;right:18px;bottom:18px}
+.contact .c-mint .sq{--s:56px;right:18px;top:18px}
 form#enquiry{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .f{display:flex;flex-direction:column;gap:6px}
 .f.full,.form-foot,.note{grid-column:1/-1}
@@ -379,7 +380,7 @@ form#enquiry{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .partners li:hover img{filter:none;opacity:1}
 
 /* footer */
-footer{background:var(--deep);color:#fff;padding:56px 0 calc(28px + env(safe-area-inset-bottom))}
+body>footer{background:var(--deep);color:#fff;padding:56px 0 calc(28px + env(safe-area-inset-bottom))}
 .foot{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:32px;text-align:center}
 .foot .pill{display:inline-block;background:#fff;border-radius:14px;padding:8px 12px}
 .foot .pill img{height:36px;width:auto}
@@ -389,7 +390,7 @@ footer{background:var(--deep);color:#fff;padding:56px 0 calc(28px + env(safe-are
 .foot ul a{display:inline-block;padding:8px 2px;text-decoration:none;color:rgba(255,255,255,.92)}
 .foot ul a:hover{text-decoration:underline}
 .legal{margin-top:40px;padding-top:20px;border-top:1px solid var(--line-d);display:flex;flex-wrap:wrap;justify-content:center;gap:8px 24px;font-size:.88rem;color:rgba(255,255,255,.78);text-align:center}
-@media (max-width:899px){.foot{grid-template-columns:1fr}footer{padding-bottom:calc(96px + env(safe-area-inset-bottom))}}
+@media (max-width:899px){.foot{grid-template-columns:1fr}body>footer{padding-bottom:calc(96px + env(safe-area-inset-bottom))}}
 
 /* phone quick bar */
 .qbar{display:none}
@@ -400,6 +401,174 @@ footer{background:var(--deep);color:#fff;padding:56px 0 calc(28px + env(safe-are
   .qbar .q2{background:var(--deep);color:#fff}
   .js body.in-hero .qbar{transform:translateY(110%)}
 }
+
+/* ===== Embossed surfaces: blocks pressed up out of the ivory page, one light from the top left ===== */
+:root{
+  --emb:10px 12px 26px rgba(3,63,102,.17),-6px -6px 16px rgba(255,255,255,.7);
+  --emb-sm:4px 5px 12px rgba(3,63,102,.17),-3px -3px 9px rgba(255,255,255,.7);
+  --emb-in:inset 3px 3px 9px rgba(3,63,102,.18),inset -3px -3px 8px rgba(255,255,255,.8);
+  --emb-photo:12px 16px 34px -8px rgba(3,63,102,.34),-6px -6px 16px rgba(255,255,255,.6);
+  --hi:inset 0 1px 0 rgba(255,255,255,.75),inset 0 -2px 0 rgba(3,63,102,.05);
+  --in:inset 3px 3px 7px rgba(3,63,102,.16),inset -3px -3px 7px rgba(255,255,255,.85);
+  --press:inset 4px 4px 12px rgba(3,63,102,.2),inset -3px -3px 9px rgba(255,255,255,.8);
+  --btn-emb:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -2px 0 rgba(0,20,40,.28),0 10px 20px -10px rgba(3,63,102,.6),0 3px 6px -2px rgba(3,63,102,.3);
+  --btn-in:inset 0 2px 7px rgba(0,20,40,.45),0 1px 1px rgba(3,63,102,.15);
+  --key:inset 0 1px 0 #fff,inset 0 -3px 0 rgba(3,63,102,.13),0 7px 12px -5px rgba(0,18,36,.45),0 2px 3px rgba(0,18,36,.2);
+  --key-in:inset 0 2px 6px rgba(3,63,102,.3),inset 0 -1px 0 rgba(255,255,255,.6),0 1px 1px rgba(0,18,36,.2);
+  --raise-d:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -2px 0 rgba(0,14,30,.3),0 8px 14px -8px rgba(0,10,22,.8),0 2px 3px rgba(0,10,22,.3);
+}
+/* coloured surfaces: darker deboss, no white outer light */
+.c-blue,.c-deep,.c-green,.k-prop,.chooser,.dates,.pr-track .p1,.pr-track .p2,.pr-track .p4{
+  --in:inset 2px 2px 6px rgba(0,18,36,.34),inset -2px -2px 5px rgba(255,255,255,.2);
+  --hi:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -2px 0 rgba(0,18,36,.16);
+  --press:inset 4px 4px 12px rgba(0,18,36,.4),inset -2px -2px 6px rgba(255,255,255,.14)}
+.dates{--emb:12px 14px 28px rgba(0,14,30,.5);--emb-sm:5px 6px 14px rgba(0,14,30,.45)}
+.c-mint,.c-ivory,.plain,.pr-track .p3,.pr-track .p5{
+  --in:inset 3px 3px 7px rgba(3,63,102,.16),inset -3px -3px 7px rgba(255,255,255,.85);
+  --hi:inset 0 1px 0 rgba(255,255,255,.75),inset 0 -2px 0 rgba(3,63,102,.05);
+  --press:inset 4px 4px 12px rgba(3,63,102,.2),inset -3px -3px 9px rgba(255,255,255,.8)}
+
+/* tiles: raised blocks; the drop shadow sits on a pseudo-element so it can fade in as a tile rises */
+.tile{isolation:isolate}
+.tile::before{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--emb);z-index:-1;opacity:var(--lift,1);transition:opacity .25s var(--ease);pointer-events:none}
+.face{background-color:var(--ivory);box-shadow:var(--hi);transition:box-shadow .25s var(--ease),translate .25s var(--ease),scale .25s var(--ease)}
+.tile .face{border-color:transparent}
+.c-blue .face,.c-deep .face,.c-green .face{background-image:linear-gradient(180deg,rgba(255,255,255,.07),rgba(0,0,0,.05))}
+.tile:active::before,html.js:not(.rm) .tile.rv.in:active::before{opacity:0;transition:opacity .25s var(--ease)}
+.tile:active>.face{box-shadow:var(--press);translate:0 1px;scale:.992}
+html.js:not(.rm) .tile.rv::before{opacity:0;transition:opacity 1.1s var(--ease) calc(var(--rd,0s) + .3s)}
+html.js:not(.rm) .tile.rv.in::before{opacity:var(--lift,1)}
+html.mo.js .bento>.tile.rv{opacity:1;transform:none;transition:none}
+html.mo.js .bento>.tile.rv::before{transition:none}
+.ic,.c-blue .ic,.c-deep .ic,.c-green .ic,.k-prop .ic,.tray li .ic{background:transparent;border-color:transparent;box-shadow:var(--in)}
+.a-big{text-shadow:0 1px 0 rgba(255,255,255,.35),0 -1px 0 rgba(0,18,36,.16)}
+.hero-art{border-color:transparent;box-shadow:var(--emb-photo)}
+
+/* buttons: raised with a gentle gradient, pressed while tapped */
+.btn{transition:background .3s,color .3s,transform .5s var(--spring),border-color .3s,box-shadow .25s}
+.btn-green{background:linear-gradient(180deg,#1A7F24,#136A1C);box-shadow:var(--btn-emb)}
+.btn-green:hover{background:linear-gradient(180deg,#14701E,#0F5A17)}
+.btn-deep{background:linear-gradient(180deg,#05568B,#033F66);box-shadow:var(--btn-emb)}
+.btn-deep:hover{background:linear-gradient(180deg,#0670B0,#04649F)}
+.btn:active{box-shadow:var(--btn-in)}
+.menu-btn{border-color:transparent;background:var(--ivory);box-shadow:var(--emb-sm);transition:box-shadow .25s}
+.menu-btn[aria-expanded="true"],.menu-btn:active{box-shadow:var(--emb-in)}
+@media (max-width:899px){.nav{background:var(--ivory);border-color:transparent;box-shadow:var(--emb),var(--hi)}}
+
+/* picker: raised keys on the deep panel; a chosen answer is pressed in */
+.chooser{border-color:transparent;background-image:linear-gradient(180deg,#04497A,#033F66 45%);box-shadow:12px 14px 30px rgba(3,63,102,.28),-6px -6px 16px rgba(255,255,255,.6),inset 0 1px 0 rgba(255,255,255,.14)}
+.opt span{border-color:transparent;background:linear-gradient(180deg,#0B5D90,#074E7E);box-shadow:var(--raise-d);transition:background .3s,transform .5s var(--spring),color .3s,box-shadow .25s var(--ease),translate .25s var(--ease)}
+.opt:hover span{border-color:transparent}
+.opt span::before{border-color:rgba(255,255,255,.55);box-shadow:inset 1px 1px 3px rgba(0,14,30,.5)}
+.opt input:checked+span{background:#EDF2F5;color:var(--deep);border-color:transparent;box-shadow:inset 3px 3px 8px rgba(3,63,102,.35),inset -2px -2px 6px rgba(255,255,255,.9);translate:0 2px}
+.opt:hover input:checked+span{transform:none}
+.opt input:checked+span::before{box-shadow:inset 1px 1px 2px rgba(0,30,10,.4)}
+.ch-nav button{border-color:transparent;background:linear-gradient(180deg,#0B5D90,#074E7E);box-shadow:var(--raise-d);transition:transform .5s var(--spring),background .3s,box-shadow .25s,translate .25s}
+.ch-nav button:hover{background:linear-gradient(180deg,#0E679E,#08568A)}
+.ch-nav button:active{box-shadow:inset 0 2px 7px rgba(0,10,22,.6);translate:0 1px}
+.ch-nav .next,.res .btn{background:linear-gradient(180deg,#fff,#E6EDF2);color:var(--deep);box-shadow:inset 0 1px 0 #fff,inset 0 -2px 0 rgba(3,63,102,.16),0 8px 16px -8px rgba(0,10,22,.8),0 2px 3px rgba(0,10,22,.3)}
+.ch-nav .next:hover,.res .btn:hover{background:linear-gradient(180deg,#fff,var(--mint))}
+.ch-nav .next:active,.res .btn:active{box-shadow:inset 0 2px 7px rgba(3,63,102,.35)}
+.ch-nav button[disabled]{box-shadow:none;translate:none}
+.res ol li{border-color:transparent;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 6px 12px -6px rgba(0,10,22,.7)}
+.res ol li b{box-shadow:inset 2px 2px 4px rgba(0,30,10,.35),inset -1px -1px 3px rgba(255,255,255,.35)}
+.dots li{box-shadow:inset 1px 1px 3px rgba(0,10,22,.45)}
+.tray-wrap{border-color:transparent;background:var(--ivory);box-shadow:var(--emb),var(--hi)}
+.tray li{border-color:transparent;background:var(--ivory);box-shadow:var(--emb-sm),var(--hi);transition:background .3s,box-shadow .25s,translate .25s}
+.tray li.pick{background:var(--mint)}
+.tray li.pick:first-child{background:var(--green)}
+.tray li:active{box-shadow:var(--emb-in);translate:0 1px}
+
+/* team, promises, partners */
+.roster li{border-color:transparent;background:var(--ivory);box-shadow:var(--emb-sm),var(--hi);transition:transform .6s var(--spring),box-shadow .25s}
+.roster li:active{box-shadow:var(--emb-in)}
+.roster i{box-shadow:inset 2px 2px 5px rgba(0,18,36,.35),inset -2px -2px 4px rgba(255,255,255,.22)}
+.pf{border-color:transparent;box-shadow:0 8px 18px -8px rgba(0,18,36,.45)}
+.pr-view{padding:20px 0 40px}
+.pr-track li{border-color:transparent;box-shadow:var(--emb),var(--hi)}
+.pr-track .p3{background:var(--ivory)}
+.pr-track .p2,.pr-track .p4{background-image:linear-gradient(180deg,rgba(255,255,255,.07),rgba(0,0,0,.05))}
+.pr-track li b{background:transparent;color:inherit;border-color:transparent;box-shadow:var(--in)}
+.partners li{border-color:transparent;box-shadow:var(--emb-sm)}
+
+/* tax dates: raised keys that press in */
+.dt span{border-color:transparent;background:linear-gradient(180deg,#fff,#EDF1F4);box-shadow:var(--key);transition:translate .2s var(--ease),box-shadow .2s var(--ease)}
+.cal .plain .dt span{background:linear-gradient(180deg,#EFF7EB,#DAEBD2)}
+.dt span:active{translate:0 2px;box-shadow:var(--key-in)}
+.dt b{text-shadow:0 1px 0 #fff}
+html.js:not(.rm) .cal .rv.in .dt span{animation:keyTap .7s var(--ease) calc(var(--rd,0s) + 1s)}
+html.js:not(.rm) .cal .rv.in .dt span+span{animation-delay:calc(var(--rd,0s) + 1.15s)}
+html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s) + 1.3s)}
+@keyframes keyTap{45%{translate:0 3px;box-shadow:var(--key-in)}}
+
+/* questions and the form: raised folds that press in when open, debossed fields */
+.faq details{border-color:transparent;background:var(--ivory);box-shadow:var(--emb-sm),var(--hi);transition:background .5s,box-shadow .5s}
+.faq details[open]{background:var(--mint);box-shadow:var(--emb-in)}
+.faq summary::after{border-color:transparent;background-color:var(--ivory);box-shadow:var(--emb-sm)}
+.faq details[open] summary::after{background-color:transparent;box-shadow:var(--emb-in)}
+.f input,.f textarea{background:var(--ivory);border-color:rgba(3,63,102,.22);box-shadow:var(--emb-in)}
+.f input:focus,.f textarea:focus{background:#FBFAF6;box-shadow:var(--emb-in),0 0 0 3px rgba(4,100,159,.25)}
+@media (max-width:899px){
+  .qbar{background:var(--ivory);border-top-color:transparent;box-shadow:0 -10px 24px -14px rgba(3,63,102,.35)}
+  .qbar a{box-shadow:var(--btn-emb);transition:box-shadow .2s,translate .2s}
+  .qbar .q1{background:linear-gradient(180deg,#1A7F24,#136A1C)}
+  .qbar .q2{background:linear-gradient(180deg,#05568B,#033F66)}
+  .qbar a:active{box-shadow:var(--btn-in);translate:0 1px}
+}
+@media (max-width:599px){
+  :root{--emb:7px 8px 18px rgba(3,63,102,.17),-4px -4px 11px rgba(255,255,255,.7);--emb-sm:3px 4px 9px rgba(3,63,102,.17),-2px -2px 7px rgba(255,255,255,.7);--emb-photo:8px 11px 24px -6px rgba(3,63,102,.34),-4px -4px 11px rgba(255,255,255,.6)}
+  .dates{--emb:8px 10px 20px rgba(0,14,30,.5);--emb-sm:4px 5px 10px rgba(0,14,30,.45)}
+}
+
+/* ===== Photos on the centre line (owner): stacked hero, photos above centred copy, rows centred as a group ===== */
+.hero{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);justify-items:center;align-items:center;gap:clamp(14px,2.4vh,28px)}
+.hero-copy{max-width:min(940px,100%)}
+.hero h1{font-size:clamp(2.6rem,4.9vw,4.4rem)}
+@media (min-width:900px){.hero{height:calc(100svh - var(--hh));min-height:560px}}
+.hero-art{width:auto;height:100%;max-height:min(520px,100%);min-height:220px;aspect-ratio:1;align-self:stretch}
+@media (max-width:899px){.hero{grid-template-rows:auto auto}.hero-art{height:auto;width:min(80vw,36svh,420px);min-height:0;max-height:none;align-self:auto}}
+.k-prop .ph-bg{background:#05507F url(../../assets/img/svc-property-800.webp) center/cover no-repeat}
+/* the photo is a band at the top of the tile; the words sit on solid blue below it, never on the photo */
+.k-prop .face{display:flex;flex-direction:column}
+.k-prop .ph{position:relative;inset:auto;flex:none;height:clamp(96px,12vh,140px);margin:-1px -1px 0;border-bottom:1px solid var(--line-d)}
+.k-prop .ph::after{display:none}
+.k-prop .ti{flex:1 1 auto;height:auto;min-height:0}
+.k-gst .face{flex-direction:column-reverse}
+.k-gst .ph{width:100%;flex:1 1 auto;min-height:150px;border-left:0;border-bottom:1px solid var(--line)}
+.k-gst .ti{flex:none;height:auto}
+@media (min-width:1024px){
+  .k-gst{grid-column:2/span 2;grid-row:1}
+  .bento>.tile[data-s="paye"]{grid-column:1;grid-row:1}
+  .k-gst .ti{flex-direction:row;flex-wrap:wrap;align-items:center;column-gap:14px}
+  .k-gst .ti h3{margin-top:0}
+  .k-gst .ti p{flex-basis:100%}
+  .fx .k-gst .ph{min-height:0}
+}
+@media (min-width:600px) and (max-width:1023px){.fx .k-gst .ph{min-height:96px}.k-gst .ti{flex-direction:row;flex-wrap:wrap;align-items:center;column-gap:14px}.k-gst .ti h3{margin-top:0}.k-gst .ti p{flex-basis:100%}}
+.team{grid-template-columns:repeat(3,minmax(0,1fr))}
+.t-comm{grid-column:1/-1;grid-row:auto;justify-self:center;width:min(100%,520px)}
+.t-comm .ph{height:auto}
+.t-comm img{aspect-ratio:1;height:auto;min-height:0}
+.t-lead{grid-column:auto}
+.t-lead .face{flex-direction:column;align-items:center;text-align:center;gap:14px}
+.roster{grid-column:1/-1}
+@media (max-width:699px){.team{grid-template-columns:1fr}.t-comm,.t-lead{grid-column:auto}}
+.a-ph{grid-column:1/-1;grid-row:auto;justify-self:center;width:min(100%,640px)}
+.a-ph .ph{height:auto}
+
+/* touch tablets in portrait: the pinned grid runs four rows and clears the quick bar */
+@media (max-width:1023px){
+  html.fx.tablet #kit{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+  html.fx.tablet .bento{grid-template-rows:repeat(4,minmax(0,1fr))}
+  html.fx.tablet .bento .face{padding:18px}
+  html.fx.tablet .bento .k-gst .face{padding:0}
+}
+
+/* phone tier extras */
+.prog{position:absolute;left:0;right:0;bottom:-1px;height:3px;border-radius:0 3px 3px 0;background:linear-gradient(90deg,var(--green),var(--blue));transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+.pr-pin .pr-view{overflow:visible;scroll-snap-type:none}
+.pr-pin .pr-hint{display:none}
+.ln-mask{padding-bottom:.1em;margin-bottom:-.1em}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -513,7 +682,7 @@ footer{background:var(--deep);color:#fff;padding:56px 0 calc(28px + env(safe-are
         <li class="tile k-prop rv" data-s="prop" style="--rd:.12s">
           <div class="face">
             <span class="tag">Suggested</span>
-            <div class="ph"><img src="../../assets/img/svc-property-800.webp" width="800" height="367" alt="" loading="lazy" decoding="async"></div>
+            <div class="ph ph-bg" aria-hidden="true"></div>
             <div class="ti">
               <span class="ic" aria-hidden="true"><svg><use href="#i-prop"/></svg></span>
               <h3>Property</h3>
@@ -860,7 +1029,7 @@ footer{background:var(--deep);color:#fff;padding:56px 0 calc(28px + env(safe-are
   var d=document,h=d.documentElement,b=d.body;
   var $=function(s,c){return (c||d).querySelector(s)},$$=function(s,c){return [].slice.call((c||d).querySelectorAll(s))};
   var reduce=h.classList.contains('rm');
-  var fx=h.classList.contains('fx');
+  var fx=h.classList.contains('fx'),tablet=h.classList.contains('tablet');
   var fine=matchMedia('(pointer: fine)').matches;
 
   // menu
@@ -972,12 +1141,18 @@ footer{background:var(--deep);color:#fff;padding:56px 0 calc(28px + env(safe-are
     } else G.from(h1,{y:30,opacity:0,duration:.9,ease:'back.out(1.6)'});
     G.from('.hero .lede,.hero-act',{y:24,opacity:0,duration:1,ease:'back.out(1.5)',stagger:.1,delay:.45});
 
-    if(!fx||!ST)return;
+    if(!ST)return;
     G.registerPlugin(ST);
+    ST.config({ignoreMobileResize:true});
+    d.addEventListener('touchstart',function(){},{passive:true}); // lets :active press the embossed tiles on iOS
+    addEventListener('load',function(){ST.refresh()});
+    if(fx)laptop();else phone();
+
+  function laptop(){
     G.from('.hero-art',{scale:.86,rotation:-4,opacity:0,duration:1.4,ease:'back.out(1.4)',delay:.15});
 
-    // smooth scroll on laptops
-    if(window.Lenis){
+    // smooth scroll on laptops (touch tablets keep native scroll)
+    if(window.Lenis&&!tablet){
       var lenis=window.__lenis=new Lenis({lerp:.09});
       lenis.on('scroll',ST.update);
       G.ticker.add(function(t){lenis.raf(t*1000)});G.ticker.lagSmoothing(0);
@@ -1025,8 +1200,6 @@ footer{background:var(--deep);color:#fff;padding:56px 0 calc(28px + env(safe-are
     // section transition: the dates band opens out of a rounded square
     G.fromTo('#dates',{clipPath:'inset(0% 6% 0% 6% round 56px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:{trigger:'#dates',start:'top bottom',end:'top 20%',scrub:true}});
 
-    addEventListener('load',function(){ST.refresh()});
-
     // cursor: tilt, magnetic hover and inner photo parallax (fine pointers only)
     if(!fine)return;
     $$('#bento .face,.tilt').forEach(function(f){
@@ -1047,6 +1220,76 @@ footer{background:var(--deep);color:#fff;padding:56px 0 calc(28px + env(safe-are
       m.addEventListener('pointermove',function(e){var r=m.getBoundingClientRect();qx((e.clientX-r.left-r.width/2)*.25);qy((e.clientY-r.top-r.height/2)*.35)});
       m.addEventListener('pointerleave',function(){qx(0);qy(0)});
     });
+  }
+
+  // phones and small screens: the same scenes, turned to portrait, on native scroll
+  function phone(){
+    // the iso tiles spring up out of the surface, then lift away as you scroll
+    G.from('.hero-art',{scale:.62,rotation:-12,y:40,duration:1.5,ease:'back.out(1.6)',delay:.2});
+    G.to('.hero-art img',{yPercent:-10,scale:.9,rotation:-6,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+
+    // a thin brand-colour progress line under the header
+    var bar=d.createElement('i');bar.className='prog';bar.setAttribute('aria-hidden','true');top.appendChild(bar);
+    G.to(bar,{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:.3}});
+
+    // section headings rise through line masks
+    if(window.SplitText){
+      $$('main .head h2').forEach(function(h2){
+        SplitText.create(h2,{type:'lines',mask:'lines',linesClass:'ln',aria:'none',autoSplit:true,onSplit:function(sp){
+          sp.masks&&sp.masks.forEach(function(m){m.classList.add('ln-mask')});
+          return G.from(sp.lines,{yPercent:115,rotation:2.5,duration:1.1,ease:'back.out(1.5)',stagger:.09,scrollTrigger:{trigger:h2,start:'top 92%',once:true}});
+        }});
+      });
+    }
+
+    // the toolkit: each tile springs out of an isometric diamond and rises out of the page
+    $$('#bento .tile').forEach(function(t,i){
+      var inner=$$('.ti>*,.ph',t);
+      var tl=G.timeline({scrollTrigger:{trigger:t,start:'top 102%',end:'top 58%',scrub:.8}});
+      tl.fromTo(t,{x:(i%2?1:-1)*36,y:90,scale:.4,'--lift':0},{x:0,y:0,scale:1,'--lift':1,duration:1,ease:'back.out(1.6)'},0)
+        .fromTo(t,{rotation:45},{rotation:0,duration:.55,ease:'back.out(1.4)'},0)
+        .fromTo(inner,{opacity:0},{opacity:1,duration:.3,ease:'none'},.62);
+    });
+
+    // picker: the answer keys and the tray pop up when the questions arrive
+    G.from('#chooser .cur .opt',{y:26,scale:.9,opacity:0,duration:.8,ease:'back.out(2)',stagger:.07,clearProps:'transform,opacity',scrollTrigger:{trigger:'#chooser',start:'top 78%',once:true}});
+    G.from('#tray li',{scale:.6,rotation:-8,opacity:0,duration:.8,ease:'back.out(2)',stagger:.05,clearProps:'transform,opacity',scrollTrigger:{trigger:'#tray',start:'top 85%',once:true}});
+
+    // photos open with a clip-path wipe while the image settles
+    $$('.t-comm .ph,.a-ph .ph').forEach(function(p){
+      var tl=G.timeline({scrollTrigger:{trigger:p,start:'top 88%',end:'top 35%',scrub:.8}});
+      tl.fromTo(p,{clipPath:'inset(16% 12% 16% 12% round 28px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none'},0)
+        .fromTo(p.querySelector('img'),{scale:1.15},{scale:1,ease:'none'},0);
+    });
+
+    // promises: a pinned sideways row while the cards overflow the screen
+    var mm=G.matchMedia();
+    mm.add('(max-width:1023px)',function(){
+      var track=$('#pr-track'),view=$('#pr-view');
+      h.classList.add('pr-pin');
+      function dist(){return Math.max(0,track.scrollWidth-view.clientWidth)}
+      var hz=G.to(track,{x:function(){return -dist()},ease:'none',scrollTrigger:{trigger:'#why',start:'top top',end:function(){return '+='+Math.min(dist(),innerHeight*1.4)},pin:true,scrub:.6,anticipatePin:1,invalidateOnRefresh:true}});
+      $$('li',track).forEach(function(li,i){
+        if(i<1)return;
+        G.from(li,{rotation:i%2?-8:8,y:50,scale:.88,ease:'back.out(1.7)',scrollTrigger:{trigger:li,containerAnimation:hz,start:'left 100%',end:'left 55%',scrub:.6}});
+      });
+      return function(){h.classList.remove('pr-pin')};
+    });
+
+    // the dates band opens out of a rounded square
+    G.fromTo('#dates',{clipPath:'inset(0% 5% 0% 5% round 40px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:{trigger:'#dates',start:'top bottom',end:'top 25%',scrub:true}});
+
+    // the client's words light up as you read (dim only once on screen)
+    var q=$('.quote blockquote p');
+    if(q&&window.SplitText){
+      var sw=SplitText.create(q,{type:'words',aria:'none'});
+      var W=sw.words,n=W.length,last=-1;
+      function lit(pr){W.forEach(function(w,i){var o=Math.min(1,Math.max(.35,.35+.65*(pr-i)));w.style.opacity=o>=1?'':o})}
+      ST.create({trigger:q,start:'top bottom',end:'bottom 58%',
+        onUpdate:function(s){var pr=Math.round((s.progress*(n+6)-3)*8)/8;if(pr!==last){last=pr;lit(pr)}},
+        onLeave:function(){last=-1;lit(n+3)},onLeaveBack:function(){last=-1;lit(n+3)}});
+    }
+  }
   });
 })();
 </script>
