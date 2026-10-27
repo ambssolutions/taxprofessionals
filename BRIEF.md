@@ -237,3 +237,9 @@ Their site shows nine partner logos (names not readable from the scrape). Known 
 
 ### Technology partners (now confirmed, logos in `assets/logo/partner-NN.png`, 300×200 on light grey)
 01 SuiteFiles · 02 MYOB Diamond Partner · 03 iPayroll · 04 Xero Silver Partner · 06 TMNZ Premium Partner · 07 SmartPayroll · 08 Crystal Payroll · 09 Institute of Advisors. A slim partner strip is welcome on every concept (greyscale until hover is fine; alt = the partner name).
+
+## OWNER DIRECTION (27 Oct 2026): unique, modern styles, NOT skeuomorphic
+The owner rejected Ledger and Paperwork and wants "unique styles, not like ledger". Rule for every concept from now on:
+- No paper metaphors: no ruled paper, ledger columns, forms with boxes, receipts, rubber stamps, folders and tabs, index cards, tear-off calendar leaves, floor plans, noticeboard pins, clipped articles, typewriter text.
+- Distinctiveness comes from art direction instead: bold photography and how it is cropped or layered, strong type pairing and scale, colour blocking in the brand blue and green, the brand's overlapping-squares device used in a fresh way, layout composition, and one signature motion moment (native CSS or light JS: masked image reveals, split-text, colour wipes, sticky stacks, scroll-snap reels, a live data widget).
+- Each concept must still look like a different studio made it. Reference level: current Awwwards / Godly professional-services sites, the MiKia quality bar.
