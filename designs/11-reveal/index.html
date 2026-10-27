@@ -11,11 +11,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="../../assets/img/office-team-1600.webp" media="(min-width: 761px)">
+<link rel="preload" as="image" href="../../assets/img/brand-cubes-dark-1920.webp" imagesrcset="../../assets/img/brand-cubes-dark-960.webp 960w, ../../assets/img/brand-cubes-dark-1920.webp 1920w, ../../assets/img/brand-cubes-dark-3840.webp 3840w" imagesizes="100vw" media="(min-width: 761px)" fetchpriority="high">
+<link rel="preload" as="image" href="../../assets/img/brand-cubes-dark-portrait-720.webp" imagesrcset="../../assets/img/brand-cubes-dark-portrait-720.webp 720w, ../../assets/img/brand-cubes-dark-portrait-1440.webp 1440w" imagesizes="100vw" media="(max-width: 760px)" fetchpriority="high">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"AccountingService","name":"Tax Professionals","legalName":"Tax Professionals Ltd","url":"https://www.taxprofessionals.co.nz/","email":"info@taxprofessionals.co.nz","telephone":["+6496250035","+6496250025"],"foundingDate":"1998","logo":"https://www.taxprofessionals.co.nz/logo.png","image":"https://www.taxprofessionals.co.nz/community.jpg","address":{"@type":"PostalAddress","streetAddress":"620 Manukau Road","addressLocality":"Epsom","addressRegion":"Auckland","postalCode":"1023","addressCountry":"NZ"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:30","closes":"17:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"11:30","closes":"15:00"}],"award":"Accountant of the Year 2019-2020, Indian Newslink Indian Business Awards","sameAs":["https://www.facebook.com/TaxProfessionalsNZ/","https://nz.linkedin.com/company/tax-professionals-limited"]}
 </script>
-<script>document.documentElement.classList.add('js')</script>
+<script>(function(h){h.classList.add('js');try{var q=/[?&]fx(=|&|$)/.test(location.search),r=matchMedia('(prefers-reduced-motion: reduce)').matches;if(!r&&(q||(matchMedia('(pointer:fine) and (min-width:1024px)').matches&&(navigator.hardwareConcurrency||8)>4)))h.classList.add('fx')}catch(e){}})(document.documentElement)</script>
 <style>
 :root{
   --deep:#033F66;--blue:#04649F;--green:#4CA442;--green-d:#1B8F25;--green-l:#62B444;
@@ -90,29 +91,44 @@ h3{font:600 var(--h3)/1.3 var(--sans)}
   html:not(.js) .nav{position:static;visibility:visible;grid-template-rows:1fr}
 }
 
-/* hero */
-.hero{position:relative;height:100vh;height:100svh;min-height:540px;overflow:clip;background:var(--deep);color:#fff}
+
+/* smooth scroll (laptops) */
+html.lenis,html.lenis body{height:auto}
+html.lenis-on{scroll-behavior:auto}
+.lenis.lenis-stopped{overflow:hidden}
+
+/* hero: the stage, the 4K brand render behind opening slabs */
+@property --sx{syntax:'<percentage>';inherits:true;initial-value:30%}
+@keyframes sweep{0%{--sx:6%}100%{--sx:94%}}
+.hero{position:relative;height:100vh;height:100svh;min-height:540px;overflow:clip;background:#03406a;color:#fff}
 .hero-ph{position:absolute;inset:var(--hdr) 0 0;display:block}
 .hero-ph img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-shade{position:absolute;inset:var(--hdr) 0 0;background:linear-gradient(180deg,rgba(3,63,102,.1) 0%,rgba(3,63,102,.3) 40%,rgba(2,42,69,.9) 100%)}
-.hero-in{position:absolute;left:0;right:0;bottom:clamp(36px,9vh,96px);text-align:center;padding-inline:var(--pad)}
-.hero h1{font-size:var(--h1);max-width:14ch;margin-inline:auto}
-.hero p{max-width:52ch;margin:clamp(14px,2.4vh,22px) auto 0;font-size:var(--lead);color:rgba(255,255,255,.9)}
-.hero .btn{margin-top:clamp(18px,3.4vh,32px)}
-.doors,.seal{display:none}
-@media (max-width:760px){
-  .hero{display:flex;flex-direction:column;padding-top:var(--hdr);min-height:0}
-  .hero-ph{position:relative;inset:auto;flex:none;width:100%;height:min(100vw,44svh)}
-  .hero-shade{display:none}
-  .hero-in{position:relative;bottom:auto;flex:1;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding:22px 16px 20px}
-  .hero h1{font-size:clamp(2.2rem,10vw,2.8rem)}
-  .hero p{font-size:15.5px}
+.hero-shade{position:absolute;inset:var(--hdr) 0 0;background:linear-gradient(90deg,rgba(2,42,69,.6) 0%,rgba(2,42,69,.25) 42%,rgba(2,42,69,0) 62%)}
+.spot{position:absolute;inset:var(--hdr) 0 0;pointer-events:none;background:radial-gradient(28% 70% at var(--sx) 38%,rgba(214,234,248,.10),rgba(214,234,248,0) 100%)}
+.hero-in{position:absolute;inset:var(--hdr) 0 0;display:flex;align-items:center}
+.hero-in .wrap{max-width:1240px}
+.hero-tx{max-width:min(600px,46vw)}
+.hero h1{font-size:var(--h1)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .hero h1 .tp-w{background:radial-gradient(70% 190% at var(--sx) 45%,#fff 0%,#fff 34%,#bcd6ea 82%);-webkit-background-clip:text;background-clip:text;color:transparent}
 }
-
-/* opening panels: hero */
+.hero p{max-width:44ch;margin-top:clamp(14px,2.4vh,22px);font-size:var(--lead);color:rgba(255,255,255,.9)}
+.hero .btn{margin-top:clamp(18px,3.4vh,32px)}
+.gl{position:absolute;left:0;right:0;top:var(--hdr);width:100%;height:calc(100% - var(--hdr));z-index:3;display:block;pointer-events:none}
+.doors,.seal{display:none}
+@media (prefers-reduced-motion:no-preference){.hero{animation:sweep 9s ease-in-out infinite alternate}}
+@media (max-width:760px){
+  .hero{min-height:0}
+  .hero-shade{background:linear-gradient(180deg,rgba(2,42,69,.82) 0%,rgba(2,42,69,.5) 42%,rgba(2,42,69,0) 66%)}
+  .hero-in{align-items:flex-start;padding-top:clamp(22px,5svh,44px);text-align:center}
+  .hero-tx{max-width:none;margin-inline:auto}
+  .hero h1{font-size:clamp(2.3rem,10.4vw,2.9rem);margin-inline:auto}
+  .hero p{font-size:15.5px;margin-inline:auto}
+  .spot{background:radial-gradient(60% 34% at var(--sx) 18%,rgba(214,234,248,.09),rgba(214,234,248,0) 100%)}
+}
 @media (prefers-reduced-motion:no-preference){
-  html.js .doors{display:block;position:absolute;inset:var(--hdr) 0 0;z-index:3;perspective:1800px;pointer-events:none}
-  html.js .seal{display:flex;position:absolute;z-index:4;left:50%;top:calc(50% + var(--hdr) / 2);transform:translate(-50%,-50%);background:#fff;border-radius:999px;padding:14px 26px;transition:opacity .45s ease;pointer-events:none}
+  html.js .doors{display:block;position:absolute;inset:var(--hdr) 0 0;z-index:4;perspective:1800px;pointer-events:none}
+  html.js .seal{display:flex;position:absolute;z-index:5;left:50%;top:calc(50% + var(--hdr) / 2);transform:translate(-50%,-50%);background:#fff;border-radius:999px;padding:14px 26px;transition:opacity .5s ease;pointer-events:none}
   .seal img{display:block;width:clamp(170px,22vw,250px);height:auto}
   .door{position:absolute;top:0;bottom:0;width:50.2%;backface-visibility:hidden;transition:transform 1.6s var(--open) .3s,visibility 0s linear 1.95s}
   .door.l{left:0;background:var(--blue);transform-origin:0 50%}
@@ -120,14 +136,15 @@ h3{font:600 var(--h3)/1.3 var(--sans)}
   .door::before{content:"";position:absolute;width:clamp(90px,16vw,220px);aspect-ratio:1}
   .door.l::before{right:0;bottom:0;background:var(--deep)}
   .door.r::before{left:0;top:0;background:var(--green-d)}
+  .hero.gl-on .doors{display:none}
   .hero.open .seal{opacity:0}
   .hero.open .door.l{transform:translateX(-101%);visibility:hidden}
   .hero.open .door.r{transform:translateX(101%);visibility:hidden}
   html.js .hero h1 .tp-w{transform:translateY(108%)}
   html.js .hero.open h1 .tp-w{transform:none;transition-delay:calc(.9s + var(--l,0)*140ms)}
-  html.js .hero-in p,html.js .hero-in .btn{opacity:0;transform:translateY(14px);transition:opacity 1s ease 1.3s,transform 1.2s var(--open) 1.3s,background-color .5s}
-  html.js .hero.open .hero-in p,html.js .hero.open .hero-in .btn{opacity:1;transform:none}
-  html.js .hero.open .hero-in .btn{transition-delay:1.45s,1.45s,0s}
+  html.js .hero-tx p,html.js .hero-tx .btn{opacity:0;transform:translateY(14px);transition:opacity 1s ease 1.3s,transform 1.2s var(--open) 1.3s,background-color .5s}
+  html.js .hero.open .hero-tx p,html.js .hero.open .hero-tx .btn{opacity:1;transform:none}
+  html.js .hero.open .hero-tx .btn{transition-delay:1.45s,1.45s,0s}
 }
 @media (prefers-reduced-motion:no-preference) and (pointer:fine) and (min-width:900px){
   .door.l{transform:rotateY(0)}.door.r{transform:rotateY(0)}
@@ -135,7 +152,7 @@ h3{font:600 var(--h3)/1.3 var(--sans)}
   .hero.open .door.r{transform:rotateY(-104deg)}
 }
 
-/* opening panels: section photos */
+/* opening panels on photos (phones and the lighter version) */
 .pv{position:relative;overflow:clip;background:var(--deep)}
 .pv img{display:block;width:100%;height:auto}
 .dr{display:none}
@@ -151,6 +168,11 @@ h3{font:600 var(--h3)/1.3 var(--sans)}
   html.js .mh[data-rv]:not(.on) .ln>.tp-w{transform:translateY(108%)}
   html.js .up{opacity:0;transform:translateY(18px);transition:opacity 1s ease calc(var(--d,0)*.12s),transform 1.2s var(--open) calc(var(--d,0)*.12s)}
   html.js .up.on{opacity:1;transform:none}
+  /* stage light: a soft beam passes across each heading as it arrives */
+  html.js .mh[data-rv]{position:relative;isolation:isolate}
+  html.js .mh[data-rv]::after{content:"";position:absolute;inset:-4% -2%;pointer-events:none;mix-blend-mode:screen;background:linear-gradient(100deg,rgba(4,100,159,0) 38%,rgba(4,100,159,.9) 50%,rgba(98,180,68,.75) 56%,rgba(4,100,159,0) 68%) no-repeat;background-size:300% 100%;background-position:100% 0}
+  html.js .dk .mh[data-rv]::after,html.js .stage .mh[data-rv]::after{background-image:linear-gradient(100deg,rgba(255,255,255,0) 38%,rgba(120,175,215,.28) 50%,rgba(98,180,68,.22) 56%,rgba(255,255,255,0) 68%)}
+  html.js .mh[data-rv].on::after{background-position:0 0;transition:background-position 2.4s cubic-bezier(.45,.05,.25,1) .35s}
 }
 @media (prefers-reduced-motion:no-preference) and (pointer:fine) and (min-width:900px){
   .dr.l{transform:perspective(1300px) rotateY(0)}
@@ -159,14 +181,71 @@ h3{font:600 var(--h3)/1.3 var(--sans)}
   .pv.on .dr.r{transform:perspective(1300px) rotateY(-104deg)}
 }
 
-/* services */
-.svc-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.4vw,32px)}
-.svc{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:clip;display:flex;flex-direction:column}
-.svc .pv{aspect-ratio:800/367}
-.svc-b{padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:10px;flex:1}
-.svc-b p{color:var(--muted)}
-.svc-b .tlink{margin-top:auto;padding-top:6px;align-self:flex-start;display:inline-flex;align-items:center;min-height:44px}
-@media (max-width:760px){.svc-g{grid-template-columns:1fr}}
+/* curtain call: team, services, award */
+.stage{position:relative;background:var(--night);color:#fff;--cx:50%}
+.stage::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(34% 80% at var(--cx) -8%,rgba(200,226,244,.09),rgba(200,226,244,0) 100%),linear-gradient(180deg,rgba(4,100,159,0) 55%,rgba(4,100,159,.22) 100%)}
+.cc-ch{position:relative;padding-block:clamp(72px,10vw,120px)}
+.cc-ch+.cc-ch{border-top:1px solid rgba(255,255,255,.12)}
+.cc-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center}
+.cc-ph{border-radius:18px;width:100%;justify-self:end}
+.ch1 .cc-ph{max-width:440px;aspect-ratio:1}
+.ch3 .cc-ph{max-width:560px;aspect-ratio:800/488}
+.ch3 figure{justify-self:end;width:100%;max-width:560px}
+.ch3 figcaption{color:rgba(255,255,255,.75);font-size:14px;margin-top:12px}
+.cc-n{display:block;font:600 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--green-l);margin-bottom:16px}
+.cc-tx h2{font-size:var(--h2)}
+.cc-tx p{color:rgba(255,255,255,.82);margin-top:18px;font-size:var(--lead);max-width:46ch}
+.stage .tlink{display:inline-flex;align-items:center;min-height:44px;margin-top:12px;color:#fff;text-decoration-color:var(--green-l)}
+.ch2 .cc-g{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:start}
+.svl{counter-reset:s}
+.svl li{display:grid;grid-template-columns:2.4em minmax(0,1fr);column-gap:14px;padding:clamp(10px,1.6vh,18px) 0;border-top:1px solid rgba(255,255,255,.16)}
+.svl li:last-child{border-bottom:1px solid rgba(255,255,255,.16)}
+.svl li::before{counter-increment:s;content:"0" counter(s);font:400 1.5rem/1.1 var(--serif);color:var(--green-l)}
+.svl h3{color:#fff}
+.svl p{color:rgba(255,255,255,.78);font-size:15px;margin-top:4px;grid-column:2}
+.svl .tlink{grid-column:2;margin-top:0;min-height:40px;font-size:14.5px}
+@media (max-width:860px){
+  .cc-g,.ch2 .cc-g{grid-template-columns:1fr}
+  .cc-ph,.ch3 figure{justify-self:center}
+  .cc-tx{text-align:center}.cc-tx p{margin-inline:auto}
+}
+.cc-doors{display:none}
+html.fx-on .stage{height:100vh;height:100svh;overflow:clip}
+html.fx-on .cc-ch{position:absolute;left:0;right:0;top:var(--hdr);bottom:0;padding-block:clamp(14px,3vh,32px);display:flex;align-items:center;border:0}
+html.fx-on .cc-ch>.wrap{max-height:100%}
+html.fx-on .ch2,html.fx-on .ch3{visibility:hidden;opacity:0}
+html.fx-on .stage .dr{display:none}
+html.fx-on .ch1 .cc-ph{max-width:min(440px,62vh)}
+html.fx-on .ch3 figure,html.fx-on .ch3 .cc-ph{max-width:min(560px,88vh)}
+html.fx-on .cc-doors{display:block;position:absolute;left:0;right:0;top:var(--hdr);bottom:0;z-index:5;perspective:1700px;perspective-origin:50% 45%;pointer-events:none}
+.cc-d{position:absolute;top:0;bottom:0;width:50%;transform-style:preserve-3d;--th:38px;--sh:0}
+.cc-d.l{left:0;transform-origin:0 50%}
+.cc-d.r{right:0;transform-origin:100% 50%}
+.fc{position:absolute;inset:0;backface-visibility:hidden;overflow:clip;display:grid;align-items:center}
+.cc-d.l .fc{background:linear-gradient(115deg,rgba(255,255,255,.12),rgba(255,255,255,0) 46%),var(--blue);justify-items:end;padding-right:clamp(28px,5vw,80px);box-shadow:inset -1px 0 0 rgba(1,26,44,.35)}
+.cc-d.r .fc{background:linear-gradient(115deg,rgba(255,255,255,.14),rgba(255,255,255,0) 46%),var(--green);justify-items:start;padding-left:clamp(28px,5vw,80px);color:var(--ink)}
+.fc::before{content:"";position:absolute;width:clamp(110px,15vw,210px);aspect-ratio:1}
+.cc-d.l .fc::before{right:0;bottom:0;background:var(--deep)}
+.cc-d.r .fc::before{left:0;top:0;background:var(--green-d)}
+.fc::after{content:"";position:absolute;inset:0;background:#011a2c;opacity:var(--sh);pointer-events:none}
+.ed{position:absolute;top:0;bottom:0;width:var(--th)}
+.cc-d.l .ed{right:0;transform-origin:100% 50%;transform:rotateY(-90deg);background:linear-gradient(90deg,#022f4f,#0a5d92 60%,#3e86b8)}
+.cc-d.r .ed{left:0;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(90deg,#7cc36a,#3d9234 40%,#22661d)}
+.lb{grid-area:1/1;position:relative}
+.lb+.lb{opacity:0;visibility:hidden}
+.cc-d.l .lb{font:400 clamp(6rem,15vw,13rem)/.9 var(--serif);color:#fff}
+.cc-d.r .lb{font:400 clamp(2.4rem,4.6vw,4.2rem)/1.02 var(--serif);max-width:7ch}
+
+/* page turn between major sections (laptops) */
+html.fx-on [data-turn]{position:relative;overflow:clip}
+.turn{position:absolute;left:0;top:0;width:100%;height:100vh;z-index:6;pointer-events:none;backface-visibility:hidden;background:linear-gradient(90deg,var(--green) 0 12px,var(--green-d) 12px 14px,transparent 14px),linear-gradient(115deg,rgba(255,255,255,.1),rgba(255,255,255,0) 40%),var(--blue);--sh:0}
+.turn::before{content:"";position:absolute;right:0;bottom:0;width:clamp(110px,14vw,200px);aspect-ratio:1;background:var(--deep)}
+.turn::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,26,44,.05),rgba(1,26,44,.55));opacity:var(--sh)}
+
+/* custom cursor */
+.cur{position:fixed;left:0;top:0;z-index:90;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1.5px solid var(--green-l);pointer-events:none;opacity:0;transition:opacity .4s,width .5s var(--open),height .5s var(--open),margin .5s var(--open),background-color .5s}
+.cur.on{opacity:1}
+.cur.hot{width:60px;height:60px;margin:-30px 0 0 -30px;background-color:rgba(98,180,68,.16)}
 
 /* why: sticky stack */
 .why .head{position:sticky;top:var(--hdr);z-index:1;background:#fff;height:var(--hh);margin-bottom:0;display:grid;place-items:center;max-width:none}
@@ -203,12 +282,7 @@ h3{font:600 var(--h3)/1.3 var(--sans)}
 .reach a{color:var(--blue);font-weight:600}
 @media (max-width:1100px){.team ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.lead-g{grid-template-columns:1fr;max-width:420px;margin-inline:auto}.team ul{grid-template-columns:1fr}}
-
-/* award */
-.award .pv{max-width:800px;margin:0 auto;border-radius:18px;aspect-ratio:800/488}
-.award figcaption{text-align:center;color:rgba(255,255,255,.75);font-size:14px;margin-top:14px}
-.award .facts{text-align:center;max-width:62ch;margin:clamp(24px,4vw,40px) auto 0;font-size:var(--lead);color:rgba(255,255,255,.88)}
-
+.lead-g{max-width:1000px;margin-inline:auto}
 /* testimonial */
 .quote{text-align:center;max-width:900px;margin:0 auto}
 .quote blockquote p{font:400 clamp(1.45rem,2.6vw,2.2rem)/1.25 var(--serif);text-wrap:pretty}
@@ -335,47 +409,69 @@ h3{font:600 var(--h3)/1.3 var(--sans)}
 <main id="main">
   <section class="hero" id="top" aria-labelledby="hero-t">
     <picture class="hero-ph">
-      <source media="(max-width: 760px)" srcset="../../assets/img/community-800.webp" width="800" height="800">
-      <img src="../../assets/img/office-team-1600.webp" srcset="../../assets/img/office-team-800.webp 800w, ../../assets/img/office-team-1600.webp 1600w" sizes="100vw" width="1600" height="900" alt="The Tax Professionals team at the office on Manukau Road, Epsom" fetchpriority="high" decoding="async">
+      <source media="(max-width: 760px)" srcset="../../assets/img/brand-cubes-dark-portrait-720.webp 720w, ../../assets/img/brand-cubes-dark-portrait-1440.webp 1440w" sizes="100vw" width="720" height="1280">
+      <img src="../../assets/img/brand-cubes-dark-1920.webp" srcset="../../assets/img/brand-cubes-dark-960.webp 960w, ../../assets/img/brand-cubes-dark-1920.webp 1920w, ../../assets/img/brand-cubes-dark-3840.webp 3840w" sizes="100vw" width="3840" height="2160" alt="" fetchpriority="high" decoding="async">
     </picture>
     <div class="hero-shade" aria-hidden="true"></div>
+    <div class="spot" aria-hidden="true"></div>
     <div class="hero-in">
-      <h1 id="hero-t" class="mh"><span class="ln"><span class="tp-w">Tax, explained</span></span> <span class="ln"><span class="tp-w" style="--l:1">in your language</span></span></h1>
-      <p>Tax accountants and advisers working for the community since 1998. The first consultation is free on all matters.</p>
-      <a class="btn" href="#contact">Book a chat</a>
+      <div class="wrap"><div class="hero-tx">
+        <h1 id="hero-t" class="mh"><span class="ln"><span class="tp-w">Tax, explained</span></span> <span class="ln"><span class="tp-w" style="--l:1">in your language</span></span></h1>
+        <p>Tax accountants and advisers in Epsom, working for the community since 1998. The first consultation is free on all matters.</p>
+        <a class="btn" href="#contact">Book a chat</a>
+      </div></div>
     </div>
     <div class="doors" aria-hidden="true"><span class="door l"></span><span class="door r"></span></div>
     <div class="seal" aria-hidden="true"><img src="../../assets/logo/logo.webp" width="250" height="46" alt=""></div>
   </section>
 
-  <section class="sec" id="services" aria-labelledby="sv-t">
-    <div class="wrap">
-      <div class="head">
-        <h2 id="sv-t" class="mh" data-rv><span class="ln"><span class="tp-w">Four ways</span></span> <span class="ln"><span class="tp-w" style="--l:1">we can help</span></span></h2>
-        <p>We believe in quality customer service and explaining things in your language. Things can get tricky when it comes to tax, so our team is there to get things done thoroughly and professionally, with a smile.</p>
+  <section class="stage" id="stage" aria-label="Who we are, what we do and our award">
+    <div class="cc-ch ch1" id="about">
+      <div class="wrap cc-g">
+        <figure class="pv cc-ph" data-rv><img src="../../assets/img/community-800.webp" width="800" height="800" alt="The Tax Professionals team outside the office at 620 Manukau Road, with Varun Gupta holding the award" loading="lazy" decoding="async"><i class="dr l" aria-hidden="true"></i><i class="dr r" aria-hidden="true"></i></figure>
+        <div class="cc-tx">
+          <span class="cc-n">The team</span>
+          <h2 class="mh" data-rv><span class="ln"><span class="tp-w">Working for the community</span></span> <span class="ln"><span class="tp-w" style="--l:1">since 1998</span></span></h2>
+          <p>At Tax Professionals we believe in quality customer service and explaining things in your language. Things can get tricky when it comes to tax, so our dedicated team is there to get things done thoroughly and professionally, with a smile.</p>
+          <a class="tlink" href="#people">Meet the people</a>
+        </div>
       </div>
-      <div class="svc-g">
-        <article class="svc">
-          <figure class="pv" data-rv><img src="../../assets/img/svc-compliance-800.webp" width="800" height="367" alt="" loading="lazy" decoding="async"><i class="dr l" aria-hidden="true"></i><i class="dr r" aria-hidden="true"></i></figure>
-          <div class="svc-b"><h3>Taxation &amp; Accounting Compliance</h3><p>Tax compliance and practical consulting services, from IR3 and rental returns to GST, company returns and financial statements, with MYOB and Xero.</p><a class="tlink" href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">About tax compliance</a></div>
-        </article>
-        <article class="svc">
-          <figure class="pv" data-rv style="--d:1"><img src="../../assets/img/svc-advisory-800.webp" width="800" height="367" alt="" loading="lazy" decoding="async"><i class="dr l" aria-hidden="true"></i><i class="dr r" aria-hidden="true"></i></figure>
-          <div class="svc-b"><h3>Business Advisory &amp; Planning</h3><p>Create a profitable, thriving and valuable business. Business planning (first meeting free of charge), cashflow forecasting and monthly coaching.</p><a class="tlink" href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">About business advisory</a></div>
-        </article>
-        <article class="svc">
-          <figure class="pv" data-rv><img src="../../assets/img/svc-hr-800.webp" width="800" height="367" alt="" loading="lazy" decoding="async"><i class="dr l" aria-hidden="true"></i><i class="dr r" aria-hidden="true"></i></figure>
-          <div class="svc-b"><h3>Employment &amp; HR Advisory</h3><p>Your employment law and HR partner: employment relations and policies, employer accreditation, restructures, personal grievances and Labour Inspector readiness.</p><a class="tlink" href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">About employment and HR</a></div>
-        </article>
-        <article class="svc">
-          <figure class="pv" data-rv style="--d:1"><img src="../../assets/img/svc-property-800.webp" width="800" height="367" alt="" loading="lazy" decoding="async"><i class="dr l" aria-hidden="true"></i><i class="dr r" aria-hidden="true"></i></figure>
-          <div class="svc-b"><h3>Property Investment &amp; Development</h3><p>Practical advice on optimal structuring of your property investments and developments to keep up with the ever-changing property taxation laws and regulations.</p><a class="tlink" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">About property</a></div>
-        </article>
+    </div>
+    <div class="cc-ch ch2" id="services">
+      <div class="wrap cc-g">
+        <div class="cc-tx">
+          <span class="cc-n">Services</span>
+          <h2 class="mh" data-rv><span class="ln"><span class="tp-w">Four ways</span></span> <span class="ln"><span class="tp-w" style="--l:1">we can help</span></span></h2>
+          <p>We understand how important it is for business owners to know how profitable they are at any given instance.</p>
+        </div>
+        <ol class="svl">
+          <li><h3>Taxation &amp; Accounting Compliance</h3><p>Tax compliance and practical consulting services, from IR3 and rental returns to GST, company returns and financial statements.</p><a class="tlink" href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">About tax compliance</a></li>
+          <li><h3>Business Advisory &amp; Planning</h3><p>Create a profitable, thriving and valuable business. The first planning meeting is free of charge.</p><a class="tlink" href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">About business advisory</a></li>
+          <li><h3>Employment &amp; HR Advisory</h3><p>Your employment law and HR partner, from policies and accreditation to Labour Inspector readiness.</p><a class="tlink" href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">About employment and HR</a></li>
+          <li><h3>Property Investment &amp; Development</h3><p>Practical advice on structuring your property investments and developments as property tax rules change.</p><a class="tlink" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">About property</a></li>
+        </ol>
       </div>
+    </div>
+    <div class="cc-ch ch3" id="award">
+      <div class="wrap cc-g">
+        <div class="cc-tx">
+          <span class="cc-n">The award</span>
+          <h2 class="mh" data-rv><span class="ln"><span class="tp-w">Accountant of the Year</span></span> <span class="ln"><span class="tp-w" style="--l:1">2019-2020</span></span></h2>
+          <p>Twelfth Annual Indian Newslink Indian Business Awards, 25 November 2019, SkyCity. Tax Professionals was also a finalist for Small Business of the Year.</p>
+        </div>
+        <figure>
+          <div class="pv cc-ph" data-rv><img src="../../assets/img/award-800.webp" width="800" height="488" alt="Varun Gupta receiving the Accountant of the Year award on stage with Grant Robertson and Paul Goldsmith" loading="lazy" decoding="async"><i class="dr l" aria-hidden="true"></i><i class="dr r" aria-hidden="true"></i></div>
+          <figcaption>Varun Gupta on stage at SkyCity, 25 November 2019</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="cc-doors" aria-hidden="true">
+      <div class="cc-d l"><span class="fc"><span class="lb">01</span><span class="lb">02</span><span class="lb">03</span></span><span class="ed"></span></div>
+      <div class="cc-d r"><span class="fc"><span class="lb">The team</span><span class="lb">Four services</span><span class="lb">The award</span></span><span class="ed"></span></div>
     </div>
   </section>
 
-  <section class="sec why white" id="why" aria-labelledby="wy-t">
+  <section class="sec why white" id="why" data-turn aria-labelledby="wy-t">
     <div class="wrap">
       <div class="head">
         <h2 id="wy-t" class="mh" data-rv><span class="ln"><span class="tp-w">Why Tax Professionals</span></span></h2>
@@ -390,7 +486,7 @@ h3{font:600 var(--h3)/1.3 var(--sans)}
     </div>
   </section>
 
-  <section class="sec" id="people" aria-labelledby="pp-t">
+  <section class="sec" id="people" data-turn aria-labelledby="pp-t">
     <div class="wrap">
       <div class="head">
         <h2 id="pp-t" class="mh" data-rv><span class="ln"><span class="tp-w">The people</span></span> <span class="ln"><span class="tp-w" style="--l:1">you will talk to</span></span></h2>
@@ -427,19 +523,6 @@ h3{font:600 var(--h3)/1.3 var(--sans)}
     </div>
   </section>
 
-  <section class="sec award dk" id="award" aria-labelledby="aw-t">
-    <div class="wrap">
-      <div class="head">
-        <h2 id="aw-t" class="mh" data-rv><span class="ln"><span class="tp-w">Accountant of the Year</span></span> <span class="ln"><span class="tp-w" style="--l:1">2019-2020</span></span></h2>
-      </div>
-      <figure data-rv>
-        <div class="pv" data-rv><img src="../../assets/img/award-800.webp" width="800" height="488" alt="Varun Gupta receiving the Accountant of the Year award on stage with Grant Robertson and Paul Goldsmith" loading="lazy" decoding="async"><i class="dr l" aria-hidden="true"></i><i class="dr r" aria-hidden="true"></i></div>
-        <figcaption>Varun Gupta on stage at SkyCity, 25 November 2019</figcaption>
-      </figure>
-      <p class="facts up" data-rv>Twelfth Annual Indian Newslink Indian Business Awards, 25 November 2019, SkyCity. Tax Professionals was also a finalist for Small Business of the Year.</p>
-    </div>
-  </section>
-
   <section class="sec white" aria-label="What a client says">
     <div class="wrap">
       <figure class="quote up" data-rv>
@@ -449,7 +532,7 @@ h3{font:600 var(--h3)/1.3 var(--sans)}
     </div>
   </section>
 
-  <section class="sec" id="dates" aria-labelledby="dt-t">
+  <section class="sec" id="dates" data-turn aria-labelledby="dt-t">
     <div class="wrap">
       <div class="head">
         <h2 id="dt-t" class="mh" data-rv><span class="ln"><span class="tp-w">Dates to know</span></span></h2>
@@ -511,7 +594,7 @@ h3{font:600 var(--h3)/1.3 var(--sans)}
     </div>
   </section>
 
-  <section class="sec dk" id="contact" aria-labelledby="ct-t">
+  <section class="sec dk" id="contact" data-turn aria-labelledby="ct-t">
     <div class="wrap">
       <div class="head">
         <h2 id="ct-t" class="mh" data-rv><span class="ln"><span class="tp-w">Book a chat</span></span></h2>
@@ -570,22 +653,78 @@ h3{font:600 var(--h3)/1.3 var(--sans)}
 
 <nav class="qb" aria-label="Quick contact"><a href="tel:+6496250035">Call</a><a href="#contact">Book</a></nav>
 
+<script src="../../assets/vendor/gsap.min.js" defer></script>
+<script src="../../assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="../../assets/vendor/lenis.min.js" defer></script>
 <script>
 (function(){
-  var d = document, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, IO = 'IntersectionObserver' in window;
+  var d = document, h = d.documentElement, b = d.body, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, IO = 'IntersectionObserver' in window;
+  var fx = h.classList.contains('fx'), fine = matchMedia('(pointer: fine)').matches && !reduce;
   var hero = d.querySelector('.hero');
 
-  /* hero: the two brand panels swing open once the photo is ready */
-  var opened = false;
+  /* hero: the brand panels swing open. Laptops get lit 3D slabs (three.js), everything else the CSS panels */
+  var opened = false, glStarted = false;
   function openHero(){ if (opened) return; opened = true; requestAnimationFrame(function(){ hero.classList.add('open'); }); }
   if (reduce) hero.classList.add('open');
-  else {
+  else if (fx) {
+    setTimeout(function(){ if (!glStarted) openHero(); }, 3200);
+    var go = function(){ setTimeout(initGL, 60); };
+    if (d.readyState === 'complete') go(); else addEventListener('load', go);
+  } else {
     var img = hero.querySelector('img');
     if (img.complete) setTimeout(openHero, 320);
     else { img.addEventListener('load', function(){ setTimeout(openHero, 160); }); img.addEventListener('error', openHero); setTimeout(openHero, 1400); }
   }
 
-  /* sections: panel pairs part, headings rise line by line */
+  function initGL(){
+    if (opened) return;
+    import('../../assets/vendor/three.module.min.js').then(function(T){
+      if (opened) return;
+      var hdr = d.getElementById('top-bar').offsetHeight, w = hero.clientWidth, hh = hero.clientHeight - hdr;
+      var cv = d.createElement('canvas'); cv.className = 'gl'; cv.setAttribute('aria-hidden', 'true'); hero.appendChild(cv);
+      var R = new T.WebGLRenderer({canvas: cv, antialias: true, alpha: true});
+      R.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); R.setSize(w, hh, false); R.setClearColor(0x000000, 0);
+      var sc = new T.Scene(), H = 10, fov = 30, asp = w / hh, W = H * asp;
+      var cam = new T.PerspectiveCamera(fov, asp, .1, 100); cam.position.set(0, 0, (H / 2) / Math.tan(fov * Math.PI / 360));
+      sc.add(new T.AmbientLight(0xffffff, .62));
+      var key = new T.DirectionalLight(0xffffff, .55); key.position.set(-7, 9, 12); sc.add(key);
+      var rim = new T.DirectionalLight(0xbfe3ff, .35); rim.position.set(8, -5, 6); sc.add(rim);
+      var spot = new T.SpotLight(0xffffff, 1.1, 0, .32, .9, 0); spot.position.set(0, 3, 22); sc.add(spot); sc.add(spot.target);
+      var geos = [];
+      function slab(x0, x1, y0, y1, dep, bev){
+        var s = new T.Shape(); s.moveTo(x0 + bev, y0 + bev); s.lineTo(x1 - bev, y0 + bev); s.lineTo(x1 - bev, y1 - bev); s.lineTo(x0 + bev, y1 - bev); s.closePath();
+        var g = new T.ExtrudeGeometry(s, {depth: dep, bevelEnabled: true, bevelThickness: bev, bevelSize: bev, bevelSegments: 6, curveSegments: 2});
+        g.translate(0, 0, -dep - bev); geos.push(g); return g;
+      }
+      function mat(c){ return new T.MeshPhysicalMaterial({color: c, roughness: .36, metalness: 0, clearcoat: .8, clearcoatRoughness: .2}); }
+      var over = .8, hw = W / 2, Y0 = -H * .53, Y1 = H * .53, sq = H * .25, mats = [mat(0x04649F), mat(0x4CA442), mat(0x033F66), mat(0x1B8F25)];
+      // left slab hinged at the left edge, right slab at the right edge
+      var Lp = new T.Group(); Lp.position.x = -hw - over; sc.add(Lp);
+      Lp.add(new T.Mesh(slab(0, hw + over - .015, Y0, Y1, .7, .16), mats[0]));
+      var ls = new T.Mesh(slab(hw + over - .015 - sq, hw + over - .015, Y0, Y0 + sq, .14, .06), mats[2]); ls.position.z = .2; Lp.add(ls);
+      var Rp = new T.Group(); Rp.position.x = hw + over; sc.add(Rp);
+      Rp.add(new T.Mesh(slab(-hw - over + .015, 0, Y0, Y1, .7, .16), mats[1]));
+      var rs = new T.Mesh(slab(-hw - over + .015, -hw - over + .015 + sq, Y1 - sq, Y1, .14, .06), mats[3]); rs.position.z = .2; Rp.add(rs);
+      var HOLD = 700, DUR = 2200, t0 = 0;
+      function ease(x){ return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+      function frame(now){
+        if (!t0) t0 = now;
+        var t = now - t0, p = Math.max(0, Math.min(1, (t - HOLD) / DUR)), e = ease(p);
+        spot.target.position.set(-W * .42 + W * .84 * Math.min(1, t / (HOLD + DUR * .7)), .6, 0);
+        Lp.rotation.y = -e * 1.86; Rp.rotation.y = e * 1.86;
+        Lp.position.z = Rp.position.z = e * .6;
+        R.render(sc, cam);
+        if (t > 30 && !hero.classList.contains('gl-on')) hero.classList.add('gl-on');
+        if (p > .1) openHero();
+        if (p < 1) requestAnimationFrame(frame);
+        else { geos.forEach(function(g){ g.dispose(); }); mats.forEach(function(m){ m.dispose(); }); R.dispose(); cv.remove(); }
+      }
+      glStarted = true;
+      requestAnimationFrame(frame);
+    }).catch(function(){ openHero(); });
+  }
+
+  /* lighter version: panel pairs part and headings rise as sections arrive */
   var rv = d.querySelectorAll('[data-rv]');
   if (IO && !reduce) {
     var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }); }, {threshold:.22, rootMargin:'0px 0px -6% 0px'});
@@ -634,6 +773,73 @@ h3{font:600 var(--h3)/1.3 var(--sans)}
     status.className = 'status';
     status.textContent = 'Your email app should open with your note ready to send. If it does not, email info@taxprofessionals.co.nz.';
     location.href = 'mailto:info@taxprofessionals.co.nz?subject=' + encodeURIComponent('Website enquiry from ' + form.name.value.trim()) + '&body=' + encodeURIComponent(body);
+  });
+
+  /* full effects on capable laptops: smooth scroll, the curtain call, page turns, cursor */
+  d.addEventListener('DOMContentLoaded', function(){
+    var G = window.gsap, ST = window.ScrollTrigger;
+    if (!fx || !G || !ST) return;
+    G.registerPlugin(ST);
+    h.classList.add('fx-on');
+    var hdrH = function(){ return d.getElementById('top-bar').offsetHeight; };
+
+    // curtain call: one pair of thick panels opens and closes on each chapter, scrubbed and pinned
+    var st = d.getElementById('stage'), chs = G.utils.toArray('.cc-ch'), L = st.querySelector('.cc-d.l'), Rd = st.querySelector('.cc-d.r');
+    var lbL = L.querySelectorAll('.lb'), lbR = Rd.querySelectorAll('.lb'), stops = [];
+    var tl = G.timeline({defaults: {ease: 'power2.inOut'}, scrollTrigger: {trigger: st, start: 'top top', end: '+=360%', pin: true, scrub: 1, anticipatePin: 1}});
+    function open(i){
+      tl.to(L, {rotationY: -96, '--sh': .4, duration: 1}).to(Rd, {rotationY: 96, '--sh': .4, duration: 1}, '<')
+        .fromTo(chs[i], {scale: .94}, {scale: 1, duration: 1.1, ease: 'power2.out'}, '<.15')
+        .fromTo(st, {'--cx': '12%'}, {'--cx': '88%', duration: 1.8, ease: 'none'}, '<');
+      tl.set([L, Rd], {autoAlpha: 0});
+      stops.push(tl.duration() - .6);
+    }
+    function close(){ tl.set([L, Rd], {autoAlpha: 1}).to(L, {rotationY: 0, '--sh': 0, duration: .9}).to(Rd, {rotationY: 0, '--sh': 0, duration: .9}, '<'); }
+    function swap(i){ tl.set(chs[i - 1], {autoAlpha: 0}).set(chs[i], {autoAlpha: 1}).set([lbL[i - 1], lbR[i - 1]], {autoAlpha: 0}).set([lbL[i], lbR[i]], {autoAlpha: 1}); }
+    tl.to({}, {duration: .2});
+    open(0); tl.to({}, {duration: .8}); close(); swap(1);
+    open(1); tl.to({}, {duration: .8}); close(); swap(2);
+    open(2); tl.to({}, {duration: .6});
+    var ccST = tl.scrollTrigger, total = tl.duration(); window.__cc = {st: ccST, stops: stops, total: total};
+
+    // page turn: a brand panel turns away like a page as each major section arrives
+    G.utils.toArray('[data-turn]').forEach(function(s){
+      var p = d.createElement('div'); p.className = 'turn'; p.setAttribute('aria-hidden', 'true'); s.prepend(p);
+      G.set(p, {transformPerspective: 1900, transformOrigin: '0% 50%'});
+      G.fromTo(p, {rotationY: 0, '--sh': 0}, {rotationY: -94, '--sh': 1, ease: 'power1.in', scrollTrigger: {trigger: s, start: 'top 94%', end: 'top 24%', scrub: .6}});
+    });
+
+    // promises: each card settles back slightly as the next one lands
+    G.utils.toArray('.card').forEach(function(c, i, all){ if (i === all.length - 1) return; G.to(c, {scale: .965, ease: 'none', scrollTrigger: {trigger: all[i + 1], start: 'top bottom', end: 'top 35%', scrub: true}}); });
+
+    // smooth scroll
+    if (window.Lenis) {
+      var lenis = window.__lenis = new Lenis({lerp: .085});
+      lenis.on('scroll', ST.update);
+      G.ticker.add(function(t){ lenis.raf(t * 1000); }); G.ticker.lagSmoothing(0);
+      h.classList.add('lenis-on');
+      d.addEventListener('click', function(e){
+        var a = e.target.closest('a[href^="#"]'); if (!a) return;
+        var id = a.getAttribute('href'); if (id.length < 2) return;
+        var t = d.querySelector(id); if (!t) return;
+        e.preventDefault();
+        var ci = chs.indexOf(t);
+        if (ci > -1) lenis.scrollTo(ccST.start + (ccST.end - ccST.start) * (stops[ci] / total), {duration: 1.6});
+        else lenis.scrollTo(id === '#top' ? 0 : t, {offset: id === '#top' ? 0 : -(hdrH() + 8), duration: 1.6});
+        if (id === '#main' || id === '#contact') { t.setAttribute('tabindex', '-1'); setTimeout(function(){ t.focus({preventScroll: true}); }, 900); }
+      });
+    }
+
+    // custom cursor
+    if (fine) {
+      var c = d.createElement('div'); c.className = 'cur'; c.setAttribute('aria-hidden', 'true'); b.appendChild(c);
+      var xs = G.quickTo(c, 'x', {duration: .45, ease: 'power3'}), ys = G.quickTo(c, 'y', {duration: .45, ease: 'power3'});
+      addEventListener('mousemove', function(e){ xs(e.clientX); ys(e.clientY); c.classList.add('on'); c.classList.toggle('hot', !!(e.target.closest && e.target.closest('a,button,summary,select,label,input,textarea'))); }, {passive: true});
+      d.addEventListener('mouseleave', function(){ c.classList.remove('on'); });
+    }
+
+    if (d.fonts && d.fonts.ready) d.fonts.ready.then(function(){ ST.refresh(); });
+    addEventListener('load', function(){ ST.refresh(); });
   });
 })();
 </script>
