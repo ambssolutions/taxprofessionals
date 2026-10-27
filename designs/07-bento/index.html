@@ -1153,7 +1153,7 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
 
     // smooth scroll on laptops (touch tablets keep native scroll)
     if(window.Lenis&&!tablet){
-      var lenis=window.__lenis=new Lenis({lerp:.09});
+      var lenis=window.__lenis=new Lenis({lerp:.12});
       lenis.on('scroll',ST.update);
       G.ticker.add(function(t){lenis.raf(t*1000)});G.ticker.lagSmoothing(0);
       h.classList.add('lenis-on');
@@ -1179,7 +1179,7 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
       var tx=bento.offsetLeft+t.offsetLeft+t.offsetWidth/2,ty=bento.offsetTop+t.offsetTop+t.offsetHeight/2;
       return {x:cx-tx,y:cy-ty,sx:s/t.offsetWidth,sy:s/t.offsetHeight};
     }
-    var tl=G.timeline({scrollTrigger:{trigger:kit,start:'top top',end:'+=150%',pin:true,scrub:.9,anticipatePin:1,invalidateOnRefresh:true}});
+    var tl=G.timeline({scrollTrigger:{trigger:kit,start:'top top',end:'+=150%',pin:true,scrub:.4,anticipatePin:1,invalidateOnRefresh:true}});
     tiles.forEach(function(t,i){
       var inner=[t.querySelector('.ti'),t.querySelector('.ph')].filter(Boolean);
       tl.fromTo(t,{x:function(){return pile(i).x},y:function(){return pile(i).y},scaleX:function(){return pile(i).sx},scaleY:function(){return pile(i).sy},rotation:45},
@@ -1191,10 +1191,10 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
     // promises: a pinned horizontal row
     var track=$('#pr-track'),view=$('#pr-view');
     function dist(){return Math.max(0,track.scrollWidth-view.clientWidth+40)}
-    var hz=G.to(track,{x:function(){return -dist()},ease:'none',scrollTrigger:{trigger:'#why',start:'top top',end:function(){return '+='+dist()},pin:true,scrub:.7,invalidateOnRefresh:true,anticipatePin:1}});
+    var hz=G.to(track,{x:function(){return -dist()},ease:'none',scrollTrigger:{trigger:'#why',start:'top top',end:function(){return '+='+dist()},pin:true,scrub:.4,invalidateOnRefresh:true,anticipatePin:1}});
     $$('li',track).forEach(function(li,i){
       if(i<2)return;
-      G.from(li,{rotation:i%2?-8:8,y:60,scale:.88,ease:'back.out(1.7)',scrollTrigger:{trigger:li,containerAnimation:hz,start:'left 100%',end:'left 62%',scrub:.6}});
+      G.from(li,{rotation:i%2?-8:8,y:60,scale:.88,ease:'back.out(1.7)',scrollTrigger:{trigger:li,containerAnimation:hz,start:'left 100%',end:'left 62%',scrub:.4}});
     });
 
     // section transition: the dates band opens out of a rounded square
@@ -1245,7 +1245,7 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
     // the toolkit: each tile springs out of an isometric diamond and rises out of the page
     $$('#bento .tile').forEach(function(t,i){
       var inner=$$('.ti>*,.ph',t);
-      var tl=G.timeline({scrollTrigger:{trigger:t,start:'top 102%',end:'top 58%',scrub:.8}});
+      var tl=G.timeline({scrollTrigger:{trigger:t,start:'top 102%',end:'top 58%',scrub:.4}});
       tl.fromTo(t,{x:(i%2?1:-1)*36,y:90,scale:.4,'--lift':0},{x:0,y:0,scale:1,'--lift':1,duration:1,ease:'back.out(1.6)'},0)
         .fromTo(t,{rotation:45},{rotation:0,duration:.55,ease:'back.out(1.4)'},0)
         .fromTo(inner,{opacity:0},{opacity:1,duration:.3,ease:'none'},.62);
@@ -1257,7 +1257,7 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
 
     // photos open with a clip-path wipe while the image settles
     $$('.t-comm .ph,.a-ph .ph').forEach(function(p){
-      var tl=G.timeline({scrollTrigger:{trigger:p,start:'top 88%',end:'top 35%',scrub:.8}});
+      var tl=G.timeline({scrollTrigger:{trigger:p,start:'top 88%',end:'top 35%',scrub:.4}});
       tl.fromTo(p,{clipPath:'inset(16% 12% 16% 12% round 28px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none'},0)
         .fromTo(p.querySelector('img'),{scale:1.15},{scale:1,ease:'none'},0);
     });
@@ -1268,10 +1268,10 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
       var track=$('#pr-track'),view=$('#pr-view');
       h.classList.add('pr-pin');
       function dist(){return Math.max(0,track.scrollWidth-view.clientWidth)}
-      var hz=G.to(track,{x:function(){return -dist()},ease:'none',scrollTrigger:{trigger:'#why',start:'top top',end:function(){return '+='+Math.min(dist(),innerHeight*1.4)},pin:true,scrub:.6,anticipatePin:1,invalidateOnRefresh:true}});
+      var hz=G.to(track,{x:function(){return -dist()},ease:'none',scrollTrigger:{trigger:'#why',start:'top top',end:function(){return '+='+Math.min(dist(),innerHeight*1.4)},pin:true,scrub:.4,anticipatePin:1,invalidateOnRefresh:true}});
       $$('li',track).forEach(function(li,i){
         if(i<1)return;
-        G.from(li,{rotation:i%2?-8:8,y:50,scale:.88,ease:'back.out(1.7)',scrollTrigger:{trigger:li,containerAnimation:hz,start:'left 100%',end:'left 55%',scrub:.6}});
+        G.from(li,{rotation:i%2?-8:8,y:50,scale:.88,ease:'back.out(1.7)',scrollTrigger:{trigger:li,containerAnimation:hz,start:'left 100%',end:'left 55%',scrub:.4}});
       });
       return function(){h.classList.remove('pr-pin')};
     });

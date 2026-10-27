@@ -830,7 +830,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);bo
     var bf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,bf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
     var lp=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(lp);gl.vertexAttribPointer(lp,2,gl.FLOAT,false,0,0);
     var uR=gl.getUniformLocation(pr,'R'),uT=gl.getUniformLocation(pr,'T'),uM=gl.getUniformLocation(pr,'M');
-    var hero=d.getElementById('top'),dpr=Math.min(window.devicePixelRatio||1,TAB?1.5:2),W=0,H=0;
+    var hero=d.getElementById('top'),dpr=Math.min(window.devicePixelRatio||1,1)*.5,W=0,H=0;
     function size(){W=Math.round(hero.offsetWidth*dpr);H=Math.round(hero.offsetHeight*dpr);c.width=W;c.height=H;gl.viewport(0,0,W,H)}
     size();addEventListener('resize',size);
     var mx=.5,my=.5,ma=0,tx=.5,ty=.5,ta=0;
@@ -839,8 +839,11 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);bo
     /* touch tablets: a tap or drag bends the mesh for a moment */
     var tt=0;hero.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse')return;var r=hero.getBoundingClientRect();tx=(e.clientX-r.left)/r.width;ty=1-(e.clientY-r.top)/r.height;ta=1;clearTimeout(tt);tt=setTimeout(function(){ta=0},1600)},{passive:true});
     var run=false,raf=0,t0=performance.now(),first=true;
+    var lastDraw=0;
     function frame(now){
       raf=0;
+      if(now-lastDraw<32&&!first){if(run)raf=requestAnimationFrame(frame);return}
+      lastDraw=now;
       mx+=(tx-mx)*.05;my+=(ty-my)*.05;ma+=(ta-ma)*.04;
       gl.uniform2f(uR,W,H);gl.uniform1f(uT,(now-t0)/1000+20);gl.uniform3f(uM,mx,my,ma);
       gl.drawArrays(gl.TRIANGLES,0,3);
@@ -863,7 +866,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);bo
     if(!LAP)ST.config({ignoreMobileResize:true});
 
     if(LAP&&window.Lenis){
-      var lenis=window.__lenis=new Lenis({lerp:.085});
+      var lenis=window.__lenis=new Lenis({lerp:.12});
       lenis.on('scroll',ST.update);
       G.ticker.add(function(t){lenis.raf(t*1000)});G.ticker.lagSmoothing(0);
       h.classList.add('lenis-on');
@@ -905,22 +908,22 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);bo
     if(LAP){
       d.querySelectorAll('.fly').forEach(function(el,i){
         G.fromTo(el,{z:-520,rotationX:24,rotationY:(i-1)*-14,yPercent:22,opacity:0},{z:0,rotationX:0,rotationY:0,yPercent:0,opacity:1,ease:'power3.out',
-          scrollTrigger:{trigger:'#pkgs',start:'top '+(96-i*5)+'%',end:'top 45%',scrub:1.2}});
+          scrollTrigger:{trigger:'#pkgs',start:'top '+(96-i*5)+'%',end:'top 45%',scrub:.4}});
       });
-      G.fromTo(pks,{'--sh':0},{'--sh':1,ease:'none',scrollTrigger:{trigger:'#pkgs',start:'top 62%',end:'top 45%',scrub:1.2}});
+      G.fromTo(pks,{'--sh':0},{'--sh':1,ease:'none',scrollTrigger:{trigger:'#pkgs',start:'top 62%',end:'top 45%',scrub:.4}});
     }
     /* touch tablets: the same flight from depth; one column in portrait, so each card flies on its own */
     if(TAB){
       mm.add('(min-width:900px)',function(){
         d.querySelectorAll('.fly').forEach(function(el,i){
           G.fromTo(el,{z:-520,rotationX:24,rotationY:(i-1)*-14,yPercent:22,opacity:0},{z:0,rotationX:0,rotationY:0,yPercent:0,opacity:1,ease:'power3.out',
-            scrollTrigger:{trigger:'#pkgs',start:'top '+(96-i*5)+'%',end:'top 45%',scrub:1.2}});
+            scrollTrigger:{trigger:'#pkgs',start:'top '+(96-i*5)+'%',end:'top 45%',scrub:.4}});
         });
-        G.fromTo(pks,{'--sh':0},{'--sh':1,ease:'none',scrollTrigger:{trigger:'#pkgs',start:'top 62%',end:'top 45%',scrub:1.2}});
+        G.fromTo(pks,{'--sh':0},{'--sh':1,ease:'none',scrollTrigger:{trigger:'#pkgs',start:'top 62%',end:'top 45%',scrub:.4}});
       });
       mm.add('(max-width:899px)',function(){
         pks.forEach(function(pk,i){
-          var tl=G.timeline({scrollTrigger:{trigger:pk,start:'top 100%',end:'top 50%',scrub:1}});
+          var tl=G.timeline({scrollTrigger:{trigger:pk,start:'top 100%',end:'top 50%',scrub:.4}});
           tl.fromTo(pk.querySelector('.fly'),{z:-460,rotationX:22,rotationY:(i%2?14:-14),yPercent:18,opacity:0},{z:0,rotationX:0,rotationY:0,yPercent:0,opacity:1,ease:'power3.out',duration:1})
             .fromTo(pk,{'--sh':0},{'--sh':1,ease:'none',duration:.35},.65);
         });
@@ -994,7 +997,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);bo
       var reserve=(innerWidth<768?72:24)+24;
       if(he+3*(hc+GAP)+TOP+reserve>innerHeight){reset();return}
       cur=-1;act(0);
-      var tl=G.timeline({scrollTrigger:{trigger:stage,start:'top '+TOP+'px',end:function(){return '+='+Math.round(innerHeight*1.35)},pin:true,anticipatePin:1,scrub:.6,invalidateOnRefresh:true,refreshPriority:1,
+      var tl=G.timeline({scrollTrigger:{trigger:stage,start:'top '+TOP+'px',end:function(){return '+='+Math.round(innerHeight*1.35)},pin:true,anticipatePin:1,scrub:.4,invalidateOnRefresh:true,refreshPriority:1,
         onUpdate:function(s){act(Math.min(3,Math.floor(s.progress*3+.5)));G.set('.pbar i',{scaleX:s.progress})}}});
       pil.forEach(function(p,i){if(i)tl.fromTo(p,{y:function(){return he-hc}},{y:0,ease:'power2.inOut',duration:1},i-1)});
       jump=function(i){var st=tl.scrollTrigger;return st.start+(i/3)*(st.end-st.start)+2};

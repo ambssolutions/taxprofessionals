@@ -1051,7 +1051,7 @@ html.motion:not(.ready) .hero-copy,html.motion:not(.ready) .glance{opacity:0}
 
     // smooth scroll on laptops
     if(window.Lenis){
-      var lenis=window.__lenis=new Lenis({lerp:.085});
+      var lenis=window.__lenis=new Lenis({lerp:.12});
       lenis.on('scroll',ST.update);
       G.ticker.add(function(t){lenis.raf(t*1000)});G.ticker.lagSmoothing(0);
       h.classList.add('lenis-on');
@@ -1076,7 +1076,7 @@ html.motion:not(.ready) .hero-copy,html.motion:not(.ready) .glance{opacity:0}
       pinned=true;
       var stage=d.getElementById('year-stage'),hh=d.querySelector('.site-header').offsetHeight;
       stage.style.minHeight=(innerHeight-hh)+'px';
-      ST.create({trigger:stage,start:'top top+='+hh,end:'+=170%',pin:true,scrub:.6,anticipatePin:1,
+      ST.create({trigger:stage,start:'top top+='+hh,end:'+=170%',pin:true,scrub:.4,anticipatePin:1,
         onUpdate:function(s){render(Math.min(1,s.progress*1.08))},
         onRefresh:function(s){render(Math.min(1,s.progress*1.08))}});
     }
@@ -1110,7 +1110,7 @@ html.motion:not(.ready) .hero-copy,html.motion:not(.ready) .glance{opacity:0}
       if(!target&&chart.offsetHeight<=avail-12){target=chart;start='top top+='+Math.round(hh+Math.max(6,(avail-chart.offsetHeight)/2))}
       if(target){
         pinned=true;render(0);
-        ST.create({trigger:target,start:start,end:'+='+(tablet?150:120)+'%',pin:true,pinSpacing:true,scrub:.6,anticipatePin:1,
+        ST.create({trigger:target,start:start,end:'+='+(tablet?150:120)+'%',pin:true,pinSpacing:true,scrub:.4,anticipatePin:1,
           onUpdate:function(s){render(Math.min(1,s.progress*1.08))},
           onRefresh:function(s){render(Math.min(1,s.progress*1.08))}});
       }

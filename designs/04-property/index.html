@@ -896,7 +896,7 @@ html:not(.js) .ex+.ex{margin-top:14px}
     // smooth scroll on laptops only (touch keeps native scroll)
     var lenis=null;
     if(lap&&window.Lenis){
-      lenis=window.__lenis=new Lenis({lerp:.085});
+      lenis=window.__lenis=new Lenis({lerp:.12});
       lenis.on('scroll',ST.update);
       G.ticker.add(function(t){lenis.raf(t*1000)});G.ticker.lagSmoothing(0);
       h.classList.add('lenis-on');
@@ -930,7 +930,7 @@ html:not(.js) .ex+.ex{margin-top:14px}
     // section transition: the experience panel opens out of the 3D space
     G.fromTo('#property',{clipPath:'inset(0% 4% 0% 4% round 40px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:{trigger:'#property',start:'top bottom',end:'top 30%',scrub:true}});
     // horizontal wipe on the meeting photo
-    G.fromTo('.xp-ph',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'power2.out',scrollTrigger:{trigger:'.xp-ph',start:'top 85%',end:'top 35%',scrub:1}});
+    G.fromTo('.xp-ph',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'power2.out',scrollTrigger:{trigger:'.xp-ph',start:'top 85%',end:'top 35%',scrub:.4}});
     G.fromTo('.xp-ph img',{scale:1.18},{scale:1,ease:'none',scrollTrigger:{trigger:'.xp-ph',start:'top bottom',end:'bottom top',scrub:true}});
 
     // strategies marquee with velocity skew
@@ -1006,7 +1006,7 @@ html:not(.js) .ex+.ex{margin-top:14px}
     var wrap=d.querySelector('.gl'),cv=wrap.querySelector('canvas');
     import('../../assets/vendor/three.module.min.js').then(function(T){
       var R=new T.WebGLRenderer({canvas:cv,antialias:true,alpha:true,powerPreference:'high-performance'});
-      R.setPixelRatio(Math.min(window.devicePixelRatio||1,lap?2:1.5));
+      R.setPixelRatio(Math.min(window.devicePixelRatio||1,lap?1.25:1));
       R.setClearColor(0x000000,0);
       var scene=new T.Scene();scene.fog=new T.Fog(0x033F66,14,30);
       var cam=new T.PerspectiveCamera(34,1,.1,90);

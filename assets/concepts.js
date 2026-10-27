@@ -99,8 +99,8 @@ window.TP_CONCEPTS = [
     '<style>' +
     ':host{all:initial}' +
     '.bar{position:fixed;left:16px;bottom:16px;z-index:2147483000;display:flex;align-items:center;gap:2px;' +
-    'font:500 13px/1 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:#fff;background:rgba(14,22,17,.9);' +
-    'backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);border-radius:999px;' +
+    'font:500 13px/1 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:#fff;background:#0E1611;' +
+    'border:1px solid rgba(255,255,255,.14);border-radius:999px;' +
     'padding:4px;box-shadow:0 12px 32px -12px rgba(0,0,0,.5);transition:opacity .3s,transform .3s}' +
     '.bar.tuck{opacity:.35}.bar:hover,.bar:focus-within{opacity:1}' +
     '.bar.gone,.bar.chat{opacity:0;pointer-events:none;transform:translate(-50%,24px)}' +

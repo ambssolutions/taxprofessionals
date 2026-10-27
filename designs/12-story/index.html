@@ -944,7 +944,7 @@ html.js .rv.in{opacity:1;transform:none}
     function hdr(){ return top.offsetHeight; }
 
     if (window.Lenis && !tab && !matchMedia('(pointer: coarse)').matches) {
-      var lenis = window.__lenis = new Lenis({lerp: .09});
+      var lenis = window.__lenis = new Lenis({lerp:.12});
       lenis.on('scroll', ST.update);
       G.ticker.add(function(t){ lenis.raf(t * 1000); }); G.ticker.lagSmoothing(0);
       h.classList.add('lenis-on');
@@ -968,7 +968,7 @@ html.js .rv.in{opacity:1;transform:none}
       .from('.cov .squares i', {scale: 0, transformOrigin: '100% 0%', duration: 1.2, stagger: .15}, 1.9)
       .from('.cov figcaption', {opacity: 0, duration: 1}, 2.1);
     /* pinned and scrubbed: the cover lines part, the photo settles closer */
-    G.timeline({scrollTrigger: {trigger: '.hero', start: 'top top', end: '+=70%', pin: true, scrub: .8}})
+    G.timeline({scrollTrigger: {trigger: '.hero', start: 'top top', end: '+=70%', pin: true, scrub: .4}})
       .to(lines, {x: function(i){ return (i % 2 ? 1 : -1) * innerWidth * .1; }, ease: 'none'}, 0)
       .to('.hero .place, .hero h1, .hero .lede, .hero .cta', {opacity: .12, ease: 'none'}, 0)
       .to('.cov', {scale: 1.12, ease: 'none'}, 0);
@@ -980,11 +980,11 @@ html.js .rv.in{opacity:1;transform:none}
       if (!inline) G.set(gr.figs, {clipPath: 'inset(0% 0% 0% 100%)'});
       gr.marks.forEach(function(m, k){
         var op = m.querySelector('.op'), f = gr.figs[k];
-        var tl = G.timeline({scrollTrigger: {trigger: op, start: function(){ return 'top ' + hdr(); }, end: '+=80%', pin: true, pinSpacing: true, scrub: .8}});
+        var tl = G.timeline({scrollTrigger: {trigger: op, start: function(){ return 'top ' + hdr(); }, end: '+=80%', pin: true, pinSpacing: true, scrub: .4}});
         tl.fromTo(op.querySelector('.op-n'), {scale: .3, opacity: 0}, {scale: 1, opacity: 1, duration: 1, ease: 'power2.out'}, 0)
           .fromTo(op.querySelector('.op-t'), {yPercent: 70, opacity: 0}, {yPercent: 0, opacity: 1, duration: .8, ease: 'power2.out'}, .3);
         if (inline) {
-          var ip = m.querySelector('.ch-ph'), st = {trigger: ip, start: 'top 92%', end: 'top 35%', scrub: .8};
+          var ip = m.querySelector('.ch-ph'), st = {trigger: ip, start: 'top 92%', end: 'top 35%', scrub: .4};
           G.fromTo(ip, {clipPath: 'inset(0% 0% 0% 100%)'}, {clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut', scrollTrigger: st});
           G.fromTo(ip.querySelectorAll(':scope > img'), {scale: 1.18, transformOrigin: '50% 100%'}, {scale: 1, ease: 'none', scrollTrigger: st});
           tl.to({}, {duration: .3});
@@ -1003,7 +1003,7 @@ html.js .rv.in{opacity:1;transform:none}
        and its back lands on the left as the next service's words; the lifting page darkens and casts a shadow. */
     (function(){
       var op = svcSec.querySelector('.op');
-      G.timeline({scrollTrigger: {trigger: op, start: function(){ return 'top ' + hdr(); }, end: '+=80%', pin: true, pinSpacing: true, scrub: .8}})
+      G.timeline({scrollTrigger: {trigger: op, start: function(){ return 'top ' + hdr(); }, end: '+=80%', pin: true, pinSpacing: true, scrub: .4}})
         .fromTo(op.querySelector('.op-n'), {scale: .3, opacity: 0}, {scale: 1, opacity: 1, duration: 1, ease: 'power2.out'}, 0)
         .fromTo(op.querySelector('.op-t'), {yPercent: 70, opacity: 0}, {yPercent: 0, opacity: 1, duration: .8, ease: 'power2.out'}, .3)
         .to({}, {duration: .3});
@@ -1015,7 +1015,7 @@ html.js .rv.in{opacity:1;transform:none}
       var leaves = [].slice.call(bk.querySelectorAll('.bk-leaf'));
       G.from(bk, {opacity: 0, duration: 1.2, ease: 'power2.out', scrollTrigger: {trigger: bk, start: 'top 90%', once: true}});
       var turn = G.timeline({scrollTrigger: {trigger: svcIn, start: function(){ return 'top ' + (hdr() + 12); }, end: function(){ return '+=' + Math.round(innerHeight * .9 * SN); },
-        pin: true, scrub: .7, anticipatePin: 1, invalidateOnRefresh: true}});
+        pin: true, scrub: .4, anticipatePin: 1, invalidateOnRefresh: true}});
       leaves.forEach(function(lf, k){
         var fs = lf.querySelector('.bk-front'), bs = lf.querySelector('.bk-back');
         var nextImg = k < SN - 2 ? leaves[k + 1].querySelector('.bk-front .bk-ph img') : bk.querySelector('.bk-right .bk-ph img');
@@ -1053,12 +1053,12 @@ html.js .rv.in{opacity:1;transform:none}
     var track = d.querySelector('.tl-track'), view = d.querySelector('.tl-view'), line = d.querySelector('.tl-line');
     function dist(){ return Math.max(0, track.scrollWidth - view.clientWidth); }
     var tlTween = G.to(track, {x: function(){ return -dist(); }, ease: 'none',
-      scrollTrigger: {trigger: '.tl', start: 'top top', end: function(){ return '+=' + dist(); }, pin: true, scrub: .8, invalidateOnRefresh: true,
+      scrollTrigger: {trigger: '.tl', start: 'top top', end: function(){ return '+=' + dist(); }, pin: true, scrub: .4, invalidateOnRefresh: true,
         onUpdate: function(s){ G.set(line, {scaleX: s.progress}); }}});
 
     /* 5. pull quote: pinned, revealed word by word */
     var pqW = d.querySelectorAll('.pq .w');
-    G.timeline({scrollTrigger: {trigger: '.pq', start: 'top top', end: '+=120%', pin: true, scrub: .6}})
+    G.timeline({scrollTrigger: {trigger: '.pq', start: 'top top', end: '+=120%', pin: true, scrub: .4}})
       .fromTo(pqW, {opacity: .12}, {opacity: 1, duration: .4, stagger: .06, ease: 'none'}, 0)
       .fromTo('.pq figcaption', {opacity: 0, y: 12}, {opacity: 1, y: 0, duration: .6}, '>-0.2')
       .fromTo('.pq-m', {scale: .6, opacity: 0}, {scale: 1, opacity: 1, duration: .6}, 0);
@@ -1077,7 +1077,7 @@ html.js .rv.in{opacity:1;transform:none}
     G.utils.toArray('.lit').forEach(function(el){
       if (el.closest('.pq')) return;
       var ws = el.querySelectorAll('.w'), ks = el.querySelectorAll('.key .w');
-      var tl = G.timeline({scrollTrigger: {trigger: el, start: 'top 85%', end: 'bottom 50%', scrub: .7}});
+      var tl = G.timeline({scrollTrigger: {trigger: el, start: 'top 85%', end: 'bottom 50%', scrub: .4}});
       tl.fromTo(ws, {opacity: .16}, {opacity: 1, duration: .5, stagger: .1, ease: 'none'}, 0);
       if (ks.length) tl.fromTo(ks, {color: '#0e1c26'}, {color: '#1B8F25', duration: .4, stagger: .08, ease: 'none'}, '>-0.35');
     });
@@ -1175,7 +1175,7 @@ html.js .rv.in{opacity:1;transform:none}
         .fromTo('.cov figcaption', {opacity: 0}, {opacity: 1, duration: 1}, 2.1);
       h.classList.add('ph-go');
       /* the cover drifts apart as you scroll away from it */
-      G.timeline({scrollTrigger: {trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6}})
+      G.timeline({scrollTrigger: {trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .4}})
         .to('.hero h1', {yPercent: -40, ease: 'none'}, 0)
         .to('.cov', {y: -50, scale: 1.08, ease: 'none'}, 0);
 
@@ -1200,7 +1200,7 @@ html.js .rv.in{opacity:1;transform:none}
 
       /* 4. chapter and service photos wipe open from the right while the photo settles from 1.15 */
       G.utils.toArray('.ch-ph, .pil-ph').forEach(function(f){
-        var st = {trigger: f, start: 'top 95%', end: 'top 40%', scrub: .7};
+        var st = {trigger: f, start: 'top 95%', end: 'top 40%', scrub: .4};
         G.fromTo(f, {clipPath: 'inset(0% 0% 0% 100%)'}, {clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut', scrollTrigger: st});
         G.fromTo(f.querySelectorAll(':scope > img'), {scale: 1.15, transformOrigin: '50% 100%'}, {scale: 1, ease: 'none', scrollTrigger: st});
         var tri = f.querySelectorAll('.trio img');
@@ -1211,7 +1211,7 @@ html.js .rv.in{opacity:1;transform:none}
       G.utils.toArray('.lit').forEach(function(el){
         if (el.closest('.pq')) return;
         var ws = el.querySelectorAll('.w:not(.key .w)');
-        G.fromTo(ws, {opacity: .35}, {opacity: 1, stagger: .1, ease: 'none', scrollTrigger: {trigger: el, start: 'top 88%', end: 'bottom 55%', scrub: .6}});
+        G.fromTo(ws, {opacity: .35}, {opacity: 1, stagger: .1, ease: 'none', scrollTrigger: {trigger: el, start: 'top 88%', end: 'bottom 55%', scrub: .4}});
       });
       G.utils.toArray('.promises .n').forEach(function(n){
         G.fromTo(n, {yPercent: 60, opacity: 0}, {yPercent: 0, opacity: 1, duration: 1.1, ease: 'expo.out', scrollTrigger: {trigger: n, start: 'top 88%', toggleActions: 'play none none none'}});
@@ -1221,7 +1221,7 @@ html.js .rv.in{opacity:1;transform:none}
       var track = d.querySelector('.tl-track'), view = d.querySelector('.tl-view'), line = d.querySelector('.tl-line');
       function dist(){ return Math.max(0, track.scrollWidth - view.clientWidth); }
       var tlTween = G.to(track, {x: function(){ return -dist(); }, ease: 'none',
-        scrollTrigger: {trigger: '.tl', start: 'top top', end: function(){ return '+=' + dist(); }, pin: true, anticipatePin: 1, scrub: .6, invalidateOnRefresh: true,
+        scrollTrigger: {trigger: '.tl', start: 'top top', end: function(){ return '+=' + dist(); }, pin: true, anticipatePin: 1, scrub: .4, invalidateOnRefresh: true,
           onUpdate: function(s){ line.style.transform = 'scaleX(' + s.progress + ')'; }}});
       G.utils.toArray('.tl-p').forEach(function(p){
         G.from(p.querySelector('.yr'), {yPercent: 40, opacity: .15, ease: 'none', scrollTrigger: {trigger: p, containerAnimation: tlTween, start: 'left 95%', end: 'left 45%', scrub: true}});
@@ -1231,7 +1231,7 @@ html.js .rv.in{opacity:1;transform:none}
       G.from('.tl-sq i', {scale: 0, transformOrigin: '0% 100%', stagger: .2, ease: 'none', scrollTrigger: {trigger: '.tl-sq', containerAnimation: tlTween, start: 'left 100%', end: 'left 60%', scrub: true}});
 
       /* 7. pinned briefly: the client's words light up one by one */
-      G.timeline({scrollTrigger: {trigger: '.pq', start: 'top top', end: '+=100%', pin: true, anticipatePin: 1, scrub: .5}})
+      G.timeline({scrollTrigger: {trigger: '.pq', start: 'top top', end: '+=100%', pin: true, anticipatePin: 1, scrub: .4}})
         .fromTo('.pq-m', {scale: .6, opacity: 0}, {scale: 1, opacity: 1, duration: .5}, 0)
         .fromTo('.pq .w', {opacity: .2}, {opacity: 1, duration: .4, stagger: .05, ease: 'none'}, 0)
         .fromTo('.pq figcaption', {opacity: 0, y: 12}, {opacity: 1, y: 0, duration: .5}, '>-0.2');

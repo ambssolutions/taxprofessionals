@@ -893,7 +893,7 @@ addEventListener('DOMContentLoaded',function(){
   function scenes(useLenis){
     var lr=null, sg=d.getElementById('svc-grid');
     if(useLenis&&window.Lenis&&hw>4){
-      lenis=new Lenis({lerp:.1,smoothWheel:true});
+      lenis=new Lenis({lerp:.12,smoothWheel:true});
       lenis.on('scroll',ST.update);
       lr=function(t){lenis.raf(t*1000)};
       G.ticker.add(lr);G.ticker.lagSmoothing(0);
@@ -901,7 +901,7 @@ addEventListener('DOMContentLoaded',function(){
     /* pinned horizontal year */
     H.classList.add('pin');
     track.scrollLeft=0;
-    yrTw=G.to(track,{x:function(){return -yrDist()},ease:'none',scrollTrigger:{trigger:stage,start:'top top',end:function(){return '+='+yrDist()},pin:true,scrub:.8,invalidateOnRefresh:true,anticipatePin:1,
+    yrTw=G.to(track,{x:function(){return -yrDist()},ease:'none',scrollTrigger:{trigger:stage,start:'top top',end:function(){return '+='+yrDist()},pin:true,scrub:.4,invalidateOnRefresh:true,anticipatePin:1,
       onUpdate:function(s){fill.style.transform='scaleX('+s.progress.toFixed(4)+')';setActive(Math.round(s.progress*11))}}});
     panels.forEach(function(pn){
       ST.create({trigger:pn,containerAnimation:yrTw,start:'left 80%',onEnter:function(){roll(pn)}});
@@ -948,7 +948,7 @@ addEventListener('DOMContentLoaded',function(){
     var T=0, o={p:0}, steps=Math.max(1,panels.indexOf(nowPanel));
     track.scrollLeft=0;
     G.to(o,{p:1,ease:'none',onUpdate:function(){track.scrollLeft=o.p*T},
-      scrollTrigger:{trigger:stage,start:function(){return 'top '+hh()},end:function(){return '+='+Math.round(innerHeight*Math.min(1.5,.45+steps*.17))},pin:true,anticipatePin:1,scrub:.6,invalidateOnRefresh:true,
+      scrollTrigger:{trigger:stage,start:function(){return 'top '+hh()},end:function(){return '+='+Math.round(innerHeight*Math.min(1.5,.45+steps*.17))},pin:true,anticipatePin:1,scrub:.4,invalidateOnRefresh:true,
         onRefresh:function(){T=nowPanel?centreOf(nowPanel):0;track.scrollLeft=o.p*T},
         onToggle:function(s){track.classList.toggle('free',s.isActive)}}});
     G.from('#today',{yPercent:-120,opacity:0,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:stage,start:'top 70%'}});

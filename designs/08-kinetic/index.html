@@ -845,7 +845,7 @@ addEventListener('DOMContentLoaded',function(){
         if(pan){img.classList.add('pan');undo.push(function(){img.classList.remove('pan')})}
         function panX(f){var iw=img.offsetWidth,vw=innerWidth;return -Math.max(0,Math.min(iw-vw,iw*f-vw/2))}
         G.set(copy,{autoAlpha:0,y:40});G.set(cbox,{autoAlpha:0});
-        var mt=G.timeline({scrollTrigger:{trigger:'#about',start:'top top',end:'+=140%',pin:true,scrub:1,anticipatePin:1,invalidateOnRefresh:true,onRefresh:function(){maskLayout();maskSet(st0.p)}}});
+        var mt=G.timeline({scrollTrigger:{trigger:'#about',start:'top top',end:'+=140%',pin:true,scrub:.4,anticipatePin:1,invalidateOnRefresh:true,onRefresh:function(){maskLayout();maskSet(st0.p)}}});
         mt.to(st0,{p:1,duration:1,ease:'power2.in',onUpdate:function(){maskSet(st0.p)}},0);
         if(pan)mt.fromTo(img,{x:function(){return panX(.2)}},{x:function(){return panX(.76)},duration:1.35,ease:'none'},0);
         else mt.fromTo(img,{scale:1.14},{scale:1,duration:1.1,ease:'none'},0);
@@ -866,7 +866,7 @@ addEventListener('DOMContentLoaded',function(){
         // 4. services deal in sideways; photos wipe open and settle; the card at the centre of the swipe row stands tallest
         var row=$('.cards'),cs=$$('.card',row),figs=$$('.card figure',row),ims=$$('.card figure img',row);
         if(P.narrow){
-          G.timeline({scrollTrigger:{trigger:row,start:'top 95%',end:'top 35%',scrub:.6}})
+          G.timeline({scrollTrigger:{trigger:row,start:'top 95%',end:'top 35%',scrub:.4}})
             .from(row,{x:function(){return innerWidth*.55},ease:'power2.out'},0)
             .fromTo(figs,{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',stagger:.08,ease:'none'},0)
             .fromTo(ims,{scale:1.15},{scale:1,stagger:.08,ease:'none'},0);
@@ -915,7 +915,7 @@ addEventListener('DOMContentLoaded',function(){
 
   // smooth scroll (laptops only)
   if(window.Lenis&&!tablet){
-    var lenis=window.__lenis=new Lenis({lerp:.085});
+    var lenis=window.__lenis=new Lenis({lerp:.12});
     lenis.on('scroll',ST.update);
     G.ticker.add(function(t){lenis.raf(t*1000)});G.ticker.lagSmoothing(0);
     h.classList.add('lenis-on');
@@ -937,7 +937,7 @@ addEventListener('DOMContentLoaded',function(){
     var st0={p:0},copy=$$('.mask-copy .ci'),cbox=$('.mask-copy');
     G.set(copy,{autoAlpha:0,y:50});G.set(cbox,{autoAlpha:0});
     G.set('.duo img',{scale:1.14});
-    var mt=G.timeline({scrollTrigger:{trigger:'#about',start:'top top',end:'+=230%',pin:true,scrub:1,anticipatePin:tablet?1:0,invalidateOnRefresh:true,onRefresh:function(){maskLayout();maskSet(st0.p)}}});
+    var mt=G.timeline({scrollTrigger:{trigger:'#about',start:'top top',end:'+=230%',pin:true,scrub:.4,anticipatePin:tablet?1:0,invalidateOnRefresh:true,onRefresh:function(){maskLayout();maskSet(st0.p)}}});
     mt.to(st0,{p:1,duration:1,ease:'power2.in',onUpdate:function(){maskSet(st0.p)}},0)
       .to('.duo img',{scale:1,duration:1.1,ease:'none'},0)
       .to('.mk-cover',{opacity:0,duration:.06},.94)
@@ -948,7 +948,7 @@ addEventListener('DOMContentLoaded',function(){
     // service reel: pinned horizontal, each card grows at centre
     var track=$('.reel-track'),cards=$$('.card');
     function dist(){return Math.max(0,track.scrollWidth-innerWidth)}
-    var tw=G.to(track,{x:function(){return -dist()},ease:'none',scrollTrigger:{trigger:'#services',start:'top top',end:function(){return '+='+dist()},pin:true,scrub:1,anticipatePin:tablet?1:0,invalidateOnRefresh:true}});
+    var tw=G.to(track,{x:function(){return -dist()},ease:'none',scrollTrigger:{trigger:'#services',start:'top top',end:function(){return '+='+dist()},pin:true,scrub:.4,anticipatePin:tablet?1:0,invalidateOnRefresh:true}});
     cards.forEach(function(c){
       G.timeline({scrollTrigger:{trigger:c,containerAnimation:tw,start:'left right',end:'right left',scrub:true}})
         .fromTo(c,{scale:.8},{scale:1,ease:'power2.out',duration:1}).to(c,{scale:.8,ease:'power2.in',duration:1});

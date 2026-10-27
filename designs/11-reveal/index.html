@@ -835,7 +835,7 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
         dr.querySelectorAll('.fc').forEach(function(fc){ fc.querySelectorAll('.lb').forEach(function(lb, j){ if (j !== i) lb.remove(); }); });
         ch.appendChild(dr);
         var L = dr.querySelector('.cc-d.l'), R = dr.querySelector('.cc-d.r'), img = ch.querySelector('.cc-ph img');
-        var tl = G.timeline({defaults: {ease: 'power2.inOut'}, scrollTrigger: {trigger: ch, start: function(){ return 'top ' + hdrH(); }, end: '+=90%', pin: true, scrub: 1, anticipatePin: 1}});
+        var tl = G.timeline({defaults: {ease: 'power2.inOut'}, scrollTrigger: {trigger: ch, start: function(){ return 'top ' + hdrH(); }, end: '+=90%', pin: true, scrub: .4, anticipatePin: 1}});
         tl.to({}, {duration: .15})
           .to(L, {rotationY: -96, '--sh': .45, duration: 1}).to(R, {rotationY: 96, '--sh': .45, duration: 1}, '<')
           .fromTo(ch.querySelector('.wrap'), {scale: .94}, {scale: 1, duration: 1.1, ease: 'power2.out'}, '<.1')
@@ -900,7 +900,7 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
     // curtain call: one pair of thick panels opens and closes on each chapter, scrubbed and pinned
     var st = d.getElementById('stage'), chs = G.utils.toArray('.cc-ch'), L = st.querySelector('.cc-d.l'), Rd = st.querySelector('.cc-d.r');
     var lbL = L.querySelectorAll('.lb'), lbR = Rd.querySelectorAll('.lb'), stops = [];
-    var tl = G.timeline({defaults: {ease: 'power2.inOut'}, scrollTrigger: {trigger: st, start: 'top top', end: '+=360%', pin: true, scrub: 1, anticipatePin: 1}});
+    var tl = G.timeline({defaults: {ease: 'power2.inOut'}, scrollTrigger: {trigger: st, start: 'top top', end: '+=360%', pin: true, scrub: .4, anticipatePin: 1}});
     function open(i){
       tl.to(L, {rotationY: -96, '--sh': .4, duration: 1}).to(Rd, {rotationY: 96, '--sh': .4, duration: 1}, '<')
         .fromTo(chs[i], {scale: .94}, {scale: 1, duration: 1.1, ease: 'power2.out'}, '<.15')
@@ -920,7 +920,7 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
     G.utils.toArray('[data-turn]').forEach(function(s){
       var p = d.createElement('div'); p.className = 'turn'; p.setAttribute('aria-hidden', 'true'); s.prepend(p);
       G.set(p, {transformPerspective: 1900, transformOrigin: '0% 50%'});
-      G.fromTo(p, {rotationY: 0, '--sh': 0}, {rotationY: -94, '--sh': 1, ease: 'power1.in', scrollTrigger: {trigger: s, start: 'top 94%', end: 'top 24%', scrub: .6}});
+      G.fromTo(p, {rotationY: 0, '--sh': 0}, {rotationY: -94, '--sh': 1, ease: 'power1.in', scrollTrigger: {trigger: s, start: 'top 94%', end: 'top 24%', scrub: .4}});
     });
 
     // promises: each card settles back slightly as the next one lands
@@ -936,7 +936,7 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
 
     // smooth scroll
     if (fx && window.Lenis) {
-      var lenis = window.__lenis = new Lenis({lerp: .085});
+      var lenis = window.__lenis = new Lenis({lerp:.12});
       lenis.on('scroll', ST.update);
       G.ticker.add(function(t){ lenis.raf(t * 1000); }); G.ticker.lagSmoothing(0);
       h.classList.add('lenis-on');

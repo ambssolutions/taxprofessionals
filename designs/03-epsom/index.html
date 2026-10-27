@@ -97,7 +97,7 @@ section[id]{scroll-margin-top:88px}
 .cam{position:absolute;inset:0;overflow:hidden;background:linear-gradient(180deg,#DCE9F0 0%,#EAF0EE 34%,var(--land) 60%)}
 .plane{position:absolute;left:50%;top:50%;width:2400px;height:1600px;transform-origin:0 0;transform:scale(.66) translate(-1000px,-640px)}
 .plane>svg{width:2400px;height:1600px;max-width:none}
-.grain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.35;mix-blend-mode:multiply}
+.grain{display:none} /* a live noise filter over the 3D map redrew the whole map every frame */
 .hero-wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(247,244,236,.97) 0%,rgba(247,244,236,.9) 40%,rgba(247,244,236,0) 70%);pointer-events:none}
 .hero-copy{position:relative;z-index:3;max-width:980px;margin:0 auto;padding:calc(var(--hd) + 9vh) 24px 0;text-align:center}
 .hero h1{margin:0 auto;max-width:15ch}
@@ -820,7 +820,7 @@ document.addEventListener('DOMContentLoaded',function(){
   /* Lenis on laptops */
   var lenis=null;
   if(window.Lenis&&!tab){
-    lenis=new Lenis({lerp:.09});
+    lenis=new Lenis({lerp:.12});
     lenis.on('scroll',ST.update);
     G.ticker.add(function(t){lenis.raf(t*1000)});G.ticker.lagSmoothing(0);
     d.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(!a)return;var id=a.getAttribute('href');if(id.length<2)return;var t=d.querySelector(id);if(!t)return;e.preventDefault();lenis.scrollTo(id==='#top'?0:t,{offset:-84,duration:1.6})});
@@ -844,7 +844,7 @@ document.addEventListener('DOMContentLoaded',function(){
   render();
   var caps=[[0,''],[.16,'Heading north on Manukau Road'],[.56,'Number 620, free on-site parking'],[.78,'']],lastCap=null;
   function cap(self){var p=self.progress,t='';caps.forEach(function(c){if(p>=c[0])t=c[1]});if(t!==lastCap){lastCap=t;capEl.classList.remove('on');capEl.textContent=t;if(t)requestAnimationFrame(function(){capEl.classList.add('on')})}}
-  var tl=G.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#fly',start:'top top',end:function(){return '+='+Math.round(innerHeight*3.2)},pin:true,scrub:1,anticipatePin:1,invalidateOnRefresh:true,onUpdate:cap}});
+  var tl=G.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#fly',start:'top top',end:function(){return '+='+Math.round(innerHeight*3.2)},pin:true,scrub:.4,anticipatePin:1,invalidateOnRefresh:true,onUpdate:cap}});
   tl.to('.hero-copy',{y:-70,autoAlpha:0,duration:.1,ease:'power1.in'},0)
     .to('.hero-wash',{autoAlpha:0,duration:.14},.02)
     .to(S,{w:1,rx:60,s:1,duration:.34,ease:'power2.inOut',onUpdate:render},.04)
@@ -958,7 +958,7 @@ document.addEventListener('DOMContentLoaded',function(){
       }
       plane.style.left='0';plane.style.top='0';draw();
       var cap=captioner([[0,''],[.3,'Heading north on Manukau Road'],[.68,'Number 620, free on-site parking']]);
-      var tl=G.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:hero,start:'top top',end:function(){return '+='+Math.round(innerHeight*1.3)},pin:true,scrub:.8,anticipatePin:1,invalidateOnRefresh:true,
+      var tl=G.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:hero,start:'top top',end:function(){return '+='+Math.round(innerHeight*1.3)},pin:true,scrub:.4,anticipatePin:1,invalidateOnRefresh:true,
         onUpdate:function(s){cap(s);b.classList.toggle('in-hero',s.progress<=.22)},onRefresh:draw}});
       heroST=tl.scrollTrigger;
       tl.to('.hero-copy',{y:-60,autoAlpha:0,duration:.24,ease:'power1.in'},0)
@@ -971,14 +971,14 @@ document.addEventListener('DOMContentLoaded',function(){
     });
 
     /* the team photo opens in a circle as it arrives */
-    var ap=d.querySelector('.arrive-photo'),apt={trigger:ap,start:'top 92%',end:'center 52%',scrub:.6};
+    var ap=d.querySelector('.arrive-photo'),apt={trigger:ap,start:'top 92%',end:'center 52%',scrub:.4};
     G.fromTo(ap,{clipPath:'circle(10% at 50% 45%)'},{clipPath:'circle(75% at 50% 45%)',ease:'none',scrollTrigger:apt});
     G.fromTo(ap.querySelector('img'),{scale:1.15},{scale:1,ease:'none',scrollTrigger:apt});
     G.from('.arrive-copy > :not(h2)',{y:30,autoAlpha:0,duration:1.1,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:'.arrive-copy',start:'top 85%',once:true}});
 
     /* service photos wipe open and settle */
     G.utils.toArray('.card-media').forEach(function(m){
-      var t={trigger:m,start:'top 96%',end:'top 40%',scrub:.6};
+      var t={trigger:m,start:'top 96%',end:'top 40%',scrub:.4};
       G.fromTo(m,{clipPath:'inset(16% 10% 16% 10% round 22px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:t});
       G.fromTo(m.querySelector('img'),{scale:1.15},{scale:1,ease:'none',scrollTrigger:t});
     });

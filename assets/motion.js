@@ -193,3 +193,40 @@ function fallingHeadings() {
     b.addEventListener('pointerleave', function () { b.style.transform = ''; });
   });
 })();
+
+/* Hover that follows the content, not just the mouse (laptops).
+   When the page scrolls, or a pinned strip slides, under a still mouse, browsers don't tell the page that the pointer
+   has left one item and is now over another, so hover effects (photos that follow the pointer, tilted tiles, cursor
+   labels, magnetic buttons) stayed switched on. After each scroll frame this checks what is really under the pointer
+   and sends the leave and enter events the browser skipped. Leaving the window or switching tabs ends every hover. */
+(function () {
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  var x = -1, y = -1, chain = [], raf = 0;
+  function at(px, py) { var c = [], e = document.elementFromPoint(px, py); while (e) { c.push(e); e = e.parentElement; } return c; }
+  function fire(el, type, rel) {
+    var o = { bubbles: /over|out/.test(type), cancelable: true, clientX: x, clientY: y, relatedTarget: rel || null, view: window };
+    try { el.dispatchEvent(type.indexOf('pointer') === 0 ? new PointerEvent(type, Object.assign(o, { pointerType: 'mouse', isPrimary: true, pointerId: 1 })) : new MouseEvent(type, o)); } catch (e) {}
+  }
+  function swap(now) {
+    var gone = chain.filter(function (e) { return now.indexOf(e) < 0; }), added = now.filter(function (e) { return chain.indexOf(e) < 0; });
+    if (!gone.length && !added.length) return false;
+    if (gone[0]) { fire(gone[0], 'pointerout', now[0]); fire(gone[0], 'mouseout', now[0]); }
+    gone.forEach(function (e) { fire(e, 'pointerleave', now[0]); fire(e, 'mouseleave', now[0]); });
+    if (now[0]) { fire(now[0], 'pointerover', gone[0]); fire(now[0], 'mouseover', gone[0]); }
+    added.slice().reverse().forEach(function (e) { fire(e, 'pointerenter', gone[0]); fire(e, 'mouseenter', gone[0]); });
+    chain = now; return true;
+  }
+  addEventListener('pointermove', function (e) { if (e.isTrusted) { x = e.clientX; y = e.clientY; chain = at(x, y); } }, { passive: true, capture: true });
+  addEventListener('scroll', function () {
+    if (raf || x < 0) return;
+    raf = requestAnimationFrame(function () {
+      raf = 0;
+      // pointer-follow effects also get a move at the same spot, so they track the item now under the pointer
+      if (swap(at(x, y)) && chain[0]) { fire(chain[0], 'pointermove'); fire(chain[0], 'mousemove'); }
+    });
+  }, { passive: true });
+  function end() { if (x < 0) return; swap([]); x = y = -1; }
+  document.documentElement.addEventListener('mouseleave', end);
+  addEventListener('blur', end);
+  document.addEventListener('visibilitychange', function () { if (document.hidden) end(); });
+})();
