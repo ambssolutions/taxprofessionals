@@ -97,7 +97,7 @@ function fallingHeadings() {
     '.tp-curtain::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:#4CA442}' +
     '.tp-curtain.up{transform:translateY(-101%)}' +
     /* text that lights up as you scroll */
-    '.tp-sw{opacity:.16;transition:opacity .5s linear}' +
+    '.tp-sw{opacity:.4;transition:opacity .5s linear}' +
     '@supports (animation-timeline: view()){.tp-sw{transition:none;animation:tp-sw linear both;animation-timeline:view();animation-range:entry 10% cover 42%}}' +
     '@keyframes tp-sw{to{opacity:1}}' +
     '.tp-scrub.tp-on .tp-sw{opacity:1}' +

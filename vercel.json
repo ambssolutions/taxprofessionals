@@ -56,6 +56,16 @@
       "source": "/capability",
       "destination": "/designs/10-capability/",
       "permanent": false
+    },
+    {
+      "source": "/reveal",
+      "destination": "/designs/11-reveal/",
+      "permanent": false
+    },
+    {
+      "source": "/story",
+      "destination": "/designs/12-story/",
+      "permanent": false
     }
   ],
   "headers": [
