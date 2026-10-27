@@ -96,7 +96,7 @@ svg{display:block}
 .srow dd{margin:0;font-weight:500}
 .srow dd small{display:block;color:var(--muted);font-weight:400;font-size:.92em}
 .srow a{text-decoration-color:var(--line)}
-.toc{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line)}
+.toc{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--line)}
 .toc a{display:flex;align-items:baseline;gap:12px;padding:16px 18px;min-height:56px;text-decoration:none;font-weight:500;font-size:15.5px;border-left:1px solid var(--line);transition:background .25s}
 .toc a:first-child{border-left:0}
 .toc a:hover{background:var(--teal-l)}
@@ -146,7 +146,9 @@ html.js .rv.in{opacity:1;transform:none}
 html:not(.motion) .tbl tbody tr{border-bottom:1px solid var(--line)}
 .tbl tbody th{font:600 18px/1.3 var(--serif)}
 .tbl td small{display:block;color:var(--muted);font-size:14.5px;margin-top:2px}
-.tbl tr.grp th{padding:26px 16px 10px;font:600 13.5px/1 var(--sans);color:var(--teal);letter-spacing:.02em;background:#fff}
+.tbl tr.grp th{padding:26px 16px 10px;font:600 15px/1 var(--sans);color:var(--teal);letter-spacing:.01em;background:#fff}
+.tbl tr.grp a{text-decoration-color:var(--line)}
+.tbl tr.grp a:hover{text-decoration-color:var(--teal)}
 .tbl tr.grp + tr th,.tbl tr.grp + tr td{padding-top:12px}
 .tbl .due{font-weight:500;color:var(--ink)}
 .tbl tbody tr:not(.grp):hover{background-color:var(--teal-l)}
@@ -200,7 +202,7 @@ html:not(.motion) .tbl tbody tr{border-bottom:1px solid var(--line)}
 .team .mono{width:56px;background:#fff;color:var(--teal);border:1px solid var(--teal);font-size:20px}
 .team h3{font-size:19px;margin-bottom:2px}
 .team p{color:var(--muted);font-size:15px}
-.partners{display:grid;grid-template-columns:1fr 1fr;margin-top:clamp(36px,6vh,60px);border:1px solid var(--line);background:#fff}
+.partners{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:clamp(36px,6vh,60px);border:1px solid var(--line);background:#fff}
 .partners div{padding:22px 26px;text-align:left}
 .partners div + div{border-left:1px solid var(--line)}
 .partners h3{font-size:20px;margin-bottom:6px}
@@ -208,6 +210,13 @@ html:not(.motion) .tbl tbody tr{border-bottom:1px solid var(--line)}
 @media (max-width:1023px){.team{grid-template-columns:1fr 1fr}.team li:nth-child(3){padding-left:0;border-left:0}}
 @media (max-width:760px){.lead{grid-template-columns:auto 1fr}.cred{grid-column:1 / -1}.partners{grid-template-columns:1fr}.partners div + div{border-left:0;border-top:1px solid var(--line)}}
 @media (max-width:520px){.team{grid-template-columns:1fr}.team li,.team li + li{padding-left:0;border-left:0}}
+
+/* insights */
+.ins{list-style:none;margin:0 auto;padding:0;max-width:860px;border-top:2px solid var(--ink);text-align:left}
+.ins li{display:grid;grid-template-columns:2.4em 1fr;gap:12px;align-items:baseline;padding:16px 4px;border-bottom:1px solid var(--line)}
+.ins .in-n{font:600 14px/1 var(--sans);color:var(--teal)}
+.ins a{font:600 clamp(17.5px,1.5vw,19.5px)/1.35 var(--serif);text-decoration-color:var(--line)}
+.ins a:hover{text-decoration-color:var(--teal)}
 
 /* faq fold */
 .faq{max-width:860px;margin:0 auto;border-top:2px solid var(--ink);text-align:left}
@@ -322,12 +331,12 @@ body.at-hero .qbar{transform:translateY(110%)}
       </div>
     </div>
     <section class="summary rules" id="summary" aria-labelledby="h-sum">
-      <h2 id="h-sum">In summary <span>Tax Professionals Ltd</span></h2>
+      <h2 id="h-sum">In summary <span>Tax Professionals Ltd, since 1998</span></h2>
       <dl>
         <div class="srow" style="--r:0"><dt>Director</dt><dd>Ranjana Gupta<small>Chartered Accountant (CA, NZ)</small></dd></div>
-        <div class="srow s-x" style="--r:1"><dt>Accountants</dt><dd>Vipul Koradia, Deepti Nanda, Mandeep Kaur and Jigar Parikh</dd></div>
-        <div class="srow" style="--r:2"><dt>Office</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=620+Manukau+Road+Epsom+Auckland+1023" target="_blank" rel="noopener">620 Manukau Road, Epsom</a></dd></div>
-        <div class="srow s-x" style="--r:3"><dt>Established</dt><dd class="num">1998</dd></div>
+        <div class="srow s-x" style="--r:1"><dt>Advisor</dt><dd>Varun Gupta<small>Business Advisor</small></dd></div>
+        <div class="srow s-x" style="--r:2"><dt>Accountants</dt><dd>Vipul Koradia, Deepti Nanda, Mandeep Kaur and Jigar Parikh</dd></div>
+        <div class="srow" style="--r:3"><dt>Office</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=620+Manukau+Road+Epsom+Auckland+1023" target="_blank" rel="noopener">620 Manukau Road, Epsom</a></dd></div>
         <div class="srow s-x" id="nextrow" style="--r:4" hidden><dt>Next date</dt><dd class="num"><a href="#dates" id="nextdate"></a><small id="nextwhat"></small></dd></div>
         <div class="srow" style="--r:5"><dt>Partners</dt><dd>TMNZ Premium Accounting Partner<small>Crystal Payroll recommended partner</small></dd></div>
       </dl>
@@ -338,7 +347,8 @@ body.at-hero .qbar{transform:translateY(110%)}
     <a href="#dates"><span>2</span>Payment dates</a>
     <a href="#bring"><span>3</span>What to bring</a>
     <a href="#people"><span>4</span>People and partners</a>
-    <a href="#contact"><span>5</span>Enquiries</a>
+    <a href="#insights"><span>5</span>Insights</a>
+    <a href="#contact"><span>6</span>Enquiries</a>
   </nav>
 </section>
 
@@ -347,26 +357,34 @@ body.at-hero .qbar{transform:translateY(110%)}
     <div class="sec-head rv">
       <span class="sn">1</span>
       <h2 id="h-services">Services, what we prepare and when it is due</h2>
-      <p>The work we do for businesses, trusts and households, set out the way you will meet it during the year.</p>
+      <p>Our four service areas, set out the way you will meet them during the year. Employment &amp; HR Advisory can be added to the compliance package.</p>
     </div>
     <table class="tbl rules" id="svc">
       <caption class="sr">Services, what we prepare, how often and when it is due</caption>
       <thead><tr><th scope="col" class="c-svc">Service</th><th scope="col" class="c-what">What we prepare</th><th scope="col" class="c-often">How often</th><th scope="col">Due</th></tr></thead>
       <tbody>
-        <tr class="grp"><th colspan="4" scope="colgroup">Tax returns</th></tr>
-        <tr><th scope="row">Income tax, individuals</th><td data-label="We prepare">Income tax returns, including rental income</td><td data-label="How often">Yearly</td><td data-label="Due" class="due">7 July<small>31 March the following year for tax-agent clients</small></td></tr>
-        <tr><th scope="row">Income tax, entities</th><td data-label="We prepare">Returns for companies, trusts and partnerships</td><td data-label="How often">Yearly</td><td data-label="Due" class="due">7 July<small>31 March the following year for tax-agent clients</small></td></tr>
-        <tr><th scope="row">GST</th><td data-label="We prepare">GST returns</td><td data-label="How often">Each GST period</td><td data-label="Due" class="due">28th of the month after the period ends<small>15 January for November periods, 7 May for March</small></td></tr>
-        <tr class="grp"><th colspan="4" scope="colgroup">Employers</th></tr>
-        <tr><th scope="row">PAYE</th><td data-label="We prepare">PAYE returns and employment information</td><td data-label="How often">Each payday</td><td data-label="Due" class="due">Within 2 working days of payday<small>PAYE paid by the 20th of the following month (small employers)</small></td></tr>
-        <tr><th scope="row">Payroll services</th><td data-label="We prepare">Payroll, as a Crystal Payroll recommended partner</td><td data-label="How often">Each pay run</td><td data-label="Due" class="due">With payday filing</td></tr>
-        <tr><th scope="row">Employment law and HR</th><td data-label="We prepare">Employment law and HR advice for employers</td><td data-label="How often">When needed</td><td data-label="Due">No set date</td></tr>
-        <tr class="grp"><th colspan="4" scope="colgroup">Records, structures and advice</th></tr>
-        <tr><th scope="row">Bookkeeping</th><td data-label="We prepare">Your books, kept through the year</td><td data-label="How often">Ongoing</td><td data-label="Due">Ready ahead of your returns</td></tr>
-        <tr><th scope="row">Company formation</th><td data-label="We prepare">A new company, set up</td><td data-label="How often">Once</td><td data-label="Due">When you start</td></tr>
-        <tr><th scope="row">Trust administration</th><td data-label="We prepare">Trust administration and the trust's return</td><td data-label="How often">Yearly</td><td data-label="Due" class="due">With the trust's income tax return</td></tr>
-        <tr><th scope="row">Property</th><td data-label="We prepare">Advice on property structures; managing property investors' affairs</td><td data-label="How often">When buying or restructuring</td><td data-label="Due">Ideally before you sign</td></tr>
-        <tr><th scope="row">Business advisory</th><td data-label="We prepare">Advice for business owners</td><td data-label="How often">When needed</td><td data-label="Due">No set date</td></tr>
+        <tr class="grp"><th colspan="4" scope="colgroup"><a href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">Taxation &amp; Accounting Compliance</a></th></tr>
+        <tr><th scope="row">Income tax returns</th><td data-label="We prepare">Returns for individuals, companies, trusts and partnerships</td><td data-label="How often">Yearly</td><td data-label="Due" class="due">7 July<small>31 March the following year for tax-agent clients</small></td></tr>
+        <tr><th scope="row">GST returns</th><td data-label="We prepare">GST returns for each period</td><td data-label="How often">Each GST period</td><td data-label="Due" class="due">28th of the month after the period ends<small>15 January for November periods, 7 May for March</small></td></tr>
+        <tr><th scope="row">PAYE and payroll</th><td data-label="We prepare">PAYE returns and employment information. Payroll as a Crystal Payroll recommended partner</td><td data-label="How often">Each payday</td><td data-label="Due" class="due">Within 2 working days of payday<small>PAYE paid by the 20th of the following month (small employers)</small></td></tr>
+        <tr><th scope="row">Bookkeeping and financial statements</th><td data-label="We prepare">Books kept through the year; annual financial statements</td><td data-label="How often">Ongoing, then yearly</td><td data-label="Due" class="due">Ready ahead of your returns</td></tr>
+        <tr><th scope="row">Tax planning and business structuring</th><td data-label="We prepare">Advice on how the business and its tax are set up</td><td data-label="How often">When needed</td><td data-label="Due" class="due">No set date</td></tr>
+        <tr><th scope="row">Company formation and trust administration</th><td data-label="We prepare">A new company set up; trust administration and the trust return</td><td data-label="How often">Once, then yearly for trusts</td><td data-label="Due" class="due">With the trust's income tax return</td></tr>
+        <tr class="grp"><th colspan="4" scope="colgroup"><a href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">Business Advisory &amp; Planning</a></th></tr>
+        <tr><th scope="row">Business planning</th><td data-label="We prepare">A workshop covering 3-month, 12-month and 3-year planning. First meeting free</td><td data-label="How often">Once, then a monthly coaching option</td><td data-label="Due" class="due">No set date</td></tr>
+        <tr><th scope="row">Performance and accountability</th><td data-label="We prepare">Regular review of results against the plan</td><td data-label="How often">Monthly coaching option</td><td data-label="Due" class="due">No set date</td></tr>
+        <tr><th scope="row">Profit improvement and cashflow</th><td data-label="We prepare">Advice on margins, costs and cashflow</td><td data-label="How often">When needed</td><td data-label="Due" class="due">No set date</td></tr>
+        <tr><th scope="row">Systems and processes</th><td data-label="We prepare">Advice on the systems the business runs on</td><td data-label="How often">When needed</td><td data-label="Due" class="due">No set date</td></tr>
+        <tr class="grp"><th colspan="4" scope="colgroup"><a href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">Employment &amp; HR Advisory</a></th></tr>
+        <tr><th scope="row">Employment agreements and policies</th><td data-label="We prepare">Agreements, employee policies and procedures, and advice on employment legislation</td><td data-label="How often">When hiring or updating</td><td data-label="Due" class="due">Before the start date</td></tr>
+        <tr><th scope="row">Restructuring and redundancy</th><td data-label="We prepare">Advice and documents for a restructure</td><td data-label="How often">When needed</td><td data-label="Due" class="due">No set date</td></tr>
+        <tr><th scope="row">Accreditations, audits and investigations</th><td data-label="We prepare">Employer accreditations; help with audits and investigations</td><td data-label="How often">When needed</td><td data-label="Due" class="due">No set date</td></tr>
+        <tr><th scope="row">Labour Inspector visits</th><td data-label="We prepare">Help preparing the records for a visit</td><td data-label="How often">When notified</td><td data-label="Due" class="due">Before the visit</td></tr>
+        <tr class="grp"><th colspan="4" scope="colgroup"><a href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">Property Investment &amp; Development</a></th></tr>
+        <tr><th scope="row">Investment strategy and structuring</th><td data-label="We prepare">Advice on holding property personally, through a company or a trust</td><td data-label="How often">Before you buy</td><td data-label="Due" class="due">Ideally before you sign</td></tr>
+        <tr><th scope="row">Property tax returns</th><td data-label="We prepare">Returns including rental income</td><td data-label="How often">Yearly</td><td data-label="Due" class="due">7 July<small>31 March the following year for tax-agent clients</small></td></tr>
+        <tr><th scope="row">Cash flow tools</th><td data-label="We prepare">Cash flow tools for property investors</td><td data-label="How often">Ongoing</td><td data-label="Due" class="due">No set date</td></tr>
+        <tr><th scope="row">Associated-persons check</th><td data-label="We prepare">Whether a buy-and-hold property becomes taxable through a link to development or trading</td><td data-label="How often">Before development or trading</td><td data-label="Due" class="due">Before you commit</td></tr>
       </tbody>
     </table>
     <p class="fineprint">General dates from Inland Revenue. Your own dates may differ; we will confirm them.</p>
@@ -393,7 +411,7 @@ body.at-hero .qbar{transform:translateY(110%)}
           <tr><th scope="row">Every month</th><td data-label="Falls due">PAYE paid by the 20th (small employers). GST on the 28th of the month after the period ends.</td><td data-label="With an agent">Same dates</td></tr>
         </tbody>
       </table>
-      <p class="fineprint">General dates from Inland Revenue. Your own dates may differ; we will confirm them.</p>
+      <p class="fineprint">General dates from Inland Revenue. Your own dates may differ; we will confirm them. When a date falls on a weekend or public holiday it moves to the next working day. <a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">More on our Client resources page</a>.</p>
     </div>
   </div>
 </section>
@@ -449,13 +467,18 @@ body.at-hero .qbar{transform:translateY(110%)}
     <div class="sec-head rv">
       <span class="sn">4</span>
       <h2 id="h-people">People, credentials and partners</h2>
-      <p>The five people you will deal with at the Epsom office.</p>
+      <p>The six people you will deal with at the Epsom office.</p>
     </div>
     <div class="people rv">
       <div class="lead">
         <span class="mono" aria-hidden="true">RG</span>
         <div><h3>Ranjana Gupta</h3><p class="role">Director</p></div>
-        <p class="cred"><b>Chartered Accountant (CA, NZ)</b>Director of Tax Professionals Ltd.</p>
+        <p class="cred"><b>Chartered Accountant (CA, NZ)</b>Director. Chartered Accountant, senior lecturer in taxation at AUT, and a published tax author.</p>
+      </div>
+      <div class="lead">
+        <span class="mono" aria-hidden="true">VG</span>
+        <div><h3>Varun Gupta</h3><p class="role">Business Advisor</p></div>
+        <p class="cred"><b>Business Advisor certification</b>Member of the Institute of Advisors, and a registered partner of the Regional Business Partner Network.</p>
       </div>
       <ul class="team">
         <li><span class="mono" aria-hidden="true">VK</span><div><h3>Vipul Koradia</h3><p>Taxation Accountant</p></div></li>
@@ -466,6 +489,7 @@ body.at-hero .qbar{transform:translateY(110%)}
       <div data-need="team photos" hidden></div>
     </div>
     <div class="partners rv">
+      <div><h3>Award</h3><p>Accountant of the Year 2019-2020, Indian Newslink Indian Business Awards.</p></div>
       <div><h3>TMNZ</h3><p>We are a TMNZ Premium Accounting Partner, for tax pooling.</p></div>
       <div><h3>Crystal Payroll</h3><p>We are a Crystal Payroll recommended partner, for payroll services.</p></div>
     </div>
@@ -473,7 +497,24 @@ body.at-hero .qbar{transform:translateY(110%)}
   </div>
 </section>
 
-<section class="sec" id="faq" aria-labelledby="h-faq">
+<section class="sec" id="insights" aria-labelledby="h-insights">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sn">5</span>
+      <h2 id="h-insights">Recent insights</h2>
+      <p>Articles from our Insights page. Each opens on our website.</p>
+    </div>
+    <ul class="ins rv">
+      <li><span class="in-n">1</span><a href="https://www.taxprofessionals.co.nz/insights-/-news/inland-revenues-crackdown-is-your-business-ready-for-the-new-wave-of-tax-audits" target="_blank" rel="noopener">Inland Revenue's Crackdown: Is Your Business Ready for the New Wave of Tax Audits?</a></li>
+      <li><span class="in-n">2</span><a href="https://www.taxprofessionals.co.nz/insights-/-news/buying-a-business-in-2026-whats-changed" target="_blank" rel="noopener">Buying a Business in 2026: What's Changed?</a></li>
+      <li><span class="in-n">3</span><a href="https://www.taxprofessionals.co.nz/insights-/-news/how-to-prepare-your-business-for-sale-when-youre-retiring" target="_blank" rel="noopener">How to Prepare Your Business for Sale When You're Retiring</a></li>
+      <li><span class="in-n">4</span><a href="https://www.taxprofessionals.co.nz/insights-/-news/kiwisaver-contribution-changes-from-1-april-2026" target="_blank" rel="noopener">KiwiSaver Contribution Changes from 1 April 2026</a></li>
+    </ul>
+    <p class="fineprint"><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">All insights and news</a></p>
+  </div>
+</section>
+
+<section class="sec alt" id="faq" aria-labelledby="h-faq">
   <div class="wrap">
     <div class="sec-head rv">
       <h2 id="h-faq">Before you engage us</h2>
@@ -492,10 +533,10 @@ body.at-hero .qbar{transform:translateY(110%)}
   </div>
 </section>
 
-<section class="sec alt" id="contact" aria-labelledby="h-contact">
+<section class="sec" id="contact" aria-labelledby="h-contact">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="sn">5</span>
+      <span class="sn">6</span>
       <h2 id="h-contact">Enquiries</h2>
       <p>Call, email or send the form. Tell us what the business, trust or household needs.</p>
     </div>
@@ -507,6 +548,8 @@ body.at-hero .qbar{transform:translateY(110%)}
           <div class="r"><dt>Phone</dt><dd class="num"><a href="tel:+6496250035">09 625 0035</a><br><a href="tel:+6496250025">09 625 0025</a></dd></div>
           <div class="r"><dt>Mobile</dt><dd class="num"><a href="tel:+64211419135">021 141 9135</a></dd></div>
           <div class="r"><dt>Email</dt><dd><a href="mailto:info@taxprofessionals.co.nz">info@taxprofessionals.co.nz</a></dd></div>
+          <div class="r"><dt>Reception</dt><dd>Monday to Friday, 9:30am to 5:30pm</dd></div>
+          <div class="r"><dt>Paying an invoice</dt><dd>Online by Visa or Mastercard, by phone, by direct debit, or by bank transfer quoting the invoice number. <a href="https://www.taxprofessionals.co.nz/pay-an-invoice" target="_blank" rel="noopener">Pay an invoice</a></dd></div>
           <div class="r"><dt>Online</dt><dd><a href="https://www.facebook.com/TaxProfessionalsNZ/" target="_blank" rel="noopener">Facebook</a> &middot; <a href="https://nz.linkedin.com/company/tax-professionals-limited" target="_blank" rel="noopener">LinkedIn</a></dd></div>
         </dl>
       </div>
@@ -535,10 +578,10 @@ body.at-hero .qbar{transform:translateY(110%)}
     <p class="tagline">Tax accountants at 620 Manukau Road, Epsom. Working for the community since 1998.</p>
     <div class="fcols">
       <nav aria-labelledby="fs"><h2 id="fs">Services</h2><ul>
-        <li><a href="#services">Tax returns</a></li><li><a href="#services">GST and PAYE</a></li><li><a href="#services">Payroll services</a></li><li><a href="#services">Bookkeeping</a></li><li><a href="#services">Company formation</a></li><li><a href="#services">Trust administration</a></li>
+        <li><a href="#services">Taxation &amp; Accounting Compliance</a></li><li><a href="#services">Business Advisory &amp; Planning</a></li><li><a href="#services">Employment &amp; HR Advisory</a></li><li><a href="#services">Property Investment &amp; Development</a></li>
       </ul></nav>
       <nav aria-labelledby="fe"><h2 id="fe">Explore</h2><ul>
-        <li><a href="#dates">Payment dates</a></li><li><a href="#bring">What to bring</a></li><li><a href="#people">People</a></li><li><a href="#faq">Questions</a></li><li><a href="#contact">Contact</a></li>
+        <li><a href="#dates">Payment dates</a></li><li><a href="#bring">What to bring</a></li><li><a href="#people">People</a></li><li><a href="#contact">Contact</a></li><li><a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">Client resources</a></li><li><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">Insights</a></li><li><a href="https://www.taxprofessionals.co.nz/pay-an-invoice" target="_blank" rel="noopener">Pay an invoice</a></li>
       </ul></nav>
     </div>
     <p class="legal"><span>&copy; Tax Professionals Ltd</span><span>Proudly designed by <a href="https://ambs.co.nz" rel="noopener">AMBS Solutions</a></span></p>

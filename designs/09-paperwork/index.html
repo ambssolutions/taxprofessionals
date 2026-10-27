@@ -148,6 +148,8 @@ html.js .panel + .panel{margin-top:0}
 .panel[hidden]{display:none}
 html.js.motion .panel.show{animation:pull .55s var(--ease)}
 @keyframes pull{from{opacity:0;transform:translateY(14px)}}
+.more{margin-top:18px}
+.more a{font:700 15px/1.4 var(--type);text-decoration-style:dotted}
 .panel .no{font:400 14px/1 var(--type);color:var(--muted);margin-bottom:10px}
 .panel h3{font-size:clamp(1.7rem,2.8vw,2.4rem);margin-bottom:12px}
 .panel p{color:var(--ink-2)}
@@ -159,7 +161,7 @@ html.js.motion .panel.show{animation:pull .55s var(--ease)}
 .slip b{display:block;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em;font-size:13.5px}
 .slip p{color:var(--ink);margin-top:8px}
 .slip p:first-of-type{margin-top:0}
-@media (max-width:760px){.panel{grid-template-columns:1fr}.tabs{padding:0 4px;margin-inline:calc(var(--pad) * -1);padding-inline:var(--pad)}}
+@media (max-width:760px){.panel{grid-template-columns:1fr}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:0 6px;overflow:visible}.tab{white-space:normal;min-height:56px;margin-top:0;padding:8px 12px;clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 100%,0 100%)}.tab[aria-selected=true]{min-height:56px}}
 
 /* receipt */
 .dates{background:var(--desk-2)}
@@ -187,7 +189,7 @@ html.js.motion .receipt.rv.in{clip-path:inset(-12px -40px -60px -40px)}
 @media (max-width:900px){.till{grid-template-columns:1fr;max-width:460px}.receipt,.n1,.n2{grid-column:1;margin-top:0;transform:none}.n1{order:2}.n2{order:3}}
 
 /* people */
-.cards{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,1.6vw,22px);max-width:1180px}
+.cards{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,22px);max-width:1180px}
 .card{position:relative;background:#fffefb repeating-linear-gradient(transparent 0 27px,#cfdcec 27px 28px);background-position:0 62px;border:1px solid var(--rule);padding:18px 18px 22px;text-align:left;box-shadow:0 14px 26px -22px rgba(20,36,74,.6)}
 .card::before{content:"";position:absolute;left:0;right:0;top:58px;height:2px;background:rgba(194,54,44,.45)}
 .mono-stamp{width:56px;height:56px;border-radius:50%;border:2.5px solid var(--ink);outline:1px solid var(--ink);outline-offset:3px;display:grid;place-items:center;font:700 19px/1 var(--type);letter-spacing:.02em;margin:4px 0 22px 4px;transform:rotate(-8deg);background:var(--sheet)}
@@ -195,9 +197,22 @@ html.js.motion .receipt.rv.in{clip-path:inset(-12px -40px -60px -40px)}
 .card p{font:400 15px/28px var(--type);color:var(--ink-2)}
 .card.lead{border-color:var(--ink)}
 .card.lead .mono-stamp{background:var(--ink);color:var(--sheet)}
-@media (max-width:1060px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:640px){.cards{grid-template-columns:1fr 1fr}.card.lead{grid-column:span 2}}
+@media (max-width:640px){.cards{grid-template-columns:1fr 1fr}.card.lead,.card.wide{grid-column:span 2}}
 .team-note{text-align:center;margin-top:28px;color:var(--ink-2)}
+
+/* reading pile */
+.pile{list-style:none;margin:0 auto;padding:10px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,26px);max-width:1180px}
+.cut{transform:rotate(var(--tilt,-1.2deg));transition:transform .5s var(--ease)}
+.cut:nth-child(2n){--tilt:.9deg}.cut:nth-child(3){--tilt:-.6deg}
+.cut:hover{transform:none}
+.cut a{display:grid;gap:10px;min-height:100%;padding:18px 18px 16px;background:#fffefb;border:1px solid var(--rule);text-decoration:none;text-align:left;box-shadow:0 14px 26px -22px rgba(20,36,74,.6);
+  -webkit-mask:linear-gradient(#000,#000) 0 0/100% calc(100% - 8px) no-repeat,conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) 50% 100%/12px 8px repeat-x;mask:linear-gradient(#000,#000) 0 0/100% calc(100% - 8px) no-repeat,conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) 50% 100%/12px 8px repeat-x;padding-bottom:26px}
+.clip-k{font:400 12.5px/1 var(--type);text-transform:uppercase;letter-spacing:.06em;color:var(--stamp);padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.clip-t{font:700 clamp(1.1rem,1.4vw,1.3rem)/1.25 var(--disp);letter-spacing:-.015em;color:var(--ink)}
+.cut a:hover .clip-t{text-decoration:underline;text-decoration-style:dotted}
+.clip-r{font:400 13px/1.3 var(--type);color:var(--muted);margin-top:auto}
+@media (max-width:900px){.pile{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.pile{grid-template-columns:1fr;max-width:360px}}
 
 /* faq */
 .faq{max-width:780px;margin:0 auto;text-align:left;border-top:2px solid var(--ink)}
@@ -346,96 +361,55 @@ body.at-hero .qbar{transform:translateY(110%)}
   <div class="wrap">
     <div class="sec-head rv">
       <h2 id="h-services">Services, sorted into folders</h2>
-      <p>Eight kinds of work, each with its own folder. Open one to see what goes in it.</p>
+      <p>Four folders, one for each kind of work we do. Open one to see what goes in it.</p>
     </div>
     <div class="cabinet rv">
       <div class="tabs" role="tablist" aria-label="Services">
-        <button class="tab" role="tab" type="button" id="t1" aria-controls="p1" aria-selected="true">Tax compliance</button>
-        <button class="tab" role="tab" type="button" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">Bookkeeping</button>
-        <button class="tab" role="tab" type="button" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">Property</button>
-        <button class="tab" role="tab" type="button" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">Companies</button>
-        <button class="tab" role="tab" type="button" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1">Trusts</button>
-        <button class="tab" role="tab" type="button" id="t6" aria-controls="p6" aria-selected="false" tabindex="-1">Advisory</button>
-        <button class="tab" role="tab" type="button" id="t7" aria-controls="p7" aria-selected="false" tabindex="-1">Employment and HR</button>
-        <button class="tab" role="tab" type="button" id="t8" aria-controls="p8" aria-selected="false" tabindex="-1">Payroll</button>
+        <button class="tab" role="tab" type="button" id="t1" aria-controls="p1" aria-selected="true">Taxation &amp; Accounting Compliance</button>
+        <button class="tab" role="tab" type="button" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">Business Advisory &amp; Planning</button>
+        <button class="tab" role="tab" type="button" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">Employment &amp; HR Advisory</button>
+        <button class="tab" role="tab" type="button" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">Property Investment &amp; Development</button>
       </div>
       <div class="folder">
         <div class="panel" id="p1" role="tabpanel" aria-labelledby="t1" tabindex="0">
           <div>
-            <p class="no">Folder 01</p>
-            <h3>Tax compliance</h3>
-            <p>Income tax, GST and PAYE returns, prepared for the people and organisations that have to file them.</p>
-            <ul class="ticks">
-              <li>Income tax returns for individuals</li>
-              <li>Income tax returns for companies, trusts and partnerships</li>
-              <li>GST returns</li>
-              <li>PAYE returns</li>
-            </ul>
+            <p class="no">Folder 01 of 4</p>
+            <h3>Taxation &amp; Accounting Compliance</h3>
+            <p>The returns and records every business and household has to keep up with, prepared and filed for you.</p>
+            <ul class="ticks"><li>Bookkeeping</li><li>GST, PAYE and income tax returns</li><li>Financial statements</li><li>Tax planning and business structuring</li><li>Payroll services, as a Crystal Payroll recommended partner</li><li>Company formation</li><li>Trust administration</li></ul>
+            <p class="more"><a href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">Full details on our website</a></p>
           </div>
-          <div class="slip"><b>Dates in this folder</b><p>Income tax returns: 7 July, or 31 March the following year for clients of a tax agent.</p><p>GST: the 28th of the month after the period ends, with two exceptions on our tax dates list.</p><p>We are a TMNZ Premium Accounting Partner for tax pooling.</p></div>
+          <div class="slip"><b>Dates in this folder</b><p>Income tax returns: 7 July, or 31 March the following year for clients of a tax agent.</p><p>GST: the 28th of the month after the period ends, with two exceptions on our tax dates list.</p><p>Employment &amp; HR Advisory can be added to this package.</p></div>
         </div>
         <div class="panel" id="p2" role="tabpanel" aria-labelledby="t2" tabindex="0">
           <div>
-            <p class="no">Folder 02</p>
-            <h3>Bookkeeping</h3>
-            <p>Your records kept in order through the year, so your returns start from tidy books.</p>
-            <ul class="ticks"><li>Bookkeeping through the year</li><li>Records that feed your GST and income tax returns</li></ul>
+            <p class="no">Folder 02 of 4</p>
+            <h3>Business Advisory &amp; Planning</h3>
+            <p>Plans, numbers and follow-through for business owners.</p>
+            <ul class="ticks"><li>Business plans and strategic growth</li><li>Performance and accountability</li><li>Profit improvement and cashflow</li><li>Systems and processes</li></ul>
+            <p class="more"><a href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">Full details on our website</a></p>
           </div>
-          <div class="slip"><b>Goes well with</b><p>Folder 01, Tax compliance.</p><p>Folder 08, Payroll.</p></div>
+          <div class="slip"><b>First meeting free</b><p>Business planning starts with a free first meeting: a workshop covering 3-month, 12-month and 3-year planning.</p><p>A monthly coaching option follows if you want someone to keep you to the plan.</p></div>
         </div>
         <div class="panel" id="p3" role="tabpanel" aria-labelledby="t3" tabindex="0">
           <div>
-            <p class="no">Folder 03</p>
-            <h3>Property</h3>
-            <p>Advice on property structures, and looking after property investors' affairs.</p>
-            <ul class="ticks"><li>Advice on property structures</li><li>Managing property investors' affairs</li><li>Rental income in your income tax return</li></ul>
+            <p class="no">Folder 03 of 4</p>
+            <h3>Employment &amp; HR Advisory</h3>
+            <p>Advice for employers on the paperwork and the law around staff.</p>
+            <ul class="ticks"><li>Employment agreements and policies</li><li>Employment legislation</li><li>Employee policies and procedures</li><li>Restructuring and redundancy</li><li>Employer accreditations, audits and investigations</li><li>Preparing records for a Labour Inspector visit</li></ul>
+            <p class="more"><a href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">Full details on our website</a></p>
           </div>
-          <div class="slip"><b>Before you buy</b><p>How a property is owned affects your tax. Ask us about structures before you sign, not after.</p></div>
+          <div class="slip"><b>Goes well with</b><p>Folder 01. Employment &amp; HR Advisory can be added to the compliance package.</p><p>Payday filing is due within 2 working days of each payday.</p></div>
         </div>
         <div class="panel" id="p4" role="tabpanel" aria-labelledby="t4" tabindex="0">
           <div>
-            <p class="no">Folder 04</p>
-            <h3>Company formation</h3>
-            <p>Setting up a new company, with the tax side considered from the start.</p>
-            <ul class="ticks"><li>Company formation</li><li>GST and PAYE when the business needs them</li></ul>
+            <p class="no">Folder 04 of 4</p>
+            <h3>Property Investment &amp; Development</h3>
+            <p>For property investors and developers, from the first purchase to the structure that holds it.</p>
+            <ul class="ticks"><li>Investment strategy</li><li>Structuring advice: personal, company or trust</li><li>Tax returns, including rental income</li><li>Cash flow tools</li></ul>
+            <p class="more"><a href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">Full details on our website</a></p>
           </div>
-          <div class="slip"><b>Goes well with</b><p>Folder 06, Business advisory.</p><p>Folder 08, Payroll, once you employ staff.</p></div>
-        </div>
-        <div class="panel" id="p5" role="tabpanel" aria-labelledby="t5" tabindex="0">
-          <div>
-            <p class="no">Folder 05</p>
-            <h3>Trust administration</h3>
-            <p>Administration for trusts, alongside the trust's income tax return.</p>
-            <ul class="ticks"><li>Trust administration</li><li>Income tax returns for trusts</li></ul>
-          </div>
-          <div class="slip"><b>Goes well with</b><p>Folder 03, Property, when a trust owns property.</p></div>
-        </div>
-        <div class="panel" id="p6" role="tabpanel" aria-labelledby="t6" tabindex="0">
-          <div>
-            <p class="no">Folder 06</p>
-            <h3>Business advisory</h3>
-            <p>Advice for business owners, from people who already know your numbers.</p>
-            <ul class="ticks"><li>Business advisory</li><li>Talked through with your returns in front of us</li></ul>
-          </div>
-          <div class="slip"><b>Ask us about</b><p>Whatever is on your mind about the business. If it is outside what we do, we will say so.</p></div>
-        </div>
-        <div class="panel" id="p7" role="tabpanel" aria-labelledby="t7" tabindex="0">
-          <div>
-            <p class="no">Folder 07</p>
-            <h3>Employment and HR advice</h3>
-            <p>Advice for employers on employment law and HR matters.</p>
-            <ul class="ticks"><li>Employment law advisory</li><li>HR advisory</li></ul>
-          </div>
-          <div class="slip"><b>Goes well with</b><p>Folder 08, Payroll.</p></div>
-        </div>
-        <div class="panel" id="p8" role="tabpanel" aria-labelledby="t8" tabindex="0">
-          <div>
-            <p class="no">Folder 08</p>
-            <h3>Payroll services</h3>
-            <p>Payroll for employers. We are a Crystal Payroll recommended partner.</p>
-            <ul class="ticks"><li>Payroll services</li><li>PAYE returns and employment information</li></ul>
-          </div>
-          <div class="slip"><b>Dates in this folder</b><p>Payday filing: within 2 working days of each payday.</p><p>PAYE paid by the 20th of the following month (small employers).</p></div>
+          <div class="slip"><b>Before you buy</b><p>A buy-and-hold property can become taxable when it is linked to development or trading, under the associated-persons rules. Ask before you commit.</p><p>Our director and partner have published on New Zealand's land tax regime and are property investors themselves.</p></div>
         </div>
       </div>
     </div>
@@ -462,7 +436,8 @@ body.at-hero .qbar{transform:translateY(110%)}
           <li><span class="d">20th</span><span>PAYE paid for the month before<small>Small employers</small></span></li>
           <li><span class="d">2 days</span><span>Payday filing<small>Within 2 working days of payday</small></span></li>
         </ul>
-        <p class="r-foot">General dates from Inland Revenue. Your own dates may differ; we will confirm them.</p>
+        <p class="r-foot">General dates from Inland Revenue. Your own dates may differ; we will confirm them. When a date falls on a weekend or public holiday it moves to the next working day.</p>
+        <p class="r-foot"><a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">More on our Client resources page</a></p>
         <div class="bars" aria-hidden="true"></div>
       </div>
       <div class="note n2 rv" role="note" style="--rd:.5s"><span class="pin" aria-hidden="true"></span><b>Provisional tax</b>Dates shown are for the standard method in three instalments. Ask us which method applies to you.</div>
@@ -474,17 +449,34 @@ body.at-hero .qbar{transform:translateY(110%)}
   <div class="wrap">
     <div class="sec-head rv">
       <h2 id="h-team">The team on your file</h2>
-      <p>Five people at 620 Manukau Road. Led by our director, Ranjana Gupta.</p>
+      <p>Six people at 620 Manukau Road. Led by our director, Ranjana Gupta.</p>
     </div>
     <ul class="cards">
-      <li class="card lead rv"><div class="mono-stamp" aria-hidden="true">RG</div><h3>Ranjana Gupta</h3><p>Director</p><p>Chartered Accountant (CA, NZ)</p></li>
-      <li class="card rv" style="--rd:.08s"><div class="mono-stamp" aria-hidden="true">VK</div><h3>Vipul Koradia</h3><p>Taxation Accountant</p></li>
-      <li class="card rv" style="--rd:.16s"><div class="mono-stamp" aria-hidden="true">DN</div><h3>Deepti Nanda</h3><p>Taxation Accountant</p></li>
-      <li class="card rv" style="--rd:.24s"><div class="mono-stamp" aria-hidden="true">MK</div><h3>Mandeep Kaur</h3><p>Taxation Accountant</p></li>
-      <li class="card rv" style="--rd:.32s"><div class="mono-stamp" aria-hidden="true">JP</div><h3>Jigar Parikh</h3><p>Taxation Accountant</p></li>
+      <li class="card lead rv"><div class="mono-stamp" aria-hidden="true">RG</div><h3>Ranjana Gupta</h3><p>Director. Chartered Accountant, senior lecturer in taxation at AUT, and a published tax author.</p></li>
+      <li class="card wide rv" style="--rd:.08s"><div class="mono-stamp" aria-hidden="true">VG</div><h3>Varun Gupta</h3><p>Business Advisor. Holds a Business Advisor certification, member of the Institute of Advisors, and a registered partner of the Regional Business Partner Network.</p></li>
+      <li class="card rv" style="--rd:.16s"><div class="mono-stamp" aria-hidden="true">VK</div><h3>Vipul Koradia</h3><p>Taxation Accountant</p></li>
+      <li class="card rv" style="--rd:.24s"><div class="mono-stamp" aria-hidden="true">DN</div><h3>Deepti Nanda</h3><p>Taxation Accountant</p></li>
+      <li class="card rv" style="--rd:.32s"><div class="mono-stamp" aria-hidden="true">MK</div><h3>Mandeep Kaur</h3><p>Taxation Accountant</p></li>
+      <li class="card rv" style="--rd:.4s"><div class="mono-stamp" aria-hidden="true">JP</div><h3>Jigar Parikh</h3><p>Taxation Accountant</p></li>
     </ul>
+    <p class="team-note rv">Accountant of the Year 2019-2020, Indian Newslink Indian Business Awards.</p>
     <div data-need="team photos" hidden></div>
     <div data-need="testimonials" hidden></div>
+  </div>
+</section>
+
+<section class="sec" id="insights" aria-labelledby="h-insights">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 id="h-insights">From the reading pile</h2>
+      <p>Articles we have published recently. Each one opens on our website.</p>
+    </div>
+    <ul class="pile">
+      <li class="cut rv" style="--rd:0.0s"><a href="https://www.taxprofessionals.co.nz/insights-/-news/kiwisaver-contribution-changes-from-1-april-2026" target="_blank" rel="noopener"><span class="clip-k">Insights</span><span class="clip-t">KiwiSaver Contribution Changes from 1 April 2026</span><span class="clip-r">Read on taxprofessionals.co.nz</span></a></li>
+      <li class="cut rv" style="--rd:0.1s"><a href="https://www.taxprofessionals.co.nz/insights-/-news/gst-tips-for-small-businesses" target="_blank" rel="noopener"><span class="clip-k">Insights</span><span class="clip-t">GST Tips for Small Businesses</span><span class="clip-r">Read on taxprofessionals.co.nz</span></a></li>
+      <li class="cut rv" style="--rd:0.2s"><a href="https://www.taxprofessionals.co.nz/insights-/-news/why-most-mortgage-structures-in-nz-are-wrong" target="_blank" rel="noopener"><span class="clip-k">Insights</span><span class="clip-t">Why Most Mortgage Structures in NZ Are Wrong</span><span class="clip-r">Read on taxprofessionals.co.nz</span></a></li>
+      <li class="cut rv" style="--rd:0.3s"><a href="https://www.taxprofessionals.co.nz/insights-/-news/crypto-investors-urged-to-get-tax-compliant-ird-steps-up-enforcement" target="_blank" rel="noopener"><span class="clip-k">Insights</span><span class="clip-t">Crypto Investors Urged to Get Tax Compliant</span><span class="clip-r">Read on taxprofessionals.co.nz</span></a></li>
+    </ul>
   </div>
 </section>
 
@@ -548,6 +540,7 @@ body.at-hero .qbar{transform:translateY(110%)}
           <dt>Phone</dt><dd><a href="tel:+6496250035">09 625 0035</a><br><a href="tel:+6496250025">09 625 0025</a></dd>
           <dt>Mobile</dt><dd><a href="tel:+64211419135">021 141 9135</a></dd>
           <dt>Email</dt><dd><a href="mailto:info@taxprofessionals.co.nz">info@taxprofessionals.co.nz</a></dd>
+          <dt>Reception</dt><dd>Monday to Friday, 9:30am to 5:30pm</dd>
         </dl>
         <p class="partners">TMNZ Premium Accounting Partner. Crystal Payroll recommended partner.</p>
       </section>
@@ -565,10 +558,10 @@ body.at-hero .qbar{transform:translateY(110%)}
     <p class="tag">Tax accountants at 620 Manukau Road, Epsom, Auckland. Working for the community since 1998.</p>
     <div class="cols">
       <nav aria-labelledby="f-s"><h2 id="f-s">Services</h2><ul>
-        <li><a href="#services">Tax compliance</a></li><li><a href="#services">Bookkeeping</a></li><li><a href="#services">Property</a></li><li><a href="#services">Company formation</a></li><li><a href="#services">Trust administration</a></li><li><a href="#services">Payroll services</a></li>
+        <li><a href="#services">Taxation &amp; Accounting Compliance</a></li><li><a href="#services">Business Advisory &amp; Planning</a></li><li><a href="#services">Employment &amp; HR Advisory</a></li><li><a href="#services">Property Investment &amp; Development</a></li>
       </ul></nav>
       <nav aria-labelledby="f-e"><h2 id="f-e">Explore</h2><ul>
-        <li><a href="#dates">Tax dates</a></li><li><a href="#team">Team</a></li><li><a href="#faq">Questions</a></li><li><a href="#contact">Contact</a></li>
+        <li><a href="#dates">Tax dates</a></li><li><a href="#team">Team</a></li><li><a href="#insights">Reading pile</a></li><li><a href="#contact">Contact</a></li><li><a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">Client resources</a></li><li><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">Insights</a></li><li><a href="https://www.taxprofessionals.co.nz/pay-an-invoice" target="_blank" rel="noopener">Pay an invoice</a></li>
         <li><a href="https://www.facebook.com/TaxProfessionalsNZ/" rel="noopener" target="_blank">Facebook</a></li><li><a href="https://nz.linkedin.com/company/tax-professionals-limited" rel="noopener" target="_blank">LinkedIn</a></li>
       </ul></nav>
     </div>
