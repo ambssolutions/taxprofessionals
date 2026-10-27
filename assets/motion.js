@@ -1,3 +1,19 @@
+/* 0. Readability, always on: balanced heading lines (no single word left alone) and a comfortable line length. */
+(function () {
+  var st = document.createElement('style');
+  st.textContent = 'h1,h2,h3{text-wrap:balance}main p,main li,main dd{text-wrap:pretty}';
+  document.head.appendChild(st);
+  function cap() {
+    document.querySelectorAll('main p').forEach(function (p) {
+      var cs = getComputedStyle(p), fs = parseFloat(cs.fontSize) || 16, w = p.getBoundingClientRect().width;
+      if (w / (fs * 0.5) <= 84 || p.textContent.trim().split(/\s+/).length < 12) return;
+      p.style.maxWidth = '68ch';
+      if (cs.textAlign === 'center') { p.style.marginLeft = 'auto'; p.style.marginRight = 'auto'; }
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', cap); else cap();
+})();
+
 /* Shared motion for every concept.
    1. Partner logo strip: turns the list that holds the partner logos into a slow right-to-left loop.
    Pauses on hover and focus, and while off screen. With reduced motion the strip stays static. */
