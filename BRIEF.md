@@ -88,3 +88,42 @@ The past AMBS sites are cloned read-only at /home/user/refs/: mikia (the quality
 - **Ticks lists, mono labels (`.mono`), CTA band and mobile quick bar:** see mikia/index.html.
 - **thomasconsultants/designs/** has 10 concepts that went through 7 feedback rounds. Open 2 or 3 to see the finish level expected, then go further.
 Remember: native motion only, nothing scroll-jacked. Phones come first and must stay smooth. Everything must fit at 1280×720.
+
+## Content from their live site (added after launch of the gallery; use it in every concept)
+Source: search-engine extracts of the firm's own pages (the sandbox cannot open the site). Facts only; wording below is paraphrased, so write it in the concept's own voice. Link to the live pages where noted.
+
+### The four service pillars (use these exact names as the top-level services)
+1. **Taxation & Accounting Compliance** (https://www.taxprofessionals.co.nz/taxation-accounting-compliance): bookkeeping, GST, PAYE and income tax returns, financial statements, tax planning, business structuring. Employment & HR Advisory can be added on to this package.
+2. **Business Advisory & Planning** (https://www.taxprofessionals.co.nz/business-advisory-planning): business plans and strategic growth, performance and accountability, profit improvement and cashflow, systems and processes. Business Planning: the first meeting is free of charge (a workshop covering 3-month, 12-month and 3-year planning); a monthly coaching option exists. Say "First meeting free" only for Business Planning, since that is what their site says.
+3. **Employment & HR Advisory** (https://www.taxprofessionals.co.nz/employment-hr-advisory): employment agreements and policies, employment legislation, employee policies and procedures, restructuring and redundancy, employer accreditations, audits and investigations, help preparing records for a Labour Inspector visit.
+4. **Property Investment & Development** (https://www.taxprofessionals.co.nz/property-investment-development): investment strategy, structuring advice (personal, company or trust), tax returns, cash flow tools; the associated-persons rules can make a buy-and-hold property taxable when linked to development or trading. The director and partner have published on New Zealand's land tax regime and are active property investors.
+Payroll services, company formation and trust administration stay as sub-services under pillar 1 (or 4 for trusts), not as separate pillars.
+
+### People (additions)
+- **Ranjana Gupta**, Director, Chartered Accountant. Also a senior lecturer in taxation at Auckland University of Technology and a published tax author (Thomson Reuters "New Zealand Taxation"). Write: "Director. Chartered Accountant, senior lecturer in taxation at AUT, and a published tax author."
+- **Varun Gupta**, Business Advisor: holds a Business Advisor certification, member of the Institute of Advisors, and a registered partner of the Regional Business Partner Network. Add him to the people section (6 people now) with that line.
+- The four taxation accountants stay as before.
+
+### Award (true, from their About Us page)
+"Accountant of the Year 2019–2020, Indian Newslink Indian Business Awards". You may show this once per page, plainly, no trophy icon needed.
+
+### Hours and payment (from the Pay an Invoice page)
+- Reception: 9:30am to 5:30pm (weekdays implied; write "Monday to Friday, 9:30am to 5:30pm").
+- Pay an invoice: online by Visa or Mastercard, by phone, by direct debit, or by bank transfer quoting the invoice number. Link "Pay an invoice" to https://www.taxprofessionals.co.nz/pay-an-invoice (nav or footer; a small utility link, not a hero item).
+
+### Client resources (https://www.taxprofessionals.co.nz/client-resources)
+Tax payment due dates. When a due date falls on a weekend or public holiday it moves to the next working day. Add that sentence to every dates section. Link "Client resources" from the dates section or footer.
+
+### Insights / News (https://www.taxprofessionals.co.nz/insights-/-news)
+They publish regularly. Add an "Insights" section or strip to each concept (in the concept's own form: 3 to 4 items, titles linking to the live articles, no dates since we don't have them, no invented summaries beyond the title):
+- "KiwiSaver Contribution Changes from 1 April 2026" https://www.taxprofessionals.co.nz/insights-/-news/kiwisaver-contribution-changes-from-1-april-2026
+- "Inland Revenue's Crackdown: Is Your Business Ready for the New Wave of Tax Audits?" https://www.taxprofessionals.co.nz/insights-/-news/inland-revenues-crackdown-is-your-business-ready-for-the-new-wave-of-tax-audits
+- "Buying a Business in 2026: What's Changed?" https://www.taxprofessionals.co.nz/insights-/-news/buying-a-business-in-2026-whats-changed
+- "GST Tips for Small Businesses" https://www.taxprofessionals.co.nz/insights-/-news/gst-tips-for-small-businesses
+- "Why Most Mortgage Structures in NZ Are Wrong" https://www.taxprofessionals.co.nz/insights-/-news/why-most-mortgage-structures-in-nz-are-wrong
+- "Crypto Investors Urged to Get Tax Compliant" https://www.taxprofessionals.co.nz/insights-/-news/crypto-investors-urged-to-get-tax-compliant-ird-steps-up-enforcement
+- "How to Prepare Your Business for Sale When You're Retiring" https://www.taxprofessionals.co.nz/insights-/-news/how-to-prepare-your-business-for-sale-when-youre-retiring
+Pick the ones that suit the concept's audience (property ones for 04, small-business ones for 07, and so on). Link with target="_blank" rel="noopener".
+
+### Navigation
+Their site's sections: Home, About Us, the four services, Client Resources, Insights / News, Pay an Invoice, Contact Us. Each concept's nav keeps its own labels, but the footer "Explore" column should now include Client resources, Insights and Pay an invoice (linking to the live pages).

@@ -174,10 +174,25 @@ html.js .panel.show{animation:panel-in .6s var(--ease)}
 .items .chip--blue{justify-self:end}
 .quiet{color:var(--muted);font-size:.95rem;padding-top:14px;grid-column:2}
 @media (max-width:980px){.quiet{grid-column:auto}}
-.small-note{text-align:center;margin-top:18px;font:400 .8rem var(--mono);color:var(--muted)}
+.small-note{text-align:center;margin-top:18px;font:400 .8rem/1.6 var(--mono);color:var(--muted);max-width:76ch;margin-inline:auto}
+.small-note a{color:var(--blue-d);text-underline-offset:.15em}
+.ins{margin-top:clamp(36px,6vh,56px);text-align:center}
+.ins h3{font:700 1.25rem/1.2 var(--sans);letter-spacing:-.02em}
+.ins ul{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;text-align:left}
+.ins a{display:flex;flex-direction:column;gap:10px;height:100%;min-height:44px;padding:18px;border-radius:16px;background:#fff;border:1px solid var(--line);text-decoration:none;font-weight:500;line-height:1.35;transition:border-color .3s,box-shadow .3s}
+.ins a:hover{border-color:var(--blue-100);box-shadow:var(--shadow)}
+.ins a > span:last-child{text-decoration:underline;text-decoration-color:var(--blue-100);text-decoration-thickness:2px;text-underline-offset:5px}
+.ins a:hover > span:last-child{text-decoration-color:var(--blue)}
+.ins .tag{align-self:flex-start;font:500 .7rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--blue-d);background:var(--blue-50);padding:6px 8px;border-radius:6px}
+.ins p{margin-top:14px}
+@media (max-width:980px){.ins ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.ins ul{grid-template-columns:minmax(0,1fr)}}
 
 /* services by when they come up */
-.svc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.svc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+.box .more{margin-top:14px;font-size:.95rem}
+.box--blue .more{color:#fff;text-decoration-color:rgba(255,255,255,.4)}
+.box--blue .more:hover{text-decoration-color:#fff}
 .box{border-radius:22px;padding:clamp(24px,3.2vw,40px);border:1px solid var(--line);background:#fff}
 .box--blue{background:var(--blue-dd);border-color:var(--blue-dd);color:#fff;background-image:radial-gradient(80% 60% at 100% 0%,rgba(77,123,255,.45),transparent 70%)}
 .box h3{font:700 1.5rem/1.15 var(--sans);letter-spacing:-.02em}
@@ -187,7 +202,7 @@ html.js .panel.show{animation:panel-in .6s var(--ease)}
 .srv li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;align-items:start;padding:16px 0;border-top:1px solid var(--line)}
 .box--blue .srv li{border-top-color:rgba(255,255,255,.14)}
 .srv h4{margin:0;font:500 1.12rem/1.3 var(--sans)}
-.srv p{grid-column:1;color:var(--muted);font-size:.95rem;line-height:1.5}
+.srv p{grid-column:1;color:var(--muted);font-size:.95rem;line-height:1.5;margin:0}
 .box--blue .srv p{color:#c3cff5}
 .srv .chip{grid-row:1/span 2;grid-column:2;align-self:center}
 .box--blue .srv .chip{background:var(--sun);color:var(--ink)}
@@ -196,15 +211,17 @@ html.js .panel.show{animation:panel-in .6s var(--ease)}
 .partners span::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--blue)}
 
 /* people */
-.ppl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
-.ppl li{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 16px 22px;text-align:center;transition:transform .5s var(--ease),box-shadow .5s}
+.ppl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.ppl li{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px;text-align:left;display:grid;grid-template-columns:60px minmax(0,1fr);gap:0 16px;align-items:center;align-content:center;transition:transform .5s var(--ease),box-shadow .5s}
+.award{text-align:center;margin-top:22px;font:500 .84rem var(--mono);color:var(--blue-d)}
+.award::before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--sun);margin-right:10px;vertical-align:.05em}
 .ppl li:hover{box-shadow:var(--shadow)}
-.av{width:76px;height:76px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;background:var(--blue-50);color:var(--blue-d);font:700 1.5rem/1 var(--sans);letter-spacing:-.02em;position:relative}
+.av{width:56px;height:56px;margin:0;grid-row:1/span 2;border-radius:50%;display:grid;place-items:center;background:var(--blue-50);color:var(--blue-d);font:700 1.15rem/1 var(--sans);letter-spacing:-.02em;position:relative}
 .av::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1.5px dashed var(--blue-100)}
 .ppl li:first-child .av{background:var(--sun);color:var(--ink)}
 .ppl li:first-child .av::after{border-color:var(--sun)}
 .ppl b{display:block;font-weight:500;font-size:1.08rem}
-.ppl .role{display:block;color:var(--muted);font-size:.92rem;margin-top:2px}
+.ppl .role{display:block;color:var(--muted);font-size:.9rem;line-height:1.45;margin-top:2px}
 .ppl .cred{display:inline-block;margin-top:12px;padding:5px 9px;text-wrap:balance;border-radius:7px;background:var(--sun-50);color:#6b4a00;font:500 .72rem/1.2 var(--mono)}
 .need{display:none}
 
@@ -266,10 +283,10 @@ html.js details.on .fold p{opacity:1}
 .foot .fb{display:inline-flex;align-items:center;gap:11px;font:700 1.3rem var(--sans);letter-spacing:-.015em}
 .foot .fb svg{width:34px;height:34px}
 .foot .addr{margin-top:12px;font-size:.95rem}
-.fcols{display:grid;grid-template-columns:repeat(2,minmax(0,220px));justify-content:center;gap:24px 64px;margin:40px auto 0;text-align:left}
+.fcols{display:grid;grid-template-columns:repeat(2,minmax(0,300px));justify-content:center;gap:24px 64px;margin:40px auto 0;text-align:left}
 .fcols h2{font:500 .78rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--sun);margin-bottom:10px}
 .fcols ul{list-style:none;margin:0;padding:0}
-.fcols a{display:inline-flex;min-height:36px;align-items:center}
+.fcols a{display:inline-flex;min-height:36px;align-items:center;text-align:left}
 .legal{margin-top:44px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;justify-content:center;gap:4px 22px;font-size:.86rem;color:#aebbe8}
 
 /* quick bar, phones only */
@@ -297,7 +314,7 @@ html.js .hero-in > .act{animation-delay:.3s}
   .tab{flex:0 0 72px;scroll-snap-align:start}
   .panel{grid-template-columns:1fr}
   .svc{grid-template-columns:1fr}
-  .ppl{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .ppl{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cgrid{grid-template-columns:1fr}
 }
 @media (max-width:760px){
@@ -318,9 +335,9 @@ html.js .hero-in > .act{animation-delay:.3s}
   .items .chip--blue{grid-column:2;justify-self:start;margin-top:6px}
   .day{width:52px;height:52px}
   .ppl{grid-template-columns:minmax(0,1fr);gap:8px}
-  .ppl li{display:grid;grid-template-columns:60px minmax(0,1fr);gap:0 16px;text-align:left;padding:14px 16px;align-items:center}
-  .ppl .av{width:56px;height:56px;margin:0;font-size:1.15rem;grid-row:1/span 3}
-  .ppl .cred{margin-top:6px;justify-self:start}
+  .ppl li{padding:14px 16px}
+  .srv li{grid-template-columns:minmax(0,1fr)}
+  .srv .chip{grid-row:auto;grid-column:1;justify-self:start;margin-top:8px}
   .two{grid-template-columns:1fr}
   .dl div{grid-template-columns:5.2rem minmax(0,1fr)}
   .fcols{gap:24px;grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -505,38 +522,75 @@ html.js .hero-in > .act{animation-delay:.3s}
           </ul>
         </section>
       </div>
-      <p class="small-note rv">General dates from Inland Revenue. Your own dates may differ; we will confirm them. Payday filing is due within 2 working days of each payday.</p>
+      <p class="small-note rv">General dates from Inland Revenue. Your own dates may differ; we will confirm them. When a due date falls on a weekend or public holiday it moves to the next working day. Payday filing is due within 2 working days of each payday. <a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">Client resources</a></p>
+      <div class="ins rv">
+        <h3>From our insights</h3>
+        <ul>
+          <li><a href="https://www.taxprofessionals.co.nz/insights-/-news/gst-tips-for-small-businesses" target="_blank" rel="noopener"><span class="tag">GST</span><span>GST Tips for Small Businesses</span></a></li>
+          <li><a href="https://www.taxprofessionals.co.nz/insights-/-news/kiwisaver-contribution-changes-from-1-april-2026" target="_blank" rel="noopener"><span class="tag">Payroll</span><span>KiwiSaver Contribution Changes from 1 April 2026</span></a></li>
+          <li><a href="https://www.taxprofessionals.co.nz/insights-/-news/inland-revenues-crackdown-is-your-business-ready-for-the-new-wave-of-tax-audits" target="_blank" rel="noopener"><span class="tag">Audits</span><span>Inland Revenue's Crackdown: Is Your Business Ready for the New Wave of Tax Audits?</span></a></li>
+          <li><a href="https://www.taxprofessionals.co.nz/insights-/-news/buying-a-business-in-2026-whats-changed" target="_blank" rel="noopener"><span class="tag">Business</span><span>Buying a Business in 2026: What's Changed?</span></a></li>
+        </ul>
+        <p><a class="tlink" href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">All insights and news</a></p>
+      </div>
     </div>
   </section>
 
   <section class="sec sec--white" id="services" aria-labelledby="services-h">
     <div class="wrap">
       <div class="shead rv">
-        <h2 id="services-h">Services, sorted by when they come up</h2>
-        <p>Some of our work runs to Inland Revenue's calendar. The rest is there when you need it.</p>
+        <h2 id="services-h">Four areas of work, and the dates inside them</h2>
+        <p>Compliance work runs to Inland Revenue's calendar. Advice, HR and property work is there when you need it.</p>
       </div>
       <div class="svc">
-        <div class="box box--blue rv">
-          <h3>Work with a due date</h3>
-          <p>Tax compliance for individuals, companies, trusts and partnerships.</p>
+        <div class="box box--blue rv" id="tax">
+          <h3>Taxation &amp; Accounting Compliance</h3>
+          <p>The returns and accounts every taxpayer needs, filed to Inland Revenue's calendar. Employment &amp; HR Advisory can be added to this package.</p>
           <ul class="srv">
             <li id="income"><h4>Income tax returns</h4><p>Individuals, companies, trusts and partnerships, with provisional and terminal tax.</p><span class="chip">7 Jul or 31 Mar</span></li>
             <li id="gst"><h4>GST returns</h4><p>Prepared and filed for each of your GST periods.</p><span class="chip">28th</span></li>
             <li id="paye"><h4>PAYE returns</h4><p>Employer returns for the PAYE you deduct from wages.</p><span class="chip">20th</span></li>
             <li id="payroll"><h4>Payroll services</h4><p>Your payroll run for you. We are a Crystal Payroll recommended partner.</p><span class="chip">Each payday</span></li>
+            <li id="bookkeeping"><h4>Bookkeeping, financial statements and tax planning</h4><p>Records kept in order through the year, year-end statements, and planning ahead of the dates.</p></li>
+            <li id="company"><h4>Business structuring and company formation</h4><p>The right structure from the start, and a new company set up properly.</p></li>
           </ul>
+          <a class="tlink more" href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">More on our site</a>
         </div>
-        <div class="box rv" style="--rd:.1s">
-          <h3>Help when you need it</h3>
-          <p>Advice and administration through the year.</p>
+        <div class="box rv" id="advisory" style="--rd:.08s">
+          <h3>Business Advisory &amp; Planning</h3>
+          <p>Planning and coaching for owners who want the business to do better.</p>
           <ul class="srv">
-            <li id="bookkeeping"><h4>Bookkeeping</h4><p>Day-to-day records kept in order, ready for your returns.</p></li>
-            <li id="property"><h4>Property</h4><p>Advice on property structures, and managing property investors' affairs.</p></li>
-            <li id="company"><h4>Company formation</h4><p>Help setting up a new company.</p></li>
-            <li id="trusts"><h4>Trust administration</h4><p>Looking after the administration of your trust.</p></li>
-            <li id="advisory"><h4>Business advisory</h4><p>Advice for business owners, from people who know your numbers.</p></li>
-            <li id="hr"><h4>Employment law and HR advisory</h4><p>Help with the questions that come with having staff.</p></li>
+            <li><h4>Business Planning</h4><p>The first meeting is free: a workshop that sets out 3-month, 12-month and 3-year plans. Monthly coaching is available after that.</p><span class="chip">First meeting free</span></li>
+            <li><h4>Business plans and strategic growth</h4></li>
+            <li><h4>Performance and accountability</h4></li>
+            <li><h4>Profit improvement and cashflow</h4></li>
+            <li><h4>Systems and processes</h4></li>
           </ul>
+          <a class="tlink more" href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">More on our site</a>
+        </div>
+        <div class="box rv" id="hr" style="--rd:.12s">
+          <h3>Employment &amp; HR Advisory</h3>
+          <p>Help with the agreements, policies and legislation that come with employing people.</p>
+          <ul class="srv">
+            <li><h4>Employment agreements and policies</h4></li>
+            <li><h4>Employment legislation</h4></li>
+            <li><h4>Employee policies and procedures</h4></li>
+            <li><h4>Restructuring and redundancy</h4></li>
+            <li><h4>Employer accreditations</h4></li>
+            <li><h4>Audits and investigations</h4><p>Including help preparing records for a Labour Inspector visit.</p></li>
+          </ul>
+          <a class="tlink more" href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">More on our site</a>
+        </div>
+        <div class="box rv" id="property" style="--rd:.16s">
+          <h3>Property Investment &amp; Development</h3>
+          <p>Advice for property investors and developers. Our director and partner have published on New Zealand's land tax regime and invest in property themselves.</p>
+          <ul class="srv">
+            <li><h4>Investment strategy</h4></li>
+            <li><h4>Structuring advice</h4><p>Personal, company or trust, and the trust administration that follows.</p></li>
+            <li><h4>Tax returns and cash flow tools</h4></li>
+            <li id="trusts"><h4>Associated-persons rules</h4><p>A buy-and-hold property can become taxable when it is linked to development or trading. Ask before you buy.</p></li>
+          </ul>
+          <a class="tlink more" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">More on our site</a>
         </div>
       </div>
       <div class="partners rv"><span>TMNZ Premium Accounting Partner</span><span>Crystal Payroll recommended partner</span></div>
@@ -547,15 +601,17 @@ html.js .hero-in > .act{animation-delay:.3s}
     <div class="wrap">
       <div class="shead rv">
         <h2 id="people-h">People you will deal with</h2>
-        <p>The practice is led by Ranjana Gupta, a Chartered Accountant. Our taxation accountants prepare and check your returns.</p>
+        <p>The practice is led by Ranjana Gupta, a Chartered Accountant. Varun Gupta advises on business, and our taxation accountants prepare and check your returns.</p>
       </div>
       <ul class="ppl">
-        <li class="rv"><span class="av" aria-hidden="true">RG</span><b>Ranjana Gupta</b><span class="role">Director</span><span class="cred">Chartered Accountant (CA, NZ)</span></li>
-        <li class="rv" style="--rd:.06s"><span class="av" aria-hidden="true">VK</span><b>Vipul Koradia</b><span class="role">Taxation Accountant</span></li>
-        <li class="rv" style="--rd:.12s"><span class="av" aria-hidden="true">DN</span><b>Deepti Nanda</b><span class="role">Taxation Accountant</span></li>
-        <li class="rv" style="--rd:.18s"><span class="av" aria-hidden="true">MK</span><b>Mandeep Kaur</b><span class="role">Taxation Accountant</span></li>
-        <li class="rv" style="--rd:.24s"><span class="av" aria-hidden="true">JP</span><b>Jigar Parikh</b><span class="role">Taxation Accountant</span></li>
+        <li class="rv"><span class="av" aria-hidden="true">RG</span><b>Ranjana Gupta</b><span class="role">Director. Chartered Accountant, senior lecturer in taxation at AUT, and a published tax author.</span></li>
+        <li class="rv" style="--rd:.05s"><span class="av" aria-hidden="true">VG</span><b>Varun Gupta</b><span class="role">Business Advisor. Holds a Business Advisor certification, is a member of the Institute of Advisors and a registered partner of the Regional Business Partner Network.</span></li>
+        <li class="rv" style="--rd:.1s"><span class="av" aria-hidden="true">VK</span><b>Vipul Koradia</b><span class="role">Taxation Accountant</span></li>
+        <li class="rv" style="--rd:.15s"><span class="av" aria-hidden="true">DN</span><b>Deepti Nanda</b><span class="role">Taxation Accountant</span></li>
+        <li class="rv" style="--rd:.2s"><span class="av" aria-hidden="true">MK</span><b>Mandeep Kaur</b><span class="role">Taxation Accountant</span></li>
+        <li class="rv" style="--rd:.25s"><span class="av" aria-hidden="true">JP</span><b>Jigar Parikh</b><span class="role">Taxation Accountant</span></li>
       </ul>
+      <p class="award rv">Accountant of the Year 2019–2020, Indian Newslink Indian Business Awards</p>
       <div class="need" data-need="team photos" hidden></div>
       <div class="need" data-need="testimonials" hidden></div>
     </div>
@@ -586,6 +642,7 @@ html.js .hero-in > .act{animation-delay:.3s}
             <div><dt>Phone</dt><dd><a href="tel:+6496250035">09 625 0035</a> &nbsp; <a href="tel:+6496250025">09 625 0025</a></dd></div>
             <div><dt>Mobile</dt><dd><a href="tel:+64211419135">021 141 9135</a></dd></div>
             <div><dt>Email</dt><dd><a href="mailto:info@taxprofessionals.co.nz">info@taxprofessionals.co.nz</a></dd></div>
+            <div><dt>Reception</dt><dd>Monday to Friday, 9:30am to 5:30pm</dd></div>
             <div><dt>Follow</dt><dd><a href="https://www.facebook.com/TaxProfessionalsNZ/" target="_blank" rel="noopener">Facebook</a> &nbsp; <a href="https://nz.linkedin.com/company/tax-professionals-limited" target="_blank" rel="noopener">LinkedIn</a></dd></div>
           </dl>
           <a class="office" href="https://www.google.com/maps/search/?api=1&amp;query=620+Manukau+Road+Epsom+Auckland+1023" target="_blank" rel="noopener">
@@ -622,9 +679,9 @@ html.js .hero-in > .act{animation-delay:.3s}
     <p class="addr">620 Manukau Road, Epsom, Auckland 1023 · <a href="tel:+6496250035">09 625 0035</a> · Since 1998</p>
     <div class="fcols">
       <nav aria-labelledby="fs-h"><h2 id="fs-h">Services</h2><ul>
-        <li><a href="#income">Income tax returns</a></li><li><a href="#gst">GST returns</a></li><li><a href="#payroll">Payroll services</a></li><li><a href="#property">Property</a></li><li><a href="#trusts">Trust administration</a></li></ul></nav>
+        <li><a href="#tax">Taxation &amp; Accounting Compliance</a></li><li><a href="#advisory">Business Advisory &amp; Planning</a></li><li><a href="#hr">Employment &amp; HR Advisory</a></li><li><a href="#property">Property Investment &amp; Development</a></li></ul></nav>
       <nav aria-labelledby="fe-h"><h2 id="fe-h">Explore</h2><ul>
-        <li><a href="#year">Tax year</a></li><li><a href="#people">People</a></li><li><a href="#questions">Questions</a></li><li><a href="#contact">Contact</a></li><li><a href="https://nz.linkedin.com/company/tax-professionals-limited" target="_blank" rel="noopener">LinkedIn</a></li></ul></nav>
+        <li><a href="#year">Tax year</a></li><li><a href="#people">People</a></li><li><a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">Client resources</a></li><li><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">Insights</a></li><li><a href="https://www.taxprofessionals.co.nz/pay-an-invoice" target="_blank" rel="noopener">Pay an invoice</a></li><li><a href="#contact">Contact</a></li></ul></nav>
     </div>
     <div class="legal"><span>© Tax Professionals Ltd</span><span>Proudly designed by AMBS Solutions</span></div>
   </div>
