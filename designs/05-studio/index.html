@@ -1480,6 +1480,19 @@ html.js .rv.in{opacity:1;transform:none}
       d.addEventListener('pointerleave', function(){ cu.classList.remove('on'); });
       d.addEventListener('pointerover', function(e){ var t = e.target; cu.classList.toggle('big', !!t.closest('.frame')); cu.classList.toggle('link', !t.closest('.frame') && !!t.closest('a,button,summary,input,select,textarea,label')); });
       frame.addEventListener('click', function(){ setPlay(!playing); });
+      // while the page scrolls the cursor is a plain dot; it grows into Play / Pause again only once scrolling stops over the slideshow
+      var lastX = -1, lastY = -1, idleT = 0;
+      addEventListener('pointermove', function(e){ lastX = e.clientX; lastY = e.clientY; }, {passive:true});
+      addEventListener('scroll', function(){
+        cu.classList.remove('big', 'link');
+        clearTimeout(idleT);
+        idleT = setTimeout(function(){
+          if (lastX < 0) return;
+          var t = d.elementFromPoint(lastX, lastY); if (!t) return;
+          cu.classList.toggle('big', !!t.closest('.frame'));
+          cu.classList.toggle('link', !t.closest('.frame') && !!t.closest('a,button,summary,input,select,textarea,label'));
+        }, 450);
+      }, {passive:true});
     }
 
     ST.sort();

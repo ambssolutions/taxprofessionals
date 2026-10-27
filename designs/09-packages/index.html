@@ -839,10 +839,12 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);bo
     /* touch tablets: a tap or drag bends the mesh for a moment */
     var tt=0;hero.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse')return;var r=hero.getBoundingClientRect();tx=(e.clientX-r.left)/r.width;ty=1-(e.clientY-r.top)/r.height;ta=1;clearTimeout(tt);tt=setTimeout(function(){ta=0},1600)},{passive:true});
     var run=false,raf=0,t0=performance.now(),first=true;
-    var lastDraw=0;
+    var lastDraw=0,lastScroll=-1e9;
+    addEventListener('scroll',function(){lastScroll=performance.now()},{passive:true});
     function frame(now){
       raf=0;
-      if(now-lastDraw<32&&!first){if(run)raf=requestAnimationFrame(frame);return}
+      // the slow gradient holds still while the page is actively scrolling, so the scroll gets every frame
+      if((now-lastDraw<32||now-lastScroll<160)&&!first){if(run)raf=requestAnimationFrame(frame);return}
       lastDraw=now;
       mx+=(tx-mx)*.05;my+=(ty-my)*.05;ma+=(ta-ma)*.04;
       gl.uniform2f(uR,W,H);gl.uniform1f(uT,(now-t0)/1000+20);gl.uniform3f(uM,mx,my,ma);

@@ -749,6 +749,8 @@ addEventListener('DOMContentLoaded',function(){
       });
     });
     list.addEventListener('pointerleave',function(){fol.classList.remove('on')});
+    // between names (or beside them) no portrait shows
+    list.addEventListener('pointerover',function(e){if(!e.target.closest('.nm'))fol.classList.remove('on')});
   }
 
   // custom cursor: a green dot that opens into VIEW over links and cards
