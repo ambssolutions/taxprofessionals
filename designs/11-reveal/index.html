@@ -267,13 +267,13 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
 .lead-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.4vw,32px)}
 .leader{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:clip}
 .leader .pv{aspect-ratio:1;background:#e9eef2}
-.leader-b{padding:20px 22px 24px}
+.leader-b{padding:20px 22px 24px;text-align:center}
 .leader-b .role{color:var(--blue);font-weight:600;font-size:14.5px;margin-top:2px}
 .leader-b p:not(.role){color:var(--muted);font-size:15px;margin-top:8px}
 .team{margin-top:clamp(40px,6vw,64px)}
 .team h3{text-align:center;font-family:var(--serif);font-weight:400;font-size:clamp(1.6rem,2.6vw,2.2rem);margin-bottom:22px}
 .team ul{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.team li{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}
+.team li{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}
 .av{flex:none;width:56px;height:56px;border-radius:10px;overflow:clip;display:grid;place-items:center;font:600 17px/1 var(--sans);background:var(--deep);color:#fff}
 .av img{width:100%;height:100%;object-fit:cover;display:block}
 .team li:nth-child(even) .av:not(.ph){background:var(--green-l);color:var(--ink)}
@@ -281,8 +281,9 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
 .team span.t{display:block;color:var(--muted);font-size:13.5px;line-height:1.35}
 .reach{text-align:center;margin-top:24px;color:var(--muted)}
 .reach a{color:var(--blue);font-weight:600}
+@media (min-width:1101px){.team li:nth-child(1),.team li:nth-child(7){grid-column-start:2}.team li:nth-child(3){grid-column-start:1}}
 @media (max-width:1100px){.team ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:760px){.lead-g{grid-template-columns:1fr;max-width:420px;margin-inline:auto}.team ul{grid-template-columns:1fr}}
+@media (max-width:760px){.lead-g{grid-template-columns:1fr;max-width:420px;margin-inline:auto}.team ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .lead-g{max-width:1000px;margin-inline:auto}
 /* testimonial */
 .quote{text-align:center;max-width:900px;margin:0 auto}

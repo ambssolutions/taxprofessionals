@@ -194,7 +194,6 @@ section[id]{scroll-margin-top:88px}
 .fx .services{margin-top:-18vh}
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;max-width:1100px;margin:0 auto}
 .card{background:var(--bg);border:1px solid var(--line);border-radius:28px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .5s,box-shadow .6s var(--ease)}
-.card:nth-child(even){margin-top:72px}
 .card:hover{border-color:#cfc4ad;box-shadow:0 30px 60px -40px rgba(3,63,102,.45)}
 .card-media{overflow:hidden;aspect-ratio:800/367;background:var(--sand)}
 .card-media img{width:100%;height:100%;object-fit:cover;transform-origin:50% 60%}
@@ -402,6 +401,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--blue);outline-of
 /* phones and other screens (mo): portrait versions of the scenes, native scroll */
 .mo .cam{perspective:900px;perspective-origin:50% 58%}
 .mo .plane{transform-style:preserve-3d}
+.mo .m-r2{display:none}
 .mo .fly-cap{left:16px;right:16px;bottom:64px;margin:0 auto;max-width:max-content;white-space:normal;text-align:center;font-size:1.25rem}
 .mo .arrive-photo,.mo .card-media img{transition:none!important}
 .mo .route i{transform:scaleY(0)}
@@ -497,7 +497,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--blue);outline-of
         <ellipse class="m-fade" style="--t:2s" cx="1224" cy="890" rx="24" ry="8" fill="#033F66" fill-opacity=".25"/>
         <g class="m-fade" style="--t:1.8s">
           <text class="m-onroad"><textPath href="#route" startOffset="18%">MANUKAU ROAD</textPath></text>
-          <text class="m-onroad"><textPath href="#route" startOffset="70%">MANUKAU ROAD</textPath></text>
+          <text class="m-onroad m-r2"><textPath href="#route" startOffset="70%">MANUKAU ROAD</textPath></text>
           <text class="m-lab" x="510" y="860" font-size="76" text-anchor="middle" fill-opacity=".9">EPSOM</text>
           <text class="m-lab" x="1980" y="760" font-size="46" text-anchor="middle">GREENLANE</text>
           <text class="m-lab" x="1830" y="1520" font-size="30" text-anchor="middle" fill="#0F3B14">MAUNGAKIEKIE</text>

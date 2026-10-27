@@ -186,7 +186,7 @@ html:not(.flaps) .flap{background:#fff;color:var(--deep);padding:.07em .1em;bord
 .yr-ctl button{min-width:48px;min-height:48px;border-radius:999px;border:1px solid var(--line-2);background:#fff;color:var(--ink);font:500 var(--t-s)/1 var(--sans);padding:0 18px;cursor:pointer}
 .yr-ctl button:hover{border-color:var(--blue)}
 html:not(.js) .yr-ctl{display:none}
-@media (max-width:699px){.months a{font-size:.58rem;padding-left:3px;min-height:28px;letter-spacing:0}}
+@media (max-width:699px){.months a{font-size:.58rem;padding-left:3px;min-height:28px;letter-spacing:0}.today::after{height:11px}}
 /* pinned (laptops) */
 html.pin .yr-stage{height:100vh;display:flex;flex-direction:column;overflow:hidden;padding-top:calc(var(--hh) + 10px);padding-bottom:0}
 html.pin .track{overflow:visible;scroll-snap-type:none;flex:1;min-height:0;padding-top:18px;padding-bottom:clamp(20px,3.5vh,36px);will-change:transform}
@@ -243,7 +243,7 @@ html.pin .stage-k{display:flex}
 .roster a:hover{text-decoration:underline}
 .peek{position:fixed;left:0;top:0;width:200px;height:200px;border-radius:4px;object-fit:cover;pointer-events:none;z-index:40;opacity:0;transform:translate(-50%,-50%);transition:opacity .35s var(--ease)}
 .peek.on{opacity:1}
-@media (max-width:899px){.leaders{grid-template-columns:1fr}.leader{flex-direction:row;text-align:left;align-items:center;gap:18px}.leader figure{width:96px;flex:none}.leader h3{margin-top:0}.roster li{grid-template-columns:44px 1fr;row-gap:2px;padding:12px 16px}.roster .av{grid-row:span 3}.roster .role,.roster a{grid-column:2}.roster a{justify-self:start;min-height:36px}}
+@media (max-width:899px){.leaders{grid-template-columns:1fr}.leader figure{width:min(180px,60%)}.roster li{grid-template-columns:44px 1fr;row-gap:2px;padding:12px 16px}.roster .av{grid-row:span 3}.roster .role,.roster a{grid-column:2}.roster a{justify-self:start;min-height:36px}}
 
 /* promises */
 .prom{background:var(--deep);color:#fff}
@@ -376,6 +376,14 @@ html.tfx-p .svc figure img,html.tfx-p .leader img{transition:none}
   *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
   html.js .intro{opacity:1}
 }
+
+/* the rest of the team: centred mini cards, photo or initials on top, name, role and email centred under it */
+.roster{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;border:0!important;padding:0;margin-top:20px}
+.roster li{display:flex!important;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:18px 12px!important;border:1px solid var(--line,rgba(0,0,0,.1))!important;border-radius:14px;background:var(--surface,#fff);grid-template-columns:none!important}
+.roster li .av{margin:0 auto 4px!important;width:56px!important;height:56px!important;flex:none;border-radius:50%;overflow:hidden;background:#E3ECF3}
+.roster li .av img{width:100%!important;height:100%!important;object-fit:cover;object-position:50% 20%;display:block}
+.roster li .role,.roster li a{margin:0!important;justify-self:center;text-align:center}
+@media (max-width:899px){.roster{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
