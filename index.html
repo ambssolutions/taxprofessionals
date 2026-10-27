@@ -212,6 +212,35 @@ footer{border-top:1px solid var(--line);padding:24px 0 120px;color:var(--muted);
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
   .card{opacity:1;transform:none}
 }
+
+/* arrange mode: drag cards by the handle or move them with the arrows */
+.arrange-bar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:center;text-align:center;margin:0 auto 18px;padding:14px 18px;border:1px dashed var(--line);border-radius:16px;background:var(--surface-2);max-width:1100px}
+.arrange-bar[hidden]{display:none}
+.arrange-bar p{margin:0;max-width:60ch}
+.ab-acts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.arr{display:none}
+body.arranging .arr{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.arr .handle{cursor:grab;display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:13px;color:var(--ink);padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);user-select:none;touch-action:none}
+.arr .handle:active{cursor:grabbing}
+.arr .pos{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
+.arr button.mv{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:16px;line-height:1;cursor:pointer;color:var(--ink)}
+.arr button.mv:disabled{opacity:.35;cursor:default}
+body.arranging .card{transition:transform .25s ease, box-shadow .25s ease}
+body.arranging .card.dragging{opacity:.55;box-shadow:0 0 0 2px var(--green-ink)}
+body.arranging .card.drop-before{box-shadow:0 -3px 0 0 var(--green-ink)}
+body.arranging .card.drop-after{box-shadow:0 3px 0 0 var(--green-ink)}
+body.arranging .card .thumb{pointer-events:none}
+/* arrange is a compact list: one short row per design */
+body.arranging .grid{grid-template-columns:1fr!important;max-width:760px;margin-inline:auto;gap:8px}
+body.arranging .card{display:flex!important;flex-direction:row!important;align-items:center;gap:14px;padding:8px 12px;min-height:0;text-align:left}
+body.arranging .card .thumb{flex:none;width:132px;aspect-ratio:16/10;border-radius:10px}
+body.arranging .card .thumb .rec,body.arranging .card .thumb .pick-flag{display:none}
+body.arranging .card .body{flex:1;min-width:0;padding:0}
+body.arranging .card .body>*:not(h2){display:none}
+body.arranging .card .body h2{margin:0;font-size:1.15rem;text-align:left}
+body.arranging .arr{order:3;border:0;background:none;padding:0;flex:none}
+body.arranging .arr .pos{margin-left:6px;min-width:56px;text-align:right}
+@media (max-width:560px){body.arranging .card .thumb{width:88px}body.arranging .arr .handle{display:none}body.arranging .arr .pos{display:none}}
 </style>
 </head>
 <body>
@@ -252,7 +281,19 @@ footer{border-top:1px solid var(--line);padding:24px 0 120px;color:var(--muted);
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="7" height="16" rx="1.5"/><rect x="14" y="4" width="7" height="16" rx="1.5"/></svg>
       Compare shortlist
     </button>
+    <button class="btn" type="button" id="arrangeBtn" aria-pressed="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16M3 8l4-4 4 4M17 20V4M13 16l4 4 4-4"/></svg>
+      Arrange order
+    </button>
     <span class="hint">Tip: use ← → keys to flip between concepts in preview</span>
+  </div>
+  <div class="arrange-bar" id="arrangeBar" hidden>
+    <p><b>Arrange the designs.</b> Drag a card by its handle, or use the arrows. Your order is kept in this browser.</p>
+    <div class="ab-acts">
+      <button class="btn" type="button" id="arrCopy">Copy link with this order</button>
+      <button class="btn ghost" type="button" id="arrReset">Reset to our order</button>
+      <button class="btn green" type="button" id="arrDone">Done</button>
+    </div>
   </div>
 
   <section class="grid" id="grid" aria-label="Design concepts">
@@ -354,6 +395,7 @@ const THUMB_V = "202610272119";
 const CONCEPTS = window.TP_CONCEPTS;
 const url = c => "designs/" + c.slug + "/";
 const byId = id => CONCEPTS.find(c => c.id === id);
+const no = id => (byId(id) || {}).no || id; // a design's place in the order (01 = first); its id is its fixed folder number
 const $ = s => document.querySelector(s);
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -376,10 +418,10 @@ const isOn = id => shortlist.includes(id);
 function toggle(id, force){
   const on = force ?? !isOn(id);
   shortlist = on ? [...new Set([...shortlist,id])] : shortlist.filter(x => x !== id);
-  shortlist.sort();
+  shortlist.sort((a,b) => CONCEPTS.indexOf(byId(a)) - CONCEPTS.indexOf(byId(b)));
   store.set("shortlist",shortlist);
   render();
-  toast(on ? `Concept ${id} · ${byId(id).name} added to shortlist` : `Removed ${byId(id).name}`);
+  toast(on ? `Concept ${no(id)} · ${byId(id).name} added to shortlist` : `Removed ${byId(id).name}`);
 }
 function setPick(id){ pick = id; store.set("pick",pick); if(id && !isOn(id)) toggle(id,true); else render(); }
 
@@ -390,9 +432,13 @@ CONCEPTS.forEach((c,i) => {
   const el = document.createElement("article");
   el.className = "card"; el.dataset.id = c.id;
   el.innerHTML = `
-    <button class="thumb" type="button" aria-label="Preview concept ${c.id}, ${c.name}" style="background:linear-gradient(135deg,${c.sw[0]},${c.sw[2]})">
-      <span class="num">${c.id}</span><span class="pick-flag">★ Preferred</span>${c.rec?'<span class="rec">Recommended</span>':''}
-      <img src="designs/${c.slug}/thumb.webp?v=${THUMB_V}" alt="Concept ${c.id}, ${c.name}: homepage preview" width="720" height="450" loading="${i<3?"eager":"lazy"}" decoding="async">
+    <div class="arr"><span class="handle" draggable="true" aria-hidden="true">⠿ Drag</span>
+      <button class="mv" type="button" data-mv="-1" aria-label="Move ${c.name} earlier">↑</button>
+      <button class="mv" type="button" data-mv="1" aria-label="Move ${c.name} later">↓</button>
+      <span class="pos"></span></div>
+    <button class="thumb" type="button" aria-label="Preview concept ${c.no}, ${c.name}" style="background:linear-gradient(135deg,${c.sw[0]},${c.sw[2]})">
+      <span class="num">${c.no}</span><span class="pick-flag">★ Preferred</span>${c.rec?'<span class="rec">Recommended</span>':''}
+      <img src="designs/${c.slug}/thumb.webp?v=${THUMB_V}" alt="Concept ${c.no}, ${c.name}: homepage preview" width="720" height="450" loading="${i<3?"eager":"lazy"}" decoding="async">
     </button>
     <div class="body">
       <h2>${c.name}</h2>
@@ -421,6 +467,71 @@ document.querySelectorAll("[data-filter]").forEach(b => b.addEventListener("clic
   render();
 }));
 
+/* ---------- arrange: the owner's own order ---------- */
+function applyOrder(ids, save){
+  const byKey = Object.fromEntries(CONCEPTS.map(c => [c.id, c]));
+  const next = ids.map(id => byKey[id]).filter(Boolean);
+  CONCEPTS.splice(0, CONCEPTS.length, ...next, ...CONCEPTS.filter(c => !ids.includes(c.id)));
+  CONCEPTS.forEach((c, i) => { c.no = String(i + 1).padStart(2, "0"); });
+  CONCEPTS.forEach(c => { const el = grid.querySelector(`.card[data-id="${c.id}"]`); if (el) grid.insertBefore(el, $("#empty")); });
+  document.querySelectorAll(".card").forEach(el => {
+    const c = byId(el.dataset.id);
+    el.querySelector(".num").textContent = c.no;
+    el.querySelector(".thumb").setAttribute("aria-label", `Preview concept ${c.no}, ${c.name}`);
+    el.querySelector(".thumb img").alt = `Concept ${c.no}, ${c.name}: homepage preview`;
+    el.querySelector(".pos").textContent = `${c.no} of ${CONCEPTS.length}`;
+    el.querySelector('[data-mv="-1"]').disabled = c.no === "01";
+    el.querySelector('[data-mv="1"]').disabled = +c.no === CONCEPTS.length;
+  });
+  shortlist.sort((a,b) => CONCEPTS.indexOf(byId(a)) - CONCEPTS.indexOf(byId(b)));
+  if (save) { try { const ids2 = CONCEPTS.map(c => c.id); if (ids2.join() === (window.TP_DEFAULT_ORDER||[]).join()) localStorage.removeItem("tp-order"); else localStorage.setItem("tp-order", JSON.stringify(ids2)); } catch (e) {} }
+  render();
+}
+const orderIds = () => CONCEPTS.map(c => c.id);
+function arrange(on){
+  document.body.classList.toggle("arranging", on);
+  $("#arrangeBar").hidden = !on;
+  $("#arrangeBtn").setAttribute("aria-pressed", on);
+  if (on) { filter = "all"; document.querySelectorAll("[data-filter]").forEach(x => x.setAttribute("aria-pressed", x.dataset.filter === "all")); applyOrder(orderIds(), false); }
+}
+$("#arrangeBtn").addEventListener("click", () => arrange(!document.body.classList.contains("arranging")));
+$("#arrDone").addEventListener("click", () => { arrange(false); toast("Order saved in this browser"); });
+$("#arrReset").addEventListener("click", () => { applyOrder(window.TP_DEFAULT_ORDER || orderIds(), true); toast("Back to our recommended order"); });
+$("#arrCopy").addEventListener("click", async () => {
+  const u = new URL(location.href.split("?")[0].split("#")[0]); u.searchParams.set("order", orderIds().join(","));
+  try { await navigator.clipboard.writeText(u.href); toast("Link copied: it opens the gallery in this order"); }
+  catch (e) { prompt("Copy this link:", u.href); }
+});
+grid.addEventListener("click", e => {
+  const b = e.target.closest("[data-mv]"); if (!b) return;
+  const id = b.closest(".card").dataset.id, ids = orderIds(), i = ids.indexOf(id), j = i + +b.dataset.mv;
+  if (j < 0 || j >= ids.length) return;
+  [ids[i], ids[j]] = [ids[j], ids[i]]; applyOrder(ids, true);
+  grid.querySelector(`.card[data-id="${id}"] [data-mv="${b.dataset.mv}"]`)?.focus();
+});
+// drag and drop (laptops): drag a card by its handle and drop it before another card
+let dragId = null;
+grid.addEventListener("dragstart", e => {
+  const h = e.target.closest(".handle"); if (!h) return;
+  const card = h.closest(".card"); dragId = card.dataset.id; card.classList.add("dragging");
+  e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", dragId);
+  try { e.dataTransfer.setDragImage(card, 40, 30); } catch (err) {}
+});
+grid.addEventListener("dragover", e => {
+  if (!dragId) return; e.preventDefault();
+  const over = e.target.closest(".card"); grid.querySelectorAll(".drop-before,.drop-after").forEach(x => x.classList.remove("drop-before","drop-after"));
+  if (over && over.dataset.id !== dragId) { const r = over.getBoundingClientRect(); over.classList.add(e.clientY > r.top + r.height / 2 ? "drop-after" : "drop-before"); }
+});
+grid.addEventListener("drop", e => {
+  if (!dragId) return; e.preventDefault();
+  const over = e.target.closest(".card"); const ids = orderIds().filter(x => x !== dragId);
+  let k = over ? ids.indexOf(over.dataset.id) : ids.length;
+  if (over) { const r = over.getBoundingClientRect(), cols = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+    if (cols > 1 ? e.clientX > r.left + r.width / 2 : e.clientY > r.top + r.height / 2) k += 1; }
+  ids.splice(Math.max(0, k), 0, dragId); applyOrder(ids, true);
+});
+grid.addEventListener("dragend", () => { dragId = null; grid.querySelectorAll(".dragging,.drop-before,.drop-after").forEach(x => x.classList.remove("dragging", "drop-before", "drop-after")); });
+
 /* ---------- render all state ---------- */
 function render(){
   if (pick && !byId(pick)) pick = null;
@@ -438,7 +549,7 @@ function render(){
   $("#compareBtn").disabled = shortlist.length < 2;
   $("#compareTray").disabled = shortlist.length < 2;
   $("#tray").classList.toggle("show", shortlist.length > 0);
-  $("#chips").innerHTML = shortlist.map(id => `<span class="chip">${pick===id?"★ ":""}${id} · ${byId(id).name}<button type="button" aria-label="Remove ${byId(id).name}" data-rm="${id}">✕</button></span>`).join("");
+  $("#chips").innerHTML = shortlist.map(id => `<span class="chip">${pick===id?"★ ":""}${no(id)} · ${byId(id).name}<button type="button" aria-label="Remove ${byId(id).name}" data-rm="${id}">✕</button></span>`).join("");
   if (vIndex != null) syncViewer();
 }
 $("#chips").addEventListener("click", e => { const id = e.target.closest("[data-rm]")?.dataset.rm; if (id) toggle(id,false); });
@@ -456,7 +567,7 @@ function openViewer(id){
 }
 function syncViewer(){
   const c = CONCEPTS[vIndex];
-  $("#vTitle").innerHTML = `${c.id} · ${c.name} <small>Inspired by ${c.insp}</small>`;
+  $("#vTitle").innerHTML = `${c.no} · ${c.name} <small>Inspired by ${c.insp}</small>`;
   $("#vOpen").href = url(c);
   $("#vDev").href = "preview.html?c=" + c.id + "&d=" + ({desktop:"laptop"}[$("#stage").dataset.dev] || $("#stage").dataset.dev);
   const on = isOn(c.id);
@@ -499,7 +610,7 @@ function openCompare(){
   if (ids.length < 2) return;
   lastFocus = document.activeElement;
   const st = $("#cStage"); st.style.setProperty("--n", ids.length);
-  st.innerHTML = ids.map(id => `<div class="cell"><header>${id} · ${byId(id).name}<button class="btn" type="button" data-pick="${id}">Pick this</button></header><iframe src="${url(byId(id))}" title="Concept ${id}"></iframe></div>`).join("");
+  st.innerHTML = ids.map(id => `<div class="cell"><header>${no(id)} · ${byId(id).name}<button class="btn" type="button" data-pick="${id}">Pick this</button></header><iframe src="${url(byId(id))}" title="Concept ${no(id)}"></iframe></div>`).join("");
   $("#cSub").textContent = shortlist.length > 3 ? `first 3 of ${shortlist.length} shortlisted` : `${ids.length} shortlisted`;
   cmp.classList.add("open"); document.body.classList.add("locked"); $("#cClose").focus();
 }
@@ -526,7 +637,7 @@ function openSend(preselect){
   const sel = preselect || pick || shortlist[0] || "";
   $("#opts").innerHTML = list.map(id => { const c = byId(id); return `
     <label class="opt"><input type="radio" name="pick" value="${id}" ${id===sel?"checked":""}>
-      <span><b>${id} · ${c.name}</b><small>Inspired by ${c.insp}</small></span>
+      <span><b>${no(id)} · ${c.name}</b><small>Inspired by ${c.insp}</small></span>
       <span class="n">${isOn(id)?"★ shortlisted":""}</span></label>`; }).join("");
   const s = store.get("contact",{}); $("#fName").value = s.name||""; $("#fEmail").value = s.email||"";
   $("#sendNote").textContent = FORM_ENDPOINT ? "Your choice is sent straight to the AMBS Solutions project team."
@@ -550,10 +661,10 @@ function summary(d){
   const c = byId(d.pick);
   return [
     "Tax Professionals · website concept selection", "",
-    `Preferred design: ${d.pick} · ${c.name} (inspired by ${c.insp})`,
+    `Preferred design: ${no(d.pick)} · ${c.name} (inspired by ${c.insp})`,
     `Link: ${new URL(url(c), location.href).href}`,
     `Font style: ${fontOf(c)}`, "",
-    `Shortlist: ${d.shortlist.length ? d.shortlist.map(id=>`${id} ${byId(id).name}`).join(", ") : "(none)"}`, "",
+    `Shortlist: ${d.shortlist.length ? d.shortlist.map(id=>`${no(id)} ${byId(id).name}`).join(", ") : "(none)"}`, "",
     `Notes: ${d.notes || "(none)"}`, "",
     `From: ${d.name || "-"}${d.email ? " <"+d.email+">" : ""}`,
     `Review link: ${shareUrl(d.pick)}`
@@ -574,14 +685,14 @@ $("#form").addEventListener("submit", async e => {
   if (FORM_ENDPOINT){
     const b = $("#submitBtn"); b.disabled = true; b.textContent = "Sending…";
     try{
-      const r = await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({...d, preferred:`${d.pick} ${c.name}`, _subject:`Preferred design: ${d.pick} ${c.name}`, message: summary(d)})});
+      const r = await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({...d, preferred:`${no(d.pick)} ${c.name}`, _subject:`Preferred design: ${no(d.pick)} ${c.name}`, message: summary(d)})});
       if (!r.ok) throw new Error(r.status);
     }catch(err){ b.disabled = false; b.textContent = "Send preference"; return fail("Couldn't send just now. Use “Copy summary” and email it instead."); }
     b.disabled = false; b.textContent = "Send preference";
-    $("#doneMsg").textContent = `We've received your choice: ${d.pick} · ${c.name}. We'll be in touch shortly.`;
+    $("#doneMsg").textContent = `We've received your choice: ${no(d.pick)} · ${c.name}. We'll be in touch shortly.`;
   } else {
-    location.href = `mailto:${SEND_TO}?subject=${encodeURIComponent(`Preferred design: ${d.pick} · ${c.name}`)}&body=${encodeURIComponent(summary(d))}`;
-    $("#doneMsg").textContent = `Your email app should now be open with ${d.pick} · ${c.name} filled in. Just press send.`;
+    location.href = `mailto:${SEND_TO}?subject=${encodeURIComponent(`Preferred design: ${no(d.pick)} · ${c.name}`)}&body=${encodeURIComponent(summary(d))}`;
+    $("#doneMsg").textContent = `Your email app should now be open with ${no(d.pick)} · ${c.name} filled in. Just press send.`;
   }
   $("#formBody").hidden = true; $("#done").hidden = false;
 });

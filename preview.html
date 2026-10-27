@@ -145,7 +145,7 @@
 
   // Concept list: recommended ones marked with a star
   sel.innerHTML = C.map(function (c, i) {
-    return '<option value="' + i + '">' + c.id + '  ' + c.name + ' · ' + c.type + ', ' + c.style + (c.rec ? '  ★' : '') + '</option>';
+    return '<option value="' + i + '">' + (c.no || c.id) + '  ' + c.name + ' · ' + c.type + ', ' + c.style + (c.rec ? '  ★' : '') + '</option>';
   }).join('');
 
   // Start from the URL (?c=05&d=tablet), else sensible defaults
@@ -205,7 +205,7 @@
     $('open').href = fullPage(idx);
     $('meta').innerHTML = '<b>' + c.type + ' · ' + c.style + '</b> · ' + c.motion + (c.rec ? ' · ★ Recommended' : '');
     document.querySelectorAll('[data-d]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.d === dev); });
-    document.title = c.id + ' ' + c.name + ' · ' + d.name + ' · Tax Professionals preview';
+    document.title = (c.no || c.id) + ' ' + c.name + ' · ' + d.name + ' · Tax Professionals preview';
     paintStar(); syncUrl(); layout();
   }
 
