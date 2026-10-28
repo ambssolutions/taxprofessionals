@@ -52,7 +52,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:150;op
 .btn .ar{width:14px;height:14px;transition:transform .5s var(--ease)}
 .btn:hover .ar{transform:translateX(3px)}
 
-.site-header{position:fixed;inset:0 0 auto;z-index:100;height:var(--hh);background:rgba(2,42,69,.95);border-bottom:1px solid var(--hair)}
+.site-header{position:fixed;inset:0 0 auto;z-index:100;height:var(--hh);background:#022a45;border-bottom:1px solid var(--hair)}
 .site-header .wrap{max-width:none;height:100%;display:flex;align-items:center;gap:24px}
 .brand{display:inline-flex;align-items:center;background:#fff;border-radius:6px;padding:6px 10px;flex:none}
 .brand img{width:176px;height:auto}
@@ -229,7 +229,7 @@ html.touchfx .btn,html.touchfx .pil-btn,html.touchfx .qbar a{position:relative;o
 .prom li::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--green-l);transform:scaleX(0);transform-origin:left;transition:transform .9s var(--ease)}
 .prom li:hover::after{transform:scaleX(1)}
 .prom .n{font:500 .85rem var(--mono);color:#86cf68}
-.prom .t{font-size:clamp(1.15rem,1rem + .9vw,1.75rem);letter-spacing:-.01em;line-height:1.25}
+.prom .t{font-size:clamp(1.15rem,1rem + .5vw,1.5rem);letter-spacing:-.01em;line-height:1.25}
 
 /* people */
 .leads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;max-width:1080px;margin:0 auto}
@@ -271,7 +271,7 @@ html.touchfx .btn,html.touchfx .pil-btn,html.touchfx .qbar a{position:relative;o
 .award .ab p{margin-top:14px;color:var(--mute)}
 .award .meta{margin-top:18px;font:400 .8rem/1.7 var(--mono);color:var(--dim);border-top:1px solid var(--hair);padding-top:14px}
 .quote{max-width:860px;margin:clamp(64px,9vw,112px) auto 0;text-align:center}
-.quote blockquote{margin:0;font-size:clamp(1.2rem,1rem + 1vw,1.7rem);line-height:1.45;letter-spacing:-.01em}
+.quote blockquote{margin:0;font-size:clamp(1.15rem,1rem + .5vw,1.5rem);line-height:1.45;letter-spacing:-.01em}
 .quote figcaption{margin-top:20px;font:500 .82rem var(--mono);color:var(--green-l);letter-spacing:.06em}
 
 /* insights */
@@ -303,7 +303,7 @@ html.touchfx .btn,html.touchfx .pil-btn,html.touchfx .qbar a{position:relative;o
 .faq details.js-fold.is-open .ans{grid-template-rows:1fr}
 
 /* contact */
-.contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,5vw,64px);max-width:1160px;margin:0 auto;text-align:left}
+.contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:start;gap:clamp(28px,5vw,64px);max-width:1160px;margin:0 auto;text-align:left}
 .cinfo dl{margin:0;border-top:1px solid var(--hair2)}
 .cinfo dl>div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--hair)}
 .cinfo dt{font:400 .74rem/1.6 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--dim);padding-top:2px}

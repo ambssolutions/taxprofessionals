@@ -21,7 +21,7 @@
   --ink:#0A2740;--body:#33495B;--muted:#5A6B78;--line:rgba(3,63,102,.12);--line-w:rgba(255,255,255,.22);
   --sans:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Geist Mono",ui-monospace,Menlo,monospace;
   --ease:cubic-bezier(.22,1,.36,1);--fold:cubic-bezier(.45,.05,.25,1);--flip:cubic-bezier(.7,0,.2,1);
-  --fs-h1:clamp(2.6rem,6.2vw,5.4rem);--fs-h2:clamp(2rem,3.6vw,3.1rem);--fs-h3:1.3rem;--hh:76px;
+  --fs-h1:clamp(2.5rem,4.6vw,4.25rem);--fs-h2:clamp(1.9rem,2.9vw,2.75rem);--fs-h3:1.3rem;--hh:76px;
   --r:22px;--wrap:1200px;
   /* embossed surfaces: one light source top left, shadows in the brand's deep blue */
   --surf:#E6EDF2;--surf-hi:#EFF4F8;--surf-lo:#DCE5EC;
@@ -215,7 +215,7 @@ a{color:var(--blue);text-underline-offset:3px}
 .prow{list-style:none;margin:0;padding:0;display:grid;gap:16px}
 @media (min-width:760px){.prow{grid-template-columns:1fr 1fr}}
 .pil{position:relative;border-radius:var(--r);padding:28px;border:1px solid var(--line);background:var(--ivory);overflow:hidden;display:flex;flex-direction:column;gap:14px;text-align:left;transition:background .9s var(--ease),border-color .9s,color .9s}
-.pil .no{color:var(--blue);align-self:flex-start;display:inline-grid;place-items:center;min-width:44px;height:28px;padding:0 9px;border-radius:9px;background:rgba(3,63,102,.05);box-shadow:inset 2px 2px 4px rgba(3,63,102,.2),inset -2px -2px 4px rgba(255,255,255,.75);transition:box-shadow .9s,background .9s,color .9s}
+.pil .no{flex:none;color:var(--blue);align-self:flex-start;display:inline-grid;place-items:center;min-width:44px;height:28px;padding:0 9px;border-radius:9px;background:rgba(3,63,102,.05);box-shadow:inset 2px 2px 4px rgba(3,63,102,.2),inset -2px -2px 4px rgba(255,255,255,.75);transition:box-shadow .9s,background .9s,color .9s}
 .pil h3{font-size:1.35rem}
 .pil p{color:var(--body)}
 .pil ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
@@ -224,8 +224,8 @@ a{color:var(--blue);text-underline-offset:3px}
 .pil .more{font-weight:600;margin-top:auto}
 .pil .bd{display:grid;gap:14px}
 .pin-on.sec{padding:100px 0 32px}.pin-on .sec-head{margin-bottom:28px}
-.pin-on .prow{display:flex;gap:14px;height:clamp(380px,calc(100vh - 290px),560px)}
-.pin-on .pil{flex:1 1 0;min-width:0;cursor:pointer;transition:flex 1.1s var(--ease),background .9s var(--ease),border-color .9s}
+.pin-on .prow{display:flex;gap:14px;height:clamp(340px,calc(100vh - 340px),400px)}
+.pin-on .pil{flex:1 1 0;min-width:0;padding:24px 20px;cursor:pointer;transition:flex 1.1s var(--ease),background .9s var(--ease),border-color .9s}
 .pin-on .pil.act{flex:3.4 1 0;cursor:default;background:linear-gradient(140deg,#033F66 0%,#04649F 58%,#2f8a52 100%);border-color:transparent}
 .pin-on .pil.act h3,.pin-on .pil.act p,.pin-on .pil.act li,.pin-on .pil.act .no,.pin-on .pil.act .more,.pin-v .pil.act h3,.pin-v .pil.act p,.pin-v .pil.act li,.pin-v .pil.act .no,.pin-v .pil.act .more{color:#fff}
 .pin-on .pil.act li::before,.pin-v .pil.act li::before{background:var(--green-l)}
@@ -239,7 +239,8 @@ a{color:var(--blue);text-underline-offset:3px}
 .pin-v .pil:not(.act) .bd{opacity:0}
 .pin-v .pil.act{cursor:default;background:linear-gradient(150deg,#033F66 0%,#04649F 62%,#2f8a52 100%);border-color:transparent}
 .pin-v .pbar{display:block}
-.pin-on .pil .bd{margin-top:auto;min-width:min(440px,52vw);opacity:0;visibility:hidden;transform:translateY(16px);transition:opacity .5s,transform .8s var(--ease),visibility 0s .5s}
+.pin-on .pil:not(.act) h3{font-size:1.1rem}
+.pin-on .pil .bd{margin-top:6px;min-width:min(440px,52vw);opacity:0;visibility:hidden;transform:translateY(16px);transition:opacity .5s,transform .8s var(--ease),visibility 0s .5s}
 .pin-on .pil.act .bd{opacity:1;visibility:visible;transform:none;transition:opacity .9s .35s,transform 1s var(--ease) .35s,visibility 0s .35s}
 .pbar{display:none;height:2px;border-radius:2px;background:var(--line);margin-top:22px;overflow:hidden}
 .pbar i{display:block;height:100%;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--blue),var(--green))}
@@ -259,7 +260,7 @@ a{color:var(--blue);text-underline-offset:3px}
 .leadc .role{font-weight:600;color:var(--blue)}
 .leadc p{font-size:.98rem}
 .staff{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(2,minmax(0,1fr))}
-@media (min-width:1100px){.staff{grid-template-columns:repeat(4,minmax(0,1fr))}.staff li:nth-child(1),.staff li:nth-child(7){grid-column-start:2}.staff li:nth-child(3){grid-column-start:1}}
+@media (min-width:1100px){.staff{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .staff li{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:14px 12px;border-radius:16px;background:#fff;border:1px solid var(--line);min-height:68px}
 .staff img,.staff .mg{width:44px;height:44px;border-radius:12px;flex:none;object-fit:cover}
 .staff .mg{display:grid;place-items:center;background:linear-gradient(140deg,var(--deep),var(--blue));color:#fff;font-weight:600;font-size:.9rem}
@@ -271,7 +272,11 @@ a{color:var(--blue);text-underline-offset:3px}
 .why h2{color:#fff}
 .why .sec-head p{color:rgba(255,255,255,.85)}
 .prom{list-style:none;margin:0;padding:0;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
-.prom li{padding:24px 22px;border-radius:20px;display:grid;gap:18px;align-content:start;text-align:left}
+.prom li{padding:22px 20px;border-radius:20px;display:grid;gap:12px;align-content:center;justify-items:center;text-align:center}
+.prom li:nth-child(3n+1){background:rgba(4,100,159,.55)}
+.prom li:nth-child(3n+2){background:rgba(2,31,53,.5)}
+.prom li:nth-child(3n){background:rgba(27,143,37,.5)}
+.prom li:nth-child(3n) .no{color:#e3f4da}
 .prom .no{color:var(--green-l)}
 .prom p{font-size:1.1rem;color:#fff;font-weight:500;line-height:1.4}
 
@@ -533,10 +538,10 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);bo
     </div>
     <div class="pstage">
     <ol class="prow">
-      <li class="pil act"><span class="mono no">01</span><h3>Taxation &amp; Accounting&nbsp;Compliance</h3><div class="bd"><p>Tax compliance and practical consulting services.</p><ul><li>Income tax, GST and financial statements</li><li>Tax pooling through TMNZ</li><li>IRD reviews, audits, arrears and letters of demand</li><li>Trusts, companies, PAYE and payroll</li></ul><a class="more" href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">More on compliance</a></div></li>
-      <li class="pil"><span class="mono no">02</span><h3>Business Advisory &amp;&nbsp;Planning</h3><div class="bd"><p>Create a profitable, thriving and valuable business.</p><ul><li>Business planning, first meeting free</li><li>Cashflow forecasting</li><li>Monthly coaching</li></ul><a class="more" href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">More on advisory</a></div></li>
-      <li class="pil"><span class="mono no">03</span><h3>Employment &amp; HR&nbsp;Advisory</h3><div class="bd"><p>Your employment law and HR partner.</p><ul><li>Employment relations and policies</li><li>Employer accreditation</li><li>Restructure and redundancy</li><li>Grievances, disputes, audits and investigations</li></ul><a class="more" href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">More on HR</a></div></li>
-      <li class="pil"><span class="mono no">04</span><h3>Property Investment &amp;&nbsp;Development</h3><div class="bd"><p>Practical advice on structuring your property investments and developments as property tax rules change.</p><ul><li>Personal, look-through company or trust</li><li>Buy and hold, trading, development, land banking</li><li>GST implications</li><li>Family trust management and advice</li></ul><a class="more" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">More on property</a></div></li>
+      <li class="pil act"><span class="mono no">01</span><h3>Taxation &amp; Accounting Compliance</h3><div class="bd"><p>Tax compliance and practical consulting services.</p><ul><li>Income tax, GST and financial statements</li><li>Tax pooling through TMNZ</li><li>IRD reviews, audits, arrears and letters of demand</li><li>Trusts, companies, PAYE and payroll</li></ul><a class="more" href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">More on compliance</a></div></li>
+      <li class="pil"><span class="mono no">02</span><h3>Business Advisory &amp; Planning</h3><div class="bd"><p>Create a profitable, thriving and valuable business.</p><ul><li>Business planning, first meeting free</li><li>Cashflow forecasting</li><li>Monthly coaching</li></ul><a class="more" href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">More on advisory</a></div></li>
+      <li class="pil"><span class="mono no">03</span><h3>Employment &amp; HR Advisory</h3><div class="bd"><p>Your employment law and HR partner.</p><ul><li>Employment relations and policies</li><li>Employer accreditation</li><li>Restructure and redundancy</li><li>Grievances, disputes, audits and investigations</li></ul><a class="more" href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">More on HR</a></div></li>
+      <li class="pil"><span class="mono no">04</span><h3>Property Investment &amp; Development</h3><div class="bd"><p>Practical advice on structuring your property investments and developments as property tax rules change.</p><ul><li>Personal, look-through company or trust</li><li>Buy and hold, trading, development, land banking</li><li>GST implications</li><li>Family trust management and advice</li></ul><a class="more" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">More on property</a></div></li>
     </ol>
     <div class="pbar" aria-hidden="true"><i></i></div>
     </div>
@@ -904,22 +909,22 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);bo
 
     /* 4K brand render drifts slower than the page */
 
-    /* packages fly in from depth and settle (laptops) */
+    /* packages fly in from depth and settle (laptops); they land level before they are in reading position */
     if(LAP){
       d.querySelectorAll('.fly').forEach(function(el,i){
         G.fromTo(el,{z:-520,rotationX:24,rotationY:(i-1)*-14,yPercent:22,opacity:0},{z:0,rotationX:0,rotationY:0,yPercent:0,opacity:1,ease:'power3.out',
-          scrollTrigger:{trigger:'#pkgs',start:'top '+(96-i*5)+'%',end:'top 45%',scrub:.4}});
+          scrollTrigger:{trigger:'#pkgs',start:'top '+(100-i*3)+'%',end:'top 78%',scrub:.4}});
       });
-      G.fromTo(pks,{'--sh':0},{'--sh':1,ease:'none',scrollTrigger:{trigger:'#pkgs',start:'top 62%',end:'top 45%',scrub:.4}});
+      G.fromTo(pks,{'--sh':0},{'--sh':1,ease:'none',scrollTrigger:{trigger:'#pkgs',start:'top 90%',end:'top 78%',scrub:.4}});
     }
     /* touch tablets: the same flight from depth; one column in portrait, so each card flies on its own */
     if(TAB){
       mm.add('(min-width:900px)',function(){
         d.querySelectorAll('.fly').forEach(function(el,i){
           G.fromTo(el,{z:-520,rotationX:24,rotationY:(i-1)*-14,yPercent:22,opacity:0},{z:0,rotationX:0,rotationY:0,yPercent:0,opacity:1,ease:'power3.out',
-            scrollTrigger:{trigger:'#pkgs',start:'top '+(96-i*5)+'%',end:'top 45%',scrub:.4}});
+            scrollTrigger:{trigger:'#pkgs',start:'top '+(100-i*3)+'%',end:'top 78%',scrub:.4}});
         });
-        G.fromTo(pks,{'--sh':0},{'--sh':1,ease:'none',scrollTrigger:{trigger:'#pkgs',start:'top 62%',end:'top 45%',scrub:.4}});
+        G.fromTo(pks,{'--sh':0},{'--sh':1,ease:'none',scrollTrigger:{trigger:'#pkgs',start:'top 90%',end:'top 78%',scrub:.4}});
       });
       mm.add('(max-width:899px)',function(){
         pks.forEach(function(pk,i){
