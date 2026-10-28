@@ -575,6 +575,11 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
   *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
   .faq details::details-content{transition:none}
 }
+
+/* the GST photo shows whole: its frame takes the photo's own shape instead of cropping it */
+.k-gst .ph{height:auto!important;min-height:0!important;aspect-ratio:800/367;align-self:center;flex:none}
+.k-gst .ph img{transform:none!important;width:100%;height:100%;object-fit:cover}
+.tray .ph img,.tray img[src*="svc-"]{object-fit:contain}
 </style>
 </head>
 <body>
