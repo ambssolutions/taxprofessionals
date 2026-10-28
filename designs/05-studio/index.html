@@ -1257,6 +1257,68 @@ html[data-theme=light] .hx-c .lede{color:#26323b}
 /* calm and reduced motion: the finished hero, nothing moves */
 html.calm .hx,html.calm .hx *,html.calm .hx ::before,html.calm .hx ::after{animation:none!important}
 @media (prefers-reduced-motion:reduce){.hx,.hx *,.hx ::before,.hx ::after{animation:none!important}}
+
+/* ===== moments: one per section, each played once as its section arrives. Only the motion tiers get them (the script
+   adds the hooks); calm, reduced motion and no script see the finished page. Transform, opacity and clip-path, plus
+   two small SVG strokes. ===== */
+/* services book: the four areas as tabs above the book; a soft light crosses a page while it turns */
+.bk-tabs{flex:none;display:flex;justify-content:center;gap:clamp(14px,2.2vw,36px);margin-inline:clamp(10px,1.6vw,24px)}
+.has-tabs .pbk-count{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:1180px){.bk-tabs button{font-size:13.5px}.bk-tabs{gap:14px}}
+.pbk-nav .bk-tabs button{display:block;width:auto;height:auto;border-radius:0;position:relative;white-space:nowrap;min-height:40px;padding:6px 2px;border:0;background:none;color:rgba(243,239,231,.62);font:500 14.5px/1.2 var(--sans);cursor:pointer;transition:color .5s}
+.pbk-nav .bk-tabs button:disabled{opacity:1}
+.bk-tabs button:hover,.bk-tabs button[aria-current=true]{color:var(--ivory)}
+.bk-tabs button::after{content:"";position:absolute;left:0;right:0;bottom:3px;height:2px;border-radius:2px;background:var(--green-l);transform:scaleX(0);transform-origin:50% 50%;transition:transform .8s var(--ease)}
+.bk-tabs button[aria-current=true]::after{transform:scaleX(1)}
+html[data-theme=light] .bk-tabs button{color:var(--lt-mut)}
+html[data-theme=light] .bk-tabs button:hover,html[data-theme=light] .bk-tabs button[aria-current=true]{color:var(--lt-tx)}
+html[data-theme=light] .bk-tabs button::after{background:var(--lt-green)}
+@media (max-width:1023px){.bk-tabs{display:none}.has-tabs .pbk-count{position:static!important;width:auto;height:auto;clip:auto}}
+.bk-face::after{content:"";position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0;background:linear-gradient(100deg,transparent 28%,rgba(243,239,231,.13) 50%,transparent 72%);transform:translateX(-70%)}
+.bk-leaf.flip>.bk-face::after{animation:bkLight .95s cubic-bezier(.65,0,.35,1)}
+@keyframes bkLight{0%{opacity:0;transform:translateX(-70%)}35%{opacity:1}to{opacity:0;transform:translateX(70%)}}
+
+/* five promises: each number draws itself as its card comes up into place; the bar under the heading counts 1 to 5 */
+.pr-bar{display:flex;gap:5px;width:140px;margin:8px auto 0;flex:none}
+.pr-bar i{flex:1;height:3px;border-radius:2px;background:rgba(243,239,231,.18);overflow:hidden}
+.pr-bar b{display:block;height:100%;background:var(--green-l);transform:scaleX(0);transform-origin:0 50%;transition:transform 1s var(--ease)}
+.pr-bar i.on b{transform:scaleX(1)}
+html[data-theme=light] .pr-bar i{background:rgba(14,28,38,.14)}
+html[data-theme=light] .pr-bar b{background:var(--lt-green)}
+@media (max-height:599px),(max-width:340px),(max-width:760px) and (max-height:799px){.pr-bar{display:none}}
+.sn-d{display:block;height:1.15em;width:auto;margin:0 auto;overflow:visible}
+.sn-d text{font:400 40px var(--serif);fill:currentColor;fill-opacity:0;stroke:currentColor;stroke-width:.9;stroke-dasharray:150;stroke-dashoffset:150;transition:stroke-dashoffset 1.6s cubic-bezier(.45,.05,.25,1),fill-opacity 1s ease .9s}
+.step.lit .sn-d text{stroke-dashoffset:0;fill-opacity:1}
+
+/* people: each portrait opens like a shutter from the top, then the name rises through its mask */
+html.js .lr.rv{opacity:1;transform:none;transition:none}
+.lr-name .nm-m{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.lr-name .nm-m>span{display:block}
+/* the shutter is an opaque panel in the card's own colour that folds down out of the way (transform only) */
+html.js .lr.rv .lr-ph{position:relative}
+html.js .lr.rv .lr-ph::after{content:"";position:absolute;inset:-1px;background:#03080d;transform-origin:50% 100%;transition:transform 1.3s var(--cine);transition-delay:calc(var(--d,0) * 70ms)}
+html[data-theme=light].js .lr.rv .lr-ph::after{background:#fff}
+html.js .lr.rv.in .lr-ph::after{transform:scaleY(0)}
+html.js .lr.rv .lr-ph img{transform:scale(1.14);transition:transform 2.4s var(--ease);transition-delay:calc(var(--d,0) * 70ms)}
+html.js .lr.rv .nm-m>span{transform:translateY(105%);transition:transform 1.2s var(--ease);transition-delay:calc(var(--d,0) * 70ms + .55s)}
+html.js .lr.rv .lr-role,html.js .lr.rv .lr-cred{opacity:0;transform:translateY(8px);transition:opacity .9s ease,transform 1s var(--ease);transition-delay:calc(var(--d,0) * 70ms + .75s)}
+html.js .lr.rv .lr-cred{transition-delay:calc(var(--d,0) * 70ms + .9s)}
+html.js .lr.rv.in .lr-ph img,html.js .lr.rv.in .nm-m>span,html.js .lr.rv.in .lr-role,html.js .lr.rv.in .lr-cred{opacity:1;transform:none}
+
+/* dates: the next 60 days arrive one card after another; today's square on the calendar rings once */
+html.js .nx-l.cas>li{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform 1s var(--ease);transition-delay:calc(var(--d,0) * 90ms + .2s)}
+html.js .nx-l.cas.in>li{opacity:1;transform:none}
+.cal-g button.today::after{content:"";position:absolute;inset:-1px;border-radius:8px;border:2px solid var(--green-l);opacity:0;pointer-events:none}
+html[data-theme=light] .cal-g button.today::after{border-color:var(--lt-green)}
+.cal-g.ping button.today::after{animation:calPing 1.6s var(--ease) .4s 1 both}
+@keyframes calPing{0%{opacity:.9;transform:scale(1)}to{opacity:0;transform:scale(1.4)}}
+
+/* contact: as the pin lands on 620 Manukau Road a ring spreads once from its point */
+.map-rip{transform-box:fill-box;transform-origin:50% 50%;opacity:0}
+.map.drop .map-rip{animation:mapRip 1.7s cubic-bezier(.2,.7,.3,1) .95s 1 both}
+.map.drop .map-rip+.map-rip{animation-delay:1.35s}
+@keyframes mapRip{0%{opacity:1;transform:scale(.6)}60%{opacity:.55}to{opacity:0;transform:scale(3.4)}}
+@media (prefers-reduced-motion:reduce){.map-rip,.cal-g button.today::after,.bk-face::after{animation:none!important;opacity:0}}
 </style>
 </head>
 <body>
@@ -1926,6 +1988,9 @@ html.calm .hx,html.calm .hx *,html.calm .hx ::before,html.calm .hx ::after{anima
       for (var k = 0; k < SN - 1; k++) html += '<div class="bk-leaf" style="--z:' + (SN - k + 1) + ';--k:' + k + '"><div class="bk-face bk-front">' + bkPic(k) + '</div><div class="bk-face bk-back">' + bkWords(k + 1) + '</div></div>';
       bk.innerHTML = html + '<span class="bk-spine"></span>'; shade(bk);
       nv = navBar('pbk-nav bk-nav'); nv.setAttribute('aria-hidden', 'true');
+      var tabs = d.createElement('div'); tabs.className = 'bk-tabs'; tabs.setAttribute('aria-hidden', 'true');
+      tabs.innerHTML = SV.map(function(s, k){ return '<button type="button" data-k="' + k + '">' + s.title + '</button>'; }).join('');
+      nv.insertBefore(tabs, nv.querySelector('.pbk-count')); nv.classList.add('has-tabs');
       svcIn.append(bk, nv); svc.classList.add('bk-on'); svc.style.setProperty('--turns', SN - 1);
       track = svc; stage = svcIn; leaves = [].slice.call(bk.querySelectorAll('.bk-leaf')); n = SN;
       [bk, nv].forEach(function(r){ r.querySelectorAll('a, button').forEach(function(x){ x.tabIndex = -1; }); });
@@ -1946,13 +2011,16 @@ html.calm .hx,html.calm .hx *,html.calm .hx ::before,html.calm .hx ::after{anima
       pb.classList.add('rv'); rv(pb);
     }
     pillars.classList.add('sr');
-    var count = nv.querySelector('.pbk-count'), btns = nv.querySelectorAll('button');
+    var count = nv.querySelector('.pbk-count'), btns = nv.querySelectorAll(':scope > button');
     var cur = 0, target = 0, stepT = 0, span = 0, stTop = 0, live = false, raf = 0;
-    function paint(){ count.textContent = '0' + (cur + 1) + ' / ' + SNN; btns[0].disabled = cur === 0; btns[1].disabled = cur === n - 1; }
+    var tabB = wide ? [].slice.call(svcIn.querySelectorAll('.bk-tabs button')) : [];
+    function paint(){ count.textContent = '0' + (cur + 1) + ' / ' + SNN; btns[0].disabled = cur === 0; btns[1].disabled = cur === n - 1;
+      tabB.forEach(function(b, k){ b.setAttribute('aria-current', k === cur ? 'true' : 'false'); }); }
+    function flip(l){ if (!wide) return; l.classList.remove('flip'); void l.offsetWidth; l.classList.add('flip'); clearTimeout(l._ft); l._ft = setTimeout(function(){ l.classList.remove('flip'); }, 1000); }
     /* one leaf at a time; a quick scroll past several steps riffles them a third of a second apart */
     function step(){
       stepT = 0; if (cur === target) return;
-      if (target > cur) { leaves[cur].classList.add('turned'); cur++; } else { cur--; leaves[cur].classList.remove('turned'); }
+      if (target > cur) { flip(leaves[cur]); leaves[cur].classList.add('turned'); cur++; } else { cur--; flip(leaves[cur]); leaves[cur].classList.remove('turned'); }
       paint(); if (cur !== target) stepT = setTimeout(step, 330);
     }
     function want(t){ if (t === target) return; target = t; if (!stepT) step(); }
@@ -1968,6 +2036,7 @@ html.calm .hx,html.calm .hx *,html.calm .hx ::before,html.calm .hx ::after{anima
       scrollTo({top: Math.round(track.getBoundingClientRect().top + scrollY - stTop + span * (k + .5) / n), behavior: reduce ? 'auto' : 'smooth'}); }
     btns[0].addEventListener('click', function(){ goTo(cur - 1); });
     btns[1].addEventListener('click', function(){ goTo(cur + 1); });
+    tabB.forEach(function(b){ b.addEventListener('click', function(){ goTo(+b.dataset.k); }); });
   }
   if (MOTION) svcBook(FX && innerWidth >= 768 && innerHeight >= 560);
 
@@ -1978,12 +2047,30 @@ html.calm .hx,html.calm .hx *,html.calm .hx ::before,html.calm .hx ::after{anima
   if (MOTION) {
     mark('.welcome .wtxt > *', 1.4);
     mark('#sorted .head, .leaders .head, .people .head', 0);
+    [].forEach.call(d.querySelectorAll('.lr-name'), function(nm){ nm.innerHTML = '<span class="nm-m"><span>' + nm.innerHTML + '</span></span>'; });
     mark('.lr', 2);
     mark('.credits .cr', 1.2);
     mark('.comm, .reach', 0);
     mark('.subt .s', 3);
     mark('.subt figcaption', 0);
   }
+
+  /* five promises: as each card comes up into its place its number draws itself, and the bar under the heading counts it */
+  (function promises(){
+    if (!MOTION) return;
+    var sec = d.getElementById('promises'), head = sec.querySelector('.sec-head'), steps = [].slice.call(sec.querySelectorAll('.step'));
+    var bar = d.createElement('div'); bar.className = 'pr-bar'; bar.setAttribute('aria-hidden', 'true');
+    bar.innerHTML = steps.map(function(){ return '<i><b></b></i>'; }).join(''); head.appendChild(bar);
+    var segs = bar.children;
+    steps.forEach(function(st, i){
+      var n = st.querySelector('.step-n'), t = n.textContent.trim(), top = parseFloat(getComputedStyle(st).top);
+      n.innerHTML = '<svg class="sn-d" viewBox="0 0 80 44" aria-hidden="true" focusable="false"><text x="40" y="35" text-anchor="middle">' + t + '</text></svg><span class="sr">' + t + '</span>';
+      /* lit once the card's top is within a few pixels of where it comes to rest (its own observer: no early sweep) */
+      var io = new IntersectionObserver(function(es){ if (!es[0].isIntersecting) return; io.disconnect(); st.classList.add('lit'); segs[i].classList.add('on'); },
+        {rootMargin:'0px 0px ' + (isNaN(top) ? '-30%' : -Math.max(0, Math.round(innerHeight - top - 60)) + 'px') + ' 0px'});
+      io.observe(st);
+    });
+  })();
 
   /* from shoebox to sorted: the clips start as a loose, tilted spread across the panel and settle onto their tracks
      once, track by track, when the panel comes into view; the ruler runs and the closing line arrives */
@@ -2123,6 +2210,12 @@ html.calm .hx,html.calm .hx *,html.calm .hx ::before,html.calm .hx ::after{anima
     }
     list.innerHTML = o || '<li><p class="nx-i">No standard dates in the next 60 days.</p></li>';
   })();
+  /* the next 60 days arrive one card after another, once */
+  (function(){
+    var l = d.getElementById('nxList'); if (!MOTION || !l) return;
+    l.classList.add('cas'); [].forEach.call(l.children, function(li, i){ li.style.setProperty('--d', Math.min(i, 8)); });
+    once(l, function(){ l.classList.add('in'); }, '-12%');
+  })();
   function pad2(n, w){ n = String(n); while (n.length < w) n = '0' + n; return n; }
   (function calendar(){
     var dlg = d.getElementById('cal'), open = d.getElementById('calOpen'); if (!dlg || !open) return;
@@ -2188,6 +2281,11 @@ html.calm .hx,html.calm .hx *,html.calm .hx ::before,html.calm .hx ::after{anima
       d.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
     });
   })();
+  /* today's square on the calendar rings once when the calendar first shows */
+  (function(){
+    var g = d.getElementById('calGrid'); if (!MOTION || !g) return;
+    once(g, function(){ if (!g.offsetParent) return; g.classList.add('ping'); setTimeout(function(){ g.classList.remove('ping'); }, 2600); }, '-15%');
+  })();
   var allE = events(today.getFullYear()).concat(events(today.getFullYear() + 1)).filter(function(e){ return e.d >= today; }).sort(function(a, b){ return a.d - b.d; });
   var firstE = allE[0], group = allE.filter(function(e){ return +e.d === +firstE.d; });
   var what = group.length > 1 ? group.map(function(e){ return e.s; }).filter(function(x, i, a){ return a.indexOf(x) === i; }).join(' and ') : firstE.t + (firstE.x ? ', ' + firstE.x : '');
@@ -2224,6 +2322,12 @@ html.calm .hx,html.calm .hx *,html.calm .hx ::before,html.calm .hx ::after{anima
 
   /* contact map: the pin drops onto 620 Manukau Road once, when the map arrives */
   var map = d.querySelector('.map');
+  /* two soft rings spread from the point where the pin lands */
+  if (MOTION) { var mpin = map.querySelector('.map-pin');
+    for (var ri = 0; ri < 2; ri++) { var rip = d.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+      rip.setAttribute('class', 'map-rip'); rip.setAttribute('cx', '257'); rip.setAttribute('cy', '182'); rip.setAttribute('rx', '13'); rip.setAttribute('ry', '5.5');
+      rip.setAttribute('fill', 'none'); rip.setAttribute('stroke', '#62B444'); rip.setAttribute('stroke-width', '2.5'); rip.setAttribute('vector-effect', 'non-scaling-stroke');
+      mpin.parentNode.insertBefore(rip, mpin); } }
   if (!MOTION) map.classList.add('drop'); else once(map, function(){ map.classList.add('drop'); }, '-30%');
 
   /* laptops: a small circle follows the pointer and becomes Play / Pause over the slideshow */
