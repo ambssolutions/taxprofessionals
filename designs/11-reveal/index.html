@@ -21,7 +21,7 @@
   --ink:#0c1d2b;--muted:#4f5d69;--bg:#F5F7F9;--white:#fff;--line:rgba(12,29,43,.12);--night:#022a45;
   --serif:"Instrument Serif",Georgia,"Times New Roman",serif;--sans:"Sora",system-ui,-apple-system,"Segoe UI",sans-serif;
   --pad:clamp(16px,5vw,72px);--hdr:72px;--open:cubic-bezier(.16,1,.3,1);--fold:cubic-bezier(.45,.05,.25,1);
-  --h1:clamp(2.6rem,min(6.4vw,10.5vh),5.6rem);--h2:clamp(2.2rem,min(4.4vw,7.6vh),3.7rem);--h3:clamp(1.05rem,1.3vw,1.2rem);--lead:clamp(16px,1.25vw,18px);
+  --h1:clamp(2.6rem,min(5.4vw,9.4vh),4.5rem);--h2:clamp(2.1rem,min(3.6vw,6.4vh),3rem);--h3:clamp(1.05rem,1.3vw,1.2rem);--lead:clamp(16px,1.25vw,18px);
 }
 @media (max-width:760px){:root{--hdr:64px}}
 *,*::before,*::after{box-sizing:border-box}
@@ -227,8 +227,8 @@ html.fx-on .cc-pd{display:block;position:absolute;left:0;right:0;top:0;height:ca
 .cc-d.r .ed{left:0;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(90deg,#7cc36a,#3d9234 40%,#22661d)}
 .lb{grid-area:1/1;position:relative}
 .lb+.lb{opacity:0;visibility:hidden}
-.cc-d.l .lb{font:400 clamp(6rem,15vw,13rem)/.9 var(--serif);color:#fff}
-.cc-d.r .lb{font:400 clamp(2.4rem,4.6vw,4.2rem)/1.02 var(--serif);max-width:7ch}
+.cc-d.l .lb{font:400 clamp(5rem,min(11vw,22vh),10rem)/.9 var(--serif);color:#fff}
+.cc-d.r .lb{font:400 clamp(2.2rem,3.4vw,3rem)/1.04 var(--serif);max-width:7ch}
 
 /* page turn between major sections (laptops) */
 html.fx-on [data-turn]{position:relative;overflow:clip}
@@ -245,16 +245,18 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
 .why .head{position:sticky;top:var(--hdr);z-index:1;background:#fff;height:var(--hh);margin-bottom:0;display:grid;place-items:center;max-width:none}
 .why{--hh:clamp(104px,15vh,132px);--step:58px;padding-top:clamp(40px,6vw,72px)}
 .stack{max-width:900px;margin:0 auto;display:grid;gap:clamp(18px,3vh,28px);padding-bottom:clamp(24px,4vw,48px)}
-.card{position:sticky;top:calc(var(--hdr) + var(--hh) + var(--i)*var(--step));min-height:clamp(178px,30vh,236px);border-radius:18px;padding:0 clamp(20px,3vw,40px) clamp(22px,3vw,34px);display:flex;flex-direction:column;background:var(--deep);color:#fff;box-shadow:0 -1px 0 rgba(255,255,255,.08) inset}
+.card{position:sticky;top:calc(var(--hdr) + var(--hh) + var(--i)*var(--step));border-radius:18px;padding:0 clamp(20px,3vw,40px) clamp(20px,3vh,28px);display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--deep);color:#fff;box-shadow:0 -1px 0 rgba(255,255,255,.08) inset}
 .card:nth-child(2){background:var(--green-l);color:var(--ink)}
 .card:nth-child(3){background:var(--blue)}
 .card:nth-child(4){background:#fff;color:var(--ink);border:1px solid var(--line)}
 .card:nth-child(5){background:var(--night)}
-.card .row{height:var(--step);display:flex;align-items:center;gap:16px;flex:none}
+.card .row{height:var(--step);display:flex;align-items:center;justify-content:center;gap:12px;flex:none}
 .card .n{font:600 14px/1 var(--sans);letter-spacing:.08em;opacity:.8}
 .card h3{font-size:var(--h3)}
-.card p{font:400 clamp(1.6rem,2.8vw,2.3rem)/1.15 var(--serif);margin-top:auto;max-width:26ch}
-@media (max-width:760px){.why{--step:52px}.card p{font-size:1.5rem}}
+.card .cb{display:flex;align-items:center;justify-content:center;gap:clamp(20px,3vw,36px);width:100%}
+.card .cb img{flex:none;width:clamp(180px,17vw,236px);height:auto;border-radius:10px;background:rgba(255,255,255,.12)}
+.card p{font:400 clamp(1.45rem,2vw,1.75rem)/1.2 var(--serif);max-width:22ch;text-align:left;text-wrap:balance}
+@media (max-width:760px){.why{--step:52px}.card .cb{flex-direction:column;gap:14px}.card .cb{gap:10px}.card .cb img{width:min(100%,168px)}.card p{font-size:1.4rem;text-align:center}}
 
 /* people */
 .lead-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.4vw,32px)}
@@ -280,7 +282,9 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
 .lead-g{max-width:1000px;margin-inline:auto}
 /* testimonial */
 .quote{text-align:center;max-width:900px;margin:0 auto}
-.quote blockquote p{font:400 clamp(1.45rem,2.6vw,2.2rem)/1.25 var(--serif);text-wrap:pretty}
+.quote blockquote p{font:400 clamp(1.4rem,2vw,1.75rem)/1.3 var(--serif);text-wrap:pretty}
+/* Instrument Serif has one weight: a name in the quote keeps it (no synthetic bold) */
+.quote blockquote .tp-name{font-weight:400!important;color:var(--blue)}
 .quote figcaption{margin-top:20px;font-weight:600;color:var(--blue)}
 
 /* dates */
@@ -496,11 +500,11 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
         <h2 id="wy-t" class="mh" data-rv><span class="ln"><span class="tp-w">Why Tax Professionals</span></span></h2>
       </div>
       <ol class="stack">
-        <li class="card" style="--i:0"><div class="row"><span class="n">01</span><h3>Free first chat</h3></div><p>First consultation free on all matters</p></li>
-        <li class="card" style="--i:1"><div class="row"><span class="n">02</span><h3>Experience</h3></div><p>Tax experts with over 20 years of experience</p></li>
-        <li class="card" style="--i:2"><div class="row"><span class="n">03</span><h3>Property</h3></div><p>Specialists in property development and structuring</p></li>
-        <li class="card" style="--i:3"><div class="row"><span class="n">04</span><h3>Fixed fees</h3></div><p>Fixed fee services. No more shock bills</p></li>
-        <li class="card" style="--i:4"><div class="row"><span class="n">05</span><h3>Tailored</h3></div><p>Tailored support and service packages based on your needs</p></li>
+        <li class="card" style="--i:0"><div class="row"><span class="n">01</span><h3>Free first chat</h3></div><div class="cb"><img src="../../assets/img/office-meeting-800.webp" width="800" height="450" alt="" loading="lazy" decoding="async"><p>First consultation free on all matters</p></div></li>
+        <li class="card" style="--i:1"><div class="row"><span class="n">02</span><h3>Experience</h3></div><div class="cb"><img src="../../assets/img/award-800.webp" width="800" height="488" alt="" loading="lazy" decoding="async"><p>Tax experts with over 20 years of experience</p></div></li>
+        <li class="card" style="--i:2"><div class="row"><span class="n">03</span><h3>Property</h3></div><div class="cb"><img src="../../assets/img/svc-property-800.webp" width="800" height="367" alt="" loading="lazy" decoding="async"><p>Specialists in property development and structuring</p></div></li>
+        <li class="card" style="--i:3"><div class="row"><span class="n">04</span><h3>Fixed fees</h3></div><div class="cb"><img src="../../assets/img/svc-compliance-800.webp" width="800" height="367" alt="" loading="lazy" decoding="async"><p>Fixed fee services. No more shock bills</p></div></li>
+        <li class="card" style="--i:4"><div class="row"><span class="n">05</span><h3>Tailored</h3></div><div class="cb"><img src="../../assets/img/office-desk-800.webp" width="800" height="450" alt="" loading="lazy" decoding="async"><p>Tailored support and service packages based on your needs</p></div></li>
       </ol>
     </div>
   </section>
@@ -916,7 +920,7 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
     G.utils.toArray('[data-turn]').forEach(function(s){
       var p = d.createElement('div'); p.className = 'turn'; p.setAttribute('aria-hidden', 'true'); s.prepend(p);
       G.set(p, {transformPerspective: 1900, transformOrigin: '0% 50%'});
-      G.fromTo(p, {rotationY: 0, '--sh': 0}, {rotationY: -94, '--sh': 1, ease: 'power1.in', scrollTrigger: {trigger: s, start: 'top 94%', end: 'top 24%', scrub: .4}});
+      G.fromTo(p, {rotationY: 0, '--sh': 0}, {rotationY: -94, '--sh': 1, ease: 'power1.in', scrollTrigger: {trigger: s, start: 'top 98%', end: 'top 50%', scrub: .4}});
     });
 
     // promises: each card settles back slightly as the next one lands
