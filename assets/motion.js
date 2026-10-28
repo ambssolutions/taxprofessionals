@@ -296,7 +296,12 @@ function fallingHeadings() {
     while ((n = w.nextNode())) list.push(n);
     list.forEach(function (t) {
       var p = t.parentNode;
-      if (p.textContent.trim() === t.nodeValue.trim() && t.nodeValue.trim().replace(re, '') === '') { p.classList.add('tp-name'); re.lastIndex = 0; return; }
+      if (p.textContent.trim() === t.nodeValue.trim() && t.nodeValue.trim().replace(re, '') === '') {
+        // a name that is its own label: bold only at reading sizes; large display names keep their font's real weight
+        // (forcing bold on a display face that has no bold cut smears the letters)
+        if (parseFloat(getComputedStyle(p).fontSize) < 20) p.classList.add('tp-name');
+        re.lastIndex = 0; return;
+      }
       var frag = document.createDocumentFragment(), s = t.nodeValue, last = 0, m;
       re.lastIndex = 0;
       while ((m = re.exec(s))) {
@@ -322,11 +327,11 @@ function fallingHeadings() {
     var vw = window.innerWidth;
     if (vw < 761) return;
     var C = {
-      long: Math.max(24, Math.min(32, vw * 0.021)),
-      h2: Math.max(36, Math.min(56, vw * 0.04)),
-      h1: Math.max(48, Math.min(84, vw * 0.06)),
-      mid: Math.max(36, Math.min(60, vw * 0.042)),
-      short: Math.max(56, Math.min(100, vw * 0.07))
+      long: Math.max(22, Math.min(28, vw * 0.019)),
+      h2: Math.max(34, Math.min(48, vw * 0.034)),
+      h1: Math.max(44, Math.min(72, vw * 0.052)),
+      mid: Math.max(30, Math.min(48, vw * 0.034)),
+      short: Math.max(48, Math.min(80, vw * 0.056))
     };
     var all = document.body.querySelectorAll('*');
     for (var i = 0; i < all.length; i++) {

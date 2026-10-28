@@ -425,17 +425,17 @@ html.fx .sh i{background:var(--navy);transform-origin:50% 0;margin-bottom:-1px}
 .subt figcaption{margin-top:22px;font:600 12.5px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--green-l)}
 
 /* ===== the tax terms stream past like end-credit type and lean with scroll speed ===== */
-.terms{background:var(--film);color:var(--ivory);overflow:hidden;padding:clamp(16px,2.2vw,28px) 0;border-block:1px solid rgba(243,239,231,.08)}
+.terms{background:var(--film);color:var(--ivory);overflow:hidden;padding:clamp(12px,1.6vw,20px) 0;border-block:1px solid rgba(243,239,231,.08)}
 .terms-lean{will-change:transform}
 .terms-track{display:flex;width:max-content}
 .terms-set{display:flex;align-items:center;flex:none}
-.terms-set span{display:inline-flex;align-items:center;white-space:nowrap;font:400 clamp(2rem,4vw,3.4rem)/1.05 var(--serif);padding-right:.5em}
+.terms-set span{display:inline-flex;align-items:center;white-space:nowrap;font:400 clamp(1.3rem,2vw,1.9rem)/1.1 var(--serif);padding-right:.6em}
 .terms-set span::after{content:"";width:.16em;height:.16em;margin-left:.5em;background:var(--green-l);flex:none}
-.terms-set span:nth-child(even){color:transparent;-webkit-text-stroke:1px rgba(243,239,231,.55)}
+.terms-set span:nth-child(even){color:rgba(243,239,231,.55)}
 html:not(.js) .terms-track,.terms.still .terms-track{flex-wrap:wrap;justify-content:center;width:auto}
 html:not(.js) .terms-set+.terms-set,.terms.still .terms-set+.terms-set{display:none}
 html:not(.js) .terms-set,.terms.still .terms-set{flex-wrap:wrap;justify-content:center;flex:1}
-.terms.still .terms-set span{font-size:clamp(1.6rem,3vw,2.4rem)}
+.terms.still .terms-set span{font-size:clamp(1.2rem,1.8vw,1.6rem)}
 /* ===== dates: a departures board counting down, then the tax year as a reel of film frames ===== */
 .dates .head p{color:rgba(243,239,231,.74)}
 .dl-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.5vw,28px);max-width:1120px;margin:0 auto}
@@ -662,7 +662,12 @@ html.js .rv.in{opacity:1;transform:none}
 .cr .nm{align-items:center!important}
 .cr .who{flex-direction:column;gap:8px}
 .cr .who img{width:64px;height:64px}
-.credits .cr .nm:has(.who){flex-direction:row;flex-wrap:wrap;justify-content:center;gap:18px 28px}
+.credits .cr .nm:has(.who){flex-direction:row;flex-wrap:wrap;justify-content:center;gap:18px 40px}
+/* credits read like an end roll: each role's names sit in one centred, wrapping row; senior accountants get larger portraits */
+.credits .cr .nm{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:6px 30px;max-width:760px}
+.credits .cr .nm b{font-weight:400;font-size:clamp(1.2rem,1.6vw,1.45rem);letter-spacing:.005em}
+.credits .cr .who img{width:clamp(76px,7vw,96px);height:clamp(76px,7vw,96px)}
+.credits{display:grid;row-gap:clamp(6px,1.4vh,14px)}
 </style>
 </head>
 <body>
@@ -1066,7 +1071,7 @@ html.js .rv.in{opacity:1;transform:none}
   var heroH = d.getElementById('hero-t'), lede = d.querySelector('.hero .lede');
   var COPY = [
     {h: ['Tax, explained', 'in your language.'], p: lede.textContent},
-    {h: ['Fixed fees.', 'No more shock bills.'], p: 'Tailored support and service packages based on your needs, starting with a free first consultation.'},
+    {h: ['The first consultation', 'is free, on any matter.'], p: 'Tailored support and service packages based on your needs, with fixed fee services so you know the cost before work starts.'},
     {h: ['Working for the community', 'since 1998.'], p: 'Tax experts with over 20 years of experience, on Manukau Road in Epsom. First consultation free on all matters.'}
   ];
   heroH.setAttribute('aria-label', COPY[0].h.join(' '));
