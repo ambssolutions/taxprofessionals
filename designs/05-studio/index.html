@@ -288,7 +288,6 @@ html.fx .welcome .since{color:var(--green-l)}
 .pbk-nav button{width:46px;height:46px;border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer}
 .pbk-nav button:disabled{opacity:.4}
 .pbk-count{font:600 14px/1 var(--sans);letter-spacing:.14em;color:rgba(243,239,231,.75);min-width:70px;text-align:center;font-variant-numeric:tabular-nums}
-@media (max-height:700px){.pbk .bk-ticks{display:none}}
 
 /* ===== five promises: native CSS sticky stacking cards. Opaque, centred; the heading stays pinned and each card's
    number and title stay in view as the next card slides over it. No ScrollTrigger pin. ===== */
@@ -654,6 +653,8 @@ html.js .rv.in{opacity:1;transform:none}
 .pbk .bk-paper.tight>p{display:none}
 .pbk .bk-paper.tighter h3{font-size:19px;margin:4px auto 6px}
 .pbk .bk-paper.tighter .bk-ticks li{font-size:14px;margin-bottom:4px}
+/* last resort on the shortest phones: keep the first three ticks rather than hiding the list */
+.pbk .bk-paper.tightest .bk-ticks li:nth-child(n+4){display:none}
 
 /* credits: one centred column like a film's end roll; role above, names (with photo above each) below */
 .cr{grid-template-columns:1fr!important;justify-items:center;text-align:center;row-gap:10px}
@@ -1574,10 +1575,11 @@ document.addEventListener('click',function(e){var b=e.target.closest('.qb-ask');
     document.querySelectorAll('.pbk-leaf').forEach(function(leaf){
       var paper = leaf.querySelector('.bk-paper'); if (!paper) return;
       var was = leaf.style.display; leaf.style.display = 'block';
-      paper.classList.remove('tight', 'tighter');
+      paper.classList.remove('tight', 'tighter', 'tightest');
       var over = function(){ return paper.scrollHeight > paper.clientHeight + 1; };
       if (over()) paper.classList.add('tight');
       if (over()) paper.classList.add('tighter');
+      if (over()) paper.classList.add('tightest');
       leaf.style.display = was;
     });
   }
