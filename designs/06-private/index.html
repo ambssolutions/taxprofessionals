@@ -708,7 +708,7 @@ html.js .rv.in{opacity:1;transform:none}
 
     // services: the stack opens out of the director scene; each card settles back as the next lands
     G.fromTo('.svc',{clipPath:'inset(0% 3% 0% 3% round 36px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:{trigger:'.svc',start:'top bottom',end:'top 25%',scrub:true}});
-    G.utils.toArray('.card').forEach(function(c,i,all){if(i===all.length-1)return;G.to(c,{scale:.95,filter:'brightness(.86)',ease:'none',scrollTrigger:{trigger:all[i+1],start:'top bottom',end:'top 35%',scrub:true}})});
+    // cards stay full size and full strength: text that is scaled or filtered while it is read renders soft
 
     // promises: a pinned horizontal strip
     var track=d.querySelector('.prom-t');
@@ -794,7 +794,6 @@ html.js .rv.in{opacity:1;transform:none}
 
       // services: the stack opens out, each card settles back as the next lands
       G.fromTo('.svc',{clipPath:'inset(0% 3% 0% 3% round 32px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:{trigger:'.svc',start:'top bottom',end:'top 25%',scrub:true}});
-      G.utils.toArray('.card').forEach(function(c,i,all){if(i===all.length-1)return;G.to(c,{scale:tab?.95:.94,ease:'none',scrollTrigger:{trigger:all[i+1],start:'top bottom',end:'top 35%',scrub:true}})});
 
       // leaders: portraits wipe up with a slow inner settle
       d.querySelectorAll('.lead .ph').forEach(function(f){

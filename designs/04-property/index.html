@@ -957,7 +957,6 @@ html:not(.js) .ex+.ex{margin-top:14px}
       onLeave:twBright,onLeaveBack:twBright});
 
     // promises: each card settles back slightly as the next one lands
-    G.utils.toArray('.pc').forEach(function(c,i,all){if(i===all.length-1)return;G.to(c,{scale:.96,ease:'none',scrollTrigger:{trigger:all[i+1],start:'top bottom',end:'top 30%',scrub:true}})});
 
     // touch tiers (phones, tablets and lighter laptops): the laptop scenes stay as they are,
     // these moments replace the hover and cursor effects with scroll and tap ones

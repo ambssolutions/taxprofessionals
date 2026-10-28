@@ -418,7 +418,6 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);bo
 </section>
 
 <section class="sec pkgs-sec" id="packages" aria-labelledby="h-pk">
-  <div class="cubes" aria-hidden="true"><img src="../../assets/img/brand-cubes-light-1920.webp" srcset="../../assets/img/brand-cubes-light-960.webp 960w, ../../assets/img/brand-cubes-light-1920.webp 1920w, ../../assets/img/brand-cubes-light-3840.webp 3840w" sizes="100vw" width="3840" height="2160" alt="" loading="lazy" decoding="async"></div>
   <div class="wrap">
     <div class="sec-head rv">
       <h2 id="h-pk">Pick the package that&nbsp;fits</h2>
@@ -904,7 +903,6 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);bo
     }
 
     /* 4K brand render drifts slower than the page */
-    G.fromTo('.cubes',{yPercent:-6},{yPercent:6,ease:'none',scrollTrigger:{trigger:'#packages',start:'top bottom',end:'bottom top',scrub:true}});
 
     /* packages fly in from depth and settle (laptops) */
     if(LAP){

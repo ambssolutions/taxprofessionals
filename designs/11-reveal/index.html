@@ -11,8 +11,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="../../assets/img/brand-cubes-dark-1920.webp" imagesrcset="../../assets/img/brand-cubes-dark-960.webp 960w, ../../assets/img/brand-cubes-dark-1920.webp 1920w, ../../assets/img/brand-cubes-dark-3840.webp 3840w" imagesizes="100vw" media="(min-width: 761px)" fetchpriority="high">
-<link rel="preload" as="image" href="../../assets/img/brand-cubes-dark-portrait-720.webp" imagesrcset="../../assets/img/brand-cubes-dark-portrait-720.webp 720w, ../../assets/img/brand-cubes-dark-portrait-1440.webp 1440w" imagesizes="100vw" media="(max-width: 760px)" fetchpriority="high">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"AccountingService","name":"Tax Professionals","legalName":"Tax Professionals Ltd","url":"https://www.taxprofessionals.co.nz/","email":"info@taxprofessionals.co.nz","telephone":["+6496250035","+6496250025"],"foundingDate":"1998","logo":"https://www.taxprofessionals.co.nz/logo.png","image":"https://www.taxprofessionals.co.nz/community.jpg","address":{"@type":"PostalAddress","streetAddress":"620 Manukau Road","addressLocality":"Epsom","addressRegion":"Auckland","postalCode":"1023","addressCountry":"NZ"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:30","closes":"17:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"11:30","closes":"15:00"}],"award":"Accountant of the Year 2019-2020, Indian Newslink Indian Business Awards","sameAs":["https://www.facebook.com/TaxProfessionalsNZ/","https://nz.linkedin.com/company/tax-professionals-limited"]}
 </script>
@@ -170,10 +168,6 @@ html.lenis-on{scroll-behavior:auto}
   html.js .up{opacity:0;transform:translateY(18px);transition:opacity 1s ease calc(var(--d,0)*.12s),transform 1.2s var(--open) calc(var(--d,0)*.12s)}
   html.js .up.on{opacity:1;transform:none}
   /* stage light: a soft beam passes across each heading as it arrives */
-  html.js .mh[data-rv]{position:relative;isolation:isolate}
-  html.js .mh[data-rv]::after{content:"";position:absolute;inset:-4% -2%;pointer-events:none;mix-blend-mode:screen;background:linear-gradient(100deg,rgba(4,100,159,0) 38%,rgba(4,100,159,.9) 50%,rgba(98,180,68,.75) 56%,rgba(4,100,159,0) 68%) no-repeat;background-size:300% 100%;background-position:100% 0}
-  html.js .dk .mh[data-rv]::after,html.js .stage .mh[data-rv]::after{background-image:linear-gradient(100deg,rgba(255,255,255,0) 38%,rgba(120,175,215,.28) 50%,rgba(98,180,68,.22) 56%,rgba(255,255,255,0) 68%)}
-  html.js .mh[data-rv].on::after{background-position:0 0;transition:background-position 2.4s cubic-bezier(.45,.05,.25,1) .35s}
 }
 @media (prefers-reduced-motion:no-preference) and (pointer:fine) and (min-width:900px){
   .dr.l{transform:perspective(1300px) rotateY(0)}
@@ -436,10 +430,7 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
 
 <main id="main">
   <section class="hero" id="top" aria-labelledby="hero-t">
-    <picture class="hero-ph">
-      <source media="(max-width: 760px)" srcset="../../assets/img/brand-cubes-dark-portrait-720.webp 720w, ../../assets/img/brand-cubes-dark-portrait-1440.webp 1440w" sizes="100vw" width="720" height="1280">
-      <img src="../../assets/img/brand-cubes-dark-1920.webp" srcset="../../assets/img/brand-cubes-dark-960.webp 960w, ../../assets/img/brand-cubes-dark-1920.webp 1920w, ../../assets/img/brand-cubes-dark-3840.webp 3840w" sizes="100vw" width="3840" height="2160" alt="" fetchpriority="high" decoding="async">
-    </picture>
+    <picture class="hero-ph"><img src="../../assets/img/office-team-1600.webp" srcset="../../assets/img/office-team-800.webp 800w, ../../assets/img/office-team-1600.webp 1600w" sizes="100vw" width="1600" height="900" alt="" fetchpriority="high" decoding="async"></picture>
     <div class="hero-shade" aria-hidden="true"></div>
     <div class="spot" aria-hidden="true"></div>
     <div class="hero-in">
@@ -866,7 +857,6 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
       G.utils.toArray('.leader .pv img').forEach(function(im){ G.fromTo(im, {scale: 1.15}, {scale: 1, duration: 2.2, ease: 'power2.out', scrollTrigger: {trigger: im, start: 'top 85%'}}); });
 
       // 5. promises: each card settles back as the next one lands
-      G.utils.toArray('.card').forEach(function(c, i, all){ if (i === all.length - 1) return; G.to(c, {scale: .955, ease: 'none', scrollTrigger: {trigger: all[i + 1], start: 'top bottom', end: 'top 40%', scrub: true}}); });
 
       // 6. intros rise line by line; the client quote lights word by word under the spotlight
       var splits = [];
@@ -930,7 +920,6 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
     });
 
     // promises: each card settles back slightly as the next one lands
-    G.utils.toArray('.card').forEach(function(c, i, all){ if (i === all.length - 1) return; G.to(c, {scale: .965, ease: 'none', scrollTrigger: {trigger: all[i + 1], start: 'top bottom', end: 'top 35%', scrub: true}}); });
 
     // touch tablets: native scroll, chapter links land on the open stage
     if (tab) d.addEventListener('click', function(e){

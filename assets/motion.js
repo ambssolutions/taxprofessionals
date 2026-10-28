@@ -310,3 +310,42 @@ function fallingHeadings() {
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
 })();
+
+/* One calm type scale on tablets and laptops: display type, headings and long lines never grow past a cap,
+   whatever a concept's own clamp() says. Runs before the page's motion is set up, so pins and splits measure the
+   final size. Phones keep their own tuned sizes. */
+(function () {
+  var SKIP = 'script,style,svg,svg *,noscript,.ac-panel,.ac-panel *,.ac-launch,.ac-launch *';
+  function words(t) { t = t.trim(); return t ? t.split(/\s+/).length : 0; }
+  function cap() {
+    [].forEach.call(document.querySelectorAll('[data-tpcap]'), function (e) { e.style.removeProperty('font-size'); e.removeAttribute('data-tpcap'); });
+    var vw = window.innerWidth;
+    if (vw < 761) return;
+    var C = {
+      long: Math.max(24, Math.min(32, vw * 0.021)),
+      h2: Math.max(36, Math.min(56, vw * 0.04)),
+      h1: Math.max(48, Math.min(84, vw * 0.06)),
+      mid: Math.max(36, Math.min(60, vw * 0.042)),
+      short: Math.max(56, Math.min(100, vw * 0.07))
+    };
+    var all = document.body.querySelectorAll('*');
+    for (var i = 0; i < all.length; i++) {
+      var e = all[i];
+      if (e.matches(SKIP)) continue;
+      var fs = parseFloat(getComputedStyle(e).fontSize);
+      if (fs <= C.long) continue;
+      var pf = e.parentElement ? parseFloat(getComputedStyle(e.parentElement).fontSize) : 0;
+      if (Math.abs(fs - pf) < .5) continue;          // inherits its size: the element that sets it is capped instead
+      var n = words(e.textContent), tag = e.tagName, lim;
+      if (!n) continue;
+      if (tag === 'H1' || e.closest('h1')) lim = C.h1;
+      else if (n >= 8) lim = C.long;
+      else if (tag === 'H2') lim = C.h2;
+      else if (n >= 2) lim = C.mid;      // names, phrases, phone numbers
+      else lim = C.short;                // a single display word or number
+      if (fs > lim + .5) { e.style.setProperty('font-size', lim.toFixed(1) + 'px', 'important'); e.setAttribute('data-tpcap', ''); }
+    }
+  }
+  cap();
+  var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(cap, 250); });
+})();
