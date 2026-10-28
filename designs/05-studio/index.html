@@ -139,7 +139,7 @@ html.fx .cur.big span{opacity:1}
   radial-gradient(ellipse 80% 70% at 50% 46%,rgba(1,17,28,0) 35%,rgba(1,17,28,.5) 100%),
   linear-gradient(180deg,rgba(1,17,28,.66) 0,rgba(1,17,28,.18) 28%,rgba(3,40,66,.42) 58%,rgba(1,17,28,.95) 100%)}
 /* slideshow progress: one segment per photo; done ones full, the current one fills while it shows */
-.segs{display:flex;gap:6px;width:clamp(120px,16vw,220px);flex:none}
+.segs{display:flex;gap:6px;width:100%}
 .segs i{flex:1;height:3px;border-radius:2px;background:rgba(243,239,231,.28);overflow:hidden}
 .segs b{display:block;height:100%;background:var(--green-l);transform:scaleX(0);transform-origin:0 50%}
 .segs i.done b{transform:scaleX(1)}
@@ -181,15 +181,16 @@ html.js .hero .lede{animation-delay:1.45s}html.js .hero .acts{animation-delay:1.
 .pp[data-play=false] .i-play{display:block}
 .reel-n{font-variant-numeric:tabular-nums;letter-spacing:.14em}
 .reel .wrap{justify-content:center}
-@media (max-width:1399px){.reel-cap{display:none}}
-.reel-cap{letter-spacing:.06em;max-width:24ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* the bar and the photo caption share one block, so the controls stay narrow and centred */
+.rb{display:flex;flex-direction:column;gap:7px;width:clamp(222px,17vw,250px);flex:none}
+@media (max-width:640px){.rb{width:218px}.reel-cap{font-size:14px!important}}
+.reel-cap{font-size:13px;line-height:1.3;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:640px){
   .hero h1{font-size:clamp(2.4rem,10.6vw,3.4rem)}
   .hero .acts .btn{width:100%}
   .strip{font-size:13px}
   .strip li{padding-inline:10px}
   .strip li:nth-child(3){flex-basis:100%;border-left:0}
-  .reel-cap{display:none}
   .copy{padding-bottom:150px}
 }
 /* chapter one: the welcome */
@@ -693,8 +694,8 @@ html.js .rv.in{opacity:1;transform:none}
         <div class="wrap">
           <button class="pp" type="button" data-play="true" aria-label="Pause the photo slideshow"><svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3" height="12" fill="currentColor"/><rect x="9" y="1" width="3" height="12" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1l10 6-10 6z" fill="currentColor"/></svg></button>
           <span class="reel-n" aria-hidden="true"><span class="reel-i">01</span> / 03</span>
-          <span class="segs" aria-hidden="true"><i class="now"><b></b></i><i><b></b></i><i><b></b></i></span>
-          <span class="reel-cap" aria-hidden="true">The office floor, Manukau Road</span>
+          <span class="rb"><span class="segs" aria-hidden="true"><i class="now"><b></b></i><i><b></b></i><i><b></b></i></span>
+          <span class="reel-cap" aria-hidden="true">The office floor, Manukau Road</span></span>
         </div>
       </div>
     </section>
