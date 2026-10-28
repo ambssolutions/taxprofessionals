@@ -265,3 +265,48 @@ function fallingHeadings() {
     (keep ? '' : '.cur{display:none!important}');
   document.head.appendChild(st);
 })();
+
+/* No bold words inside sentences: a highlighted phrase keeps its colour but takes the sentence's own weight.
+   Headings, names and list titles keep their weight. */
+(function () {
+  var st = document.createElement('style');
+  st.textContent = 'main :is(p,blockquote,dd,figcaption) :is(b,strong,em,mark,span,a){font-weight:inherit!important}' +
+    'main :is(p,blockquote,dd,figcaption) :is(em){font-style:normal}';
+  document.head.appendChild(st);
+})();
+
+/* People's names stay bold, in cards and in sentences. */
+(function () {
+  var re = /\b(Ranjana|Varun|Eshan) Gupta\b|\b(Hemant Kumar|Rizwan Sheikh|Vipul Koradia|Deepti Nanda|Mandeep Kaur|Jigar Parikh|Syed Shafi|Reeti Patel)\b/g;
+  var st = document.createElement('style');
+  st.textContent = 'main .tp-name,main .tp-name *{font-weight:700!important}';
+  document.head.appendChild(st);
+  function run() {
+    var main = document.querySelector('main');
+    if (!main) return;
+    var w = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        if (!re.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+        re.lastIndex = 0;
+        return n.parentNode.closest('script,style,.tp-name,[aria-hidden="true"] svg')
+          ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var list = [], n;
+    while ((n = w.nextNode())) list.push(n);
+    list.forEach(function (t) {
+      var p = t.parentNode;
+      if (p.textContent.trim() === t.nodeValue.trim() && t.nodeValue.trim().replace(re, '') === '') { p.classList.add('tp-name'); re.lastIndex = 0; return; }
+      var frag = document.createDocumentFragment(), s = t.nodeValue, last = 0, m;
+      re.lastIndex = 0;
+      while ((m = re.exec(s))) {
+        frag.appendChild(document.createTextNode(s.slice(last, m.index)));
+        var b = document.createElement('b'); b.className = 'tp-name'; b.textContent = m[0];
+        frag.appendChild(b); last = m.index + m[0].length;
+      }
+      frag.appendChild(document.createTextNode(s.slice(last)));
+      p.replaceChild(frag, t);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+})();
