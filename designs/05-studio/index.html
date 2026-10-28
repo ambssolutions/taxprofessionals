@@ -292,7 +292,7 @@ html.fx .welcome .since{color:var(--green-l)}
 
 /* ===== five promises: native CSS sticky stacking cards. Opaque, centred; the heading stays pinned and each card's
    number and title stay in view as the next card slides over it. No ScrollTrigger pin. ===== */
-.why{background:var(--paper);padding-top:clamp(48px,min(8vw,8vh),80px);padding-bottom:clamp(40px,6vw,80px);--sh:clamp(84px,11vh,104px);--peek:clamp(84px,10.8vh,100px);--gapb:24px;--bw:56ch}
+.why{background:var(--paper);padding-top:clamp(48px,min(8vw,8vh),80px);padding-bottom:clamp(40px,6vw,80px);--sh:clamp(84px,11vh,104px);--peek:clamp(92px,11.4vh,110px);--gapb:24px;--bw:56ch}
 .why .sec-head{position:sticky;top:var(--hdr);z-index:3;background:var(--paper);height:var(--sh);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .why .sec-head h2{font-size:clamp(2rem,min(4.2vw,6.2vh),3.3rem)}
 .why .sec-head p{font-size:14px;color:var(--muted);margin-top:4px}
@@ -314,7 +314,7 @@ html.fx .welcome .since{color:var(--green-l)}
 .step-b p{max-width:var(--bw);margin-inline:auto;font-size:clamp(16px,1.3vw,18px);line-height:1.6}
 .step-b .tlink{display:inline-block;margin-top:14px;font-size:15px}
 .step:nth-child(5) .step-b p{color:rgba(243,239,231,.88)}
-@media (max-height:780px){.why{--sh:76px;--peek:72px}}
+@media (max-height:780px){.why{--sh:76px;--peek:80px}}
 @media (max-width:760px){
   .why{--sh:76px;--peek:88px;--gapb:calc(86px + env(safe-area-inset-bottom));--bw:34ch}
   .why .sec-head h2{font-size:clamp(1.9rem,8.4vw,2.3rem)}
@@ -325,6 +325,26 @@ html.fx .welcome .since{color:var(--green-l)}
   .step-b p{font-size:15px;line-height:1.5}
   .step-b .tlink{margin-top:10px}
 }
+/* studio dress: the promises are dark film frames on the film stock, each with a sprocket edge along its title band.
+   Every card stays opaque and keeps its own tone (logo blues and greens, deepened) so the stack reads in layers. */
+.why{background:var(--film);color:var(--ivory)}
+.why .sec-head{background:var(--film)}
+.why .sec-head h2{color:var(--ivory)}
+.why .sec-head p{color:rgba(243,239,231,.72)}
+.step{border:1px solid rgba(243,239,231,.12);color:var(--ivory);box-shadow:0 -14px 30px -18px rgba(0,0,0,.7)}
+.step:nth-child(1){--t:#0a1a26}
+.step:nth-child(2){--t:#0c2334}
+.step:nth-child(3){--t:#032d4a}
+.step:nth-child(4){--t:#0b2c1f}
+.step:nth-child(5){--t:var(--blue);border-color:rgba(243,239,231,.2)}
+.step-h{position:relative;padding-top:12px;border-bottom:1px solid rgba(243,239,231,.12)}
+.step-h::before{content:"";position:absolute;left:14px;right:14px;top:4px;height:5px;background:repeating-linear-gradient(90deg,transparent 0 9px,rgba(243,239,231,.16) 9px 19px,transparent 19px 28px);pointer-events:none}
+.step-n,.step:nth-child(4) .step-n,.step:nth-child(5) .step-n{color:var(--green-l)}
+.step:nth-child(5) .step-n{color:#bfe3b4}
+.step h3{color:var(--ivory)}
+.step-b p,.step:nth-child(5) .step-b p{color:rgba(243,239,231,.86)}
+.step-b .tlink{color:var(--ivory)}
+@media (min-width:761px) and (max-width:1100px){.step h3{font-size:1.2rem;max-width:none}}
 /* too short for the stack: a plain list of cards */
 @media (max-height:599px),(max-width:340px),(max-width:760px) and (max-height:799px){
   .why .sec-head{position:static;height:auto;padding-bottom:24px}
