@@ -342,6 +342,7 @@ body.arranging .arr .pos{margin-left:6px;min-width:56px;text-align:right}
     </div>
     <div class="seg vfont" role="group" aria-label="Font style" id="vFont"></div>
     <label class="vbtn" title="Button style"><span>Buttons</span><select id="vBtn" aria-label="Button style"><option value="1">Original</option><option value="2">Pill</option><option value="3">Rounded</option><option value="4">Square</option><option value="5">Pill with arrow</option><option value="6">iOS style</option><option value="7">One UI style</option><option value="8">Material style</option></select></label>
+    <label class="vbtn" title="Phone bar style"><span>Phone bar</span><select id="vBar" aria-label="Phone Call and Book bar style"><option value="1">Original</option><option value="2">Floating tab bar</option></select></label>
     <button class="btn vbtn-ico" type="button" id="vPrev" aria-label="Previous concept">←</button>
     <button class="btn vbtn-ico" type="button" id="vNext" aria-label="Next concept">→</button>
     <a class="btn hide-sm" id="vDev">Device frames</a>
@@ -606,7 +607,12 @@ function paintFonts(c){
     `<button type="button" aria-pressed="${i + 1 === k}" data-font="${i + 1}" title="${f[1] === f[2] ? f[1] : f[1] + " + " + f[2]}"><b>Aa</b> ${i ? (f[1].split(" ")[0].length < 4 ? f[1].split(" ").slice(0, 2).join(" ") : f[1].split(" ")[0]) : "Original"}</button>`).join("");
 }
 // button style: the same choice as the switcher's button menu on the design itself (shared localStorage key)
-function paintBtn(c){ let k = 1; try { k = +(localStorage.getItem("tp-btn-" + c.id) || 1); } catch (e) {} $("#vBtn").value = String(k); }
+function paintBtn(c){ let k = 1, r = 1; try { k = +(localStorage.getItem("tp-btn-" + c.id) || 1); r = +(localStorage.getItem("tp-bar-" + c.id) || 1); } catch (e) {} $("#vBtn").value = String(k); $("#vBar").value = String(r); }
+$("#vBar").addEventListener("change", () => {
+  if (vIndex == null) return; const c = CONCEPTS[vIndex], k = +$("#vBar").value;
+  try { localStorage.setItem("tp-bar-" + c.id, String(k)); } catch (err) {}
+  try { frame.contentWindow.TP_BAR.set(k - 1); } catch (err) { frame.src = url(c) + "?bar=" + k; }
+});
 $("#vBtn").addEventListener("change", () => {
   if (vIndex == null) return; const c = CONCEPTS[vIndex], k = +$("#vBtn").value;
   try { localStorage.setItem("tp-btn-" + c.id, String(k)); } catch (err) {}

@@ -440,6 +440,26 @@ html.ph-gal .gal-bar i{position:absolute;inset:0;background:var(--ivory);transfo
   .quote blockquote{font-size:clamp(1.3rem,1.85vw,1.75rem)}
   .ins .t{font-size:clamp(1.2rem,1.8vw,1.6rem)}
 }
+/* laptops: each section's heading, intro and content share one screen */
+.fx .sh{margin-bottom:clamp(24px,4.5vh,48px)}
+.fx .sh p{margin-top:12px}
+.fx .tm li{padding:clamp(4px,1vh,10px) 0}
+.fx .tm-note{margin-top:14px}
+.fx .dates{max-width:1100px}
+.fx .dtab th{padding-bottom:8px}
+.fx .dtab td{padding:clamp(6px,1.25vh,12px) 16px clamp(6px,1.25vh,12px) 0;line-height:1.45}
+.fx .dtab td:first-child{font-size:1.2rem}
+.fx .dtab td:last-child{white-space:nowrap}
+.fx .dnote{margin-top:14px}
+.fx .ins a{padding:clamp(14px,2.2vh,22px) 0}
+.fx .faq summary{min-height:56px;padding:12px 0}
+.fx #contact .dl div{padding:9px 0}
+.fx #contact .form{padding:clamp(20px,2.4vw,32px)}
+.fx #contact .f{margin-top:12px}
+.fx #contact .f input,.fx #contact .f select{min-height:46px;padding:10px 14px}
+.fx #contact .f textarea{min-height:92px}
+.fx #contact .form .btn{margin-top:16px}
+.fx #contact .status{margin-top:6px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -999,8 +1019,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       /* award: the photo opens from a close crop as it arrives (time-based, no pin) */
       gsap.timeline({ scrollTrigger: { trigger: '.aw-frame', start: 'top 85%', toggleActions: 'play none none reverse' } })
-        .fromTo('.aw-frame', { clipPath: 'inset(14% 18% 14% 18%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'expo.inOut' }, 0)
-        .fromTo('.aw-frame img', { scale: 1.4 }, { scale: 1, duration: 1.6, ease: 'expo.out' }, 0);
+        .fromTo('.aw-frame', { clipPath: 'inset(14% 18% 14% 18%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'expo.inOut' }, 0);
 
       return function () {
         unBook(); H.classList.remove('fx');
@@ -1072,9 +1091,8 @@ document.addEventListener('DOMContentLoaded', function () {
       var unBook = phoneBook();
 
       /* award: the photo opens from a close crop as it arrives (scrubbed, no pin) */
-      gsap.timeline({ scrollTrigger: { trigger: '.aw-frame', start: 'top 92%', end: 'center 50%', scrub: .4 } })
-        .fromTo('.aw-frame', { clipPath: 'inset(14% 18% 14% 18%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut' }, 0)
-        .fromTo('.aw-frame img', { scale: 1.4 }, { scale: 1, ease: 'power2.inOut' }, 0);
+      gsap.timeline({ scrollTrigger: { trigger: '.aw-frame', start: 'top 92%', end: 'top 55%', scrub: .4 } })
+        .fromTo('.aw-frame', { clipPath: 'inset(14% 18% 14% 18%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut' }, 0);
 
       return function () {
         unBook(); H.classList.remove('ph', 'ph-gal'); track.setAttribute('tabindex', '0');

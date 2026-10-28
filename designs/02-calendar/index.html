@@ -186,6 +186,7 @@ html:not(.flaps) .flap{background:#fff;color:var(--deep);padding:.07em .1em;bord
 .yr-ctl button{min-width:48px;min-height:48px;border-radius:999px;border:1px solid var(--line-2);background:#fff;color:var(--ink);font:500 var(--t-s)/1 var(--sans);padding:0 18px;cursor:pointer}
 .yr-ctl button:hover{border-color:var(--blue)}
 html:not(.js) .yr-ctl{display:none}
+@media (max-width:899px){.mo{min-height:clamp(290px,42svh,400px)}}
 @media (max-width:699px){.months a{font-size:.58rem;padding-left:3px;min-height:28px;letter-spacing:0}.today::after{height:11px}}
 /* laptops and tablets: a sideways row that scrolls on its own and rolls to this month as it enters */
 html.row .mo{flex-basis:min(60vw,860px)}
@@ -395,6 +396,39 @@ html.tfx-p .svc figure img,html.tfx-p .leader img{transition:none}
   .svc-grid:not(.stacked) .svc h3{min-height:2lh}
   .svc-grid:not(.stacked) .svc-b>p{min-height:3lh}
   .svc-grid:not(.stacked) .svc ul{margin-top:4px}
+}
+/* laptops: calmer section spacing so each heading, intro and its content share one screen */
+@media (min-width:900px){
+  .sec{padding-block:clamp(56px,9vh,104px)}
+  .shead{margin-bottom:clamp(28px,4.5vh,52px)}
+  .shead p{margin-top:12px}
+  .year-intro{padding-top:clamp(48px,7.5vh,96px);padding-bottom:clamp(16px,2.6vh,32px)}
+  .yr-stage{padding-bottom:clamp(40px,7vh,80px)}
+  html.row .mo{min-height:clamp(240px,34vh,330px);padding:clamp(16px,2.4vh,26px) clamp(20px,2vw,30px)}
+  html.row .mo h3{margin:clamp(8px,1.4vh,18px) 0}
+  #year .shead{max-width:900px}
+  .axis{padding-top:22px}.axis-line{top:22px}.axis-fill{top:21px}
+  .track{padding-block:16px}
+  #services .shead{margin-bottom:clamp(24px,3.6vh,44px)}
+  .svc-b{padding:16px 20px 18px;gap:8px}
+  .svc-b>p{font-size:1rem;line-height:1.5}
+  .svc-grid:not(.stacked) .svc h3{font-size:clamp(1.1rem,1.35vw,1.45rem)}
+  .svc ul{font-size:.95rem}
+  .svc li{padding:7px 0}
+  .leader{padding:20px}
+  .leader figure{width:min(clamp(150px,24vh,220px),100%)}
+  .leader h3{margin-top:14px}
+  .leader p{font-size:1rem}
+  .roster li{padding:14px 12px!important}
+  .roster li .role{font-size:.95rem}
+  .award figure{width:min(640px,100%,calc((100svh - var(--hh) - 370px) * 1.64))}
+  .quote{margin-top:clamp(40px,7vh,80px);padding-top:clamp(28px,4.5vh,48px)}
+  .ins a{padding:clamp(14px,2.2vh,20px) 16px}
+  .card{padding:clamp(20px,2.4vw,30px)}
+  .dl>div{padding:9px 0}
+  .f{margin-top:12px}
+  .f textarea{min-height:96px}
+  .form .btn{margin-top:16px}
 }
 </style>
 </head>
@@ -941,7 +975,7 @@ addEventListener('DOMContentLoaded',function(){
       G.fromTo(li,{'--lw':'0%'},{'--lw':'100%',ease:'none',scrollTrigger:{trigger:li,start:'top 85%',end:'top 50%',scrub:true}});
     });
     /* award photo wipes open, the quote rises line by line */
-    G.fromTo('#award-fig img',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'none',scrollTrigger:{trigger:'#award-fig',start:'top 85%',end:'top 40%',scrub:true}});
+    G.fromTo('#award-fig img',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'none',scrollTrigger:{trigger:'#award-fig',start:'top 92%',end:'top 62%',scrub:true}});
     if(window.SplitText)SplitText.create('#quote-p',{type:'lines',mask:'lines',aria:'none',autoSplit:true,onSplit:function(q){return G.from(q.lines,{yPercent:105,duration:1.4,ease:'expo.out',stagger:.08,scrollTrigger:{trigger:'#quote-p',start:'top 85%'}})}});
     G.from('.leader',{y:40,opacity:0,duration:1.3,ease:'expo.out',stagger:.1,scrollTrigger:{trigger:'.leaders',start:'top 82%'}});
     return function(){
@@ -977,7 +1011,7 @@ addEventListener('DOMContentLoaded',function(){
         .fromTo(f,{clipPath:'circle(0% at 50% 50%)'},{clipPath:'circle(50% at 50% 50%)',duration:1.4,ease:'expo.out'})
         .fromTo(f.querySelector('img'),{scale:1.15},{scale:1,duration:2,ease:'expo.out'},0);
     });
-    G.fromTo('#award-fig img',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'none',scrollTrigger:{trigger:'#award-fig',start:'top 88%',end:'top 45%',scrub:true}});
+    G.fromTo('#award-fig img',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'none',scrollTrigger:{trigger:'#award-fig',start:'top 92%',end:'top 62%',scrub:true}});
     ST.batch('.roster li',{start:'top 92%',once:true,onEnter:function(els){G.fromTo(els,{y:24,opacity:0},{y:0,opacity:1,duration:1.1,ease:'expo.out',stagger:.07})}});
     /* headings rise through line masks */
     heads();

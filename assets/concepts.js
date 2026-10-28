@@ -147,6 +147,52 @@ window.TP_CONCEPTS = [
   };
 })();
 
+/* Phone bar style: the small Call / Book / Ask bar on phones, as designed or as a floating tab bar
+   (a rounded pill that floats above the bottom edge, an icon above each label, the main action highlighted). */
+(function () {
+  var slug = document.documentElement.getAttribute('data-concept');
+  var c = (window.TP_CONCEPTS || []).find(function (x) { return x.slug === slug; });
+  if (!c) return;
+  var KEY = 'tp-bar-' + c.id, cur = 0, style = document.createElement('style');
+  var LIST = [['Original', 'As designed'], ['Floating tab bar', 'Rounded pill, icons above labels']];
+  var IC = {
+    call: '<path d="M6.6 3.5h2.6l1.4 4-2 1.4a12 12 0 0 0 6.5 6.5l1.4-2 4 1.4v2.6a2 2 0 0 1-2.1 2A16.5 16.5 0 0 1 4.6 5.6a2 2 0 0 1 2-2.1z"/>',
+    book: '<rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    ask: '<path d="M5 5.5h14a1.5 1.5 0 0 1 1.5 1.5v8.5a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z"/>'
+  };
+  var CSS = '@media (max-width:760px){' +
+    ':is(.qbar,.qb){display:flex!important;justify-content:center;gap:4px!important;left:0!important;right:0!important;bottom:calc(12px + env(safe-area-inset-bottom))!important;' +
+      'width:max-content!important;max-width:calc(100% - 24px)!important;margin:0 auto!important;padding:6px!important;border:1px solid rgba(255,255,255,.08)!important;' +
+      'border-radius:999px!important;background:#1d2120!important;box-shadow:0 10px 30px -10px rgba(0,0,0,.7)!important}' +
+    ':is(.qbar,.qb)>:is(a,button){display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;' +
+      'min-width:86px!important;min-height:58px!important;padding:6px 16px!important;border:0!important;border-radius:999px!important;background:transparent!important;' +
+      'color:#f2f2f0!important;font:500 13px/1.1 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif!important;letter-spacing:0!important;text-transform:none!important;box-shadow:none!important;text-decoration:none!important}' +
+    ':is(.qbar,.qb)>:is(a,button):first-child{background:#3a3f3d!important;font-weight:700!important}' +
+    ':is(.qbar,.qb) .tpi{display:block!important;width:22px;height:22px}' +
+  '}' +
+  '.tpi{display:none}';
+  function icons() {
+    document.querySelectorAll(':is(.qbar,.qb)>:is(a,button)').forEach(function (b) {
+      if (b.querySelector('.tpi')) return;
+      var h = (b.getAttribute('href') || ''), k = /^tel:/.test(h) ? 'call' : b.tagName === 'BUTTON' ? 'ask' : 'book';
+      var sp = document.createElement('span'); sp.className = 'tpi'; sp.setAttribute('aria-hidden', 'true');
+      sp.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">' + IC[k] + '</svg>';
+      b.insertBefore(sp, b.firstChild);
+    });
+  }
+  function apply(k) {
+    k = Math.max(0, Math.min(LIST.length - 1, k | 0)); cur = k;
+    if (!style.parentNode) document.head.appendChild(style);
+    style.textContent = k === 1 ? CSS : '';
+    document.documentElement.setAttribute('data-bar', k + 1);
+    if (k === 1) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', icons); else icons(); }
+  }
+  var q = +(new URLSearchParams(location.search).get('bar') || 0), saved = 0;
+  try { saved = +(localStorage.getItem(KEY) || 1); } catch (e) {}
+  apply((q >= 1 && q <= LIST.length ? q : saved || 1) - 1);
+  window.TP_BAR = { list: LIST, current: function () { return cur; }, set: function (k) { apply(k); try { localStorage.setItem(KEY, String(k + 1)); } catch (e) {} } };
+})();
+
 /* Tax Professionals concept switcher: a small floating control on every concept page
    to jump to the previous/next concept, open any concept, return to the gallery,
    and shortlist the current one. Rendered in a shadow root so it never inherits or
@@ -238,7 +284,9 @@ window.TP_CONCEPTS = [
     (window.TP_BTN ? '<div class="menu bmenu" role="menu" aria-label="Button style"><p>Button style for this design</p>' +
       window.TP_BTN.list.map(function (b, k) {
         return '<button type="button" role="menuitemradio" data-k="' + k + '" aria-checked="false"><span class="s">' + (k + 1) + '. ' + b[0] + '</span><small>' + b[1] + '</small></button>';
-      }).join('') + '</div>' : '') +
+      }).join('') + (window.TP_BAR ? '<p>Phone Call / Book bar</p>' + window.TP_BAR.list.map(function (b, k) {
+        return '<button type="button" role="menuitemradio" data-bar="' + k + '" aria-checked="false"><span class="s">' + b[0] + '</span><small>' + b[1] + '</small></button>';
+      }).join('') : '') + '</div>' : '') +
     (window.TP_FONT ? '<div class="menu fmenu" role="menu" aria-label="Font style"><p>Font style for this design</p>' +
       window.TP_FONT.list.map(function (f, k) {
         return '<button type="button" role="menuitemradio" data-k="' + k + '" aria-checked="false"><span class="s" style="font-family:\'' + f[1] + '\',serif">' +
@@ -250,12 +298,12 @@ window.TP_CONCEPTS = [
   var aa = root.querySelector('.aa'), fmenu = root.querySelector('.fmenu'), dmenu = null;
   var bsb = root.querySelector('.bs'), bmenu = root.querySelector('.bmenu');
   if (bsb) {
-    var paintBtn = function () { bmenu.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-checked', String(+b.dataset.k === window.TP_BTN.current())); }); };
+    var paintBtn = function () { bmenu.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-checked', String(b.dataset.bar != null ? (window.TP_BAR && +b.dataset.bar === window.TP_BAR.current()) : +b.dataset.k === window.TP_BTN.current())); }); };
     bsb.addEventListener('click', function (e) {
       e.stopPropagation(); var open = !bmenu.classList.contains('open'); close();
       if (open) { paintBtn(); bmenu.classList.add('open'); bsb.setAttribute('aria-expanded', 'true'); }
     });
-    bmenu.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; e.stopPropagation(); window.TP_BTN.set(+b.dataset.k); paintBtn(); });
+    bmenu.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; e.stopPropagation(); if (b.dataset.bar != null) window.TP_BAR.set(+b.dataset.bar); else window.TP_BTN.set(+b.dataset.k); paintBtn(); });
   }
   // on a laptop, "Laptop" is this page itself; tablet and mobile open the device preview for this design (the saved font choice carries over)
   if (innerWidth >= 1024) { var lap = root.querySelector('.dvb[data-d=laptop]'); lap.href = location.pathname; lap.setAttribute('aria-current', 'page'); }

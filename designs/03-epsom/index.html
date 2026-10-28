@@ -431,6 +431,37 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--blue);outline-of
   .pr-list li{font-size:clamp(1.2rem,1.8vw,1.75rem)}
   .quote blockquote p{font-size:clamp(1.2rem,1.85vw,1.75rem)}
 }
+/* laptops: calmer section spacing so each heading, intro and its content share one screen */
+@media (min-width:900px){
+  .sec{padding:clamp(56px,9vh,104px) 0}
+  .pr-stage{padding:clamp(56px,9vh,104px) 0}
+  .sh{margin-bottom:clamp(28px,4.5vh,52px)}
+  .sh p{margin-top:12px}
+  .cards{gap:24px}
+  .card-media{aspect-ratio:800/330}
+  .card-body{padding:22px 26px 24px;gap:10px}
+  .ticks{gap:6px}
+  .partners{margin-top:clamp(44px,7vh,80px)}
+  .lp{width:min(100%,clamp(200px,36vh,300px));margin-inline:auto}
+  .crew{margin-top:clamp(36px,5vh,56px)}
+  .crew li{padding:12px 8px}
+  .award figure{max-width:min(640px,calc((100svh - var(--hd) - 340px) * 1.64))}
+  .quote{margin-top:clamp(40px,7vh,80px)}
+  .monthly{margin-top:14px}
+  .dgrid{gap:14px}
+  .dgrid li{padding:16px 20px 18px;line-height:1.5}
+  .dgrid .d{margin-bottom:6px}
+  .dgrid .d b{font-size:2.15rem}
+  .dgrid em{margin-top:6px}
+  .monthly div{padding:16px 22px}
+  .ir-note{margin-top:16px}
+  .ins a{padding:clamp(14px,2.2vh,22px) 20px}
+  .vcard,.form{padding:26px}
+  .vcard dl{gap:12px}
+  .form{gap:12px}
+  textarea{min-height:96px}
+}
+.btn{box-shadow:0 1px 0 rgba(3,63,102,.08),0 10px 22px -16px rgba(3,63,102,.45)}
 </style>
 </head>
 <body class="in-hero">
