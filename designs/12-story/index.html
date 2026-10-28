@@ -162,7 +162,7 @@ html.js:not(.fx):not(.ph) .squares i{transform:scale(0);transform-origin:100% 0;
 .ch-ph figcaption,.fig figcaption{margin-top:10px;font-size:14px;color:var(--muted)}
 .ch-ph .por{max-width:320px;margin-inline:auto;background:#fff}
 .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.trio img{border-radius:12px;background:#fff}
+.trio img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:12px;background:#fff}
 .op{display:none}
 
 .leaders{margin-top:clamp(28px,4.4vh,44px);display:grid;gap:20px;max-width:560px;width:100%}
@@ -287,7 +287,9 @@ html.js:not(.fx):not(.ph) .squares i{transform:scale(0);transform-origin:100% 0;
   .fig.on{opacity:1}
   .fig>img{width:auto;height:auto;max-width:100%;max-height:calc(100% - 2.6em);border-radius:14px}
   .fig>img.por{max-width:min(100%,320px)}
-  .fig .trio{width:100%;max-width:560px}
+  .fig .trio{width:100%;max-width:min(460px,100%,calc((100svh - var(--hdr) - 200px) * .82));grid-template-columns:1fr 1fr;gap:12px}
+  /* the director a little larger on top, the two partners side by side below: fills the frame, no stretching */
+  .fig .trio img:first-child{grid-column:1 / -1;width:64%;justify-self:center}
   .fig figcaption{text-align:center;opacity:0;transition:opacity .3s ease}
   .fig.on figcaption{opacity:1;transition:opacity .6s ease .5s}
   .ch{min-height:calc(100svh - var(--hdr));display:flex;flex-direction:column;justify-content:center}

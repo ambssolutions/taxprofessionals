@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en-NZ" data-concept="05-studio">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calculators and client resources | Tax Professionals, Epsom</title>
+<meta name="description" content="Income tax, pay and take-home, student loan, KiwiSaver, GST and provisional tax calculators for the 2026-27 tax year, with a first-meeting checklist and official Inland Revenue links. Tax Professionals, Epsom, Auckland.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#01111c">
+<link rel="icon" href="../../../assets/logo/mark.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top-bar">
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../../../assets/logo/logo.webp" width="165" height="30" alt="Tax Professionals home"></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><i aria-hidden="true"></i></button>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <div>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="#tools" aria-current="page">Calculators</a></li>
+          <li><a href="#bring" data-tab="bring">Checklist</a></li>
+          <li><a href="#ird">IRD links</a></li>
+          <li><a href="../pay/">Pay an invoice</a></li>
+          <li class="m-only"><a class="btn" href="../#contact">Book a chat</a></li>
+        </ul>
+      </div>
+    </nav>
+    <a class="btn" href="../#contact">Book a chat</a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="intro" aria-labelledby="h1">
+    <div class="wrap">
+      <h1 id="h1">Calculators and client resources</h1>
+      <p class="lede">Work out income tax, take-home pay, student loan, KiwiSaver, GST and provisional tax here, then check with Inland Revenue or with us. Results update as you type.</p>
+      <p class="figs">Figures for the <span data-tax-year>2026-27</span> tax year, checked against Inland Revenue on <span data-checked>28 October 2026</span></p>
+    </div>
+  </section>
+
+  <section class="tools" id="tools" aria-label="Calculators">
+    <div class="wrap">
+      <div class="tablist" role="tablist" aria-label="Choose a calculator">
+        <button role="tab" id="t-tax" aria-controls="p-tax" aria-selected="true">Income tax</button>
+        <button role="tab" id="t-paye" aria-controls="p-paye" aria-selected="false" tabindex="-1">Pay and take-home</button>
+        <button role="tab" id="t-sl" aria-controls="p-sl" aria-selected="false" tabindex="-1">Student loan</button>
+        <button role="tab" id="t-ks" aria-controls="p-ks" aria-selected="false" tabindex="-1">KiwiSaver</button>
+        <button role="tab" id="t-gst" aria-controls="p-gst" aria-selected="false" tabindex="-1">GST</button>
+        <button role="tab" id="t-gstf" aria-controls="p-gstf" aria-selected="false" tabindex="-1">GST filing</button>
+        <button role="tab" id="t-prov" aria-controls="p-prov" aria-selected="false" tabindex="-1">Provisional tax</button>
+        <button role="tab" id="t-bring" aria-controls="p-bring" aria-selected="false" tabindex="-1">What to bring</button>
+      </div>
+
+      <!-- 1. Income tax -->
+      <section class="panel" id="p-tax" role="tabpanel" aria-labelledby="t-tax" tabindex="0">
+        <header><h2>Income tax on your annual income</h2><p>Enter your taxable income for the year to see the tax, your average rate and the rate on your next dollar.</p></header>
+        <div class="pgrid">
+          <form data-calc="tax" aria-controls="r-tax" novalidate>
+            <div class="fld"><label for="tax-income">Taxable income for the year</label>
+              <div class="money"><input type="text" inputmode="decimal" id="tax-income" name="income" value="60,000" autocomplete="off" aria-describedby="tax-h"></div>
+              <small id="tax-h">Before tax, from all sources.</small></div>
+            <p class="src">Rates: 10.5% to $15,600, 17.5% to $53,500, 30% to $78,100, 33% to $180,000, 39% over. <a href="https://www.ird.govt.nz/income-tax/income-tax-for-individuals/tax-codes-and-tax-rates-for-individuals/tax-rates-for-individuals" target="_blank" rel="noopener">Tax rates on Inland Revenue</a></p>
+          </form>
+          <div class="out" id="r-tax" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- 2. PAYE -->
+      <section class="panel" id="p-paye" role="tabpanel" aria-labelledby="t-paye" tabindex="0" hidden>
+        <header><h2>Pay and take-home</h2><p>PAYE, ACC earners' levy, student loan and KiwiSaver for one pay, on tax code M or M SL.</p></header>
+        <div class="pgrid">
+          <form data-calc="paye" aria-controls="r-paye" novalidate>
+            <div class="fld"><label for="paye-pay">Gross pay before deductions</label>
+              <div class="money"><input type="text" inputmode="decimal" id="paye-pay" name="pay" value="1,500" autocomplete="off"></div></div>
+            <fieldset class="fld"><legend>How often you are paid</legend>
+              <div class="seg four">
+                <label><input type="radio" name="freq" value="weekly">Weekly</label>
+                <label><input type="radio" name="freq" value="fortnightly" checked>Fortnightly</label>
+                <label><input type="radio" name="freq" value="monthly">Monthly</label>
+                <label><input type="radio" name="freq" value="annual">Annual</label>
+              </div></fieldset>
+            <fieldset class="fld"><legend>Tax code</legend>
+              <div class="seg">
+                <label><input type="radio" name="code" value="M" checked>M</label>
+                <label><input type="radio" name="code" value="MSL">M SL (student loan)</label>
+              </div></fieldset>
+            <div class="fld"><label for="paye-ks">Your KiwiSaver rate</label>
+              <select id="paye-ks" name="ks">
+                <option value="none">Not in KiwiSaver</option>
+                <option value="0.03">3% (temporary rate reduction)</option>
+                <option value="0.035" selected>3.5% (default)</option>
+                <option value="0.04">4%</option>
+                <option value="0.06">6%</option>
+                <option value="0.08">8%</option>
+                <option value="0.1">10%</option>
+              </select></div>
+            <div class="fld"><label for="paye-er">Employer KiwiSaver rate</label>
+              <select id="paye-er" name="er" aria-describedby="paye-er-h">
+                <option value="0.035" selected>3.5% (minimum)</option>
+                <option value="0.03">3% (only if you have a temporary rate reduction and they match it)</option>
+                <option value="0.04">4%</option>
+                <option value="0.06">6%</option>
+              </select>
+              <small id="paye-er-h">Paid on top of your gross pay. Employer contributions have ESCT taken out.</small></div>
+          </form>
+          <div class="out" id="r-paye" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- 3. Student loan -->
+      <section class="panel" id="p-sl" role="tabpanel" aria-labelledby="t-sl" tabindex="0" hidden>
+        <header><h2>Student loan repayments</h2><p>For New Zealand-based borrowers on salary or wages: 12% of every dollar over the repayment threshold.</p></header>
+        <div class="pgrid">
+          <form data-calc="sl" aria-controls="r-sl" novalidate>
+            <div class="fld"><label for="sl-pay">Gross pay</label>
+              <div class="money"><input type="text" inputmode="decimal" id="sl-pay" name="pay" value="1,200" autocomplete="off"></div></div>
+            <fieldset class="fld"><legend>Pay period</legend>
+              <div class="seg four">
+                <label><input type="radio" name="freq" value="weekly" checked>Weekly</label>
+                <label><input type="radio" name="freq" value="fortnightly">Fortnightly</label>
+                <label><input type="radio" name="freq" value="monthly">Monthly</label>
+                <label><input type="radio" name="freq" value="annual">Annual</label>
+              </div></fieldset>
+            <p class="src">Threshold $24,128 a year ($464 a week, $928 a fortnight, $2,010.66 a month). <a data-link="studentLoan" href="#" target="_blank" rel="noopener">Student loan repayments on Inland Revenue</a></p>
+          </form>
+          <div class="out" id="r-sl" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- 4. KiwiSaver -->
+      <section class="panel" id="p-ks" role="tabpanel" aria-labelledby="t-ks" tabindex="0" hidden>
+        <header><h2>KiwiSaver contributions</h2><p>What you and your employer put in over a year. The default and minimum employer rate is 3.5% from 1 April 2026, rising to 4% from 1 April 2028.</p></header>
+        <div class="pgrid">
+          <form data-calc="ks" aria-controls="r-ks" novalidate>
+            <div class="fld"><label for="ks-salary">Annual salary or wages</label>
+              <div class="money"><input type="text" inputmode="decimal" id="ks-salary" name="salary" value="70,000" autocomplete="off"></div></div>
+            <div class="fld"><label for="ks-rate">Your contribution rate</label>
+              <select id="ks-rate" name="rate">
+                <option value="0.03">3% (temporary rate reduction)</option>
+                <option value="0.035" selected>3.5% (default)</option>
+                <option value="0.04">4%</option>
+                <option value="0.06">6%</option>
+                <option value="0.08">8%</option>
+                <option value="0.1">10%</option>
+              </select></div>
+            <div class="fld"><label for="ks-er">Employer contribution rate</label>
+              <select id="ks-er" name="er">
+                <option value="0.035" selected>3.5% (minimum)</option>
+                <option value="0.03">3% (matching a temporary rate reduction)</option>
+                <option value="0.04">4%</option>
+                <option value="0.06">6%</option>
+              </select></div>
+            <p class="src">ESCT bands: 10.5% to $18,720, 17.5% to $64,200, 30% to $93,720, 33% to $216,000, 39% over. <a href="https://www.ird.govt.nz/kiwisaver-changes" target="_blank" rel="noopener">KiwiSaver changes on Inland Revenue</a></p>
+          </form>
+          <div class="out" id="r-ks" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- 5. GST -->
+      <section class="panel" id="p-gst" role="tabpanel" aria-labelledby="t-gst" tabindex="0" hidden>
+        <header><h2>Add or remove GST</h2><p>GST is 15%. To find the GST inside a GST-inclusive price, multiply by 3 and divide by 23.</p></header>
+        <div class="pgrid">
+          <form data-calc="gst" aria-controls="r-gst" novalidate>
+            <div class="fld"><label for="gst-amount">Amount</label>
+              <div class="money"><input type="text" inputmode="decimal" id="gst-amount" name="amount" value="115" autocomplete="off"></div></div>
+            <fieldset class="fld"><legend>This amount is</legend>
+              <div class="seg">
+                <label><input type="radio" name="mode" value="add">Before GST (add GST)</label>
+                <label><input type="radio" name="mode" value="remove" checked>Including GST (remove it)</label>
+              </div></fieldset>
+            <p class="src"><a href="https://www.ird.govt.nz/gst/filing-and-paying-gst-and-refunds/calculating-gst" target="_blank" rel="noopener">Calculating GST on Inland Revenue</a></p>
+          </form>
+          <div class="out" id="r-gst" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- 6. GST filing frequency -->
+      <section class="panel" id="p-gstf" role="tabpanel" aria-labelledby="t-gstf" tabindex="0" hidden>
+        <header><h2>GST filing frequency</h2><p>See which GST filing periods are open to you, based on your sales over 12 months.</p></header>
+        <div class="pgrid">
+          <form data-calc="gstf" aria-controls="r-gstf" novalidate>
+            <div class="fld"><label for="gstf-t">Expected sales (turnover) over 12 months</label>
+              <div class="money"><input type="text" inputmode="decimal" id="gstf-t" name="turnover" value="350,000" autocomplete="off" aria-describedby="gstf-h"></div>
+              <small id="gstf-h">Taxable supplies, excluding GST.</small></div>
+            <fieldset class="fld"><legend>Registered for GST?</legend>
+              <div class="seg">
+                <label><input type="radio" name="reg" value="yes" checked>Yes</label>
+                <label><input type="radio" name="reg" value="no">Not yet</label>
+              </div></fieldset>
+            <p class="src"><a data-link="gstFrequency" href="#" target="_blank" rel="noopener">GST filing frequency on Inland Revenue</a></p>
+          </form>
+          <div class="out" id="r-gstf" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- 7. Provisional tax -->
+      <section class="panel" id="p-prov" role="tabpanel" aria-labelledby="t-prov" tabindex="0" hidden>
+        <header><h2>Provisional tax, standard option</h2><p>Last year's residual income tax plus 5%, paid in instalments. Residual income tax is your tax to pay after PAYE and tax credits (other than Working for Families).</p></header>
+        <div class="pgrid">
+          <form data-calc="prov" aria-controls="r-prov" novalidate>
+            <div class="fld"><label for="prov-rit">Residual income tax for 2025-26</label>
+              <div class="money"><input type="text" inputmode="decimal" id="prov-rit" name="rit" value="12,000" autocomplete="off"></div></div>
+            <label class="tick"><input type="checkbox" name="six"><span>I file GST six-monthly (two instalments: 28 October and 7 May)</span></label>
+            <p class="src"><a href="https://www.ird.govt.nz/income-tax/provisional-tax/provisional-tax-options/standard-option/work-out-provisional-tax-using-the-standard-option" target="_blank" rel="noopener">Standard option on Inland Revenue</a></p>
+          </form>
+          <div class="out" id="r-prov" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- 8. What to bring -->
+      <section class="panel" id="p-bring" role="tabpanel" aria-labelledby="t-bring" tabindex="0" hidden>
+        <header><h2 id="bring">What to bring to your first meeting</h2><p>Tick what applies to you to build your list, then tick items off as you find them. This device remembers your ticks.</p></header>
+        <div class="cl">
+          <form id="cl-form" class="cl-sit" novalidate>
+            <fieldset><legend>What applies to you</legend>
+              <label class="tick"><input type="checkbox" name="sit" value="individual" checked><span>Salary, wages or personal income</span></label>
+              <label class="tick"><input type="checkbox" name="sit" value="rental"><span>Rental property</span></label>
+              <label class="tick"><input type="checkbox" name="sit" value="sole"><span>Sole trader or partnership</span></label>
+              <label class="tick"><input type="checkbox" name="sit" value="company"><span>Company</span></label>
+              <label class="tick"><input type="checkbox" name="sit" value="trust"><span>Trust</span></label>
+              <label class="tick"><input type="checkbox" name="sit" value="employer"><span>Employer</span></label>
+            </fieldset>
+          </form>
+          <div class="cl-list" id="cl-list">
+            <header><h3>Your list</h3><span id="cl-count" aria-live="polite"></span></header>
+          <section data-group="all"><h4>Everyone</h4><ul>
+            <li><label class="tick"><input type="checkbox" name="all-1"><span>Your IRD number</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="all-2"><span>Photo ID: passport or driver licence</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="all-3"><span>Any letters or notices from Inland Revenue</span></label></li>
+          </ul></section>
+          <section data-group="individual"><h4>Salary, wages or other personal income</h4><ul>
+            <li><label class="tick"><input type="checkbox" name="individual-1"><span>Your last income tax return or assessment, if you have one</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="individual-2"><span>Income details for the year: wages, interest and dividends</span></label></li>
+          </ul></section>
+          <section data-group="rental"><h4>Rental property</h4><ul>
+            <li><label class="tick"><input type="checkbox" name="rental-1"><span>Rental income and costs: rates, insurance, interest and repairs</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="rental-2"><span>Purchase or sale papers for any property bought or sold</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="rental-3"><span>Bank statements for the rental account</span></label></li>
+          </ul></section>
+          <section data-group="sole"><h4>Sole trader or partnership</h4><ul>
+            <li><label class="tick"><input type="checkbox" name="sole-1"><span>Your GST number, if registered</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="sole-2"><span>Last year's financial statements and return</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="sole-3"><span>Bank statements for the year</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="sole-4"><span>Invoices and receipts for sales and expenses, or access to your accounting software</span></label></li>
+          </ul></section>
+          <section data-group="company"><h4>Company</h4><ul>
+            <li><label class="tick"><input type="checkbox" name="company-1"><span>IRD and GST numbers for the company</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="company-2"><span>Last year's financial statements and return</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="company-3"><span>Bank statements for the year</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="company-4"><span>Sales and expense records, or access to your accounting software</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="company-5"><span>Company records: directors, shareholders and any changes in the year</span></label></li>
+          </ul></section>
+          <section data-group="trust"><h4>Trust</h4><ul>
+            <li><label class="tick"><input type="checkbox" name="trust-1"><span>IRD number for the trust</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="trust-2"><span>The trust deed and any changes during the year</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="trust-3"><span>Last year's financial statements and return</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="trust-4"><span>Bank statements for the year</span></label></li>
+          </ul></section>
+          <section data-group="employer"><h4>Employer</h4><ul>
+            <li><label class="tick"><input type="checkbox" name="employer-1"><span>Your employer IRD number</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="employer-2"><span>A list of staff with start dates and pay rates</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="employer-3"><span>Employment agreements</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="employer-4"><span>Your pay cycle and paydays</span></label></li>
+            <li><label class="tick"><input type="checkbox" name="employer-5"><span>Recent payslips or payroll reports</span></label></li>
+          </ul></section>
+            <p class="fine">Not sure what applies to you? Ask, and we will tell you what else we need.</p>
+            <div class="cl-act"><button class="btn ghost" type="button" id="cl-print">Print this list</button><button class="btn ghost" type="button" id="cl-clear">Clear ticks</button><a class="btn" href="../#contact">Book a chat</a></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="side">
+        <article class="card" aria-labelledby="h-wff">
+          <h2 id="h-wff">Working for Families</h2>
+          <p>Working for Families depends on family income, the number and ages of your children, care arrangements and more, so we have not built a calculator for it. Inland Revenue's own calculator gives the official estimate.</p>
+          <a class="btn" data-link="wff" href="#" target="_blank" rel="noopener">Inland Revenue's calculator<span class="sr"> (opens in a new tab)</span></a>
+        </article>
+        <article class="card" id="ird" aria-labelledby="h-ird">
+          <h2 id="h-ird">Official IRD links</h2>
+          <p>Each opens on the Inland Revenue website in a new tab.</p>
+          <nav class="links" aria-labelledby="h-ird">
+            <a data-link="home" href="#" target="_blank" rel="noopener">Inland Revenue home <span>ird.govt.nz</span></a>
+            <a data-link="calculators" href="#" target="_blank" rel="noopener">IRD calculators <span>Tools</span></a>
+            <a data-link="wff" href="#" target="_blank" rel="noopener">Working for Families <span>Calculator</span></a>
+            <a data-link="ir330" href="#" target="_blank" rel="noopener">Tax code declaration <span>IR330</span></a>
+            <a data-link="ir526" href="#" target="_blank" rel="noopener">Tax credit claim form <span>IR526</span></a>
+            <a data-link="gstFrequency" href="#" target="_blank" rel="noopener">GST filing frequency <span>GST</span></a>
+            <a data-link="studentLoan" href="#" target="_blank" rel="noopener">Student loan repayments <span>Loans</span></a>
+          </nav>
+          <div class="contact">
+            <a class="tel" href="tel:+6496250035">Call 09 625 0035</a>
+            <a class="btn" href="../#contact">Book a chat</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../../../assets/logo/logo.webp" width="220" height="40" alt="Tax Professionals home" loading="lazy" decoding="async"></a>
+    <p class="tag">620 Manukau Road, Epsom, Auckland 1023</p>
+    <p class="f-ct"><a href="tel:+6496250035">09 625 0035</a><a href="mailto:info@taxprofessionals.co.nz">info@taxprofessionals.co.nz</a></p>
+    <nav class="f-links" aria-label="Footer"><a href="../">Home</a><a href="../#contact">Book a chat</a><a href="../pay/">Pay an invoice</a><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">Insights</a></nav>
+    <div class="legal"><span>© 2026 Tax Professionals</span><span>Calculators give estimates only.</span><span>Proudly designed by AMBS Solutions</span></div>
+  </div>
+</footer>
+
+<nav class="qb" aria-label="Quick contact"><a href="tel:+6496250035">Call</a><a href="../#contact">Book</a></nav>
+
+<script src="calc.js" defer></script>
+</body>
+</html>
