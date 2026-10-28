@@ -325,7 +325,7 @@ html.fx .welcome .since{color:var(--green-l)}
   .step-b p{font-size:15px;line-height:1.5}
   .step-b .tlink{margin-top:10px}
 }
-/* studio dress: the promises are dark film frames on the film stock, each with a sprocket edge along its title band.
+/* studio dress: the promises are dark film frames on the film stock, each with its own title band.
    Every card stays opaque and keeps its own tone (logo blues and greens, deepened) so the stack reads in layers. */
 .why{background:var(--film);color:var(--ivory)}
 .why .sec-head{background:var(--film)}
@@ -337,8 +337,7 @@ html.fx .welcome .since{color:var(--green-l)}
 .step:nth-child(3){--t:#032d4a}
 .step:nth-child(4){--t:#0b2c1f}
 .step:nth-child(5){--t:var(--blue);border-color:rgba(243,239,231,.2)}
-.step-h{position:relative;padding-top:12px;border-bottom:1px solid rgba(243,239,231,.12)}
-.step-h::before{content:"";position:absolute;left:14px;right:14px;top:4px;height:5px;background:repeating-linear-gradient(90deg,transparent 0 9px,rgba(243,239,231,.16) 9px 19px,transparent 19px 28px);pointer-events:none}
+.step-h{position:relative;border-bottom:1px solid rgba(243,239,231,.12)}
 .step-n,.step:nth-child(4) .step-n,.step:nth-child(5) .step-n{color:var(--green-l)}
 .step:nth-child(5) .step-n{color:#bfe3b4}
 .step h3{color:var(--ivory)}
@@ -356,8 +355,6 @@ html.fx .welcome .since{color:var(--green-l)}
 /* ===== leaders: three portraits as film frames in a centred row (one column on narrow screens); they reveal as they enter ===== */
 .leaders .head p{color:rgba(243,239,231,.74)}
 .lr-view{position:relative;width:min(1180px,calc(100% - 2 * max(var(--pad),env(safe-area-inset-left))));margin:0 auto;background:#03080d;border-radius:6px;padding:clamp(34px,5vh,48px) 0}
-.lr-view::before,.lr-view::after{content:"";position:absolute;z-index:2;left:0;right:0;height:10px;background:repeating-linear-gradient(90deg,transparent 0 9px,rgba(243,239,231,.2) 9px 21px,transparent 21px 30px)}
-.lr-view::before{top:12px}.lr-view::after{bottom:12px}
 .lr-track{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0 auto}
 .lr{display:flex;flex-direction:column;align-items:center;text-align:center;padding:clamp(16px,2.6vh,28px) clamp(16px,2.4vw,32px)}
 .lr+.lr{border-left:1px solid rgba(243,239,231,.1)}
@@ -466,14 +463,12 @@ html:not(.js) .cd-row{display:none}
 .fl::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:#01111c;z-index:1}
 .cd-t{margin:18px auto 0;max-width:52ch;font-size:clamp(16px,1.3vw,18px);line-height:1.5;color:rgba(243,239,231,.82)}
 .cd-t b{font-weight:600;color:var(--ivory)}
-/* the tax year as a film strip: frames April to March, sprockets top and bottom, a line that draws itself */
+/* the tax year as a film strip: frames April to March, a line that draws itself */
 .yr-stage{max-width:1280px;margin:0 auto}
 .yr-scene .board{margin-bottom:clamp(16px,3vh,32px)}
 @media (max-height:760px){.yr-scene .board{padding-block:16px}.yr-scene .cd-row{font-size:clamp(2.2rem,7vh,3.4rem);margin-top:10px}.yr-scene .cd-t{margin-top:10px}.yr-track{padding-block:30px 40px}}
 .yr-view{overflow:hidden;margin-inline:calc(-1 * max(var(--pad),env(safe-area-inset-left)))}
 .yr-track{position:relative;display:flex;gap:12px;width:max-content;padding:34px max(var(--pad),env(safe-area-inset-left)) 44px;background:#03080d}
-.yr-track::before,.yr-track::after{content:"";position:absolute;left:0;right:0;height:10px;background:repeating-linear-gradient(90deg,transparent 0 9px,rgba(243,239,231,.2) 9px 21px,transparent 21px 30px)}
-.yr-track::before{top:12px}.yr-track::after{bottom:8px}
 .yr-fr{flex:none;width:clamp(230px,21vw,290px);padding:16px 18px 18px;border-radius:6px;background:linear-gradient(180deg,#0b2337,#081a29);border:1px solid rgba(243,239,231,.08);opacity:.38;transition:opacity .8s ease,border-color .8s ease}
 .yr-fr.lit{opacity:1}
 .yr-fr.now{border-color:var(--green-l)}
