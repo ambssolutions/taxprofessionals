@@ -14,7 +14,7 @@
   /* phones: no reading text below 14px (body copy 15px) and no cramped line spacing */
   function phone() {
     if (!matchMedia('(max-width: 760px)').matches) return;
-    document.querySelectorAll('main p,main li,main dd,main blockquote,main figcaption,main small,main span,main a,main td,footer p,footer li,footer a,footer small').forEach(function (e) {
+    document.querySelectorAll('main p,main li,main dd,main blockquote,main figcaption,main small,main span,main a,main td,footer p,footer li,footer a,footer small,footer span,footer div').forEach(function (e) {
       if (e.closest('[aria-hidden="true"],nav,button')) return;
       var own = '';
       e.childNodes.forEach(function (n) { if (n.nodeType === 3) own += n.textContent; });

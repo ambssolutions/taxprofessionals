@@ -606,6 +606,31 @@ html.js .rv.in{opacity:1;transform:none}
   .qb-ask:active{box-shadow:var(--emb-in);transform:translateY(1px)}
   .ac-launch{display:none!important}
 }
+
+/* book pages: centred like the rest of the page; the tick list is a centred block whose lines start together */
+.bk-paper{text-align:center;align-items:center}
+.bk-paper h3,.bk-paper p{margin-inline:auto}
+.bk-paper ul{align-self:center;text-align:left;max-width:100%;margin-inline:auto}
+.bk-paper .btn,.bk-paper a.bk-more{align-self:center}
+.bk-paper .bk-no{align-self:center}
+
+/* phone book: compact type so a whole page (photo, title, ticks, link) fits the card */
+.pbk .bk-paper{padding:14px 16px 14px}
+.pbk .bk-paper h3{font-size:21px;line-height:1.12;margin:6px auto 8px}
+.pbk .bk-paper p{font-size:15px;line-height:1.45;margin-bottom:10px}
+.pbk .bk-ticks{margin:0 auto 12px}
+.pbk .bk-ticks li{font-size:15px;line-height:1.35;margin:0 0 6px}
+.pbk .bk-paper.tight>p{display:none}
+.pbk .bk-paper.tighter h3{font-size:19px;margin:4px auto 6px}
+.pbk .bk-paper.tighter .bk-ticks li{font-size:14px;margin-bottom:4px}
+
+/* credits: one centred column like a film's end roll; role above, names (with photo above each) below */
+.cr{grid-template-columns:1fr!important;justify-items:center;text-align:center;row-gap:10px}
+.cr .role{text-align:center!important}
+.cr .nm{align-items:center!important}
+.cr .who{flex-direction:column;gap:8px}
+.cr .who img{width:64px;height:64px}
+.credits .cr .nm:has(.who){flex-direction:row;flex-wrap:wrap;justify-content:center;gap:18px 28px}
 </style>
 </head>
 <body>
@@ -671,7 +696,7 @@ html.js .rv.in{opacity:1;transform:none}
     <section class="sec welcome" aria-labelledby="w-t">
       <div class="wrap">
         <div class="wtxt">
-          <h2 id="w-t">We understand how important it is for business owners to know how profitable they are at any given instance.</h2>
+          <h2 id="w-t">We understand how important it is for business owners to know how profitable they are at any given&nbsp;instance.</h2>
           <p>The traditional ways of annual accounting and compliance are clearly inappropriate in today's business environment. Things can get tricky when it comes to tax, so our dedicated team is there to help and get things done thoroughly and professionally, with a smile.</p>
           <p class="since">Working for the community since 1998.</p>
         </div>
@@ -682,14 +707,14 @@ html.js .rv.in{opacity:1;transform:none}
   <section class="sec svc film" id="services" aria-labelledby="svc-t">
     <div class="wrap svc-in">
       <div class="head">
-        <h2 id="svc-t">Four areas of work</h2>
+        <h2 id="svc-t">Four areas of&nbsp;work</h2>
         <p>Each one is handled in-house by the same team. Scroll and the book turns to the next one.</p>
       </div>
       <ol class="pillars">
         <li class="pillar">
           <figure class="ph"><img src="../../assets/img/svc-compliance-800.webp" sizes="(min-width:860px) 640px, 100vw" width="800" height="367" alt="A calculator and notebook, with the Tax Professionals blue and green squares" loading="lazy" decoding="async"></figure>
           <div class="txt">
-            <h3>Taxation &amp; Accounting Compliance</h3>
+            <h3>Taxation &amp; Accounting&nbsp;Compliance</h3>
             <p class="one">Tax compliance and practical consulting services, for individuals, rental property owners and businesses on Xero or MYOB. Whatever the tax position, talk to us.</p>
             <ul class="ticks"><li>GST, IR3 and IR4 returns and end-of-year financial statements</li><li>IRD audits, compliance reviews and negotiating tax debt</li><li>Tax pooling through TMNZ, so you pay provisional tax when it suits you</li><li>Trusts, company formation, PAYE and payroll as add-ons</li></ul>
             <a class="tlink more" href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">Read more on our site</a>
@@ -698,7 +723,7 @@ html.js .rv.in{opacity:1;transform:none}
         <li class="pillar">
           <figure class="ph"><img src="../../assets/img/svc-advisory-800.webp" sizes="(min-width:860px) 640px, 100vw" width="800" height="367" alt="A business planning session, with the Tax Professionals blue and green squares" loading="lazy" decoding="async"></figure>
           <div class="txt">
-            <h3>Business Advisory &amp; Planning</h3>
+            <h3>Business Advisory &amp;&nbsp;Planning</h3>
             <p class="one">Create a profitable, thriving and valuable business. Business planning begins with a free first meeting: a one-on-one workshop on your business and personal goals for the next 3 months, 12 months and 3 years.</p>
             <ul class="ticks"><li>Business planning, first meeting free of charge</li><li>Cashflow forecasting</li><li>Monthly coaching, so you know where you are heading and what the goals are</li></ul>
             <a class="tlink more" href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">Read more on our site</a>
@@ -707,7 +732,7 @@ html.js .rv.in{opacity:1;transform:none}
         <li class="pillar">
           <figure class="ph"><img src="../../assets/img/svc-hr-800.webp" sizes="(min-width:860px) 640px, 100vw" width="800" height="367" alt="An employer and employee in conversation, with the Tax Professionals blue and green squares" loading="lazy" decoding="async"></figure>
           <div class="txt">
-            <h3>Employment &amp; HR Advisory</h3>
+            <h3>Employment &amp; HR&nbsp;Advisory</h3>
             <p class="one">Your employment law and HR partner. The most valuable asset in your business is your staff.</p>
             <ul class="ticks"><li>Employment relations and policies</li><li>Employer accreditation, and restructure and redundancy</li><li>Personal grievances and disputes</li><li>Audit and investigations, including Labour Inspector readiness</li></ul>
             <a class="tlink more" href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">Read more on our site</a>
@@ -716,7 +741,7 @@ html.js .rv.in{opacity:1;transform:none}
         <li class="pillar">
           <figure class="ph"><img src="../../assets/img/svc-property-800.webp" sizes="(min-width:860px) 640px, 100vw" width="800" height="367" alt="Residential property, with the Tax Professionals blue and green squares" loading="lazy" decoding="async"></figure>
           <div class="txt">
-            <h3>Property Investment &amp; Development</h3>
+            <h3>Property Investment &amp;&nbsp;Development</h3>
             <p class="one">Practical advice on optimal structuring of your property investments and developments to keep up with the ever-changing property taxation laws and regulations.</p>
             <ul class="ticks"><li>Structuring: personal ownership, a look-through company or a trust</li><li>Strategy for buy and hold, trading and flips, development and land banking</li><li>Returns, financial statements and cash-flow tools</li><li>Family trust management and advisory</li></ul>
             <a class="tlink more" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">Read more on our site</a>
@@ -734,23 +759,23 @@ html.js .rv.in{opacity:1;transform:none}
       </div>
       <ol class="steps">
         <li class="step" data-n="01">
-          <div class="step-h"><span class="step-n">01</span><h3>First consultation free on all matters</h3></div>
+          <div class="step-h"><span class="step-n">01</span><h3>First consultation free on all&nbsp;matters</h3></div>
           <div class="step-b"><p>Call, email or book a time. The first conversation costs nothing, whatever the matter.</p><a class="tlink" href="#contact">Book a chat</a></div>
         </li>
         <li class="step" data-n="02">
-          <div class="step-h"><span class="step-n">02</span><h3>Tax experts with over 20 years of experience</h3></div>
+          <div class="step-h"><span class="step-n">02</span><h3>Tax experts with over 20 years of&nbsp;experience</h3></div>
           <div class="step-b"><p>Working for the community from Manukau Road since 1998, led by the director with two partners and a team of accountants.</p></div>
         </li>
         <li class="step" data-n="03">
-          <div class="step-h"><span class="step-n">03</span><h3>Specialists in property development and structuring</h3></div>
+          <div class="step-h"><span class="step-n">03</span><h3>Specialists in property development and&nbsp;structuring</h3></div>
           <div class="step-b"><p>Structuring for personal ownership, a look-through company or a trust, from people who invest and develop themselves and have published on New Zealand's land tax regime.</p></div>
         </li>
         <li class="step" data-n="04">
-          <div class="step-h"><span class="step-n">04</span><h3>Fixed fee services. No more shock bills</h3></div>
+          <div class="step-h"><span class="step-n">04</span><h3>Fixed fee services. No more shock&nbsp;bills</h3></div>
           <div class="step-b"><p>Fixed fee services, so you know what the work will cost before it starts.</p></div>
         </li>
         <li class="step" data-n="05">
-          <div class="step-h"><span class="step-n">05</span><h3>Tailored support and service packages based on your needs</h3></div>
+          <div class="step-h"><span class="step-n">05</span><h3>Tailored support and service packages based on your&nbsp;needs</h3></div>
           <div class="step-b"><p>From a monthly rental property package to full business compliance with payroll and HR added on. Free training and ongoing support on your accounting software is part of it.</p></div>
         </li>
       </ol>
@@ -760,7 +785,7 @@ html.js .rv.in{opacity:1;transform:none}
   <section class="sec leaders film" id="people" aria-labelledby="pp-t">
     <div class="lr-stage">
       <div class="wrap head">
-        <h2 id="pp-t">The people you will deal with</h2>
+        <h2 id="pp-t">The people you will deal&nbsp;with</h2>
         <p>A director, two partners and a team of accountants on Manukau Road.</p>
       </div>
       <div class="lr-view">
@@ -777,7 +802,7 @@ html.js .rv.in{opacity:1;transform:none}
     <div class="roll">
       <div class="wrap">
         <div class="head">
-          <h2 id="tm-t">The team on Manukau Road</h2>
+          <h2 id="tm-t">The team on Manukau&nbsp;Road</h2>
           <p>Accountants and administration, working with the director and partners.</p>
         </div>
         <ol class="credits">
@@ -797,7 +822,7 @@ html.js .rv.in{opacity:1;transform:none}
     <div class="wrap aw-g">
       <figure class="aw-ph"><img src="../../assets/img/award-800.webp" width="800" height="488" alt="Varun Gupta receiving Accountant of the Year on stage with Grant Robertson and Paul Goldsmith" loading="lazy" decoding="async"><span class="sh" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></figure>
       <div class="aw-t">
-        <h2 id="aw-t">Accountant of the Year 2019 to 2020</h2>
+        <h2 id="aw-t">Accountant of the Year 2019 to&nbsp;2020</h2>
         <p>Twelfth Annual Indian Newslink Indian Business Awards, 25 November 2019, SkyCity. Also a finalist, Small Business of the Year.</p>
         <p class="who-on">Varun Gupta on stage with Grant Robertson and Paul Goldsmith.</p>
       </div>
@@ -853,7 +878,7 @@ html.js .rv.in{opacity:1;transform:none}
           <div><dt>20th</dt><dd>PAYE paid, small employers<small>Payday filing within 2 working days of payday</small></dd></div>
         </dl></div>
       </div>
-      <p class="note">Due on a weekend or public holiday? Pay on the next working day. GST is the exception: it is due on the last working day of the period. Depending on your individual circumstances the due dates that apply to you may be different; we will confirm yours. Calculators and forms are on our <a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">client resources</a> page.</p>
+      <p class="note">General dates from Inland Revenue. Due on a weekend or public holiday? Pay the next working day (GST: the last working day of the period). We&#8217;ll confirm your own dates. Calculators and forms are on our <a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">client resources</a> page.</p>
     </div>
   </section>
 
@@ -876,7 +901,7 @@ html.js .rv.in{opacity:1;transform:none}
   <section class="sec faq" id="questions" aria-labelledby="fq-t">
     <div class="wrap">
       <div class="head rv">
-        <h2 id="fq-t">Good to know first</h2>
+        <h2 id="fq-t">Good to know&nbsp;first</h2>
         <p>Short answers. For anything specific to you, book a chat.</p>
       </div>
       <div class="faq-l">
@@ -933,7 +958,7 @@ html.js .rv.in{opacity:1;transform:none}
   </section>
   <section class="partners" aria-labelledby="pt-t">
     <div class="wrap">
-      <h2 id="pt-t">Technology and industry partners</h2>
+      <h2 id="pt-t">Technology and industry&nbsp;partners</h2>
       <ul>
         <li><img src="../../assets/logo/partner-01.png" width="150" height="100" alt="SuiteFiles" loading="lazy" decoding="async"></li>
         <li><img src="../../assets/logo/partner-02.png" width="150" height="100" alt="MYOB Diamond Partner" loading="lazy" decoding="async"></li>
@@ -1061,7 +1086,7 @@ html.js .rv.in{opacity:1;transform:none}
   var SN = SV.length, SNN = '0' + SN;
   function bkPhoto(k){ return '<figure class="bk-ph"><img src="' + SV[k].img + '" width="800" height="367" alt="" decoding="async"></figure>'; }
   function bkMore(k){ return '<a class="btn bk-more" href="' + SV[k].href + '" target="_blank" rel="noopener">' + SV[k].more + '</a>'; }
-  function bkWords(k){ return '<div class="bk-paper"><span class="bk-no">' + SV[k].n + ' <span>/ ' + SNN + '</span></span><h3>' + SV[k].title + '</h3><p>' + SV[k].p + '</p>' + bkMore(k) + '<span class="bk-folio">Tax Professionals</span></div>'; }
+  function bkWords(k){ return '<div class="bk-paper"><span class="bk-no">' + SV[k].n + ' <span>/ ' + SNN + '</span></span><h3>' + SV[k].title +&nbsp;'</h3><p>' + SV[k].p + '</p>' + bkMore(k) + '<span class="bk-folio">Tax Professionals</span></div>'; }
   function bkPic(k){ return '<div class="bk-paper bk-pic">' + bkPhoto(k) + '<div class="bk-list"><p class="bk-lbl">What this covers</p><ul class="bk-ticks">' + SV[k].ticks + '</ul></div></div>'; }
   /* the book is a picture of the list: hidden from screen readers and out of the tab order */
   function bookOn(root){ root.querySelectorAll('a, button').forEach(function(x){ x.tabIndex = -1; }); pillars.classList.add('sr'); }
@@ -1107,7 +1132,7 @@ html.js .rv.in{opacity:1;transform:none}
     var pb = d.createElement('div'); pb.className = 'pbk';
     var ph = '';
     for (var j = 0; j < SN; j++) ph += '<div class="pbk-leaf" style="z-index:' + (SN - j) + '"><div class="bk-face bk-front pbk-front">' + bkPhoto(j) +
-      '<div class="bk-paper"><span class="bk-no">' + SV[j].n + ' <span>/ ' + SNN + '</span></span><h3>' + SV[j].title + '</h3><p>' + SV[j].p + '</p><ul class="bk-ticks">' + SV[j].ticks + '</ul>' + bkMore(j) + '</div>' +
+      '<div class="bk-paper"><span class="bk-no">' + SV[j].n + ' <span>/ ' + SNN + '</span></span><h3>' + SV[j].title +&nbsp;'</h3><p>' + SV[j].p + '</p><ul class="bk-ticks">' + SV[j].ticks + '</ul>' + bkMore(j) + '</div>' +
       '</div><div class="bk-face bk-back pbk-back"><span>Tax Professionals</span></div></div>';
     pb.innerHTML = ph;
     var nav = d.createElement('div'); nav.className = 'pbk-nav';
@@ -1367,7 +1392,7 @@ html.js .rv.in{opacity:1;transform:none}
     var pps = d.querySelector('.people');
     G.from(pps.querySelectorAll('.people .head > *, .cr'), {y:46, autoAlpha:0, duration:1.4, ease:'expo.out', stagger:.14, scrollTrigger:{trigger:pps.querySelector('.credits'), start:'top 85%', once:true}});
     var comm = pps.querySelector('.comm .ph');
-    G.timeline({scrollTrigger:{trigger:comm, start:'top 82%', once:true}})
+    G.timeline({scrollTrigger:{trigger:comm, start:'top 94%', once:true}})
       .fromTo(comm, {clipPath:'inset(100% 0% 0% 0%)'}, {clipPath:'inset(0% 0% 0% 0%)', duration:1.5, ease:'expo.inOut'}, 0)
       .fromTo(comm.querySelector('img'), {scale:1.12}, {scale:1, duration:2.2, ease:'power2.out'}, 0);
 
@@ -1470,7 +1495,7 @@ html.js .rv.in{opacity:1;transform:none}
         gs.from(el, {y:28, autoAlpha:0, duration:1.2, ease:'expo.out', scrollTrigger:{trigger:el, start:'top 92%', once:true}});
       });
       var comm = d.querySelector('.comm .ph');
-      gs.timeline({scrollTrigger:{trigger:comm, start:'top 90%', end:'center 50%', scrub:true}})
+      gs.timeline({scrollTrigger:{trigger:comm, start:'top bottom', end:'top 62%', scrub:true}})
         .fromTo(comm, {clipPath:'inset(100% 0% 0% 0%)'}, {clipPath:'inset(0% 0% 0% 0%)', ease:'none'}, 0)
         .fromTo(comm.querySelector('img'), {scale:1.15}, {scale:1, ease:'none'}, 0);
 
@@ -1505,6 +1530,26 @@ html.js .rv.in{opacity:1;transform:none}
 <script>
 // the call bar's Ask button opens the chat window (the floating chat button is hidden on phones)
 document.addEventListener('click',function(e){var b=e.target.closest('.qb-ask');if(!b)return;var l=document.querySelector('.ac-launch');if(l)l.click()});
+</script>
+<script>
+// phone book: if a page's words don't fit its card on this screen, its intro sentence steps aside (the full text is in the
+// list kept for screen readers and on the "Read more" page), then the type tightens a step; the link always shows
+(function(){
+  function fit(){
+    document.querySelectorAll('.pbk-leaf').forEach(function(leaf){
+      var paper = leaf.querySelector('.bk-paper'); if (!paper) return;
+      var was = leaf.style.display; leaf.style.display = 'block';
+      paper.classList.remove('tight', 'tighter');
+      var over = function(){ return paper.scrollHeight > paper.clientHeight + 1; };
+      if (over()) paper.classList.add('tight');
+      if (over()) paper.classList.add('tighter');
+      leaf.style.display = was;
+    });
+  }
+  addEventListener('load', function(){ setTimeout(fit, 300); });
+  addEventListener('resize', function(){ clearTimeout(fit.t); fit.t = setTimeout(fit, 200); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ setTimeout(fit, 300); });
+})();
 </script>
 <!--chat--><script src="/designs/05-studio/chat.js?v=ea4d8a04" data-index="/designs/05-studio/chat-index.json?v=3926c95c" data-label="Ask us" data-langs="en" data-key="taxpro-05-chat" data-color="#04649F" data-nudge="Kia ora. I&#x27;m the Tax Professionals assistant. Can I help with a tax or accounting question?" data-nudge-after="15" data-nudge-open="1" data-avoid=".qb" defer></script><!--/chat-->
 </body>

@@ -150,8 +150,13 @@ window.TP_CONCEPTS = [
     '.fmenu button[aria-checked="true"]{background:rgba(109,171,60,.22)}.fmenu .s{font-size:19px;line-height:1.15}.fmenu small{color:#A9B8AE;font:400 12px/1.3 Inter,system-ui,sans-serif}' +
     '.fmenu p{margin:4px 12px 8px;color:#A9B8AE;font-size:12px}' +
     '@media (max-width:760px),(pointer:coarse) and (max-width:1366px){.bar{left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom))}.sub{display:none}}' +
-    '@media print{.bar{display:none}}' +
+    '.tab{all:unset;display:none;position:fixed;left:0;bottom:calc(150px + env(safe-area-inset-bottom));z-index:2147483000;width:36px;height:44px;' +
+    'border-radius:0 12px 12px 0;background:#0E1611;color:#8BC75A;font:700 12px/44px Inter,system-ui,sans-serif;text-align:center;cursor:pointer;' +
+    'box-shadow:0 6px 18px -8px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.14);border-left:0}' +
+    '.tab.show{display:block}.tab:focus-visible{outline:2px solid #8BC75A}' +
+    '@media print{.bar,.tab{display:none}}' +
     '</style>' +
+    '<button type="button" class="tab" aria-label="Show the design switcher">' + pad(i) + '</button>' +
     '<nav class="bar" aria-label="Design concepts">' +
     '<a class="arrow" href="' + href(prev) + '" aria-label="Previous concept: ' + prev[1] + '">&#8249;</a>' +
     '<button type="button" class="label" aria-expanded="false" aria-haspopup="true">' +
@@ -269,12 +274,21 @@ window.TP_CONCEPTS = [
   // fade a little while scrolling down so it never blocks content
   // hide while scrolling down (fully on phones, faded on desktop); show again on scroll up or near the end
   var lastY = scrollY, ticking = false, phone = matchMedia('(max-width:760px),(pointer:coarse) and (max-width:1366px)');
+  // phones and tablets: the bar never sits over the page; it lives in a small numbered tab at the left edge,
+  // opens on a tap and tucks away again after a few seconds or as soon as the page scrolls
+  var tab = root.querySelector('.tab'), tabT = 0;
+  function tuckAway() { if (menu.classList.contains('open') || (fmenu && fmenu.classList.contains('open'))) return; bar.classList.add('gone'); tab.classList.add('show'); }
+  function showBar() { bar.classList.remove('gone'); tab.classList.remove('show'); clearTimeout(tabT); tabT = setTimeout(tuckAway, 6000); }
+  tab.addEventListener('click', function (e) { e.stopPropagation(); showBar(); });
+  root.addEventListener('click', function () { if (phone.matches && !bar.classList.contains('gone')) { clearTimeout(tabT); tabT = setTimeout(tuckAway, 6000); } });
+  function phoneMode() { if (phone.matches) tuckAway(); else { bar.classList.remove('gone'); tab.classList.remove('show'); } }
+  phoneMode(); if (phone.addEventListener) phone.addEventListener('change', phoneMode);
   addEventListener('scroll', function () {
     if (ticking) return; ticking = true;
     requestAnimationFrame(function () {
       var y = scrollY, down = y > lastY && y > 200, nearEnd = innerHeight + y > document.documentElement.scrollHeight - 160;
-      bar.classList.toggle(phone.matches ? 'gone' : 'tuck', down && !nearEnd);
-      if (!phone.matches) bar.classList.remove('gone');
+      if (phone.matches) { if (Math.abs(y - lastY) > 4) { clearTimeout(tabT); close(); tuckAway(); } }
+      else { bar.classList.toggle('tuck', down && !nearEnd); bar.classList.remove('gone'); }
       lastY = y; ticking = false;
     });
   }, { passive: true });
