@@ -344,8 +344,8 @@ function fallingHeadings() {
       var n = words(e.textContent), tag = e.tagName, lim;
       if (!n) continue;
       if (tag === 'H1' || e.closest('h1')) lim = C.h1;
+      else if (tag === 'H2' || e.closest('h2')) lim = C.h2;   // a heading keeps the heading scale, however many words
       else if (n >= 8) lim = C.long;
-      else if (tag === 'H2') lim = C.h2;
       else if (n >= 2) lim = C.mid;      // names, phrases, phone numbers
       else lim = C.short;                // a single display word or number
       if (fs > lim + .5) { e.style.setProperty('font-size', lim.toFixed(1) + 'px', 'important'); e.setAttribute('data-tpcap', ''); }

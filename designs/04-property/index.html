@@ -50,7 +50,7 @@ h1,h2,h3{font-family:var(--disp);font-weight:500;letter-spacing:-.03em;text-wrap
 .wrap{max-width:1240px;margin:0 auto}
 .sec{position:relative;padding:clamp(80px,11vw,140px) var(--pad)}
 .sec-head{text-align:center;max-width:780px;margin:0 auto}
-.sec-head h2,.h2{font-size:clamp(2rem,min(4vw,7vh),3.4rem);line-height:1.06}
+.sec-head h2,.h2{font-size:clamp(2rem,min(3.2vw,6.3vh),3rem);line-height:1.08}
 .sec-head p{margin-top:16px;color:var(--mute);font-size:1.1rem;text-wrap:pretty}
 .ice{background:var(--ice);color:var(--dark)}
 .ice .sec-head p{color:var(--dmute)}
@@ -140,7 +140,7 @@ h1,h2,h3{font-family:var(--disp);font-weight:500;letter-spacing:-.03em;text-wrap
 /* structures: centred heading, then the situations panel and the diagram (the 3D scene frames itself on .dia) */
 .structs{position:relative;z-index:1;padding:clamp(72px,10vw,120px) var(--pad);border-top:1px solid var(--hair)}
 .m3 .structs{height:100vh;padding:calc(var(--hh) + 2vh) var(--pad) 3vh;border-top:0;display:flex;align-items:center}
-.s-in{max-width:1480px;width:100%;margin:0 auto;display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);grid-template-areas:"head head" "panel dia";gap:clamp(14px,3vh,36px) clamp(24px,4vw,64px);align-items:center}
+.s-in{max-width:1480px;width:100%;margin:0 auto;display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);grid-template-areas:"head head" "panel dia";gap:clamp(20px,5vh,48px) clamp(24px,4vw,64px);align-items:center}
 .s-head{grid-area:head;text-align:center}
 .s-head .count{justify-content:center}
 .panel{grid-area:panel;max-width:500px;width:100%;justify-self:end}
@@ -211,7 +211,7 @@ html:not(.js) .ex+.ex{margin-top:14px}
 .xp .sec-head p{color:var(--dmute);max-width:62ch;margin-left:auto;margin-right:auto}
 .xp-t .who{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
 .xp-t .who img{width:56px;height:56px;border-radius:50%;object-fit:cover;background:#fff;border:1px solid var(--dline)}
-.xp-t .who b{display:block;font:500 1.02rem/1.3 var(--disp)}
+.xp-t .who>div>b{display:block;font:500 1.02rem/1.3 var(--disp)}
 .xp-t .who span{font-size:.9rem;color:var(--dmute)}
 .ticks{margin-top:24px;display:grid;gap:0;border-top:1px solid var(--dline)}
 .ticks li{position:relative;padding:11px 0 11px 30px;border-bottom:1px solid var(--dline);font-size:.98rem}
@@ -226,7 +226,7 @@ html:not(.js) .ex+.ex{margin-top:14px}
 .qrow::before{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--green-d);transform:scaleX(0);transform-origin:0 50%;transition:transform 1s var(--ease)}
 .qrow .n{font:500 .8rem/2.4 var(--mono);color:var(--green-tx)}
 .qrow:focus-visible{outline-offset:-2px}
-.qrow h3{font-size:clamp(1.25rem,2.3vw,2rem);line-height:1.2;transition:transform .8s var(--ease),color .5s}
+.qrow h3{font-size:clamp(1.15rem,1.6vw,1.6rem);line-height:1.25;transition:transform .8s var(--ease),color .5s}
 .qa{display:grid;grid-template-rows:1fr}
 .qa>div{overflow:hidden;min-height:0}
 .qa p{padding-top:10px;max-width:60ch;color:var(--dmute)}
@@ -246,8 +246,8 @@ html:not(.js) .ex+.ex{margin-top:14px}
 .strat{background:var(--abyss);overflow:hidden;padding-bottom:clamp(64px,9vw,110px)}
 .mq{margin-top:clamp(36px,5vw,56px);overflow:hidden;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:clamp(18px,3vw,34px) 0}
 .mq-track{display:flex;width:max-content;will-change:transform}
-.mq-track span{display:flex;align-items:center;white-space:nowrap;font:500 clamp(2.4rem,6.4vw,6rem)/1.05 var(--disp);letter-spacing:-.045em;color:#fff;padding-right:.5em}
-.mq-track span:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--green-t)}
+.mq-track span{display:flex;align-items:center;white-space:nowrap;font:500 clamp(2rem,3.2vw,3rem)/1.1 var(--disp);letter-spacing:-.02em;color:#fff;padding-right:.6em}
+.mq-track span:nth-child(even){color:var(--green-t)}
 .mq-track span::after{content:"";flex:none;width:.22em;height:.22em;margin-left:.5em;background:var(--green-l)}
 .strat .note{margin-top:22px;text-align:center;color:var(--mute)}
 
@@ -291,9 +291,10 @@ html:not(.js) .ex+.ex{margin-top:14px}
 /* promises: sticky stack */
 .prom{background:var(--deep)}
 .stack{max-width:900px;margin:clamp(40px,5vw,64px) auto 0;display:grid;gap:18px}
-.pc{position:sticky;top:calc(var(--hh) + 24px + var(--i) * 18px);min-height:clamp(150px,22vh,200px);display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:clamp(18px,3vw,40px);padding:clamp(22px,3vw,40px);border-radius:24px;border:1px solid var(--hair);text-align:left;box-shadow:0 -18px 40px -24px rgba(1,15,26,.7)}
-.pc .k{font:500 clamp(2.6rem,5vw,4rem)/1 var(--mono);letter-spacing:-.04em}
-.pc h3{font-size:clamp(1.4rem,2.6vw,2.1rem);line-height:1.15}
+.pc{--o:64px;position:sticky;top:calc(var(--hh) + 20px + var(--i) * var(--o));margin-bottom:calc((4 - var(--i)) * var(--o));display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start;gap:clamp(16px,2.4vw,32px);padding:22px clamp(22px,3vw,40px) 26px;border-radius:24px;border:1px solid var(--hair);text-align:left;box-shadow:0 -18px 40px -24px rgba(1,15,26,.7)}
+.pc .k{font:500 clamp(1.6rem,2.2vw,2.1rem)/1.2 var(--mono);letter-spacing:-.02em}
+.pc h3{font-size:clamp(1.25rem,1.75vw,1.75rem);line-height:1.3}
+@media (max-width:760px){.pc{--o:86px}}
 .pc:nth-child(1){background:#05507f}
 .pc:nth-child(2){background:#04649F}
 .pc:nth-child(3){background:var(--green-l);color:var(--abyss);border-color:transparent}
@@ -1080,7 +1081,7 @@ html:not(.js) .ex+.ex{margin-top:14px}
         heroH=d.getElementById('hero').offsetHeight||1;
         BX.hero={x:r.left+r.width/2,y:r.top+sy+r.height/2,w:r.width,h:r.height};
         BX.dia={x:q.left+q.width/2,y:q.top-sr.top+q.height/2,w:q.width,h:q.height};
-        BX.headTop=sec.querySelector('.s-head').getBoundingClientRect().top-sr.top;
+        var hr=sec.querySelector('.s-head').getBoundingClientRect();BX.headTop=hr.top-sr.top;BX.headBot=hr.bottom-sr.top+10;
         Object.keys(tags).forEach(function(k){tagW[k]=tags[k].offsetWidth;tagH[k]=tags[k].offsetHeight});
       }
       function size(){W=wrap.clientWidth;Hh=wrap.clientHeight;R.setSize(W,Hh,false);cam.aspect=W/Hh;measure()}
@@ -1093,17 +1094,17 @@ html:not(.js) .ex+.ex{margin-top:14px}
         var a=BX.hero,b=BX.dia;f=sm(f);
         bx.x=a.x+(b.x-a.x)*f;bx.y=a.y+(b.y-a.y)*f;bx.w=a.w+(b.w-a.w)*f;bx.h=a.h+(b.h-a.h)*f;
         // the hero box sits low on the first screen: the structure fills it and bleeds a little below the fold
-        var ph=W<768,col=W<1024,lift=bx.h*(.12-(col?.1:.02)*f);
+        var ph=W<768,col=W<1024,lift=bx.h*(.12-.1*f);
         // once the pin lets go, the scene leaves with its section
         if(pin&&window.scrollY>pin.end)lift-=window.scrollY-pin.end;
-        var fw=ph?8.2:4.78+1.8*f,fh=3.82+(col?3.4:2)*f;
+        var fw=ph?8.2:4.78+1.8*f,fh=3.82+(col?3.4:3)*f;
         cam.zoom=Math.max(.2,Math.min(bx.h/fh,bx.w/fw)*6.725/Hh);
         cam.setViewOffset(W,Hh,W/2-bx.x,Hh/2-(bx.y+lift),W,Hh);cam.updateProjectionMatrix();
-        // single-column layouts: the canvas is cut away over the section heading and below the diagram box,
+        // the canvas is cut away over the section heading (down to the diagram box in one column) and below the diagram box,
         // following the section as it arrives, pins and leaves, so the scene and its labels never run over text
-        if(col&&pin){
+        if(pin){
           var yy=window.scrollY,off=yy<pin.start?pin.start-yy:yy>pin.end?pin.end-yy:0;
-          var A=Math.round(Math.min(Hh,Math.max(0,BX.headTop+off))),Bv=Math.round(Math.min(Hh,Math.max(0,BX.dia.y-BX.dia.h/2+off))),Cv=Math.round(Math.min(Hh,Math.max(0,BX.dia.y+BX.dia.h/2+off)));
+          var A=Math.round(Math.min(Hh,Math.max(0,BX.headTop+off))),Bv=Math.round(Math.min(Hh,Math.max(0,(col?BX.dia.y-BX.dia.h/2:BX.headBot)+off))),Cv=Math.round(Math.min(Hh,Math.max(0,BX.dia.y+BX.dia.h/2+off)));
           var key=A+','+Bv+','+Cv;
           if(key!==clipT){clipT=key;wrap.style.clipPath='polygon(0 0,100% 0,100% '+A+'px,0 '+A+'px,0 '+Bv+'px,100% '+Bv+'px,100% '+Cv+'px,0 '+Cv+'px)'}
         }else if(clipT){clipT=0;wrap.style.clipPath=''}

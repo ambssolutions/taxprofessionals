@@ -44,7 +44,7 @@ body{margin:0;background:var(--ivory);color:var(--ink);font:400 16px/1.6 var(--s
 img,svg{display:block;max-width:100%}
 a{color:inherit}
 button,input,textarea{font:inherit;color:inherit}
-h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.02;margin:0;font-variation-settings:"opsz" 96;text-wrap:balance}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.015em;line-height:1.02;margin:0;font-variation-settings:"opsz" 96;text-wrap:balance}
 h3{font-weight:600;letter-spacing:-.01em;line-height:1.15;font-size:1.22rem}
 p{margin:0}
 :focus-visible{outline:3px solid var(--green-d);outline-offset:3px;border-radius:8px}
@@ -104,7 +104,7 @@ p{margin:0}
 /* hero */
 .hero{min-height:calc(100svh - var(--hh));display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:clamp(20px,4vw,56px);padding-block:clamp(16px,3vh,40px)}
 .hero-copy{text-align:center;max-width:620px;justify-self:center}
-.hero h1{font-size:clamp(2.6rem,5.6vw,4.9rem);line-height:.98}
+.hero h1{font-size:clamp(2.6rem,5vw,4.5rem);line-height:1}
 .hero h1 .o{color:var(--green-d)}
 html.js:not(.rm) .hero h1{opacity:0;animation:show 0s 1.4s forwards}
 @keyframes show{to{opacity:1}}
@@ -123,7 +123,7 @@ html.js:not(.rm) .hero h1{opacity:0;animation:show 0s 1.4s forwards}
 /* sections */
 .sec{padding-block:clamp(72px,10vw,128px)}
 .head{text-align:center;max-width:46rem;margin:0 auto clamp(30px,4vw,52px)}
-.head h2{font-size:clamp(2rem,3.9vw,3.25rem)}
+.head h2{font-size:clamp(1.9rem,3.2vw,3rem)}
 .head p{margin-top:14px;color:var(--muted);font-size:1.08rem}
 
 /* tiles */
@@ -139,8 +139,8 @@ html.js:not(.rm) .hero h1{opacity:0;animation:show 0s 1.4s forwards}
 .c-blue .ic,.c-deep .ic{background:rgba(255,255,255,.12);border-color:var(--line-d);color:#fff}
 .c-green .ic{background:rgba(255,255,255,.35);border-color:rgba(11,34,51,.2);color:var(--ink)}
 .tile:hover .ic{transform:rotate(-8deg) scale(1.08)}
-.ti{display:flex;flex-direction:column;gap:10px;height:100%}
-.ti h3{margin-top:auto}
+.ti{display:flex;flex-direction:column;justify-content:center;gap:10px;height:100%}
+.ti .ic{margin-bottom:4px}
 .ti p{font-size:.95rem;line-height:1.5}
 .c-blue .ti p,.c-deep .ti p{color:rgba(255,255,255,.88)}
 
@@ -218,9 +218,9 @@ html.fx.js .bento>.tile.rv{opacity:1;transform:none;transition:none}
 .res .btn{background:var(--white);color:var(--deep)}
 .res:focus{outline:none}
 html.js .chooser .step,html.js .chooser .res{display:none}
-html.js .chooser .cur{display:block;animation:stepIn .7s var(--spring) both}
+html.js .chooser .now{display:block;animation:stepIn .7s var(--spring) both}
 @keyframes stepIn{from{opacity:0;transform:translateX(40px) scale(.98)}}
-html.js .chooser .cur.back{animation-name:stepBack}
+html.js .chooser .now.back{animation-name:stepBack}
 @keyframes stepBack{from{opacity:0;transform:translateX(-40px) scale(.98)}}
 html:not(.js) .ch-nav,html:not(.js) .dots,html:not(.js) .res{display:none}
 .tray-wrap{border-radius:var(--r);border:1px solid var(--line);background:var(--white);padding:clamp(18px,2.4vw,26px);display:flex;flex-direction:column}
@@ -252,7 +252,7 @@ html:not(.js) .ch-nav,html:not(.js) .dots,html:not(.js) .res{display:none}
 .t-lead .cred{display:inline-block;margin-top:10px;font-size:.84rem;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid currentColor}
 .roster{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0;padding:0}
 .roster li{list-style:none;display:flex;align-items:center;gap:12px;padding:12px;border-radius:18px;border:1px solid var(--line);background:var(--white);transition:transform .6s var(--spring)}
-.roster li:hover{transform:translateY(-4px) rotate(-1deg)}
+.roster li:hover{transform:translateY(-4px)}
 .roster img,.roster i{width:52px;height:52px;border-radius:15px;flex:none;object-fit:cover}
 .roster i{display:grid;place-items:center;font-style:normal;font-family:var(--display);font-weight:800;font-size:1.05rem;color:#fff;background:var(--blue)}
 .roster li:nth-child(even) i{background:var(--green);color:var(--ink)}
@@ -266,8 +266,8 @@ html:not(.js) .ch-nav,html:not(.js) .dots,html:not(.js) .res{display:none}
 #why{overflow:hidden}
 .pr-view{overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 0 22px;scrollbar-width:thin;overscroll-behavior-x:contain}
 .pr-track{display:flex;gap:var(--gap);margin:0;padding:0 var(--pad);width:max-content;list-style:none}
-.pr-track li{scroll-snap-align:center;width:min(78vw,400px);min-height:340px;border-radius:var(--r);border:1px solid var(--line);padding:28px;display:flex;flex-direction:column;justify-content:space-between;font-family:var(--display);font-weight:800;font-size:clamp(1.55rem,2.4vw,2.1rem);line-height:1.08;letter-spacing:-.02em;transition:transform .6s var(--spring)}
-.pr-track li:hover{transform:translateY(-6px) rotate(-1.2deg)}
+.pr-track li{scroll-snap-align:center;width:min(78vw,400px);min-height:0;border-radius:var(--r);border:1px solid var(--line);padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:22px;text-align:center;text-wrap:balance;font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,1.75vw,1.6rem);line-height:1.15;letter-spacing:-.01em;transition:transform .6s var(--spring)}
+.pr-track li:hover{transform:translateY(-6px)}
 .pr-track li b{display:grid;place-items:center;width:64px;height:64px;border-radius:20px;font-size:1.8rem;background:rgba(255,255,255,.85);color:var(--deep);border:1px solid var(--line)}
 .pr-track .p1{background:var(--green);color:var(--ink)}
 .pr-track .p2{background:var(--blue);color:#fff}
@@ -275,12 +275,13 @@ html:not(.js) .ch-nav,html:not(.js) .dots,html:not(.js) .res{display:none}
 .pr-track .p4{background:var(--deep);color:#fff}
 .pr-track .p5{background:var(--mint)}
 .pr-hint{text-align:center;color:var(--muted);font-size:.9rem;margin-top:8px}
-@media (min-width:1024px){html:not(.fx) .pr-view{overflow:visible}html:not(.fx) .pr-track{width:min(1280px,100% - var(--pad)*2);margin-inline:auto;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}html:not(.fx) .pr-track li{width:auto;min-height:300px;padding:22px;font-size:clamp(1.25rem,1.7vw,1.5rem)}html:not(.fx) .pr-hint{display:none}}
+@media (min-width:1024px){html:not(.fx) .pr-view{overflow:visible}html:not(.fx) .pr-track{width:min(1280px,100% - var(--pad)*2);margin-inline:auto;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}html:not(.fx) .pr-track li{width:auto;min-height:0;padding:22px;font-size:clamp(1.2rem,1.6vw,1.45rem)}html:not(.fx) .pr-hint{display:none}}
 .fx #why{height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--hh) + 10px) 0 30px}
 .fx #why .head{margin-bottom:28px}
 .fx .pr-view{overflow:visible;scroll-snap-type:none}
 .fx .pr-track{padding-left:max(var(--pad),calc((100vw - 1280px)/2))}
-.fx .pr-track li{width:clamp(330px,30vw,420px);min-height:min(360px,44vh)}
+.fx .pr-track li{width:clamp(330px,30vw,420px);min-height:0}
+.fx .pr-track{align-items:center}
 .fx .pr-hint{display:none}
 
 /* dates */
@@ -315,10 +316,10 @@ html.js .cal .rv.in{opacity:1;transform:none}
 .a-tx{grid-column:span 2}
 .a-tx h3{font-size:clamp(1.5rem,2.2vw,1.9rem);margin-bottom:10px}
 .a-big{font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,4.2vw,3.6rem);line-height:1;letter-spacing:-.04em}
-.a-sm .face{justify-content:space-between;gap:16px}
+.a-sm .face{justify-content:center;gap:10px}
 .quote{grid-column:1/-1}
 .quote blockquote{margin:0 auto;text-align:center;max-width:56rem}
-.quote blockquote p{font-family:var(--display);font-weight:600;font-size:clamp(1.25rem,2vw,1.7rem);line-height:1.3;letter-spacing:-.01em}
+.quote blockquote p{font-family:var(--display);font-weight:600;font-size:clamp(1.25rem,1.8vw,1.7rem);line-height:1.3;letter-spacing:-.01em}
 .quote footer{margin-top:16px;font-weight:700;color:var(--deep)}
 .quote .face{padding:clamp(26px,4vw,48px)}
 @media (max-width:899px){.aw{grid-template-columns:1fr 1fr}.a-ph,.a-tx{grid-column:1/-1}.a-ph{grid-row:auto}}
@@ -326,11 +327,11 @@ html.js .cal .rv.in{opacity:1;transform:none}
 
 /* insights */
 .reads{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap);margin:0;padding:0}
-.reads .face{gap:14px;min-height:220px}
+.reads .face{gap:14px;min-height:220px;justify-content:center}
 .reads a{font-family:var(--display);font-weight:600;font-size:1.2rem;line-height:1.2;text-decoration:none;letter-spacing:-.01em}
 .reads a::after{content:"";position:absolute;inset:0;border-radius:inherit}
 .reads a:hover{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
-.reads .by{margin-top:auto;font-size:.86rem}
+.reads .by{font-size:.86rem}
 .reads li:first-child{grid-column:span 2}
 .reads li:first-child a{font-size:clamp(1.5rem,2.3vw,2rem)}
 .reads-more{text-align:center;margin-top:18px}
@@ -404,10 +405,10 @@ body>footer{background:var(--deep);color:#fff;padding:56px 0 calc(28px + env(saf
 
 /* ===== Embossed surfaces: blocks pressed up out of the ivory page, one light from the top left ===== */
 :root{
-  --emb:10px 12px 26px rgba(3,63,102,.17),-6px -6px 16px rgba(255,255,255,.7);
-  --emb-sm:4px 5px 12px rgba(3,63,102,.17),-3px -3px 9px rgba(255,255,255,.7);
+  --emb:10px 12px 26px rgba(3,63,102,.17);
+  --emb-sm:4px 5px 12px rgba(3,63,102,.17);
   --emb-in:inset 3px 3px 9px rgba(3,63,102,.18),inset -3px -3px 8px rgba(255,255,255,.8);
-  --emb-photo:12px 16px 34px -8px rgba(3,63,102,.34),-6px -6px 16px rgba(255,255,255,.6);
+  --emb-photo:12px 16px 34px -8px rgba(3,63,102,.34);
   --hi:inset 0 1px 0 rgba(255,255,255,.75),inset 0 -2px 0 rgba(3,63,102,.05);
   --in:inset 3px 3px 7px rgba(3,63,102,.16),inset -3px -3px 7px rgba(255,255,255,.85);
   --press:inset 4px 4px 12px rgba(3,63,102,.2),inset -3px -3px 9px rgba(255,255,255,.8);
@@ -456,7 +457,7 @@ html.mo.js .bento>.tile.rv::before{transition:none}
 @media (max-width:899px){.nav{background:var(--ivory);border-color:transparent;box-shadow:var(--emb),var(--hi)}}
 
 /* picker: raised keys on the deep panel; a chosen answer is pressed in */
-.chooser{border-color:transparent;background-image:linear-gradient(180deg,#04497A,#033F66 45%);box-shadow:12px 14px 30px rgba(3,63,102,.28),-6px -6px 16px rgba(255,255,255,.6),inset 0 1px 0 rgba(255,255,255,.14)}
+.chooser{border-color:transparent;background-image:linear-gradient(180deg,#04497A,#033F66 45%);box-shadow:12px 14px 30px rgba(3,63,102,.28),inset 0 1px 0 rgba(255,255,255,.14)}
 .opt span{border-color:transparent;background:linear-gradient(180deg,#0B5D90,#074E7E);box-shadow:var(--raise-d);transition:background .3s,transform .5s var(--spring),color .3s,box-shadow .25s var(--ease),translate .25s var(--ease)}
 .opt:hover span{border-color:transparent}
 .opt span::before{border-color:rgba(255,255,255,.55);box-shadow:inset 1px 1px 3px rgba(0,14,30,.5)}
@@ -516,7 +517,7 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
   .qbar a:active{box-shadow:var(--btn-in);translate:0 1px}
 }
 @media (max-width:599px){
-  :root{--emb:7px 8px 18px rgba(3,63,102,.17),-4px -4px 11px rgba(255,255,255,.7);--emb-sm:3px 4px 9px rgba(3,63,102,.17),-2px -2px 7px rgba(255,255,255,.7);--emb-photo:8px 11px 24px -6px rgba(3,63,102,.34),-4px -4px 11px rgba(255,255,255,.6)}
+  :root{--emb:7px 8px 18px rgba(3,63,102,.17);--emb-sm:3px 4px 9px rgba(3,63,102,.17);--emb-photo:8px 11px 24px -6px rgba(3,63,102,.34)}
   .dates{--emb:8px 10px 20px rgba(0,14,30,.5);--emb-sm:4px 5px 10px rgba(0,14,30,.45)}
 }
 
@@ -1071,7 +1072,7 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
   function paintDots(){dots.forEach(function(p,k){p.classList.toggle('on',k===cur);p.classList.toggle('done',!!state[Q[k]])})}
   function go(i,dir){
     cur=i;
-    steps.forEach(function(s,k){s.classList.toggle('cur',k===i);s.classList.toggle('back',k===i&&dir<0)});
+    steps.forEach(function(s,k){s.classList.toggle('now',k===i);s.classList.toggle('back',k===i&&dir<0)});
     paintDots();
     back.disabled=i===0;
     next.hidden=i===3;reset.hidden=i!==3;
@@ -1189,7 +1190,7 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
       var inner=[t.querySelector('.ti'),t.querySelector('.ph')].filter(Boolean);
       tl.fromTo(t,{x:function(){return pile(i).x},y:function(){return pile(i).y},scaleX:function(){return pile(i).sx},scaleY:function(){return pile(i).sy},rotation:45},
         {x:0,y:0,scaleX:1,scaleY:1,rotation:0,duration:1,ease:'back.out(1.5)'},.08+i*.09);
-      tl.fromTo(inner,{opacity:0},{opacity:1,duration:.3,ease:'none'},.72+i*.09);
+      tl.fromTo(inner,{opacity:0},{opacity:1,duration:.25,ease:'none'},1+i*.09);
     });
     tl.to({},{duration:.3});
 
@@ -1199,7 +1200,7 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
     var hz=G.to(track,{x:function(){return -dist()},ease:'none',scrollTrigger:{trigger:'#why',start:'top top',end:function(){return '+='+dist()},pin:true,scrub:.4,invalidateOnRefresh:true,anticipatePin:1}});
     $$('li',track).forEach(function(li,i){
       if(i<2)return;
-      G.from(li,{rotation:i%2?-8:8,y:60,scale:.88,ease:'back.out(1.7)',scrollTrigger:{trigger:li,containerAnimation:hz,start:'left 100%',end:'left 62%',scrub:.4}});
+      G.from(li,{y:60,ease:'back.out(1.7)',scrollTrigger:{trigger:li,containerAnimation:hz,start:'left 100%',end:'left 62%',scrub:.4}});
     });
 
     // section transition: the dates band opens out of a rounded square
@@ -1214,7 +1215,7 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
       var im=f.querySelector('.ph img'),px=im&&G.quickTo(im,'x',{duration:.8,ease:'power3'}),py=im&&G.quickTo(im,'y',{duration:.8,ease:'power3'});
       f.addEventListener('pointermove',function(e){
         var r=f.getBoundingClientRect(),u=(e.clientX-r.left)/r.width-.5,v=(e.clientY-r.top)/r.height-.5;
-        rx(-v*7);ry(u*7);mx(u*8);my(v*8);if(im){px(-u*16);py(-v*16)}
+        mx(u*8);my(v*8);if(im){px(-u*16);py(-v*16)}
       });
       f.addEventListener('pointerleave',function(){
         rx(0);ry(0);mx(0);my(0);if(im){px(0);py(0)}
@@ -1257,7 +1258,7 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
     });
 
     // picker: the answer keys and the tray pop up when the questions arrive
-    G.from('#chooser .cur .opt',{y:26,scale:.9,opacity:0,duration:.8,ease:'back.out(2)',stagger:.07,clearProps:'transform,opacity',scrollTrigger:{trigger:'#chooser',start:'top 78%',once:true}});
+    G.from('#chooser .now .opt',{y:26,scale:.9,opacity:0,duration:.8,ease:'back.out(2)',stagger:.07,clearProps:'transform,opacity',scrollTrigger:{trigger:'#chooser',start:'top 78%',once:true}});
     G.from('#tray li',{scale:.6,rotation:-8,opacity:0,duration:.8,ease:'back.out(2)',stagger:.05,clearProps:'transform,opacity',scrollTrigger:{trigger:'#tray',start:'top 85%',once:true}});
 
     // photos open with a clip-path wipe while the image settles
@@ -1276,7 +1277,7 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
       var hz=G.to(track,{x:function(){return -dist()},ease:'none',scrollTrigger:{trigger:'#why',start:'top top',end:function(){return '+='+Math.min(dist(),innerHeight*1.4)},pin:true,scrub:.4,anticipatePin:1,invalidateOnRefresh:true}});
       $$('li',track).forEach(function(li,i){
         if(i<1)return;
-        G.from(li,{rotation:i%2?-8:8,y:50,scale:.88,ease:'back.out(1.7)',scrollTrigger:{trigger:li,containerAnimation:hz,start:'left 100%',end:'left 55%',scrub:.4}});
+        G.from(li,{y:50,ease:'back.out(1.7)',scrollTrigger:{trigger:li,containerAnimation:hz,start:'left 100%',end:'left 55%',scrub:.4}});
       });
       return function(){h.classList.remove('pr-pin')};
     });
