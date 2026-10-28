@@ -463,6 +463,59 @@ html:not(.js) .cd-row{display:none}
 .cd-t{margin:18px auto 0;max-width:52ch;font-size:clamp(16px,1.3vw,18px);line-height:1.5;color:rgba(243,239,231,.82)}
 .cd-t b{font-weight:600;color:var(--ivory)}
 /* the tax year as a film strip: frames April to March, a line that draws itself */
+/* the next 60 days: an always-current list worked out from today's date */
+.nx{max-width:760px;margin:0 auto clamp(36px,6vh,56px)}
+.nx-h{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;margin-bottom:18px}
+.nx-h h3{font:400 clamp(1.4rem,2vw,1.75rem)/1.1 var(--serif);color:var(--ivory)}
+.nx-open{min-height:44px;padding:0 20px;border-radius:999px;border:1px solid rgba(243,239,231,.4);background:transparent;color:var(--ivory);font:600 15px/1 var(--sans);cursor:pointer;box-shadow:var(--emb-sm)}
+.nx-open:hover{border-color:var(--green-l);color:#fff}
+.nx-l{display:grid;gap:10px;text-align:left}
+.nx-l>li{display:grid;grid-template-columns:76px 1fr;gap:16px;align-items:start;padding:14px 16px;border-radius:12px;background:#071a29;border:1px solid rgba(243,239,231,.08)}
+.nx-l>li.soon{border-color:rgba(98,180,68,.55)}
+.nx-d{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0;border-radius:10px;background:#0b2337;color:var(--ivory)}
+.nx-d b{font:400 1.7rem/1 var(--serif)}
+.nx-d span{font:600 11.5px/1.2 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:rgba(243,239,231,.68)}
+.nx-i ul{display:grid;gap:6px}
+.nx-i li{display:flex;gap:10px;align-items:baseline;font-size:16px;line-height:1.4;color:rgba(243,239,231,.9)}
+.nx-i small{display:block;margin-top:6px;font-size:14px;color:rgba(243,239,231,.66)}
+.nx-in{font:600 13px/1 var(--sans);letter-spacing:.04em;color:var(--green-l)}
+.k{flex:none;width:10px;height:10px;border-radius:3px;display:inline-block;transform:translateY(-1px)}
+.k.gst{background:#62B444}.k.prov{background:#4FA3DD}.k.inc{background:#F3EFE7}.k.paye{background:#8C9BA8}.k.year{background:transparent;border:1.5px solid #62B444}
+/* the full calendar: a month grid for the next 12 months, with filters and a download */
+.cal{width:min(720px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:0;border:1px solid rgba(243,239,231,.14);border-radius:18px;background:#04121d;color:var(--ivory);overflow:auto}
+.cal::backdrop{background:rgba(1,8,14,.72)}
+.cal-in{padding:clamp(16px,3vw,28px)}
+.cal-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cal-top h3{font:400 1.6rem/1.1 var(--serif)}
+.cal-x{width:44px;height:44px;border-radius:50%;border:1px solid rgba(243,239,231,.3);background:transparent;color:var(--ivory);font-size:26px;line-height:1;cursor:pointer}
+.cal-f{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0 6px;font-size:14.5px;color:rgba(243,239,231,.86)}
+.cal-f label{display:inline-flex;align-items:center;gap:8px;min-height:36px;cursor:pointer}
+.cal-f input{width:18px;height:18px;accent-color:#62B444}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin:8px 0 10px}
+.cal-nav p{font:400 1.35rem/1 var(--serif)}
+.cal-nav button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(243,239,231,.3);background:transparent;color:var(--ivory);font-size:24px;cursor:pointer}
+.cal-nav button:disabled{opacity:.3;cursor:default}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-g .h{padding:6px 0;text-align:center;font:600 11.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:rgba(243,239,231,.55)}
+.cal-g button{position:relative;min-height:52px;padding:6px 4px 16px;border-radius:8px;border:1px solid transparent;background:#071a29;color:rgba(243,239,231,.9);font:500 15px/1 var(--sans);cursor:pointer;text-align:center}
+.cal-g button.out{visibility:hidden}
+.cal-g button.past{opacity:.35}
+.cal-g button.today{border-color:var(--green-l)}
+.cal-g button[aria-pressed=true]{background:#0f3350;border-color:rgba(243,239,231,.5)}
+.cal-g .dots{position:absolute;left:0;right:0;bottom:7px;display:flex;justify-content:center;gap:3px}
+.cal-g .dots .k{width:7px;height:7px;border-radius:50%}
+.cal-l{display:grid;gap:8px;margin-top:14px;min-height:60px}
+.cal-l li{display:grid;grid-template-columns:92px 1fr;gap:12px;font-size:15px;line-height:1.4;color:rgba(243,239,231,.88)}
+.cal-l li b{font-weight:600;color:var(--ivory)}
+.cal-l .t{display:flex;gap:8px;align-items:baseline}
+.cal-b{margin-top:18px;padding-top:16px;border-top:1px solid rgba(243,239,231,.12);display:grid;gap:10px;justify-items:start}
+.cal-b p{font-size:14px;color:rgba(243,239,231,.66)}
+@media (max-width:600px){
+  .cal{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;border-radius:0}
+  .nx-l>li{grid-template-columns:64px 1fr;gap:12px;padding:12px}
+  .cal-g button{min-height:44px;font-size:14px}
+  .cal-l li{grid-template-columns:1fr;gap:2px}
+}
 .yr-stage{max-width:1280px;margin:0 auto}
 .yr-scene .board{margin-bottom:clamp(16px,3vh,32px)}
 @media (max-height:760px){.yr-scene .board{padding-block:16px}.yr-scene .cd-row{font-size:clamp(2.2rem,7vh,3.4rem);margin-top:10px}.yr-scene .cd-t{margin-top:10px}.yr-track{padding-block:30px 40px}}
@@ -506,6 +559,12 @@ html:not(.js) .cd-row{display:none}
 .faq summary::after{content:"";flex:none;margin-left:auto;width:10px;height:10px;border-right:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(45deg) translate(-2px,-2px);transition:transform 1s var(--fold)}
 .faq details[open] summary::after{transform:rotate(225deg)}
 .faq .ans{padding:0 48px 24px 0;color:#2f353a;max-width:66ch}
+/* owner: centre the questions. Each question sits on the centre line; the arrow keeps its place at the right edge */
+.faq-l{max-width:760px}
+.faq summary{position:relative;justify-content:center;text-align:center;padding:14px 44px}
+.faq summary::after{position:absolute;right:8px;top:50%;margin:-7px 0 0}
+.faq details[open] summary::after{margin-top:-2px}
+.faq .ans{padding:0 44px 24px;margin:0 auto;text-align:center}
 @supports selector(::details-content){
   .faq details::details-content{block-size:0;overflow:hidden;opacity:0;transition:block-size 1.4s var(--fold),opacity 1s ease,content-visibility 1.4s allow-discrete}
   .faq details[open]::details-content{block-size:auto;opacity:1}
@@ -896,6 +955,10 @@ html.js .rv.in{opacity:1;transform:none}
         <p class="sr" id="cd-sr"></p>
         <p class="cd-t"><b id="cd-what">GST, provisional tax, income tax and terminal tax dates</b> <span id="cd-when">are listed below.</span></p>
       </div>
+      <div class="nx rv" id="nx">
+        <div class="nx-h"><h3>The next 60 days</h3><button type="button" class="nx-open" id="calOpen" aria-haspopup="dialog">Open the full calendar</button></div>
+        <ol class="nx-l" id="nxList"></ol>
+      </div>
       <div class="dl-g">
         <div class="dcard rv"><h3>Income tax</h3><dl>
           <div><dt>7 July</dt><dd>Income tax returns<small>Without a tax agent</small></dd></div>
@@ -916,6 +979,21 @@ html.js .rv.in{opacity:1;transform:none}
           <div><dt>20th</dt><dd>PAYE paid, small employers<small>Payday filing within 2 working days of payday</small></dd></div>
         </dl></div>
       </div>
+      <dialog class="cal" id="cal" aria-labelledby="cal-t">
+        <div class="cal-in">
+          <div class="cal-top"><h3 id="cal-t">Tax calendar</h3><button type="button" class="cal-x" id="calClose" aria-label="Close the calendar">&times;</button></div>
+          <div class="cal-f" role="group" aria-label="Show these dates">
+            <label><input type="checkbox" value="gst" checked><span class="k gst"></span>GST</label>
+            <label><input type="checkbox" value="prov" checked><span class="k prov"></span>Provisional tax</label>
+            <label><input type="checkbox" value="inc" checked><span class="k inc"></span>Income and terminal tax</label>
+            <label><input type="checkbox" value="paye" checked><span class="k paye"></span>PAYE</label>
+          </div>
+          <div class="cal-nav"><button type="button" id="calPrev" aria-label="Previous month">&#8249;</button><p id="calMonth" aria-live="polite"></p><button type="button" id="calNext" aria-label="Next month">&#8250;</button></div>
+          <div class="cal-g" id="calGrid" role="grid" aria-labelledby="calMonth"></div>
+          <ol class="cal-l" id="calList"></ol>
+          <div class="cal-b"><button type="button" class="nx-open" id="calIcs">Add the next 12 months to my calendar</button><p>Standard Inland Revenue dates for a 31 March balance date. Due on a weekend or public holiday? Pay the next working day. We&#8217;ll confirm your own dates.</p></div>
+        </div>
+      </dialog>
       <p class="note">General dates from Inland Revenue. Due on a weekend or public holiday? Pay the next working day (GST: the last working day of the period). We&#8217;ll confirm your own dates. Calculators and forms are on our <a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">client resources</a> page.</p>
     </div>
   </section>
@@ -1262,6 +1340,98 @@ html.js .rv.in{opacity:1;transform:none}
     return E;
   }
   var now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  /* the next 60 days and the full calendar, worked out from today's date so they never go stale */
+  var DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  function calEvents(y){
+    var E = [];
+    for (var m = 0; m < 12; m++) {
+      var pm = (m + 11) % 12, py = m === 0 ? y - 1 : y;
+      if (pm !== 10 && pm !== 2) E.push({d:new Date(y, m, 28), c:'gst', t:'GST return and payment', x:'Periods ending ' + lastDay(pm, py) + ' ' + MON[pm]});
+      E.push({d:new Date(y, m, 20), c:'paye', t:'PAYE and deductions', x:'Small employers, for last month'});
+    }
+    E.push({d:new Date(y, 0, 15), c:'gst', t:'GST return and payment', x:'Periods ending 30 November'});
+    E.push({d:new Date(y, 4, 7), c:'gst', t:'GST return and payment', x:'Periods ending 31 March'});
+    E.push({d:new Date(y, 7, 28), c:'prov', t:'Provisional tax, first instalment', x:'Standard method'});
+    E.push({d:new Date(y, 0, 15), c:'prov', t:'Provisional tax, second instalment', x:'Standard method'});
+    E.push({d:new Date(y, 4, 7), c:'prov', t:'Provisional tax, third instalment', x:'Standard method'});
+    E.push({d:new Date(y, 6, 7), c:'inc', t:'Income tax returns', x:'Without a tax agent'});
+    E.push({d:new Date(y, 1, 7), c:'inc', t:'Terminal tax', x:'Without an extension of time'});
+    E.push({d:new Date(y, 3, 7), c:'inc', t:'Terminal tax', x:'Tax-agent clients with an extension'});
+    E.push({d:new Date(y, 2, 31), c:'inc', t:'Income tax returns', x:'Tax-agent clients, for the year before last'});
+    E.push({d:new Date(y, 3, 1), c:'year', t:'The new tax year begins', x:''});
+    return E;
+  }
+  var CAL = calEvents(today.getFullYear() - 1).concat(calEvents(today.getFullYear()), calEvents(today.getFullYear() + 1), calEvents(today.getFullYear() + 2))
+    .sort(function(a, b){ return a.d - b.d || (a.c > b.c ? 1 : -1); });
+  function sameDay(a, b){ return +a === +b; }
+  function daysTo(dt){ return Math.round((dt - today) / 864e5); }
+  function inWords(n){ return n === 0 ? 'Today' : n === 1 ? 'Tomorrow' : 'In ' + n + ' days'; }
+  function esc(t){ return String(t).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+  (function nextSixty(){
+    var list = d.getElementById('nxList'); if (!list) return;
+    var end = new Date(today); end.setDate(end.getDate() + 60);
+    var soon = CAL.filter(function(e){ return e.d >= today && e.d <= end; }), o = '', i = 0;
+    while (i < soon.length) {
+      var dt = soon[i].d, same = soon.filter(function(e){ return sameDay(e.d, dt); }), n = daysTo(dt), wk = dt.getDay() === 0 || dt.getDay() === 6;
+      o += '<li' + (n <= 7 ? ' class="soon"' : '') + '><p class="nx-d"><span>' + DAYS[dt.getDay()] + '</span><b>' + dt.getDate() + '</b><span>' + MON[dt.getMonth()].slice(0, 3) + '</span></p><div class="nx-i"><p class="nx-in">' + inWords(n) + '</p><ul>' +
+        same.map(function(e){ return '<li><span class="k ' + e.c + '"></span><span>' + esc(e.t) + (e.x ? ', ' + esc(e.x.charAt(0).toLowerCase() + e.x.slice(1)) : '') + '</span></li>'; }).join('') + '</ul>' +
+        (wk ? '<small>Falls on a ' + (dt.getDay() === 0 ? 'Sunday' : 'Saturday') + ', so payment is due the next working day.</small>' : '') + '</div></li>';
+      i += same.length;
+    }
+    list.innerHTML = o || '<li><p class="nx-i">No standard dates in the next 60 days.</p></li>';
+  })();
+  (function calendar(){
+    var dlg = d.getElementById('cal'), open = d.getElementById('calOpen'); if (!dlg || !open) return;
+    var grid = d.getElementById('calGrid'), label = d.getElementById('calMonth'), listEl = d.getElementById('calList');
+    var prev = d.getElementById('calPrev'), next = d.getElementById('calNext');
+    var first = new Date(today.getFullYear(), today.getMonth(), 1), last = new Date(today.getFullYear(), today.getMonth() + 12, 1);
+    var view = new Date(first), picked = null;
+    var on = {gst:1, prov:1, inc:1, paye:1, year:1};
+    function shown(e){ return on[e.c]; }
+    function item(e, withDate){ return '<li>' + (withDate ? '<b>' + DAYS[e.d.getDay()] + ' ' + e.d.getDate() + ' ' + MON[e.d.getMonth()].slice(0, 3) + '</b>' : '') + '<span class="t"><span class="k ' + e.c + '"></span><span>' + esc(e.t) + (e.x ? '<br><small>' + esc(e.x) + '</small>' : '') + '</span></span></li>'; }
+    function draw(){
+      var y = view.getFullYear(), m = view.getMonth(), lead = (new Date(y, m, 1).getDay() + 6) % 7, n = lastDay(m, y), o = '';
+      label.textContent = MON[m] + ' ' + y;
+      prev.disabled = +view <= +first; next.disabled = new Date(y, m + 1, 1) >= last;
+      ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(function(h){ o += '<span class="h" role="columnheader">' + h + '</span>'; });
+      for (var i = 0; i < lead; i++) o += '<button type="button" class="out" tabindex="-1" aria-hidden="true"></button>';
+      for (var day = 1; day <= n; day++) {
+        var dt = new Date(y, m, day), ev = CAL.filter(function(e){ return sameDay(e.d, dt) && shown(e); });
+        var cls = (dt < today ? 'past' : '') + (sameDay(dt, today) ? ' today' : '');
+        o += '<button type="button" class="' + cls.trim() + '" data-day="' + day + '" aria-pressed="' + (picked && sameDay(picked, dt) ? 'true' : 'false') + '" aria-label="' + day + ' ' + MON[m] + (ev.length ? ', ' + ev.map(function(e){ return e.t; }).join('; ') : ', no standard dates') + '">' + day +
+          (ev.length ? '<span class="dots">' + ev.map(function(e){ return '<span class="k ' + e.c + '"></span>'; }).join('') + '</span>' : '') + '</button>';
+      }
+      grid.innerHTML = o;
+      var evs = CAL.filter(function(e){ return shown(e) && (picked ? sameDay(e.d, picked) : e.d.getFullYear() === y && e.d.getMonth() === m); });
+      listEl.innerHTML = evs.length ? evs.map(function(e){ return item(e, true); }).join('') : '<li><span>No standard dates ' + (picked ? 'on this day.' : 'this month.') + '</span></li>';
+    }
+    grid.addEventListener('click', function(e){
+      var b = e.target.closest('button[data-day]'); if (!b) return;
+      var dt = new Date(view.getFullYear(), view.getMonth(), +b.dataset.day);
+      picked = picked && sameDay(picked, dt) ? null : dt; draw();
+      var again = grid.querySelector('button[data-day="' + b.dataset.day + '"]'); if (again) again.focus();
+    });
+    prev.addEventListener('click', function(){ view = new Date(view.getFullYear(), view.getMonth() - 1, 1); picked = null; draw(); });
+    next.addEventListener('click', function(){ view = new Date(view.getFullYear(), view.getMonth() + 1, 1); picked = null; draw(); });
+    [].forEach.call(dlg.querySelectorAll('.cal-f input'), function(cb){ cb.addEventListener('change', function(){ on[cb.value] = cb.checked ? 1 : 0; draw(); }); });
+    open.addEventListener('click', function(){ view = new Date(first); picked = null; draw(); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); });
+    d.getElementById('calClose').addEventListener('click', function(){ dlg.close ? dlg.close() : dlg.removeAttribute('open'); open.focus(); });
+    dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
+    d.getElementById('calIcs').addEventListener('click', function(){
+      function f(dt){ return dt.getFullYear() + pad2(dt.getMonth() + 1, 2) + pad2(dt.getDate(), 2); }
+      var nx = function(dt){ var t = new Date(dt); t.setDate(t.getDate() + 1); return t; };
+      var stamp = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+      var L = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Tax Professionals//Tax dates//EN','CALSCALE:GREGORIAN','X-WR-CALNAME:Tax dates (Tax Professionals)'];
+      CAL.filter(function(e){ return e.d >= today && e.d < last && shown(e) && e.c !== 'year'; }).forEach(function(e, i){
+        L.push('BEGIN:VEVENT','UID:' + f(e.d) + '-' + e.c + '-' + i + '@taxprofessionals.co.nz','DTSTAMP:' + stamp,'DTSTART;VALUE=DATE:' + f(e.d),'DTEND;VALUE=DATE:' + f(nx(e.d)),
+          'SUMMARY:' + e.t, 'DESCRIPTION:' + (e.x ? e.x + '. ' : '') + 'Standard Inland Revenue date. Due on a weekend or public holiday? Pay the next working day. Questions: 09 625 0035.','END:VEVENT');
+      });
+      L.push('END:VCALENDAR');
+      var a = d.createElement('a'); a.href = URL.createObjectURL(new Blob([L.join('\r\n')], {type:'text/calendar'})); a.download = 'tax-dates.ics';
+      d.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    });
+  })();
   var allE = events(today.getFullYear()).concat(events(today.getFullYear() + 1)).filter(function(e){ return e.d >= today; }).sort(function(a, b){ return a.d - b.d; });
   var first = allE[0], group = allE.filter(function(e){ return +e.d === +first.d; });
   var what = group.length > 1 ? group.map(function(e){ return e.s; }).filter(function(x, i, a){ return a.indexOf(x) === i; }).join(' and ') : first.t + (first.x ? ', ' + first.x : '');
@@ -1448,7 +1618,6 @@ html.js .rv.in{opacity:1;transform:none}
     termsStrip(G, ST);
 
     /* 7. dates: the tax year runs past as film frames, pinned while its line draws itself */
-    datesReel(G, ST);
 
     /* cursor: a small circle that becomes Play / Pause over the slideshow */
     if (!TAB && matchMedia('(pointer: fine)').matches) {
@@ -1547,7 +1716,6 @@ html.js .rv.in{opacity:1;transform:none}
       undo.push(termsStrip(gs, ST));
 
       /* dates: the tax year as film frames, running as it comes up, then a short hold while the line draws */
-      undo.push(datesReel(gs, ST));
 
       /* 8. a soft ripple where a button is tapped */
       function rip(e){
