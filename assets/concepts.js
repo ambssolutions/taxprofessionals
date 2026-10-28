@@ -105,14 +105,21 @@ window.TP_CONCEPTS = [
   if (!c) return;
   var KEY = 'tp-btn-' + c.id, cur = 0, style = document.createElement('style');
   var B = ['.btn', '.bt', '.qbar a', '.qbar button', '.qb a', '.qb button'].join(',');
-  var LIST = [['Original', 'As designed'], ['Pill', 'Fully rounded'], ['Rounded', 'Soft corners'], ['Square', 'Crisp corners'], ['Pill with arrow', 'Fully rounded, with an arrow after the label']];
+  var LIST = [['Original', 'As designed'], ['Pill', 'Fully rounded'], ['Rounded', 'Soft corners'], ['Square', 'Crisp corners'], ['Pill with arrow', 'Fully rounded, with an arrow after the label'], ['iOS style', 'Soft corners, system font, flat'], ['One UI style', 'Bold full pill, roomy and flat'], ['Material style', 'Compact pill with a light lift']];
   var CSS = {
     1: ':is(' + B + '){border-radius:999px!important}',
     2: ':is(' + B + '){border-radius:12px!important}',
     3: ':is(' + B + '){border-radius:3px!important}',
     4: ':is(' + B + '){border-radius:999px!important}' +
        '.tpb-ar{display:inline-block;margin-left:.5em;font-weight:600;line-height:1;transition:transform .5s cubic-bezier(.22,1,.36,1)}' +
-       ':is(.btn,.bt):hover .tpb-ar{transform:translateX(3px)}'
+       ':is(.btn,.bt):hover .tpb-ar{transform:translateX(3px)}',
+    5: ':is(' + B + '){border-radius:14px!important;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",system-ui,sans-serif!important;font-weight:600!important;letter-spacing:-.01em!important;text-transform:none!important;box-shadow:none!important}' +
+       ':is(.btn,.bt){min-height:50px!important;padding-inline:22px!important}',
+    6: ':is(' + B + '){border-radius:999px!important;font-family:"SamsungOne","Samsung Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif!important;font-weight:700!important;letter-spacing:0!important;text-transform:none!important;box-shadow:none!important}' +
+       ':is(.btn,.bt){min-height:52px!important;padding-inline:30px!important}',
+    7: ':is(' + B + '){border-radius:999px!important;font-family:Roboto,system-ui,-apple-system,"Segoe UI",sans-serif!important;font-weight:500!important;letter-spacing:.01em!important;text-transform:none!important}' +
+       ':is(.btn,.bt){min-height:44px!important;padding-inline:24px!important;font-size:15px!important;box-shadow:0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15)!important;transition:box-shadow .3s ease!important}' +
+       ':is(.btn,.bt):hover{box-shadow:0 1px 2px rgba(0,0,0,.3),0 2px 6px 2px rgba(0,0,0,.15)!important}'
   };
   /* the arrow is a real element inside each button (designs already use ::before and ::after for their own effects) */
   function arrows(on) {

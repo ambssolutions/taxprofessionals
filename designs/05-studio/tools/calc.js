@@ -223,21 +223,27 @@
   function rows(list) {
     return '<dl class="rl">' + list.map(function (r) { return '<div' + (r[2] ? ' class="' + r[2] + '"' : '') + '><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>'; }).join('') + '</dl>';
   }
-  function big(label, value, sub) { return '<p class="big"><span class="bl">' + label + '</span><span class="bv">' + value + '</span>' + (sub ? '<span class="bs">' + sub + '</span>' : '') + '</p>'; }
+  function big(label, value, sub, txt) { return '<p class="big"><span class="bl">' + label + '</span><span class="bv' + (txt ? ' txt' : '') + '">' + value + '</span>' + (sub ? '<span class="bs">' + sub + '</span>' : '') + '</p>'; }
+  /* collapsible detail; its open state survives the re-render on every keystroke */
+  var openSt = {}, curOut = null;
+  function det(k, sum, body) { var id = curOut.id + ':' + k; return '<details class="more" data-k="' + k + '"' + (openSt[id] ? ' open' : '') + '><summary>' + sum + '</summary><div class="more-b">' + body + '</div></details>'; }
+  var LY = { weekly: 'Weekly', fortnightly: 'Fortnightly', monthly: 'Monthly', annual: 'Yearly' };
 
   // figures note
   $$('[data-tax-year]').forEach(function (el) { el.textContent = TAX_CONFIG.taxYear; });
   $$('[data-checked]').forEach(function (el) { el.textContent = TAX_CONFIG.checkedOn; });
   $$('[data-link]').forEach(function (a) { var k = a.getAttribute('data-link'); if (TAX_CONFIG.links[k]) a.href = TAX_CONFIG.links[k]; });
 
+  /* each renderer fills the result block and returns the one-line summary for the phone result bar */
   var calcs = {
     tax: function (f, out) {
       var r = incomeTax(num(f.income));
       out.innerHTML = big('Income tax for the year', money(r.tax)) +
-        rows([['Effective rate', pct(r.effective, 2)], ['Marginal rate', pct(r.marginal)], ['Income after income tax', money(r.net)]]) +
-        '<details class="bands"><summary>How it adds up</summary><table><thead><tr><th scope="col">Band</th><th scope="col">Rate</th><th scope="col">Tax</th></tr></thead><tbody>' +
+        rows([['Effective rate', pct(r.effective, 2)], ['Marginal rate', pct(r.marginal)], ['Income after income tax', money(r.net), 'tot']]) +
+        det('bands', 'How it adds up, band by band', '<table class="bands"><thead><tr><th scope="col">Band</th><th scope="col">Rate</th><th scope="col">Tax</th></tr></thead><tbody>' +
         r.rows.map(function (b) { return '<tr><td>' + nzd0.format(b.from + (b.from ? 1 : 0)) + (b.to ? ' to ' + nzd0.format(b.to) : ' and over') + '</td><td>' + pct(b.rate) + '</td><td>' + money(b.tax) + '</td></tr>'; }).join('') +
-        '</tbody></table></details><p class="fine">Income tax only. ACC earners\' levy, student loan and tax credits are not included.</p>';
+        '</tbody></table>') + '<p class="fine">Income tax only. ACC earners\' levy, student loan and tax credits are not included.</p>';
+      return { l: 'Tax', v: money(r.tax), s: 'a year' };
     },
     paye: function (f, out) {
       var freq = f.freq.value, ks = f.ks.value, basis = f.basis ? f.basis.value : 'period';
@@ -248,67 +254,86 @@
       var r = paye(opts(freq));
       var per = FREQ[freq];
       var all = ['weekly', 'fortnightly', 'monthly', 'annual'].map(function (fq) { return [fq, paye(opts(fq))]; });
-      var yearNet = all[3][1].takeHome;
-      var table = '<h4>Take-home at every pay frequency</h4><div class="tw"><table class="freqs"><thead><tr><th scope="col">Paid</th><th scope="col">Gross</th><th scope="col">Deductions</th><th scope="col">Take-home</th></tr></thead><tbody>' +
-        all.map(function (x) { var q = x[1], ded = r2(q.gross - q.takeHome); return '<tr' + (x[0] === freq ? ' class="cur"' : '') + '><th scope="row">' + FREQ[x[0]].charAt(0).toUpperCase() + FREQ[x[0]].slice(1)+ 'ly' + '</th><td>' + money(q.gross) + '</td><td>- ' + money(ded) + '</td><td><b>' + money(q.takeHome) + '</b></td></tr>'; }).join('') +
-        '</tbody></table></div>';
-      out.innerHTML = big('Take-home pay', money(r.takeHome), 'per ' + per + (freq !== 'annual' ? ', about ' + money(yearNet) + ' a year' : '')) +
+      var strip = '<ul class="strip" aria-label="Take-home at each pay frequency">' + all.map(function (x) { return '<li' + (x[0] === freq ? ' class="cur" aria-current="true"' : '') + '><span>' + LY[x[0]] + '</span><b>' + money(x[1].takeHome) + '</b></li>'; }).join('') + '</ul>';
+      var table = '<table class="freqs"><thead><tr><th scope="col">Paid</th><th scope="col">Gross</th><th scope="col">Deductions</th><th scope="col">Take-home</th></tr></thead><tbody>' +
+        all.map(function (x) { var q = x[1], ded = r2(q.gross - q.takeHome); return '<tr' + (x[0] === freq ? ' class="cur"' : '') + '><th scope="row">' + LY[x[0]] + '</th><td data-l="Gross"><span>' + money(q.gross) + '</span></td><td data-l="Deductions"><span>- ' + money(ded) + '</span></td><td data-l="Take-home"><span><b>' + money(q.takeHome) + '</b></span></td></tr>'; }).join('') +
+        '</tbody></table>';
+      out.innerHTML = big('Take-home pay', money(r.takeHome), 'per ' + per) + strip +
         rows([['Gross pay', money(r.gross)], ['PAYE (income tax)', '- ' + money(r.paye)], ['ACC earners\' levy', '- ' + money(r.acc)],
           f.code.value === 'MSL' ? ['Student loan', '- ' + money(r.studentLoan)] : null,
           ks !== 'none' ? ['KiwiSaver (you, ' + pct(+ks) + ')', '- ' + money(r.kiwiSaver)] : null,
           ['Take-home', money(r.takeHome), 'tot']].filter(Boolean)) +
-        (ks !== 'none' ? '<h4>Paid by your employer, on top of your pay</h4>' + rows([['Employer KiwiSaver (gross, ' + pct(+f.er.value) + ')', money(r.employerGross)], ['Less ESCT at ' + pct(r.esctRate), '- ' + money(r.esct)], ['Into your KiwiSaver', money(r.employerNet), 'tot']]) : '') +
-        table +
+        (ks !== 'none' ? det('er', 'Employer KiwiSaver, on top of your pay', rows([['Employer KiwiSaver (gross, ' + pct(+f.er.value) + ')', money(r.employerGross)], ['Less ESCT at ' + pct(r.esctRate), '- ' + money(r.esct)], ['Into your KiwiSaver', money(r.employerNet), 'tot']])) : '') +
+        det('freq', 'Gross, deductions and take-home at every frequency', table) +
         '<p class="fine">Tax code M or M SL only. Hourly pay assumes the same hours every week for 52 weeks. Secondary tax codes, tax credits, Working for Families and one-off payments are not covered.</p>';
+      return { l: 'Take-home', v: money(r.takeHome), s: 'a ' + per };
     },
     sl: function (f, out) {
       var freq = f.freq.value, r = studentLoan(num(f.pay), freq);
       out.innerHTML = big('Student loan repayment', money(r.perPeriod), 'per ' + FREQ[freq]) +
         rows([['Per year at this pay', money(r.perYear)], ['Repayment threshold', money(r.threshold) + ' per ' + FREQ[freq]], ['Rate on pay over the threshold', pct(r.rate, 0)]]) +
         '<p class="fine">For salary and wages with tax code M SL. Self-employed and other income is assessed at year end. Overseas-based borrowers have different rules.</p>';
+      return { l: 'Repayment', v: money(r.perPeriod), s: 'a ' + FREQ[freq] };
     },
     ks: function (f, out) {
       var r = kiwiSaver({ salary: num(f.salary), rate: +f.rate.value, erRate: +f.er.value });
       out.innerHTML = big('Going into KiwiSaver each year', money(r.total), 'your contributions plus your employer\'s after ESCT') +
-        rows([['You (' + pct(+f.rate.value) + ' of gross pay)', money(r.employee)], ['Employer contribution (gross)', money(r.employerGross)], ['Less ESCT at ' + pct(r.esctRate), '- ' + money(r.esct)], ['Employer contribution (after ESCT)', money(r.employerNet)],
-          ['Your share per fortnight', money(r.employee / 26)]]) +
+        rows([['You (' + pct(+f.rate.value) + ' of gross pay)', money(r.employee)], ['Employer contribution (after ESCT)', money(r.employerNet)], ['Your share per fortnight', money(r.employee / 26)]]) +
+        det('esct', 'Employer contribution and ESCT', rows([['Employer contribution (gross)', money(r.employerGross)], ['Less ESCT at ' + pct(r.esctRate), '- ' + money(r.esct)], ['Employer contribution (after ESCT)', money(r.employerNet), 'tot']])) +
         '<p class="fine">ESCT rate uses this salary plus the employer contribution, as a stand-in for last year\'s figure. Government contributions are not included.</p>';
+      return { l: 'KiwiSaver', v: money(r.total), s: 'a year' };
     },
     gst: function (f, out) {
       var mode = f.mode.value, r = gst(num(f.amount), mode);
       out.innerHTML = big(mode === 'remove' ? 'Price before GST' : 'Price including GST', money(mode === 'remove' ? r.excl : r.incl)) +
         rows([['Excluding GST', money(r.excl)], ['GST at ' + pct(TAX_CONFIG.gst.rate, 0), money(r.gst)], ['Including GST', money(r.incl), 'tot']]) +
         '<p class="fine">' + (mode === 'remove' ? 'GST content worked out as 3/23 of the GST-inclusive amount.' : 'GST worked out as 15% of the GST-exclusive amount.') + '</p>';
+      return { l: 'GST', v: money(r.gst), s: mode === 'remove' ? 'included' : 'to add' };
     },
     gstf: function (f, out) {
       var r = gstFrequency(num(f.turnover)), reg = f.reg.value, c = TAX_CONFIG.gst;
       var opt = function (ok, name, when) { return '<li class="' + (ok ? 'ok' : 'no') + '"><strong>' + name + '</strong><span>' + (ok ? 'Open to you. ' : 'Not available at this turnover. ') + when + '</span></li>'; };
       var regLine = reg === 'yes' ? '' : (r.mustRegister ? '<p class="note warn">Over ' + nzd0.format(c.registrationThreshold) + ' in 12 months, you must register for GST.</p>' : '<p class="note">Under ' + nzd0.format(c.registrationThreshold) + ' in 12 months, registering is optional. You can still choose to register.</p>');
-      var best = !r.twoMonthly ? 'Monthly' : r.sixMonthly ? 'Monthly, two-monthly or six-monthly' : 'Monthly or two-monthly';
-      out.innerHTML = big('Filing periods open to you', best) + regLine +
+      var best = (!r.twoMonthly ? 'Monthly' : r.sixMonthly ? 'Monthly, two-monthly or six-monthly' : 'Monthly or two-monthly').replace(/-/g, '\u2011');
+      out.innerHTML = big('Filing periods open to you', best, '', true) + regLine +
         '<ul class="opts">' +
         opt(r.monthly, 'Monthly', r.twoMonthly ? 'Anyone can choose it. It can suit regular refunds.' : 'Required when sales are over $24 million in 12 months.') +
         opt(r.twoMonthly, 'Two-monthly', 'For sales of $24 million or less in 12 months. The usual choice.') +
         opt(r.sixMonthly, 'Six-monthly', 'For sales under $500,000 in 12 months. Periods line up with your balance date.') +
         '</ul><p class="fine">Returns and payments are due on the 28th of the month after the period ends, except periods ending in November (due 15 January) and March (due 7 May). With a 31 March balance date, six-monthly periods end in September and March.</p>';
+      var n = (r.monthly ? 1 : 0) + (r.twoMonthly ? 1 : 0) + (r.sixMonthly ? 1 : 0);
+      return { l: 'Open to you', v: n === 1 ? 'Monthly only' : n + ' filing periods', s: '' };
     },
     prov: function (f, out) {
       var r = provisional({ rit: num(f.rit), sixMonthlyGst: f.six.checked });
       if (!r.applies) {
-        out.innerHTML = big('Provisional tax', 'Not required', 'last year\'s residual income tax is ' + nzd0.format(TAX_CONFIG.provisional.threshold) + ' or less') +
+        out.innerHTML = big('Provisional tax', 'Not required', 'last year\'s residual income tax is ' + nzd0.format(TAX_CONFIG.provisional.threshold) + ' or less', true) +
           '<p class="fine">You can still choose to pay voluntarily, which can help avoid interest on a large bill. Ask us if your income is rising.</p>';
-        return;
+        return { l: 'Provisional tax', v: 'Not required', s: '' };
       }
       out.innerHTML = big('Provisional tax for ' + TAX_CONFIG.taxYear, money(r.total), 'last year\'s residual income tax plus 5%') +
         '<ol class="inst">' + r.instalments.map(function (p, i) { return '<li><span class="n">' + (i + 1) + '</span><span class="d">' + fmtDate(p.date) + '</span><span class="a">' + money(p.amount) + '</span></li>'; }).join('') + '</ol>' +
         '<p class="fine">Standard option, 31 March balance date. If last year\'s return is not filed by an instalment date, the instalment is based on the year before plus 10%. A due date that falls on a weekend or public holiday moves to the next working day.</p>';
+      return { l: 'Provisional tax', v: money(r.total), s: 'in ' + r.instalments.length + ' instalments' };
     }
   };
 
   var DISC = '<p class="disc">Estimate only. Your own tax may differ; talk to us.</p>';
+  var bars = {}, rbar = $('#rbar'), rbT = rbar && $('.rb-t', rbar), activePanel = null;
+  function paintBar() {
+    if (!rbar || !activePanel) return;
+    var b = bars[activePanel.id];
+    rbT.innerHTML = b ? '<small>' + b.l + (b.s ? ' ' + b.s : '') + '</small><b>' + b.v + '</b>' : '';
+  }
   $$('form[data-calc]').forEach(function (f) {
-    var key = f.getAttribute('data-calc'), out = $('#' + f.getAttribute('aria-controls'));
-    function run() { try { calcs[key](f, out); out.insertAdjacentHTML('beforeend', DISC); } catch (e) { out.textContent = 'Check the amounts entered.'; } }
+    var key = f.getAttribute('data-calc'), out = $('#' + f.getAttribute('aria-controls')), pid = f.closest('[role=tabpanel]').id;
+    out.addEventListener('toggle', function (e) { var d = e.target; if (d.getAttribute && d.getAttribute('data-k')) openSt[out.id + ':' + d.getAttribute('data-k')] = d.open; }, true);
+    function run() {
+      curOut = out;
+      try { bars[pid] = calcs[key](f, out); out.insertAdjacentHTML('beforeend', DISC); }
+      catch (e) { bars[pid] = null; out.innerHTML = '<p class="note">Check the amounts entered.</p>' + DISC; }
+      if (activePanel && activePanel.id === pid) paintBar();
+    }
     f.addEventListener('input', run);
     f.addEventListener('change', run);
     f.addEventListener('submit', function (e) { e.preventDefault(); run(); });
@@ -321,10 +346,16 @@
   });
 
   // tabs
-  var tabs = $$('[role=tab]');
+  var tabs = $$('[role=tab]'), shown = false;
+  function reduce() { return matchMedia('(prefers-reduced-motion: reduce)').matches; }
   function show(t, focus) {
-    tabs.forEach(function (x) { var on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; $('#' + x.getAttribute('aria-controls')).hidden = !on; });
-    var row = t.parentNode; if (row.scrollWidth > row.clientWidth) row.scrollTo({ left: t.offsetLeft - row.clientWidth / 2 + t.offsetWidth / 2, behavior: 'smooth' });
+    tabs.forEach(function (x) { var on = x === t, pn = $('#' + x.getAttribute('aria-controls')); x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; pn.hidden = !on; if (on) activePanel = pn; });
+    var row = t.parentNode;
+    if (row.scrollWidth > row.clientWidth + 1) {
+      var rr = row.getBoundingClientRect(), tr = t.getBoundingClientRect();
+      row.scrollTo({ left: row.scrollLeft + (tr.left - rr.left) - (rr.width - tr.width) / 2, behavior: shown && !reduce() ? 'smooth' : 'auto' });
+    }
+    shown = true; paintBar(); place();
     if (focus) t.focus();
     try { history.replaceState(null, '', '#' + t.id.replace('t-', '')); } catch (e) {}
   }
@@ -338,7 +369,7 @@
   });
   var start = location.hash && $('#t-' + location.hash.slice(1));
   if (start) show(start); else if (tabs[0]) show(tabs[0]);
-  $$('a[data-tab]').forEach(function (a) { a.addEventListener('click', function (e) { var t = $('#t-' + a.getAttribute('data-tab')); if (t) { e.preventDefault(); show(t); $('#tools').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } }); });
+  $$('a[data-tab]').forEach(function (a) { a.addEventListener('click', function (e) { var t = $('#t-' + a.getAttribute('data-tab')); if (t) { e.preventDefault(); show(t); $('#tools').scrollIntoView({ behavior: reduce() ? 'auto' : 'smooth' }); } }); });
 
   // checklist builder
   var KEY = 'taxpro-05-bring';
@@ -372,8 +403,50 @@
     $$('a', nav).forEach(function (a) { a.addEventListener('click', function () { mb.setAttribute('aria-expanded', 'false'); nav.classList.remove('open'); }); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('open')) { mb.click(); mb.focus(); } });
   }
-  var qb = $('.qb'), intro = $('.intro');
-  if (qb && intro && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (es) { qb.classList.toggle('on', !es[0].isIntersecting); }).observe(intro);
-  } else if (qb) qb.classList.add('on');
+  /* tab row edges fade only where more tabs are hidden */
+  var tl = $('.tablist');
+  function fades() { if (!tl) return; var m = tl.scrollWidth - tl.clientWidth; tl.classList.toggle('fade-l', m > 1 && tl.scrollLeft > 4); tl.classList.toggle('fade-r', m > 1 && tl.scrollLeft < m - 4); }
+  if (tl) { tl.addEventListener('scroll', fades, { passive: true }); fades(); }
+
+  /* bottom of the screen on phones and tablets: the live result bar while the form is in view and the full
+     result is still below; the Call / Book bar once the intro has scrolled away and the result bar is not showing */
+  var qb = $('.qb'), intro = $('.intro'), narrow = matchMedia('(max-width: 860px)'), typing = false, raf = 0;
+  if (rbar) rbar.hidden = false;
+  function place() {
+    raf = 0;
+    if (!narrow) return;
+    if (tl) fades();
+    var vh = window.innerHeight, barOn = false;
+    if (rbar && activePanel && narrow.matches && bars[activePanel.id] && !typing) {
+      var out = $('.out', activePanel), pr = activePanel.getBoundingClientRect(), orr = out ? out.getBoundingClientRect() : null;
+      barOn = !!orr && pr.top < vh && orr.top > vh - 90;
+    }
+    if (rbar) { rbar.classList.toggle('on', barOn); rbar.setAttribute('aria-hidden', barOn ? 'false' : 'true'); rbar.tabIndex = barOn ? 0 : -1; }
+    if (qb) { var ir = intro ? intro.getBoundingClientRect() : null; qb.classList.toggle('on', !barOn && !typing && (!ir || ir.bottom < 0)); }
+  }
+  function queue() { if (!raf) raf = requestAnimationFrame(place); }
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue);
+  /* the keyboard is open while a text field has focus: keep the bars out of the way, back on blur */
+  document.addEventListener('focusin', function (e) { if (e.target.matches && e.target.matches('input[type=text]')) { typing = true; place(); } });
+  document.addEventListener('focusout', function (e) { if (e.target.matches && e.target.matches('input[type=text]')) { typing = false; setTimeout(place, 50); } });
+  if (rbar) rbar.addEventListener('click', function () {
+    var out = activePanel && $('.out', activePanel); if (!out) return;
+    out.scrollIntoView({ behavior: reduce() ? 'auto' : 'smooth', block: 'start' });
+  });
+  place();
+
+  /* light and dark: dark is the Studio default; a saved choice (shared with every 05 page) wins */
+  var h = document.documentElement, tgls = $$('[data-theme-toggle]'), meta = $('meta[name=theme-color]');
+  function paintTheme(t) {
+    h.setAttribute('data-theme', t);
+    tgls.forEach(function (b) { b.setAttribute('aria-pressed', t === 'light' ? 'true' : 'false'); b.title = t === 'light' ? 'Switch to dark mode' : 'Switch to light mode'; var l = $('.tgl-l', b); if (l) l.textContent = t === 'light' ? 'Dark mode' : 'Light mode'; });
+    if (meta) meta.setAttribute('content', t === 'light' ? '#FBF9F4' : '#01111c');
+  }
+  paintTheme(h.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+  tgls.forEach(function (b) { b.addEventListener('click', function () {
+    var t = h.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    h.classList.add('theme-swap'); paintTheme(t); setTimeout(function () { h.classList.remove('theme-swap'); }, 700);
+    try { localStorage.setItem('tp05-theme', t); } catch (e) {}
+  }); });
 })(typeof globalThis !== 'undefined' ? globalThis : this);

@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<script>(function(h){var t='dark';try{if(localStorage.getItem('tp05-theme')==='light')t='light'}catch(e){}h.setAttribute('data-theme',t);var m=document.querySelector('meta[name=theme-color]');if(m&&t==='light')m.setAttribute('content','#FBF9F4')})(document.documentElement)</script>
 <link rel="stylesheet" href="calc.css">
 </head>
 <body>
@@ -32,6 +33,10 @@
         </ul>
       </div>
     </nav>
+    <button class="tgl" type="button" data-theme-toggle aria-pressed="false" title="Switch to light mode"><span class="tgl-l sr">Light mode</span>
+      <svg class="i-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 14.6A8 8 0 0 1 9.4 4a8 8 0 1 0 10.6 10.6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+    </button>
     <a class="btn" href="../#contact">Book a chat</a>
   </div>
 </header>
@@ -40,7 +45,7 @@
   <section class="intro" aria-labelledby="h1">
     <div class="wrap">
       <h1 id="h1">Tax calculators</h1>
-      <p class="lede">Income tax, take-home pay, student loan, KiwiSaver, GST and provisional tax. Results update as you type.</p>
+      <p class="lede">Work out tax, take-home pay, GST and more. Results update as you type.</p>
       <p class="figs">Figures for the <span data-tax-year>2026-27</span> tax year, checked against Inland Revenue on <span data-checked>28 October 2026</span></p>
     </div>
   </section>
@@ -60,7 +65,7 @@
 
       <!-- 1. Income tax -->
       <section class="panel" id="p-tax" role="tabpanel" aria-labelledby="t-tax" tabindex="0">
-        <header><h2>Income tax on your annual income</h2><p>Enter your taxable income for the year to see the tax, your average rate and the rate on your next dollar.</p></header>
+        <header><h2>Income tax on your annual income</h2><p>Your tax for the year, your average rate and the rate on your next dollar.</p></header>
         <div class="pgrid">
           <form data-calc="tax" aria-controls="r-tax" novalidate>
             <div class="fld"><label for="tax-income">Taxable income for the year</label>
@@ -74,22 +79,24 @@
 
       <!-- 2. PAYE -->
       <section class="panel" id="p-paye" role="tabpanel" aria-labelledby="t-paye" tabindex="0" hidden>
-        <header><h2>Pay and take-home</h2><p>Enter an hourly rate, an annual salary or one pay. See PAYE, ACC earners' levy, student loan and KiwiSaver, your take-home each pay and for the year, and how it looks at every pay frequency. Tax code M or M SL.</p></header>
+        <header><h2>Pay and take-home</h2><p>PAYE, ACC levy, student loan and KiwiSaver from an hourly rate, a salary or one pay.</p></header>
         <div class="pgrid">
           <form data-calc="paye" aria-controls="r-paye" novalidate>
-            <fieldset class="fld"><legend>Your pay</legend>
+            <fieldset class="fld"><legend>Your pay, before deductions</legend>
               <div class="seg">
                 <label><input type="radio" name="basis" value="hourly">Hourly rate</label>
-                <label><input type="radio" name="basis" value="salary" checked>Annual salary</label>
+                <label><input type="radio" name="basis" value="salary" checked>Salary</label>
                 <label><input type="radio" name="basis" value="period">Per pay</label>
               </div></fieldset>
-            <div class="fld" data-basis="hourly" hidden><label for="paye-rate">Hourly rate before deductions</label>
-              <div class="money"><input type="text" inputmode="decimal" id="paye-rate" name="rate" value="30.00" autocomplete="off"></div></div>
-            <div class="fld" data-basis="hourly" hidden><label for="paye-hours">Hours a week</label>
-              <input type="text" inputmode="decimal" id="paye-hours" name="hours" value="40" autocomplete="off"></div>
-            <div class="fld" data-basis="salary"><label for="paye-salary">Annual salary before deductions</label>
+            <div class="pair" data-basis="hourly" hidden>
+              <div class="fld"><label for="paye-rate">Hourly rate</label>
+                <div class="money"><input type="text" inputmode="decimal" id="paye-rate" name="rate" value="30.00" autocomplete="off"></div></div>
+              <div class="fld"><label for="paye-hours">Hours a week</label>
+                <input type="text" inputmode="decimal" id="paye-hours" name="hours" value="40" autocomplete="off"></div>
+            </div>
+            <div class="fld" data-basis="salary"><label for="paye-salary">Annual salary</label>
               <div class="money"><input type="text" inputmode="decimal" id="paye-salary" name="salary" value="65,000" autocomplete="off"></div></div>
-            <div class="fld" data-basis="period" hidden><label for="paye-pay">Gross pay each pay, before deductions</label>
+            <div class="fld" data-basis="period" hidden><label for="paye-pay">Gross pay each pay</label>
               <div class="money"><input type="text" inputmode="decimal" id="paye-pay" name="pay" value="1,500" autocomplete="off"></div></div>
             <fieldset class="fld"><legend>How often you are paid</legend>
               <div class="seg four">
@@ -98,29 +105,31 @@
                 <label><input type="radio" name="freq" value="monthly">Monthly</label>
                 <label><input type="radio" name="freq" value="annual">Annual</label>
               </div></fieldset>
-            <fieldset class="fld"><legend>Tax code</legend>
-              <div class="seg">
-                <label><input type="radio" name="code" value="M" checked>M</label>
-                <label><input type="radio" name="code" value="MSL">M SL (student loan)</label>
-              </div></fieldset>
-            <div class="fld"><label for="paye-ks">Your KiwiSaver rate</label>
-              <select id="paye-ks" name="ks">
-                <option value="none">Not in KiwiSaver</option>
-                <option value="0.03">3% (temporary rate reduction)</option>
-                <option value="0.035" selected>3.5% (default)</option>
-                <option value="0.04">4%</option>
-                <option value="0.06">6%</option>
-                <option value="0.08">8%</option>
-                <option value="0.1">10%</option>
-              </select></div>
-            <div class="fld"><label for="paye-er">Employer KiwiSaver rate</label>
-              <select id="paye-er" name="er" aria-describedby="paye-er-h">
-                <option value="0.035" selected>3.5% (minimum)</option>
-                <option value="0.03">3% (only if you have a temporary rate reduction and they match it)</option>
-                <option value="0.04">4%</option>
-                <option value="0.06">6%</option>
-              </select>
-              <small id="paye-er-h">Paid on top of your gross pay. Employer contributions have ESCT taken out.</small></div>
+            <div class="trio">
+              <fieldset class="fld"><legend>Tax code</legend>
+                <div class="seg">
+                  <label><input type="radio" name="code" value="M" checked>M</label>
+                  <label><input type="radio" name="code" value="MSL"><span>M SL<span class="sr"> (student loan)</span></span></label>
+                </div></fieldset>
+              <div class="fld"><label for="paye-ks">Your KiwiSaver</label>
+                <select id="paye-ks" name="ks">
+                  <option value="none">Not in KiwiSaver</option>
+                  <option value="0.03">3% (temporary rate reduction)</option>
+                  <option value="0.035" selected>3.5% (default)</option>
+                  <option value="0.04">4%</option>
+                  <option value="0.06">6%</option>
+                  <option value="0.08">8%</option>
+                  <option value="0.1">10%</option>
+                </select></div>
+              <div class="fld"><label for="paye-er">Employer rate</label>
+                <select id="paye-er" name="er" aria-describedby="paye-er-h">
+                  <option value="0.035" selected>3.5% (minimum)</option>
+                  <option value="0.03">3% (only if you have a temporary rate reduction and they match it)</option>
+                  <option value="0.04">4%</option>
+                  <option value="0.06">6%</option>
+                </select></div>
+            </div>
+            <p class="hint" id="paye-er-h">Use M SL if you have a student loan. Employer KiwiSaver is paid on top of your pay, less ESCT.</p>
           </form>
           <div class="out" id="r-paye" aria-live="polite"></div>
         </div>
@@ -128,7 +137,7 @@
 
       <!-- 3. Student loan -->
       <section class="panel" id="p-sl" role="tabpanel" aria-labelledby="t-sl" tabindex="0" hidden>
-        <header><h2>Student loan repayments</h2><p>For New Zealand-based borrowers on salary or wages: 12% of every dollar over the repayment threshold.</p></header>
+        <header><h2>Student loan repayments</h2><p>For New Zealand-based borrowers on salary or wages: 12% of every dollar over the threshold.</p></header>
         <div class="pgrid">
           <form data-calc="sl" aria-controls="r-sl" novalidate>
             <div class="fld"><label for="sl-pay">Gross pay</label>
@@ -148,12 +157,13 @@
 
       <!-- 4. KiwiSaver -->
       <section class="panel" id="p-ks" role="tabpanel" aria-labelledby="t-ks" tabindex="0" hidden>
-        <header><h2>KiwiSaver contributions</h2><p>What you and your employer put in over a year. The default and minimum employer rate is 3.5% from 1 April 2026, rising to 4% from 1 April 2028.</p></header>
+        <header><h2>KiwiSaver contributions</h2><p>What you and your employer put in over a year, at the rates from 1 April 2026.</p></header>
         <div class="pgrid">
           <form data-calc="ks" aria-controls="r-ks" novalidate>
             <div class="fld"><label for="ks-salary">Annual salary or wages</label>
               <div class="money"><input type="text" inputmode="decimal" id="ks-salary" name="salary" value="70,000" autocomplete="off"></div></div>
-            <div class="fld"><label for="ks-rate">Your contribution rate</label>
+            <div class="pair sels">
+            <div class="fld"><label for="ks-rate">Your rate</label>
               <select id="ks-rate" name="rate">
                 <option value="0.03">3% (temporary rate reduction)</option>
                 <option value="0.035" selected>3.5% (default)</option>
@@ -162,14 +172,15 @@
                 <option value="0.08">8%</option>
                 <option value="0.1">10%</option>
               </select></div>
-            <div class="fld"><label for="ks-er">Employer contribution rate</label>
+            <div class="fld"><label for="ks-er">Employer rate</label>
               <select id="ks-er" name="er">
                 <option value="0.035" selected>3.5% (minimum)</option>
                 <option value="0.03">3% (matching a temporary rate reduction)</option>
                 <option value="0.04">4%</option>
                 <option value="0.06">6%</option>
               </select></div>
-            <p class="src">ESCT bands: 10.5% to $18,720, 17.5% to $64,200, 30% to $93,720, 33% to $216,000, 39% over. <a href="https://www.ird.govt.nz/kiwisaver-changes" target="_blank" rel="noopener">KiwiSaver changes on Inland Revenue</a></p>
+            </div>
+            <p class="src">The default and minimum employer rate is 3.5% from 1 April 2026, rising to 4% from 1 April 2028. ESCT bands: 10.5% to $18,720, 17.5% to $64,200, 30% to $93,720, 33% to $216,000, 39% over. <a href="https://www.ird.govt.nz/kiwisaver-changes" target="_blank" rel="noopener">KiwiSaver changes on Inland Revenue</a></p>
           </form>
           <div class="out" id="r-ks" aria-live="polite"></div>
         </div>
@@ -184,7 +195,7 @@
               <div class="money"><input type="text" inputmode="decimal" id="gst-amount" name="amount" value="115" autocomplete="off"></div></div>
             <fieldset class="fld"><legend>This amount is</legend>
               <div class="seg">
-                <label><input type="radio" name="mode" value="add">Before GST (add GST)</label>
+                <label><input type="radio" name="mode" value="add">Before GST (add it)</label>
                 <label><input type="radio" name="mode" value="remove" checked>Including GST (remove it)</label>
               </div></fieldset>
             <p class="src"><a href="https://www.ird.govt.nz/gst/filing-and-paying-gst-and-refunds/calculating-gst" target="_blank" rel="noopener">Calculating GST on Inland Revenue</a></p>
@@ -214,11 +225,12 @@
 
       <!-- 7. Provisional tax -->
       <section class="panel" id="p-prov" role="tabpanel" aria-labelledby="t-prov" tabindex="0" hidden>
-        <header><h2>Provisional tax, standard option</h2><p>Last year's residual income tax plus 5%, paid in instalments. Residual income tax is your tax to pay after PAYE and tax credits (other than Working for Families).</p></header>
+        <header><h2>Provisional tax, standard option</h2><p>Last year's residual income tax plus 5%, paid in instalments.</p></header>
         <div class="pgrid">
           <form data-calc="prov" aria-controls="r-prov" novalidate>
             <div class="fld"><label for="prov-rit">Residual income tax for 2025-26</label>
-              <div class="money"><input type="text" inputmode="decimal" id="prov-rit" name="rit" value="12,000" autocomplete="off"></div></div>
+              <div class="money"><input type="text" inputmode="decimal" id="prov-rit" name="rit" value="12,000" autocomplete="off" aria-describedby="prov-h"></div>
+              <small id="prov-h">Your tax to pay after PAYE and tax credits (other than Working for Families).</small></div>
             <label class="tick"><input type="checkbox" name="six"><span>I file GST six-monthly (two instalments: 28 October and 7 May)</span></label>
             <p class="src"><a href="https://www.ird.govt.nz/income-tax/provisional-tax/provisional-tax-options/standard-option/work-out-provisional-tax-using-the-standard-option" target="_blank" rel="noopener">Standard option on Inland Revenue</a></p>
           </form>
@@ -325,6 +337,8 @@
     <div class="legal"><span>© 2026 Tax Professionals</span><span>Calculators give estimates only.</span><span>Proudly designed by AMBS Solutions</span></div>
   </div>
 </footer>
+
+<button class="rbar" id="rbar" type="button" aria-controls="tools" hidden><span class="rb-t"></span><span class="rb-go">Full result<svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2 4.5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span></button>
 
 <nav class="qb" aria-label="Quick contact"><a href="tel:+6496250035">Call</a><a href="../#contact">Book</a></nav>
 
