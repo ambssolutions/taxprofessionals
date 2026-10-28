@@ -1153,7 +1153,7 @@ html.js:not(.rm) .cal .rv.in .dt span+span+span{animation-delay:calc(var(--rd,0s
 
     // smooth scroll on laptops (touch tablets keep native scroll)
     if(window.Lenis&&!tablet){
-      var lenis=window.__lenis=new Lenis({lerp:.12});
+      var lenis=window.__lenis=new Lenis({smoothWheel:false,syncTouch:false}) /* native scrolling: the page moves exactly with the wheel or trackpad */;
       lenis.on('scroll',ST.update);
       G.ticker.add(function(t){lenis.raf(t*1000)});G.ticker.lagSmoothing(0);
       h.classList.add('lenis-on');

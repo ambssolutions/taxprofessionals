@@ -1051,7 +1051,7 @@ html.motion:not(.ready) .hero-copy,html.motion:not(.ready) .glance{opacity:0}
 
     // smooth scroll on laptops
     if(window.Lenis){
-      var lenis=window.__lenis=new Lenis({lerp:.12});
+      var lenis=window.__lenis=new Lenis({smoothWheel:false,syncTouch:false}) /* native scrolling: the page moves exactly with the wheel or trackpad */;
       lenis.on('scroll',ST.update);
       G.ticker.add(function(t){lenis.raf(t*1000)});G.ticker.lagSmoothing(0);
       h.classList.add('lenis-on');

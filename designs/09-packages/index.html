@@ -868,7 +868,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);bo
     if(!LAP)ST.config({ignoreMobileResize:true});
 
     if(LAP&&window.Lenis){
-      var lenis=window.__lenis=new Lenis({lerp:.12});
+      var lenis=window.__lenis=new Lenis({smoothWheel:false,syncTouch:false}) /* native scrolling: the page moves exactly with the wheel or trackpad */;
       lenis.on('scroll',ST.update);
       G.ticker.add(function(t){lenis.raf(t*1000)});G.ticker.lagSmoothing(0);
       h.classList.add('lenis-on');
