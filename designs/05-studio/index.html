@@ -138,10 +138,13 @@ html.fx .cur.big span{opacity:1}
 .grade{position:absolute;inset:0;pointer-events:none;background:
   radial-gradient(ellipse 80% 70% at 50% 46%,rgba(1,17,28,0) 35%,rgba(1,17,28,.5) 100%),
   linear-gradient(180deg,rgba(1,17,28,.66) 0,rgba(1,17,28,.18) 28%,rgba(3,40,66,.42) 58%,rgba(1,17,28,.95) 100%)}
-.pl{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(243,239,231,.18);pointer-events:none}
-.pl i{display:block;height:100%;background:var(--green-l);transform:scaleX(0);transform-origin:0 50%}
-html.js .pl i{animation:plfill 7s linear both}
-.hero.hold .pl i{animation-play-state:paused}
+/* slideshow progress: one segment per photo; done ones full, the current one fills while it shows */
+.segs{display:flex;gap:6px;width:clamp(120px,16vw,220px);flex:none}
+.segs i{flex:1;height:3px;border-radius:2px;background:rgba(243,239,231,.28);overflow:hidden}
+.segs b{display:block;height:100%;background:var(--green-l);transform:scaleX(0);transform-origin:0 50%}
+.segs i.done b{transform:scaleX(1)}
+html.js .segs i.now b{animation:plfill 7s linear both}
+.hero.hold .segs i.now b{animation-play-state:paused}
 @keyframes plfill{to{transform:scaleX(1)}}
 /* letterbox bars that slide open on load */
 .lb{display:none}
@@ -177,7 +180,9 @@ html.js .hero .lede{animation-delay:1.45s}html.js .hero .acts{animation-delay:1.
 .pp .i-play,.pp[data-play=false] .i-pause{display:none}
 .pp[data-play=false] .i-play{display:block}
 .reel-n{font-variant-numeric:tabular-nums;letter-spacing:.14em}
-.reel-cap{margin-left:auto;letter-spacing:.06em}
+.reel .wrap{justify-content:center}
+@media (max-width:1399px){.reel-cap{display:none}}
+.reel-cap{letter-spacing:.06em;max-width:24ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:640px){
   .hero h1{font-size:clamp(2.4rem,10.6vw,3.4rem)}
   .hero .acts .btn{width:100%}
@@ -589,7 +594,7 @@ html.js .rv.in{opacity:1;transform:none}
   html.js .rv{opacity:1;transform:none;transition:none}
   html.js .lb{display:none}
   html.js .ln>span,html.js .hero .lede,html.js .hero .acts,html.js .hero .strip,html.js .reel{animation:none}
-  html.js .pl i{animation:none}
+  html.js .segs i.now b{animation:none;transform:scaleX(1)}
   .slide{transition:opacity .01s}
   .btn::before{display:none}
   .faq details::details-content{transition:none}
@@ -668,7 +673,7 @@ html.js .rv.in{opacity:1;transform:none}
         <figure class="slide" data-cap="Varun Gupta with a client"><img src="../../assets/img/office-meeting-1600.webp" srcset="../../assets/img/office-meeting-800.webp 800w, ../../assets/img/office-meeting-1600.webp 1600w" sizes="100vw" width="1600" height="900" alt="Varun Gupta with a client signing papers" loading="lazy" decoding="async"></figure>
         <figure class="slide" data-cap="Two of the team at work"><img src="../../assets/img/office-desk-1600.webp" srcset="../../assets/img/office-desk-800.webp 800w, ../../assets/img/office-desk-1600.webp 1600w" sizes="100vw" width="1600" height="900" alt="Two of the team working at a computer" loading="lazy" decoding="async"></figure>
         <div class="grade" aria-hidden="true"></div>
-        <div class="pl" aria-hidden="true"><i></i></div>
+        
       </div>
       <div class="lb" aria-hidden="true"></div>
       <div class="wrap copy">
@@ -688,6 +693,7 @@ html.js .rv.in{opacity:1;transform:none}
         <div class="wrap">
           <button class="pp" type="button" data-play="true" aria-label="Pause the photo slideshow"><svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3" height="12" fill="currentColor"/><rect x="9" y="1" width="3" height="12" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1l10 6-10 6z" fill="currentColor"/></svg></button>
           <span class="reel-n" aria-hidden="true"><span class="reel-i">01</span> / 03</span>
+          <span class="segs" aria-hidden="true"><i class="now"><b></b></i><i><b></b></i><i><b></b></i></span>
           <span class="reel-cap" aria-hidden="true">The office floor, Manukau Road</span>
         </div>
       </div>
@@ -1011,7 +1017,7 @@ html.js .rv.in{opacity:1;transform:none}
 
   /* hero slideshow: slow crossfade, progress line, play/pause */
   var hero = d.querySelector('.hero'), slides = [].slice.call(d.querySelectorAll('.slide')), pp = d.querySelector('.pp');
-  var num = d.querySelector('.reel-i'), capEl = d.querySelector('.reel-cap'), line = d.querySelector('.pl i'), curEl = d.querySelector('.cur span');
+  var num = d.querySelector('.reel-i'), capEl = d.querySelector('.reel-cap'), segs = [].slice.call(d.querySelectorAll('.segs i')), curEl = d.querySelector('.cur span');
   var si = 0, playing = !reduce, vis = true, T = 7000, left = T, t0 = 0, timer = null;
   function running(){ return playing && vis && !d.hidden; }
   function sync(){
@@ -1023,7 +1029,8 @@ html.js .rv.in{opacity:1;transform:none}
     slides[si].classList.remove('on'); si = (i + slides.length) % slides.length; slides[si].classList.add('on');
     num.textContent = '0' + (si + 1); capEl.textContent = slides[si].getAttribute('data-cap');
     swapCopy(si);
-    line.style.animation = 'none'; void line.offsetWidth; line.style.animation = '';
+    segs.forEach(function(g, k){ g.classList.toggle('done', k < si); g.classList.remove('now'); });
+    void segs[si].offsetWidth; segs[si].classList.add('now');
     left = T; sync();
   }
   /* each photo carries its own headline and intro: the old lines lift out of their masks, the new ones rise in */
