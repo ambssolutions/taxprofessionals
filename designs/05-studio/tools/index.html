@@ -39,8 +39,8 @@
 <main id="main">
   <section class="intro" aria-labelledby="h1">
     <div class="wrap">
-      <h1 id="h1">Calculators and client resources</h1>
-      <p class="lede">Work out income tax, take-home pay, student loan, KiwiSaver, GST and provisional tax here, then check with Inland Revenue or with us. Results update as you type.</p>
+      <h1 id="h1">Tax calculators</h1>
+      <p class="lede">Income tax, take-home pay, student loan, KiwiSaver, GST and provisional tax. Results update as you type.</p>
       <p class="figs">Figures for the <span data-tax-year>2026-27</span> tax year, checked against Inland Revenue on <span data-checked>28 October 2026</span></p>
     </div>
   </section>
@@ -74,10 +74,22 @@
 
       <!-- 2. PAYE -->
       <section class="panel" id="p-paye" role="tabpanel" aria-labelledby="t-paye" tabindex="0" hidden>
-        <header><h2>Pay and take-home</h2><p>PAYE, ACC earners' levy, student loan and KiwiSaver for one pay, on tax code M or M SL.</p></header>
+        <header><h2>Pay and take-home</h2><p>Enter an hourly rate, an annual salary or one pay. See PAYE, ACC earners' levy, student loan and KiwiSaver, your take-home each pay and for the year, and how it looks at every pay frequency. Tax code M or M SL.</p></header>
         <div class="pgrid">
           <form data-calc="paye" aria-controls="r-paye" novalidate>
-            <div class="fld"><label for="paye-pay">Gross pay before deductions</label>
+            <fieldset class="fld"><legend>Your pay</legend>
+              <div class="seg">
+                <label><input type="radio" name="basis" value="hourly">Hourly rate</label>
+                <label><input type="radio" name="basis" value="salary" checked>Annual salary</label>
+                <label><input type="radio" name="basis" value="period">Per pay</label>
+              </div></fieldset>
+            <div class="fld" data-basis="hourly" hidden><label for="paye-rate">Hourly rate before deductions</label>
+              <div class="money"><input type="text" inputmode="decimal" id="paye-rate" name="rate" value="30.00" autocomplete="off"></div></div>
+            <div class="fld" data-basis="hourly" hidden><label for="paye-hours">Hours a week</label>
+              <input type="text" inputmode="decimal" id="paye-hours" name="hours" value="40" autocomplete="off"></div>
+            <div class="fld" data-basis="salary"><label for="paye-salary">Annual salary before deductions</label>
+              <div class="money"><input type="text" inputmode="decimal" id="paye-salary" name="salary" value="65,000" autocomplete="off"></div></div>
+            <div class="fld" data-basis="period" hidden><label for="paye-pay">Gross pay each pay, before deductions</label>
               <div class="money"><input type="text" inputmode="decimal" id="paye-pay" name="pay" value="1,500" autocomplete="off"></div></div>
             <fieldset class="fld"><legend>How often you are paid</legend>
               <div class="seg four">
@@ -309,7 +321,7 @@
     <a class="brand" href="../"><img src="../../../assets/logo/logo.webp" width="220" height="40" alt="Tax Professionals home" loading="lazy" decoding="async"></a>
     <p class="tag">620 Manukau Road, Epsom, Auckland 1023</p>
     <p class="f-ct"><a href="tel:+6496250035">09 625 0035</a><a href="mailto:info@taxprofessionals.co.nz">info@taxprofessionals.co.nz</a></p>
-    <nav class="f-links" aria-label="Footer"><a href="../">Home</a><a href="../#contact">Book a chat</a><a href="../pay/">Pay an invoice</a><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">Insights</a></nav>
+    <nav class="f-links" aria-label="Footer"><a href="../">Home</a><a href="../#contact">Book a chat</a><a href="../pay/">Pay an invoice</a><a href="../insights/">Insights</a></nav>
     <div class="legal"><span>© 2026 Tax Professionals</span><span>Calculators give estimates only.</span><span>Proudly designed by AMBS Solutions</span></div>
   </div>
 </footer>

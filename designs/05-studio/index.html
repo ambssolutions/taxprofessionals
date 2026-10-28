@@ -267,7 +267,7 @@ html.fx .welcome .since{color:var(--green-l)}
 .svc.bk-on .head{margin-bottom:clamp(14px,2.6vh,30px)}
 .svc.bk-on .head h2{font-size:clamp(1.9rem,3vw,2.5rem)}
 .svc.bk-on .head p{margin-top:8px}
-.bk{position:relative;flex:1 1 auto;min-height:0;max-height:600px;width:100%;max-width:1100px;margin:0 auto;perspective:3200px;perspective-origin:50% 45%}
+.bk{position:relative;flex:1 1 auto;min-height:0;max-height:600px;width:100%;max-width:1100px;margin:0 auto;perspective:6000px;perspective-origin:50% 50%}
 .bk::before{content:"";position:absolute;inset:5px -5px -8px 5px;border-radius:14px;background:#022a45;box-shadow:0 4px 0 -1px #01223a,0 8px 0 -2px #011a2c,0 44px 70px -36px rgba(0,0,0,.85)}
 .bk-page,.bk-leaf{position:absolute;top:0;bottom:0;width:50%}
 .bk-left{left:0;border-radius:14px 0 0 14px;overflow:hidden}
@@ -290,10 +290,10 @@ html.fx .welcome .since{color:var(--green-l)}
 .bk-lbl{font:600 12px/1.2 var(--sans)!important;letter-spacing:.22em;text-transform:uppercase;color:var(--green-l)!important;margin-bottom:10px}
 .bk-ticks{display:grid;gap:clamp(4px,.9vh,8px)}
 .bk-ticks li{display:flex;gap:12px;font-size:clamp(15px,1.15vw,16.5px);line-height:1.45;color:rgba(243,239,231,.9)}
-.bk-face::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;opacity:var(--sh,0);background:linear-gradient(90deg,rgba(1,17,28,.8),rgba(1,17,28,.3))}
-.bk-back::after{background:linear-gradient(270deg,rgba(1,17,28,.75),rgba(1,17,28,.2))}
+.bk-face>.bk-sh{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;will-change:opacity;background:linear-gradient(90deg,rgba(1,17,28,.8),rgba(1,17,28,.3))}
+.bk-back>.bk-sh{background:linear-gradient(270deg,rgba(1,17,28,.75),rgba(1,17,28,.2))}
 .bk-spine{position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;z-index:60;pointer-events:none;background:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.5),rgba(0,0,0,.2))}
-.bk::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:50%;z-index:9;pointer-events:none;opacity:var(--cast,0);border-radius:0 14px 14px 0;background:linear-gradient(90deg,rgba(1,17,28,.7),rgba(1,17,28,0) 70%)}
+.bk>.bk-cast{position:absolute;top:0;bottom:0;left:50%;width:50%;z-index:9;pointer-events:none;opacity:0;will-change:opacity;border-radius:0 14px 14px 0;background:linear-gradient(90deg,rgba(1,17,28,.7),rgba(1,17,28,0) 70%)}
 @media (max-width:1100px){.bk-paper{padding:26px 26px}.bk-list{padding:16px 24px 36px}}
 @media (max-height:620px){.bk-ph,.bk-folio{display:none}.bk-paper h3{font-size:24px;margin-top:8px}.bk-paper p{font-size:15px}}
 /* the one-page book (phones): a tall track with a sticky stage; pages turn one at a time */
@@ -422,6 +422,15 @@ html.so-run .so-c li{will-change:transform}
   .sort .head{margin-bottom:14px}
   .so-end{margin-top:14px}
   .so-end .btn{min-height:50px;margin-top:12px}
+}
+/* short phones (360 wide, under 760 tall): tighter tracks so the closing line and button stay inside the stage */
+@media (max-width:380px),(max-width:760px) and (max-height:760px){
+  .so-c li{height:30px;font-size:14px}
+  .so-t{padding-block:4px}
+  .so-line{font-size:1.08rem;line-height:1.4}
+  .sort .head h2{font-size:1.6rem}
+  .so-end{margin-top:10px}
+  .so-end .btn{min-height:46px;margin-top:10px}
 }
 
 /* ===== leaders: three portraits as film frames in a centred row (one column on narrow screens); they reveal as they enter ===== */
@@ -829,11 +838,10 @@ html.js .rv.in{opacity:1;transform:none}
       <div>
         <ul>
           <li><a href="#services">Services</a></li>
-          <li><a href="#promises">Promises</a></li>
           <li><a href="#people">People</a></li>
           <li><a href="#dates">Dates</a></li>
+          <li><a href="tools/">Calculators</a></li>
           <li><a href="#insights">Insights</a></li>
-          <li><a href="#questions">Questions</a></li>
           <li><a href="#contact">Contact</a></li>
           <li class="m-only"><a class="btn" href="#contact">Book a chat</a></li>
         </ul>
@@ -909,7 +917,7 @@ html.js .rv.in{opacity:1;transform:none}
             <h3>Taxation &amp; Accounting&nbsp;Compliance</h3>
             <p class="one">Tax compliance and practical consulting services, for individuals, rental property owners and businesses on Xero or MYOB. Whatever the tax position, talk to us.</p>
             <ul class="ticks"><li>GST, IR3 and IR4 returns and end-of-year financial statements</li><li>IRD audits, compliance reviews and negotiating tax debt</li><li>Tax pooling through TMNZ, so you pay provisional tax when it suits you</li><li>Trusts, company formation, PAYE and payroll as add-ons</li></ul>
-            <a class="tlink more" href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">Read more on our site</a>
+            <a class="tlink more" href="services/taxation-accounting-compliance/">Read more on our site</a>
           </div>
         </li>
         <li class="pillar">
@@ -918,7 +926,7 @@ html.js .rv.in{opacity:1;transform:none}
             <h3>Business Advisory &amp;&nbsp;Planning</h3>
             <p class="one">Create a profitable, thriving and valuable business. Business planning begins with a free first meeting: a one-on-one workshop on your business and personal goals for the next 3 months, 12 months and 3 years.</p>
             <ul class="ticks"><li>Business planning, first meeting free of charge</li><li>Cashflow forecasting</li><li>Monthly coaching, so you know where you are heading and what the goals are</li></ul>
-            <a class="tlink more" href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">Read more on our site</a>
+            <a class="tlink more" href="services/business-advisory-planning/">Read more on our site</a>
           </div>
         </li>
         <li class="pillar">
@@ -927,7 +935,7 @@ html.js .rv.in{opacity:1;transform:none}
             <h3>Employment &amp; HR&nbsp;Advisory</h3>
             <p class="one">Your employment law and HR partner. The most valuable asset in your business is your staff.</p>
             <ul class="ticks"><li>Employment relations and policies</li><li>Employer accreditation, and restructure and redundancy</li><li>Personal grievances and disputes</li><li>Audit and investigations, including Labour Inspector readiness</li></ul>
-            <a class="tlink more" href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">Read more on our site</a>
+            <a class="tlink more" href="services/employment-hr-advisory/">Read more on our site</a>
           </div>
         </li>
         <li class="pillar">
@@ -936,7 +944,7 @@ html.js .rv.in{opacity:1;transform:none}
             <h3>Property Investment &amp;&nbsp;Development</h3>
             <p class="one">Practical advice on optimal structuring of your property investments and developments to keep up with the ever-changing property taxation laws and regulations.</p>
             <ul class="ticks"><li>Structuring: personal ownership, a look-through company or a trust</li><li>Strategy for buy and hold, trading and flips, development and land banking</li><li>Returns, financial statements and cash-flow tools</li><li>Family trust management and advisory</li></ul>
-            <a class="tlink more" href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">Read more on our site</a>
+            <a class="tlink more" href="services/property-investment-development/">Read more on our site</a>
           </div>
         </li>
       </ol>
@@ -1218,9 +1226,9 @@ html.js .rv.in{opacity:1;transform:none}
     <p class="tag">620 Manukau Road, Epsom, Auckland 1023</p>
     <p class="f-ct"><a href="tel:+6496250035">09 625 0035</a><a href="mailto:info@taxprofessionals.co.nz">info@taxprofessionals.co.nz</a></p>
     <div class="f-cols">
-      <nav aria-labelledby="fs-t"><h2 id="fs-t">Services</h2><a href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">Taxation &amp; Accounting Compliance</a><a href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">Business Advisory &amp; Planning</a><a href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">Employment &amp; HR Advisory</a><a href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">Property Investment &amp; Development</a></nav>
+      <nav aria-labelledby="fs-t"><h2 id="fs-t">Services</h2><a href="services/taxation-accounting-compliance/">Taxation &amp; Accounting Compliance</a><a href="services/business-advisory-planning/">Business Advisory &amp; Planning</a><a href="services/employment-hr-advisory/">Employment &amp; HR Advisory</a><a href="services/property-investment-development/">Property Investment &amp; Development</a></nav>
       <nav aria-labelledby="fe-t"><h2 id="fe-t">On this page</h2><a href="#promises">Five promises</a><a href="#people">People</a><a href="#dates">Dates to know</a><a href="#questions">Questions</a></nav>
-      <nav aria-labelledby="fm-t"><h2 id="fm-t">More</h2><a href="tools/">Calculators and resources</a><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">Insights</a><a href="pay/">Pay an invoice</a><a href="https://www.facebook.com/TaxProfessionalsNZ/" target="_blank" rel="noopener">Facebook</a><a href="https://nz.linkedin.com/company/tax-professionals-limited" target="_blank" rel="noopener">LinkedIn</a></nav>
+      <nav aria-labelledby="fm-t"><h2 id="fm-t">More</h2><a href="tools/">Calculators and resources</a><a href="insights/">Insights</a><a href="pay/">Pay an invoice</a><a href="https://www.facebook.com/TaxProfessionalsNZ/" target="_blank" rel="noopener">Facebook</a><a href="https://nz.linkedin.com/company/tax-professionals-limited" target="_blank" rel="noopener">LinkedIn</a></nav>
     </div>
     <div class="legal"><span>© 2026 Tax Professionals</span><span>Some images may be stock images.</span><span>Proudly designed by AMBS Solutions</span></div>
   </div>
@@ -1360,7 +1368,7 @@ html.js .rv.in{opacity:1;transform:none}
   });
   var SN = SV.length, SNN = '0' + SN;
   function bkPhoto(k){ return '<figure class="bk-ph"><img src="' + SV[k].img + '" width="800" height="367" alt="" decoding="async"></figure>'; }
-  function bkMore(k){ return '<a class="btn bk-more" href="' + SV[k].href + '" target="_blank" rel="noopener">' + SV[k].more + '</a>'; }
+  function bkMore(k){ return '<a class="btn bk-more" href="' + SV[k].href + '">' + SV[k].more + '</a>'; }
   function bkWords(k){ return '<div class="bk-paper"><span class="bk-no">' + SV[k].n + ' <span>/ ' + SNN + '</span></span><h3>' + SV[k].title + '</h3><p>' + SV[k].p + '</p>' + bkMore(k) + '<span class="bk-folio">Tax Professionals</span></div>'; }
   function bkPic(k){ return '<div class="bk-paper bk-pic">' + bkPhoto(k) + '<div class="bk-list"><p class="bk-lbl">What this covers</p><ul class="bk-ticks">' + SV[k].ticks + '</ul></div></div>'; }
   /* the book is a picture of the list: hidden from screen readers and out of the tab order */
@@ -1373,7 +1381,7 @@ html.js .rv.in{opacity:1;transform:none}
       var bk = d.createElement('div'); bk.className = 'bk'; bk.setAttribute('aria-hidden', 'true');
       var html = '<div class="bk-page bk-left" style="z-index:1">' + bkWords(0) + '</div><div class="bk-page bk-right" style="z-index:1">' + bkPic(SN - 1) + '</div>';
       for (var k = 0; k < SN - 1; k++) html += '<div class="bk-leaf" style="z-index:' + (SN - k + 1) + '"><div class="bk-face bk-front">' + bkPic(k) + '</div><div class="bk-face bk-back">' + bkWords(k + 1) + '</div></div>';
-      bk.innerHTML = html + '<span class="bk-spine"></span>';
+      bk.innerHTML = html + '<span class="bk-spine"></span>'; bk.querySelectorAll('.bk-face').forEach(function(f){ var i = document.createElement('i'); i.className = 'bk-sh'; i.setAttribute('aria-hidden', 'true'); f.appendChild(i); }); if (bk.classList.contains('bk')) { var c = document.createElement('i'); c.className = 'bk-cast'; c.setAttribute('aria-hidden', 'true'); bk.appendChild(c); }
       svcIn.appendChild(bk); svc.classList.add('bk-on'); bookOn(bk);
       var leaves = [].slice.call(bk.querySelectorAll('.bk-leaf'));
       var turn = G.timeline({scrollTrigger:{trigger:svc, start:'top top', end:function(){ return '+=' + Math.round(innerHeight * .34 * (SN - .4)); }, pin:true, scrub:.4, anticipatePin:1, invalidateOnRefresh:true}});
@@ -1383,10 +1391,10 @@ html.js .rv.in{opacity:1;transform:none}
         var nextImg = k < SN - 2 ? leaves[k + 1].querySelector('.bk-front .bk-ph img') : bk.querySelector('.bk-right .bk-ph img'), at = .3 + k;
         turn.fromTo(lf, {rotationY:0}, {rotationY:-180, duration:1, ease:'power2.inOut'}, at)
           .set(lf, {zIndex:20 + k}, at + .5)
-          .fromTo(fs, {'--sh':0}, {'--sh':.55, duration:.5, ease:'power1.in'}, at)
-          .fromTo(bs, {'--sh':.5}, {'--sh':0, duration:.5, ease:'power1.out'}, at + .5)
-          .fromTo(bk, {'--cast':0}, {'--cast':.5, duration:.5, ease:'power1.in'}, at)
-          .to(bk, {'--cast':0, duration:.5, ease:'power1.out'}, at + .5)
+          .fromTo(fs.querySelector('.bk-sh'), {opacity:0}, {opacity:.55, duration:.5, ease:'power1.in'}, at)
+          .fromTo(bs.querySelector('.bk-sh'), {opacity:.5}, {opacity:0, duration:.5, ease:'power1.out'}, at + .5)
+          .fromTo(bk.querySelector('.bk-cast'), {opacity:0}, {opacity:.5, duration:.5, ease:'power1.in'}, at)
+          .to(bk.querySelector('.bk-cast'), {opacity:0, duration:.5, ease:'power1.out'}, at + .5)
           .fromTo(nextImg, {scale:1.1}, {scale:1, duration:1, ease:'power2.out'}, at);
       });
       turn.to({}, {duration:.5});
@@ -1409,7 +1417,7 @@ html.js .rv.in{opacity:1;transform:none}
     for (var j = 0; j < SN; j++) ph += '<div class="pbk-leaf" style="z-index:' + (SN - j) + '"><div class="bk-face bk-front pbk-front">' + bkPhoto(j) +
       '<div class="bk-paper"><span class="bk-no">' + SV[j].n + ' <span>/ ' + SNN + '</span></span><h3>' + SV[j].title + '</h3><p>' + SV[j].p + '</p><ul class="bk-ticks">' + SV[j].ticks + '</ul>' + bkMore(j) + '</div>' +
       '</div><div class="bk-face bk-back pbk-back"><span>Tax Professionals</span></div></div>';
-    pb.innerHTML = ph;
+    pb.innerHTML = ph; pb.querySelectorAll('.bk-face').forEach(function(f){ var i = document.createElement('i'); i.className = 'bk-sh'; i.setAttribute('aria-hidden', 'true'); f.appendChild(i); }); if (pb.classList.contains('bk')) { var c = document.createElement('i'); c.className = 'bk-cast'; c.setAttribute('aria-hidden', 'true'); pb.appendChild(c); }
     var nav = d.createElement('div'); nav.className = 'pbk-nav';
     nav.innerHTML = '<button class="emb" type="button" aria-label="Previous service"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg></button>' +
       '<span class="pbk-count">01 / ' + SNN + '</span>' +
@@ -1429,8 +1437,8 @@ html.js .rv.in{opacity:1;transform:none}
       lf.classList.add('turning'); G.set(lf, {zIndex:50});
       var tl = G.timeline({onComplete:function(){ pBusy = false; lf.classList.remove('turning'); G.set(lf, {zIndex:SN - k, clearProps:'transform'}); pMark(); }});
       tl.timeScale(1 + Math.min(2, Math.abs(pTarget - pCur) - 1) * 1.1);
-      if (dir > 0) tl.fromTo(lf, {rotationY:0}, {rotationY:-180, duration:.9, ease:'power2.inOut'}).fromTo(fs, {'--sh':0}, {'--sh':.55, duration:.45, ease:'power1.in'}, 0).fromTo(bs, {'--sh':.5}, {'--sh':0, duration:.45}, .45);
-      else tl.fromTo(lf, {rotationY:-180}, {rotationY:0, duration:.9, ease:'power2.inOut'}).fromTo(bs, {'--sh':0}, {'--sh':.5, duration:.45}, 0).fromTo(fs, {'--sh':.55}, {'--sh':0, duration:.45, ease:'power1.out'}, .45);
+      if (dir > 0) tl.fromTo(lf, {rotationY:0}, {rotationY:-180, duration:.9, ease:'power2.inOut'}).fromTo(fs.querySelector('.bk-sh'), {opacity:0}, {opacity:.55, duration:.45, ease:'power1.in'}, 0).fromTo(bs.querySelector('.bk-sh'), {opacity:.5}, {opacity:0, duration:.45}, .45);
+      else tl.fromTo(lf, {rotationY:-180}, {rotationY:0, duration:.9, ease:'power2.inOut'}).fromTo(bs.querySelector('.bk-sh'), {opacity:0}, {opacity:.5, duration:.45}, 0).fromTo(fs.querySelector('.bk-sh'), {opacity:.55}, {opacity:0, duration:.45, ease:'power1.out'}, .45);
       pCur += dir; pShow();
     }
     function pStep(){ if (!pBusy && pCur !== pTarget) pFlip(pTarget > pCur ? 1 : -1); }

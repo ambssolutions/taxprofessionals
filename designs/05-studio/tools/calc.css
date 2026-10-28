@@ -226,3 +226,38 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--blue-l);outline
   .tablist{gap:6px;margin-bottom:16px}
   .tablist button{min-height:44px;font-size:15px}
 }
+
+/* take-home at every pay frequency */
+.tw{overflow-x:auto;margin-top:6px}
+.freqs{width:100%;border-collapse:collapse;font-size:15px;font-variant-numeric:tabular-nums}
+.freqs th,.freqs td{padding:10px 8px;text-align:right;border-bottom:1px solid rgba(243,239,231,.1);white-space:nowrap}
+.freqs th:first-child{text-align:left}
+.freqs thead th{font-weight:600;font-size:13px;letter-spacing:.04em;color:rgba(243,239,231,.62)}
+.freqs tbody tr.cur{background:rgba(98,180,68,.12)}
+.freqs tbody tr.cur th{color:#62B444}
+@media (max-width:420px){.freqs{font-size:14px}.freqs th,.freqs td{padding:9px 5px}}
+
+/* screen fit: a compact intro so the first calculator starts on the first screen; results stay in view beside the form */
+[data-basis][hidden]{display:none!important}
+.intro{padding:clamp(28px,5vh,56px) 0 clamp(18px,2.6vh,28px)}
+.intro h1{font-size:clamp(2rem,3.4vw,2.75rem)}
+.intro .lede{margin-top:10px;font-size:clamp(16px,1.2vw,18px)}
+.figs{margin-top:14px;padding:6px 14px;font-size:14px}
+.tablist{margin-bottom:clamp(14px,2vh,22px)}
+.tablist button{min-height:44px;padding:0 16px;font-size:15px}
+.panel>header{padding-top:clamp(18px,2.4vw,28px)}
+.panel>header h2{font-size:clamp(1.5rem,2.2vw,1.9rem)}
+.pgrid{padding-top:clamp(16px,2.2vw,28px)}
+.fld{gap:6px}
+form[data-calc]{display:grid;gap:clamp(12px,1.8vh,18px);align-content:start}
+@media (min-width:861px){
+  .out{position:sticky;top:calc(var(--hdr) + 16px);max-height:calc(100vh - var(--hdr) - 32px);overflow:auto;scrollbar-width:thin}
+}
+@media (max-width:640px){
+  /* phones: the eight calculators in one swipeable row, so the calculator itself starts on the first screen */
+  .tablist{display:flex;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
+    margin-inline:calc(-1 * var(--pad,20px));padding:2px var(--pad,20px) 6px;scrollbar-width:none;mask-image:linear-gradient(90deg,#000 88%,transparent)}
+  .tablist::-webkit-scrollbar{display:none}
+  .tablist button{flex:none;scroll-snap-align:start;min-height:44px;padding:0 16px}
+  .intro .lede{font-size:16px}
+}

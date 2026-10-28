@@ -240,16 +240,26 @@
         '</tbody></table></details><p class="fine">Income tax only. ACC earners\' levy, student loan and tax credits are not included.</p>';
     },
     paye: function (f, out) {
-      var freq = f.freq.value, ks = f.ks.value;
-      var r = paye({ pay: num(f.pay), freq: freq, sl: f.code.value === 'MSL', ksRate: ks === 'none' ? 0 : +ks, erRate: +f.er.value });
+      var freq = f.freq.value, ks = f.ks.value, basis = f.basis ? f.basis.value : 'period';
+      $$('[data-basis]', f).forEach(function (el) { el.hidden = el.getAttribute('data-basis') !== basis; });
+      /* gross for the year from whichever the visitor entered: hourly rate x hours x 52, a salary, or one pay */
+      var annualGross = basis === 'hourly' ? num(f.rate) * num(f.hours) * 52 : basis === 'salary' ? num(f.salary) : num(f.pay) * PERIODS[freq];
+      var opts = function (fq) { return { pay: annualGross / PERIODS[fq], freq: fq, sl: f.code.value === 'MSL', ksRate: ks === 'none' ? 0 : +ks, erRate: +f.er.value }; };
+      var r = paye(opts(freq));
       var per = FREQ[freq];
-      out.innerHTML = big('Take-home pay', money(r.takeHome), 'per ' + per) +
+      var all = ['weekly', 'fortnightly', 'monthly', 'annual'].map(function (fq) { return [fq, paye(opts(fq))]; });
+      var yearNet = all[3][1].takeHome;
+      var table = '<h4>Take-home at every pay frequency</h4><div class="tw"><table class="freqs"><thead><tr><th scope="col">Paid</th><th scope="col">Gross</th><th scope="col">Deductions</th><th scope="col">Take-home</th></tr></thead><tbody>' +
+        all.map(function (x) { var q = x[1], ded = r2(q.gross - q.takeHome); return '<tr' + (x[0] === freq ? ' class="cur"' : '') + '><th scope="row">' + FREQ[x[0]].charAt(0).toUpperCase() + FREQ[x[0]].slice(1)+ 'ly' + '</th><td>' + money(q.gross) + '</td><td>- ' + money(ded) + '</td><td><b>' + money(q.takeHome) + '</b></td></tr>'; }).join('') +
+        '</tbody></table></div>';
+      out.innerHTML = big('Take-home pay', money(r.takeHome), 'per ' + per + (freq !== 'annual' ? ', about ' + money(yearNet) + ' a year' : '')) +
         rows([['Gross pay', money(r.gross)], ['PAYE (income tax)', '- ' + money(r.paye)], ['ACC earners\' levy', '- ' + money(r.acc)],
           f.code.value === 'MSL' ? ['Student loan', '- ' + money(r.studentLoan)] : null,
           ks !== 'none' ? ['KiwiSaver (you, ' + pct(+ks) + ')', '- ' + money(r.kiwiSaver)] : null,
           ['Take-home', money(r.takeHome), 'tot']].filter(Boolean)) +
         (ks !== 'none' ? '<h4>Paid by your employer, on top of your pay</h4>' + rows([['Employer KiwiSaver (gross, ' + pct(+f.er.value) + ')', money(r.employerGross)], ['Less ESCT at ' + pct(r.esctRate), '- ' + money(r.esct)], ['Into your KiwiSaver', money(r.employerNet), 'tot']]) : '') +
-        '<p class="fine">Tax code M or M SL only. Secondary tax codes, tax credits, Working for Families and one-off payments are not covered.</p>';
+        table +
+        '<p class="fine">Tax code M or M SL only. Hourly pay assumes the same hours every week for 52 weeks. Secondary tax codes, tax credits, Working for Families and one-off payments are not covered.</p>';
     },
     sl: function (f, out) {
       var freq = f.freq.value, r = studentLoan(num(f.pay), freq);
@@ -314,6 +324,7 @@
   var tabs = $$('[role=tab]');
   function show(t, focus) {
     tabs.forEach(function (x) { var on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; $('#' + x.getAttribute('aria-controls')).hidden = !on; });
+    var row = t.parentNode; if (row.scrollWidth > row.clientWidth) row.scrollTo({ left: t.offsetLeft - row.clientWidth / 2 + t.offsetWidth / 2, behavior: 'smooth' });
     if (focus) t.focus();
     try { history.replaceState(null, '', '#' + t.id.replace('t-', '')); } catch (e) {}
   }

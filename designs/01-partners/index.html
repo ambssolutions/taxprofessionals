@@ -262,10 +262,10 @@ ul,ol{margin:0;padding:0;list-style:none}
 .bk-lbl{margin-top:clamp(14px,2.6vh,26px);font-weight:500;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
 .bk-sub{margin-top:8px;columns:2;column-gap:clamp(18px,2vw,28px)}
 .bk-sub li{break-inside:avoid;padding:7px 0;border-top:1px solid var(--line);font-size:.98rem;line-height:1.4}
-.bk-face::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;opacity:var(--sh,0);background:linear-gradient(90deg,rgba(2,44,73,.72),rgba(2,44,73,.2))}
-.bk-back::after{background:linear-gradient(270deg,rgba(2,44,73,.6),rgba(2,44,73,.12))}
+.bk-face>.bk-sh{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;will-change:opacity;background:linear-gradient(90deg,rgba(2,44,73,.72),rgba(2,44,73,.2))}
+.bk-back>.bk-sh{background:linear-gradient(270deg,rgba(2,44,73,.6),rgba(2,44,73,.12))}
 .bk-spine{position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;z-index:60;pointer-events:none;background:linear-gradient(rgba(2,44,73,.1),rgba(2,44,73,.3),rgba(2,44,73,.1))}
-.bk::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:50%;z-index:9;pointer-events:none;opacity:var(--cast,0);background:linear-gradient(90deg,rgba(2,44,73,.6),rgba(2,44,73,0) 70%)}
+.bk>.bk-cast{position:absolute;top:0;bottom:0;left:50%;width:50%;z-index:9;pointer-events:none;opacity:0;will-change:opacity;background:linear-gradient(90deg,rgba(2,44,73,.6),rgba(2,44,73,0) 70%)}
 @media (max-width:1023px){.bk-sub{columns:1}.bk-paper{padding:26px 24px}.bk-pic{padding:20px 20px 34px}}
 @media (max-height:600px){.bk-ph,.bk-no,.bk-folio,.bk-lbl{display:none}.bk-sub{margin-top:0}}
 /* phones: a tall track, a sticky stage (native scroll) and one page that turns at a time */
@@ -825,7 +825,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var bk = d.createElement('div'); bk.className = 'bk'; bk.setAttribute('aria-hidden', 'true');
       var html = '<div class="bk-page bk-left" style="z-index:1">' + bkWords(0) + '</div><div class="bk-page bk-right" style="z-index:1">' + bkPic(SN - 1) + '</div>';
       for (var k = 0; k < SN - 1; k++) html += '<div class="bk-leaf" style="z-index:' + (SN - k + 1) + '"><div class="bk-face bk-front">' + bkPic(k) + SHADE + '</div><div class="bk-face bk-back">' + bkWords(k + 1) + SHADE + '</div></div>';
-      bk.innerHTML = html + '<span class="bk-spine" aria-hidden="true"></span>';
+      bk.innerHTML = html + '<span class="bk-spine" aria-hidden="true"></span>'; bk.querySelectorAll('.bk-face').forEach(function(f){ var i = document.createElement('i'); i.className = 'bk-sh'; i.setAttribute('aria-hidden', 'true'); f.appendChild(i); }); if (bk.classList.contains('bk')) { var c = document.createElement('i'); c.className = 'bk-cast'; c.setAttribute('aria-hidden', 'true'); bk.appendChild(c); }
       svcStage.appendChild(bk); svcStage.classList.add('has-bk'); bookOn(bk);
       var leaves = $$('.bk-leaf', bk);
       gsap.from(bk, { opacity: 0, duration: 1.2, ease: 'power2.out', scrollTrigger: { trigger: svcStage, start: 'top 80%', once: true } });
@@ -835,10 +835,10 @@ document.addEventListener('DOMContentLoaded', function () {
         var nextImg = k < SN - 2 ? $('.bk-front .bk-ph img', leaves[k + 1]) : $('.bk-right .bk-ph img', bk);
         turn.fromTo(lf, { rotationY: 0 }, { rotationY: -180, duration: 1, ease: 'power2.inOut' }, k)
           .set(lf, { zIndex: 20 + k }, k + 0.5)
-          .fromTo(fs, {'--sh': 0}, {'--sh': 0.55, duration: 0.5, ease: 'power1.in' }, k)
-          .fromTo(bs, {'--sh': 0.5}, {'--sh': 0, duration: 0.5, ease: 'power1.out' }, k + 0.5)
-          .fromTo(bk, {'--cast': 0}, {'--cast': 0.5, duration: 0.5, ease: 'power1.in' }, k)
-          .to(bk, {'--cast': 0, duration: 0.5, ease: 'power1.out' }, k + 0.5)
+          .fromTo(fs.querySelector('.bk-sh'), {opacity: 0}, {opacity: 0.55, duration: 0.5, ease: 'power1.in' }, k)
+          .fromTo(bs.querySelector('.bk-sh'), {opacity: 0.5}, {opacity: 0, duration: 0.5, ease: 'power1.out' }, k + 0.5)
+          .fromTo(bk.querySelector('.bk-cast'), {opacity: 0}, {opacity: 0.5, duration: 0.5, ease: 'power1.in' }, k)
+          .to(bk.querySelector('.bk-cast'), {opacity: 0, duration: 0.5, ease: 'power1.out' }, k + 0.5)
           .fromTo(nextImg, { scale: 1.1 }, { scale: 1, duration: 1, ease: 'power2.out' }, k);
       });
       turn.to({}, { duration: 0.2 });
@@ -879,6 +879,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var trk = d.createElement('div'); trk.className = 'pbk-track'; trk.style.setProperty('--pages', SN);
       var stk = d.createElement('div'); stk.className = 'pbk-sticky';
       stk.append(pb, nav); trk.appendChild(stk); svcStage.appendChild(trk); svcStage.classList.add('has-bk'); bookOn(stk);
+      pb.querySelectorAll('.bk-face').forEach(function (f) { var i = d.createElement('i'); i.className = 'bk-sh'; i.setAttribute('aria-hidden', 'true'); f.appendChild(i) });
       var leaves = $$('.pbk-leaf', pb), count = $('.pbk-count', nav), bt = $$('button', nav);
       var cur = 0, target = 0, busy = false, tl = null;
       function num(k) { return (k < 9 ? '0' : '') + (k + 1) + ' / ' + SNN }
@@ -894,9 +895,9 @@ document.addEventListener('DOMContentLoaded', function () {
         tl = gsap.timeline({ onComplete: function () { busy = false; lf.classList.remove('turning'); gsap.set(lf, { zIndex: SN - k, clearProps: 'transform' }); mark(); tl = null } });
         tl.timeScale(1 + Math.min(2, Math.abs(target - cur) - 1) * 1.1);
         if (dir > 0) tl.fromTo(lf, { rotationY: 0 }, { rotationY: -180, duration: 0.9, ease: 'power2.inOut' })
-          .fromTo(fs, {'--sh': 0}, {'--sh': 0.55, duration: 0.45, ease: 'power1.in' }, 0).fromTo(bs, {'--sh': 0.5}, {'--sh': 0, duration: 0.45 }, 0.45);
+          .fromTo(fs.querySelector('.bk-sh'), {opacity: 0}, {opacity: 0.55, duration: 0.45, ease: 'power1.in' }, 0).fromTo(bs.querySelector('.bk-sh'), {opacity: 0.5}, {opacity: 0, duration: 0.45 }, 0.45);
         else tl.fromTo(lf, { rotationY: -180 }, { rotationY: 0, duration: 0.9, ease: 'power2.inOut' })
-          .fromTo(bs, {'--sh': 0}, {'--sh': 0.5, duration: 0.45 }, 0).fromTo(fs, {'--sh': 0.55}, {'--sh': 0, duration: 0.45, ease: 'power1.out' }, 0.45);
+          .fromTo(bs.querySelector('.bk-sh'), {opacity: 0}, {opacity: 0.5, duration: 0.45 }, 0).fromTo(fs.querySelector('.bk-sh'), {opacity: 0.55}, {opacity: 0, duration: 0.45, ease: 'power1.out' }, 0.45);
         cur += dir; show();
       }
       function step() { if (!busy && cur !== target) flip(target > cur ? 1 : -1) }

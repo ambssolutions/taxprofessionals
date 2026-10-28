@@ -228,10 +228,10 @@ html.js:not(.fx):not(.ph) .squares i{transform:scale(0);transform-origin:100% 0;
 .bk-lbl{font:600 14px/1.2 var(--sans)!important;color:var(--blue)!important;letter-spacing:.02em;margin-bottom:10px}
 .bk-ticks{display:grid;gap:clamp(4px,.9vh,8px)}
 .bk-ticks li{font-size:clamp(15px,1.15vw,16.5px);line-height:1.45}
-.bk-face::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;opacity:var(--sh,0);background:linear-gradient(90deg,rgba(3,40,66,.72),rgba(3,40,66,.22))}
-.bk-back::after{background:linear-gradient(270deg,rgba(3,40,66,.6),rgba(3,40,66,.12))}
+.bk-face>.bk-sh{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;will-change:opacity;background:linear-gradient(90deg,rgba(3,40,66,.72),rgba(3,40,66,.22))}
+.bk-back>.bk-sh{background:linear-gradient(270deg,rgba(3,40,66,.6),rgba(3,40,66,.12))}
 .bk-spine{position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;z-index:60;pointer-events:none;background:linear-gradient(rgba(3,40,66,.12),rgba(3,40,66,.32),rgba(3,40,66,.12))}
-.bk::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:50%;z-index:9;pointer-events:none;opacity:var(--cast,0);border-radius:0 16px 16px 0;background:linear-gradient(90deg,rgba(3,40,66,.6),rgba(3,40,66,0) 70%)}
+.bk>.bk-cast{position:absolute;top:0;bottom:0;left:50%;width:50%;z-index:9;pointer-events:none;opacity:0;will-change:opacity;border-radius:0 16px 16px 0;background:linear-gradient(90deg,rgba(3,40,66,.6),rgba(3,40,66,0) 70%)}
 @media (max-width:980px){.bk{height:min(calc(100svh - var(--hdr) - 150px),600px)}.bk-paper{padding:26px 24px}.bk-list{padding:16px 22px 34px}}
 @media (max-height:560px){.bk{height:calc(100svh - var(--hdr) - 100px);min-height:0}.bk-ph,.bk-no,.bk-folio{display:none}.bk-paper h3{font-size:22px;margin-top:0}.bk-paper p{font-size:14px}}
 
@@ -1019,7 +1019,7 @@ html.js .rv.in{opacity:1;transform:none}
       var bk = d.createElement('div'); bk.className = 'bk'; bk.setAttribute('aria-hidden', 'true');
       var html = '<div class="bk-page bk-left" style="z-index:1">' + bkWords(0) + '</div><div class="bk-page bk-right" style="z-index:1">' + bkPic(SN - 1) + '</div>';
       for (var k = 0; k < SN - 1; k++) html += '<div class="bk-leaf" style="z-index:' + (SN - k + 1) + '"><div class="bk-face bk-front">' + bkPic(k) + SHADE + '</div><div class="bk-face bk-back">' + bkWords(k + 1) + SHADE + '</div></div>';
-      bk.innerHTML = html + '<span class="bk-spine" aria-hidden="true"></span>';
+      bk.innerHTML = html + '<span class="bk-spine" aria-hidden="true"></span>'; bk.querySelectorAll('.bk-face').forEach(function(f){ var i = document.createElement('i'); i.className = 'bk-sh'; i.setAttribute('aria-hidden', 'true'); f.appendChild(i); }); if (bk.classList.contains('bk')) { var c = document.createElement('i'); c.className = 'bk-cast'; c.setAttribute('aria-hidden', 'true'); bk.appendChild(c); }
       svcIn.appendChild(bk); svcSec.classList.add('has-bk'); bookOn(bk);
       var leaves = [].slice.call(bk.querySelectorAll('.bk-leaf'));
       G.from(bk, {opacity: 0, duration: 1.2, ease: 'power2.out', scrollTrigger: {trigger: bk, start: 'top 90%', once: true}});
@@ -1030,10 +1030,10 @@ html.js .rv.in{opacity:1;transform:none}
         var nextImg = k < SN - 2 ? leaves[k + 1].querySelector('.bk-front .bk-ph img') : bk.querySelector('.bk-right .bk-ph img');
         turn.fromTo(lf, {rotationY: 0}, {rotationY: -180, duration: 1, ease: 'power2.inOut'}, k)
           .set(lf, {zIndex: 20 + k}, k + .5)
-          .fromTo(fs, {'--sh': 0}, {'--sh': .55, duration: .5, ease: 'power1.in'}, k)
-          .fromTo(bs, {'--sh': .5}, {'--sh': 0, duration: .5, ease: 'power1.out'}, k + .5)
-          .fromTo(bk, {'--cast': 0}, {'--cast': .5, duration: .5, ease: 'power1.in'}, k)
-          .to(bk, {'--cast': 0, duration: .5, ease: 'power1.out'}, k + .5)
+          .fromTo(fs.querySelector('.bk-sh'), {opacity: 0}, {opacity: .55, duration: .5, ease: 'power1.in'}, k)
+          .fromTo(bs.querySelector('.bk-sh'), {opacity: .5}, {opacity: 0, duration: .5, ease: 'power1.out'}, k + .5)
+          .fromTo(bk.querySelector('.bk-cast'), {opacity: 0}, {opacity: .5, duration: .5, ease: 'power1.in'}, k)
+          .to(bk.querySelector('.bk-cast'), {opacity: 0, duration: .5, ease: 'power1.out'}, k + .5)
           .fromTo(nextImg, {scale: 1.1}, {scale: 1, duration: 1, ease: 'power2.out'}, k);
       });
       turn.to({}, {duration: .15});
@@ -1134,7 +1134,7 @@ html.js .rv.in{opacity:1;transform:none}
       for (var k = 0; k < SN; k++) ph += '<div class="pbk-leaf" style="z-index:' + (SN - k) + '"><div class="bk-face bk-front pbk-front">' + bkPhoto(k) +
         '<div class="bk-paper"><h3>' + svc[k].title + '</h3><p>' + svc[k].p + '</p><ul class="bk-ticks">' + svc[k].ticks + '</ul>' + bkMore(k) + '</div>' + SHADE +
         '</div><div class="bk-face bk-back pbk-back" aria-hidden="true"><span>Tax Professionals</span>' + SHADE + '</div></div>';
-      pb.innerHTML = ph;
+      pb.innerHTML = ph; pb.querySelectorAll('.bk-face').forEach(function(f){ var i = document.createElement('i'); i.className = 'bk-sh'; i.setAttribute('aria-hidden', 'true'); f.appendChild(i); }); if (pb.classList.contains('bk')) { var c = document.createElement('i'); c.className = 'bk-cast'; c.setAttribute('aria-hidden', 'true'); pb.appendChild(c); }
       var nav = d.createElement('div'); nav.className = 'pbk-nav'; nav.setAttribute('aria-hidden', 'true');
       nav.innerHTML = '<button type="button" aria-label="Previous service"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg></button>' +
         '<span class="pbk-count">01 / ' + SNN + '</span>' +
@@ -1157,9 +1157,9 @@ html.js .rv.in{opacity:1;transform:none}
         pTl = G.timeline({onComplete: function(){ pBusy = false; lf.classList.remove('turning'); G.set(lf, {zIndex: SN - k, clearProps: 'transform'}); pMark(); pTl = null; }});
         pTl.timeScale(1 + Math.min(2, Math.abs(pTarget - pCur) - 1) * 1.1);
         if (dir > 0) pTl.fromTo(lf, {rotationY: 0}, {rotationY: -180, duration: .9, ease: 'power2.inOut'})
-          .fromTo(fs, {'--sh': 0}, {'--sh': .55, duration: .45, ease: 'power1.in'}, 0).fromTo(bs, {'--sh': .5}, {'--sh': 0, duration: .45}, .45);
+          .fromTo(fs.querySelector('.bk-sh'), {opacity: 0}, {opacity: .55, duration: .45, ease: 'power1.in'}, 0).fromTo(bs.querySelector('.bk-sh'), {opacity: .5}, {opacity: 0, duration: .45}, .45);
         else pTl.fromTo(lf, {rotationY: -180}, {rotationY: 0, duration: .9, ease: 'power2.inOut'})
-          .fromTo(bs, {'--sh': 0}, {'--sh': .5, duration: .45}, 0).fromTo(fs, {'--sh': .55}, {'--sh': 0, duration: .45, ease: 'power1.out'}, .45);
+          .fromTo(bs.querySelector('.bk-sh'), {opacity: 0}, {opacity: .5, duration: .45}, 0).fromTo(fs.querySelector('.bk-sh'), {opacity: .55}, {opacity: 0, duration: .45, ease: 'power1.out'}, .45);
         pCur += dir; pShow();
       }
       function pStep(){ if (!pBusy && pCur !== pTarget) pFlip(pTarget > pCur ? 1 : -1); }
