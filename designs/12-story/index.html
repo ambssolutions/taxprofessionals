@@ -904,7 +904,7 @@ html.js .rv.in{opacity:1;transform:none}
   var ARW = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
   function bkPhoto(k){ var v = svc[k]; return '<figure class="bk-ph" aria-hidden="true"><img src="' + v.img + '" width="800" height="367" alt="" decoding="async"></figure>'; }   /* decorative inside the book, which is one centred group */
   function bkMore(k){ var v = svc[k]; return '<a class="bk-more" href="' + v.href + '" target="_blank" rel="noopener">' + v.more + ' ' + ARW + '</a>'; }
-  function bkWords(k){ var v = svc[k]; return '<div class="bk-paper"><span class="bk-no" aria-hidden="true">' + v.n + '</span><h3>' + v.title +&nbsp;'</h3><p>' + v.p + '</p>' + bkMore(k) + '<span class="bk-folio" aria-hidden="true">' + v.n + ' / ' + SNN + '</span></div>'; }
+  function bkWords(k){ var v = svc[k]; return '<div class="bk-paper"><span class="bk-no" aria-hidden="true">' + v.n + '</span><h3>' + v.title + '</h3><p>' + v.p + '</p>' + bkMore(k) + '<span class="bk-folio" aria-hidden="true">' + v.n + ' / ' + SNN + '</span></div>'; }
   function bkPic(k){ return '<div class="bk-paper bk-pic">' + bkPhoto(k) + '<div class="bk-list"><p class="bk-lbl">What this covers</p><ul class="bk-ticks">' + svc[k].ticks + '</ul></div></div>'; }
   var SHADE = '';
   /* the book is a visual presentation: hidden from screen readers and out of the tab order; the plain list stays in the page, visually hidden, for them */
@@ -1124,7 +1124,7 @@ html.js .rv.in{opacity:1;transform:none}
       var pb = d.createElement('div'); pb.className = 'pbk'; pb.setAttribute('aria-hidden', 'true');
       var ph = '';
       for (var k = 0; k < SN; k++) ph += '<div class="pbk-leaf" style="z-index:' + (SN - k) + '"><div class="bk-face bk-front pbk-front">' + bkPhoto(k) +
-        '<div class="bk-paper"><h3>' + svc[k].title +&nbsp;'</h3><p>' + svc[k].p + '</p><ul class="bk-ticks">' + svc[k].ticks + '</ul>' + bkMore(k) + '</div>' + SHADE +
+        '<div class="bk-paper"><h3>' + svc[k].title + '</h3><p>' + svc[k].p + '</p><ul class="bk-ticks">' + svc[k].ticks + '</ul>' + bkMore(k) + '</div>' + SHADE +
         '</div><div class="bk-face bk-back pbk-back" aria-hidden="true"><span>Tax Professionals</span>' + SHADE + '</div></div>';
       pb.innerHTML = ph;
       var nav = d.createElement('div'); nav.className = 'pbk-nav'; nav.setAttribute('aria-hidden', 'true');

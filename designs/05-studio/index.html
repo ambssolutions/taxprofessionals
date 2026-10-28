@@ -1086,7 +1086,7 @@ html.js .rv.in{opacity:1;transform:none}
   var SN = SV.length, SNN = '0' + SN;
   function bkPhoto(k){ return '<figure class="bk-ph"><img src="' + SV[k].img + '" width="800" height="367" alt="" decoding="async"></figure>'; }
   function bkMore(k){ return '<a class="btn bk-more" href="' + SV[k].href + '" target="_blank" rel="noopener">' + SV[k].more + '</a>'; }
-  function bkWords(k){ return '<div class="bk-paper"><span class="bk-no">' + SV[k].n + ' <span>/ ' + SNN + '</span></span><h3>' + SV[k].title +&nbsp;'</h3><p>' + SV[k].p + '</p>' + bkMore(k) + '<span class="bk-folio">Tax Professionals</span></div>'; }
+  function bkWords(k){ return '<div class="bk-paper"><span class="bk-no">' + SV[k].n + ' <span>/ ' + SNN + '</span></span><h3>' + SV[k].title + '</h3><p>' + SV[k].p + '</p>' + bkMore(k) + '<span class="bk-folio">Tax Professionals</span></div>'; }
   function bkPic(k){ return '<div class="bk-paper bk-pic">' + bkPhoto(k) + '<div class="bk-list"><p class="bk-lbl">What this covers</p><ul class="bk-ticks">' + SV[k].ticks + '</ul></div></div>'; }
   /* the book is a picture of the list: hidden from screen readers and out of the tab order */
   function bookOn(root){ root.querySelectorAll('a, button').forEach(function(x){ x.tabIndex = -1; }); pillars.classList.add('sr'); }
@@ -1132,7 +1132,7 @@ html.js .rv.in{opacity:1;transform:none}
     var pb = d.createElement('div'); pb.className = 'pbk';
     var ph = '';
     for (var j = 0; j < SN; j++) ph += '<div class="pbk-leaf" style="z-index:' + (SN - j) + '"><div class="bk-face bk-front pbk-front">' + bkPhoto(j) +
-      '<div class="bk-paper"><span class="bk-no">' + SV[j].n + ' <span>/ ' + SNN + '</span></span><h3>' + SV[j].title +&nbsp;'</h3><p>' + SV[j].p + '</p><ul class="bk-ticks">' + SV[j].ticks + '</ul>' + bkMore(j) + '</div>' +
+      '<div class="bk-paper"><span class="bk-no">' + SV[j].n + ' <span>/ ' + SNN + '</span></span><h3>' + SV[j].title + '</h3><p>' + SV[j].p + '</p><ul class="bk-ticks">' + SV[j].ticks + '</ul>' + bkMore(j) + '</div>' +
       '</div><div class="bk-face bk-back pbk-back"><span>Tax Professionals</span></div></div>';
     pb.innerHTML = ph;
     var nav = d.createElement('div'); nav.className = 'pbk-nav';
