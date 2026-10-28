@@ -133,6 +133,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .vbar .seg{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}
 .vbar .seg button{color:rgba(255,255,255,.6);padding:7px 12px}
 .vbar .seg button[aria-pressed="true"]{background:rgba(255,255,255,.14);color:#fff}
+.vbtn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:inherit}.vbtn span{opacity:.7}.vbtn select{height:32px;border-radius:999px;padding:0 10px;background:transparent;color:inherit;border:1px solid rgba(255,255,255,.2);font:inherit}.vbtn option{color:#111}
 .vfont button{white-space:nowrap}.vfont b{font-weight:600;opacity:.7;margin-right:2px}
 .stage{flex:1;display:grid;place-items:center;overflow:hidden;padding:0}
 .stage .frame{width:100%;height:100%;transition:width .5s var(--ease),height .5s var(--ease),border-radius .5s;background:#fff;overflow:hidden}
@@ -254,6 +255,8 @@ body.arranging .arr .pos{margin-left:6px;min-width:56px;text-align:right}
   .vbar .btn{min-height:34px;padding:0 10px;font-size:12.5px}
   .vbar .vbtn-ico{width:34px;min-width:34px;padding:0;justify-content:center}
   .vbar .vfont button{padding:5px 10px;font-size:12px}
+  .vbar .vbtn{order:9;grid-column:1/-1;justify-self:center}
+  .vbar .vbtn select{height:30px;font-size:12.5px}
 }
 </style>
 </head>
@@ -338,6 +341,7 @@ body.arranging .arr .pos{margin-left:6px;min-width:56px;text-align:right}
       <button type="button" aria-pressed="false" data-dev="mobile">Mobile</button>
     </div>
     <div class="seg vfont" role="group" aria-label="Font style" id="vFont"></div>
+    <label class="vbtn" title="Button style"><span>Buttons</span><select id="vBtn" aria-label="Button style"><option value="1">Original</option><option value="2">Pill</option><option value="3">Rounded</option><option value="4">Square</option><option value="5">Pill with arrow</option></select></label>
     <button class="btn vbtn-ico" type="button" id="vPrev" aria-label="Previous concept">←</button>
     <button class="btn vbtn-ico" type="button" id="vNext" aria-label="Next concept">→</button>
     <a class="btn hide-sm" id="vDev">Device frames</a>
@@ -592,7 +596,7 @@ function syncViewer(){
   $("#vStar").textContent = small ? (on ? "★" : "☆") : (on ? "★ Shortlisted" : "☆ Shortlist");
   $("#vStar").setAttribute("aria-label", on ? "Remove from shortlist" : "Add to shortlist");
   $("#vPick").textContent = pick === c.id ? (small ? "★ Send" : "★ Your pick · Send") : (small ? "Pick" : "This is the one");
-  paintFonts(c);
+  paintFonts(c); paintBtn(c);
 }
 // three font styles per design: the same choice as the Aa menu on the design itself (shared localStorage key)
 function fontNo(c){ let k = 1; try { k = +(localStorage.getItem("tp-font-" + c.id) || 1); } catch (e) {} return k; }
@@ -601,12 +605,19 @@ function paintFonts(c){
   $("#vFont").innerHTML = (c.fonts || []).map((f, i) =>
     `<button type="button" aria-pressed="${i + 1 === k}" data-font="${i + 1}" title="${f[1] === f[2] ? f[1] : f[1] + " + " + f[2]}"><b>Aa</b> ${i ? (f[1].split(" ")[0].length < 4 ? f[1].split(" ").slice(0, 2).join(" ") : f[1].split(" ")[0]) : "Original"}</button>`).join("");
 }
+// button style: the same choice as the switcher's button menu on the design itself (shared localStorage key)
+function paintBtn(c){ let k = 1; try { k = +(localStorage.getItem("tp-btn-" + c.id) || 1); } catch (e) {} $("#vBtn").value = String(k); }
+$("#vBtn").addEventListener("change", () => {
+  if (vIndex == null) return; const c = CONCEPTS[vIndex], k = +$("#vBtn").value;
+  try { localStorage.setItem("tp-btn-" + c.id, String(k)); } catch (err) {}
+  try { frame.contentWindow.TP_BTN.set(k - 1); } catch (err) { frame.src = url(c) + "?btn=" + k; }
+});
 $("#vFont").addEventListener("click", e => {
   const b = e.target.closest("button[data-font]"); if (!b || vIndex == null) return;
   const c = CONCEPTS[vIndex], k = +b.dataset.font;
   try { localStorage.setItem("tp-font-" + c.id, String(k)); } catch (err) {}
   try { frame.contentWindow.TP_FONT.set(k - 1); } catch (err) { frame.src = url(c) + "?font=" + k; }
-  paintFonts(c);
+  paintFonts(c); paintBtn(c);
 });
 function step(d){ vIndex = (vIndex + d + CONCEPTS.length) % CONCEPTS.length; frame.src = url(CONCEPTS[vIndex]); syncViewer(); }
 function closeViewer(){ viewer.classList.remove("open"); document.body.classList.remove("locked"); vIndex = null; setTimeout(()=>{ if(vIndex==null) frame.src="about:blank"; },350); lastFocus?.focus(); }

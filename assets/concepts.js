@@ -97,6 +97,49 @@ window.TP_CONCEPTS = [
   };
 })();
 
+/* Button style picker: reshapes the main buttons (Book a chat, Call, the phone quick bar) on a concept page.
+   Colours stay the design's own; only the shape changes. Kept per design in this browser; ?btn=N sets it. */
+(function () {
+  var slug = document.documentElement.getAttribute('data-concept');
+  var c = (window.TP_CONCEPTS || []).find(function (x) { return x.slug === slug; });
+  if (!c) return;
+  var KEY = 'tp-btn-' + c.id, cur = 0, style = document.createElement('style');
+  var B = ['.btn', '.bt', '.qbar a', '.qbar button', '.qb a', '.qb button'].join(',');
+  var LIST = [['Original', 'As designed'], ['Pill', 'Fully rounded'], ['Rounded', 'Soft corners'], ['Square', 'Crisp corners'], ['Pill with arrow', 'Fully rounded, with an arrow after the label']];
+  var CSS = {
+    1: ':is(' + B + '){border-radius:999px!important}',
+    2: ':is(' + B + '){border-radius:12px!important}',
+    3: ':is(' + B + '){border-radius:3px!important}',
+    4: ':is(' + B + '){border-radius:999px!important}' +
+       '.tpb-ar{display:inline-block;margin-left:.5em;font-weight:600;line-height:1;transition:transform .5s cubic-bezier(.22,1,.36,1)}' +
+       ':is(.btn,.bt):hover .tpb-ar{transform:translateX(3px)}'
+  };
+  /* the arrow is a real element inside each button (designs already use ::before and ::after for their own effects) */
+  function arrows(on) {
+    document.querySelectorAll('.tpb-ar').forEach(function (x) { x.remove(); });
+    if (!on) return;
+    document.querySelectorAll('.btn,.bt').forEach(function (b) {
+      if (b.closest('[aria-hidden="true"]') || b.textContent.indexOf('\u2192') >= 0) return;
+      var t = b.querySelector('.lbl') || b, a = document.createElement('span');
+      a.className = 'tpb-ar'; a.setAttribute('aria-hidden', 'true'); a.textContent = '\u2192'; t.appendChild(a);
+    });
+  }
+  function apply(k) {
+    k = Math.max(0, Math.min(LIST.length - 1, k | 0)); cur = k;
+    if (!style.parentNode) document.head.appendChild(style);
+    style.textContent = CSS[k] || '';
+    document.documentElement.setAttribute('data-btn', k + 1);
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { arrows(cur === 4); }); else arrows(k === 4);
+  }
+  var q = +(new URLSearchParams(location.search).get('btn') || 0), saved = 0;
+  try { saved = +(localStorage.getItem(KEY) || 1); } catch (e) {}
+  apply((q >= 1 && q <= LIST.length ? q : saved || 1) - 1);
+  window.TP_BTN = {
+    list: LIST, current: function () { return cur; },
+    set: function (k) { apply(k); try { localStorage.setItem(KEY, String(k + 1)); } catch (e) {} }
+  };
+})();
+
 /* Tax Professionals concept switcher: a small floating control on every concept page
    to jump to the previous/next concept, open any concept, return to the gallery,
    and shortlist the current one. Rendered in a shadow root so it never inherits or
@@ -149,6 +192,9 @@ window.TP_CONCEPTS = [
     '.dvs{display:flex;gap:2px;margin-left:4px;padding-left:6px;border-left:1px solid rgba(255,255,255,.14)}' +
     '.dvb{gap:6px;padding:0 9px;font-size:12.5px;opacity:.78}.dvb:hover,.dvb:focus-visible{opacity:1}.dvb[aria-current]{opacity:1;background:rgba(109,171,60,.22)}' +
     '@media (max-width:900px){.dvb span{display:none}.dvb{padding:0 8px}}' +
+    '.bs{width:34px;padding:0;justify-content:center}.bmenu{min-width:260px}.bmenu p{margin:4px 12px 8px;color:#A9B8AE;font-size:12px}' +
+    '.bmenu button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;box-sizing:border-box;height:auto;padding:10px 12px;border-radius:10px}' +
+    '.bmenu button[aria-checked=true]{background:rgba(109,171,60,.22)}' +
     '.fmenu{min-width:280px}.fmenu button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;box-sizing:border-box;height:auto;padding:10px 12px;border-radius:10px}' +
     '.fmenu button[aria-checked="true"]{background:rgba(109,171,60,.22)}.fmenu .s{font-size:19px;line-height:1.15}.fmenu small{color:#A9B8AE;font:400 12px/1.3 Inter,system-ui,sans-serif}' +
     '.fmenu p{margin:4px 12px 8px;color:#A9B8AE;font-size:12px}' +
@@ -167,6 +213,8 @@ window.TP_CONCEPTS = [
     '<a class="arrow" href="' + href(next) + '" aria-label="Next concept: ' + next[1] + '">&#8250;</a>' +
     '<button type="button" class="fav" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.1 1 5.85L12 16.9l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/></svg></button>' +
     (window.TP_FONT ? '<button type="button" class="aa" aria-haspopup="true" aria-expanded="false" aria-label="Font style" title="Font style">Aa</button>' : '') +
+    (window.TP_BTN ? '<button type="button" class="bs" aria-haspopup="true" aria-expanded="false" aria-label="Button style" title="Button style">' +
+      '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="7" width="19" height="10" rx="5"/><path d="M8 12h8"/></svg></button>' : '') +
     '<span class="dvs" role="group" aria-label="View this design as">' +
       [['laptop', 'Laptop', '<rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/>'],
        ['tablet', 'Tablet', '<rect x="5.5" y="2.5" width="13" height="19" rx="2"/><path d="M11 18.5h2"/>'],
@@ -180,6 +228,10 @@ window.TP_CONCEPTS = [
     '<p class="mvtip">Use &#8593; &#8595; to change the order (kept in this browser, same as the gallery)</p>' +
     '<button type="button" class="reset" hidden>Reset to our order</button>' +
     '</div>' +
+    (window.TP_BTN ? '<div class="menu bmenu" role="menu" aria-label="Button style"><p>Button style for this design</p>' +
+      window.TP_BTN.list.map(function (b, k) {
+        return '<button type="button" role="menuitemradio" data-k="' + k + '" aria-checked="false"><span class="s">' + (k + 1) + '. ' + b[0] + '</span><small>' + b[1] + '</small></button>';
+      }).join('') + '</div>' : '') +
     (window.TP_FONT ? '<div class="menu fmenu" role="menu" aria-label="Font style"><p>Font style for this design</p>' +
       window.TP_FONT.list.map(function (f, k) {
         return '<button type="button" role="menuitemradio" data-k="' + k + '" aria-checked="false"><span class="s" style="font-family:\'' + f[1] + '\',serif">' +
@@ -189,6 +241,15 @@ window.TP_CONCEPTS = [
 
   var bar = root.querySelector('.bar'), btn = root.querySelector('button.label'), menu = root.querySelector('.menu'), fav = root.querySelector('.fav');
   var aa = root.querySelector('.aa'), fmenu = root.querySelector('.fmenu'), dmenu = null;
+  var bsb = root.querySelector('.bs'), bmenu = root.querySelector('.bmenu');
+  if (bsb) {
+    var paintBtn = function () { bmenu.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-checked', String(+b.dataset.k === window.TP_BTN.current())); }); };
+    bsb.addEventListener('click', function (e) {
+      e.stopPropagation(); var open = !bmenu.classList.contains('open'); close();
+      if (open) { paintBtn(); bmenu.classList.add('open'); bsb.setAttribute('aria-expanded', 'true'); }
+    });
+    bmenu.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; e.stopPropagation(); window.TP_BTN.set(+b.dataset.k); paintBtn(); });
+  }
   // on a laptop, "Laptop" is this page itself; tablet and mobile open the device preview for this design (the saved font choice carries over)
   if (innerWidth >= 1024) { var lap = root.querySelector('.dvb[data-d=laptop]'); lap.href = location.pathname; lap.setAttribute('aria-current', 'page'); }
 
@@ -252,6 +313,7 @@ window.TP_CONCEPTS = [
   function close() {
     menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false');
     if (fmenu) { fmenu.classList.remove('open'); aa.setAttribute('aria-expanded', 'false'); }
+    if (bmenu) { bmenu.classList.remove('open'); bsb.setAttribute('aria-expanded', 'false'); }
   }
   if (aa) {
     var paintFont = function () {
@@ -289,7 +351,7 @@ window.TP_CONCEPTS = [
   // phones and tablets: the bar never sits over the page; it lives in a small numbered tab at the left edge,
   // opens on a tap and tucks away again after a few seconds or as soon as the page scrolls
   var tab = root.querySelector('.tab'), tabT = 0;
-  function tuckAway() { if (menu.classList.contains('open') || (fmenu && fmenu.classList.contains('open'))) return; bar.classList.add('gone'); tab.classList.add('show'); }
+  function tuckAway() { if (menu.classList.contains('open') || (fmenu && fmenu.classList.contains('open')) || (bmenu && bmenu.classList.contains('open'))) return; bar.classList.add('gone'); tab.classList.add('show'); }
   function showBar() { bar.classList.remove('gone'); tab.classList.remove('show'); clearTimeout(tabT); tabT = setTimeout(tuckAway, 6000); }
   tab.addEventListener('click', function (e) { e.stopPropagation(); showBar(); });
   root.addEventListener('click', function () { if (phone.matches && !bar.classList.contains('gone')) { clearTimeout(tabT); tabT = setTimeout(tuckAway, 6000); } });
