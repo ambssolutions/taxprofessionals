@@ -146,7 +146,9 @@ window.TP_CONCEPTS = [
     '.fav{width:34px;padding:0;justify-content:center}.fav svg{width:17px;height:17px}' +
     '.fav[aria-pressed="true"]{color:#F5C518}.fav[aria-pressed="true"] svg{fill:currentColor}' +
     '.aa{width:34px;padding:0;justify-content:center;font:600 14px/1 Georgia,serif}' +
-    '.dv{width:34px;padding:0;justify-content:center}.dmenu{min-width:220px}.dmenu p{margin:4px 12px 8px;color:#A9B8AE;font-size:12px}' +
+    '.dvs{display:flex;gap:2px;margin-left:4px;padding-left:6px;border-left:1px solid rgba(255,255,255,.14)}' +
+    '.dvb{gap:6px;padding:0 9px;font-size:12.5px;opacity:.78}.dvb:hover,.dvb:focus-visible{opacity:1}.dvb[aria-current]{opacity:1;background:rgba(109,171,60,.22)}' +
+    '@media (max-width:900px){.dvb span{display:none}.dvb{padding:0 8px}}' +
     '.fmenu{min-width:280px}.fmenu button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;box-sizing:border-box;height:auto;padding:10px 12px;border-radius:10px}' +
     '.fmenu button[aria-checked="true"]{background:rgba(109,171,60,.22)}.fmenu .s{font-size:19px;line-height:1.15}.fmenu small{color:#A9B8AE;font:400 12px/1.3 Inter,system-ui,sans-serif}' +
     '.fmenu p{margin:4px 12px 8px;color:#A9B8AE;font-size:12px}' +
@@ -165,12 +167,13 @@ window.TP_CONCEPTS = [
     '<a class="arrow" href="' + href(next) + '" aria-label="Next concept: ' + next[1] + '">&#8250;</a>' +
     '<button type="button" class="fav" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.1 1 5.85L12 16.9l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/></svg></button>' +
     (window.TP_FONT ? '<button type="button" class="aa" aria-haspopup="true" aria-expanded="false" aria-label="Font style" title="Font style">Aa</button>' : '') +
-    '<button type="button" class="dv" aria-haspopup="true" aria-expanded="false" aria-label="View as laptop, tablet or mobile" title="View as laptop, tablet or mobile">' +
-      '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="14" height="10" rx="1.5"/><path d="M1.5 17h16"/><rect x="18" y="8" width="4.5" height="10" rx="1"/></svg></button>' +
-    '<div class="menu dmenu" role="menu" aria-label="View this design as"><p>View this design as</p>' +
-      [['laptop', 'Laptop', 'full page'], ['tablet', 'Tablet', 'iPad frame'], ['mobile', 'Mobile', 'phone frame']].map(function (d) {
-        return '<a role="menuitem" data-d="' + d[0] + '" href="' + new URL('preview.html?c=' + cur[0].slice(0, 2) + '&d=' + d[0], base).href + '">' + d[1] + ' <small>' + d[2] + '</small></a>';
-      }).join('') + '</div>' +
+    '<span class="dvs" role="group" aria-label="View this design as">' +
+      [['laptop', 'Laptop', '<rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/>'],
+       ['tablet', 'Tablet', '<rect x="5.5" y="2.5" width="13" height="19" rx="2"/><path d="M11 18.5h2"/>'],
+       ['mobile', 'Mobile', '<rect x="7.5" y="2.5" width="9" height="19" rx="2"/><path d="M11 18.5h2"/>']].map(function (d) {
+        return '<a class="dvb" data-d="' + d[0] + '" href="' + new URL('preview.html?c=' + cur[0].slice(0, 2) + '&d=' + d[0], base).href + '" title="View as ' + d[1].toLowerCase() + '">' +
+          '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true">' + d[2] + '</svg><span>' + d[1] + '</span></a>';
+      }).join('') + '</span>' +
     '<div class="menu" role="menu">' +
     '<a role="menuitem" href="' + base.href + '">All concepts <small>gallery &amp; send your pick</small></a><hr>' +
     '<div class="list"></div>' +
@@ -185,13 +188,9 @@ window.TP_CONCEPTS = [
     '</nav>';
 
   var bar = root.querySelector('.bar'), btn = root.querySelector('button.label'), menu = root.querySelector('.menu'), fav = root.querySelector('.fav');
-  var aa = root.querySelector('.aa'), fmenu = root.querySelector('.fmenu'), dv = root.querySelector('.dv'), dmenu = root.querySelector('.dmenu');
+  var aa = root.querySelector('.aa'), fmenu = root.querySelector('.fmenu'), dmenu = null;
   // on a laptop, "Laptop" is this page itself; tablet and mobile open the device preview for this design (the saved font choice carries over)
-  if (innerWidth >= 1024) { var lap = dmenu.querySelector('[data-d=laptop]'); lap.href = location.pathname; lap.setAttribute('aria-current', 'page'); }
-  dv.addEventListener('click', function (e) {
-    e.stopPropagation(); var open = !dmenu.classList.contains('open'); close();
-    if (open) { dmenu.classList.add('open'); dv.setAttribute('aria-expanded', 'true'); }
-  });
+  if (innerWidth >= 1024) { var lap = root.querySelector('.dvb[data-d=laptop]'); lap.href = location.pathname; lap.setAttribute('aria-current', 'page'); }
 
   // the menu doubles as an order list: arrows move a design up or down; the order is shared with the gallery
   var listEl = root.querySelector('.list'), resetB = root.querySelector('.reset'), arrows = root.querySelectorAll('a.arrow'), tagEl = root.querySelector('.tag');
@@ -253,7 +252,6 @@ window.TP_CONCEPTS = [
   function close() {
     menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false');
     if (fmenu) { fmenu.classList.remove('open'); aa.setAttribute('aria-expanded', 'false'); }
-    if (dmenu) { dmenu.classList.remove('open'); dv.setAttribute('aria-expanded', 'false'); }
   }
   if (aa) {
     var paintFont = function () {
@@ -291,7 +289,7 @@ window.TP_CONCEPTS = [
   // phones and tablets: the bar never sits over the page; it lives in a small numbered tab at the left edge,
   // opens on a tap and tucks away again after a few seconds or as soon as the page scrolls
   var tab = root.querySelector('.tab'), tabT = 0;
-  function tuckAway() { if (menu.classList.contains('open') || (fmenu && fmenu.classList.contains('open')) || dmenu.classList.contains('open')) return; bar.classList.add('gone'); tab.classList.add('show'); }
+  function tuckAway() { if (menu.classList.contains('open') || (fmenu && fmenu.classList.contains('open'))) return; bar.classList.add('gone'); tab.classList.add('show'); }
   function showBar() { bar.classList.remove('gone'); tab.classList.remove('show'); clearTimeout(tabT); tabT = setTimeout(tuckAway, 6000); }
   tab.addEventListener('click', function (e) { e.stopPropagation(); showBar(); });
   root.addEventListener('click', function () { if (phone.matches && !bar.classList.contains('gone')) { clearTimeout(tabT); tabT = setTimeout(tuckAway, 6000); } });

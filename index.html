@@ -616,8 +616,11 @@ $("#vNext").onclick = () => step(1);
 $("#vStar").onclick = () => toggle(CONCEPTS[vIndex].id);
 $("#vPick").onclick = () => { const id = CONCEPTS[vIndex].id; setPick(id); closeViewer(); openSend(id); };
 viewer.querySelectorAll("[data-dev]").forEach(b => b.addEventListener("click", () => {
+  if ($("#stage").dataset.dev === b.dataset.dev) return;
   $("#stage").dataset.dev = b.dataset.dev;
   if (vIndex != null) syncViewer();
+  /* each design sets itself up for the screen it loads on (phone, tablet or laptop scenes), so reload it at the new size */
+  const fr = $("#vFrame"); if (fr && fr.src) { const u = fr.src; fr.src = "about:blank"; requestAnimationFrame(() => { fr.src = u; }); }
   viewer.querySelectorAll("[data-dev]").forEach(x => x.setAttribute("aria-pressed", x === b));
 }));
 
