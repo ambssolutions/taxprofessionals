@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Inter+Tight:wght@400;500;600&amp;display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js')</script>
+<script>(function(e){var t;try{t=localStorage.getItem('tp05-theme')}catch(x){}e.setAttribute('data-theme',t==='light'?'light':'dark');e.classList.add('js')})(document.documentElement)</script>
 <link rel="stylesheet" href="../inner.css">
 </head>
 <body>
@@ -34,6 +34,7 @@
         </ul>
       </div>
     </nav>
+    <button class="theme-btn" type="button" aria-pressed="true" aria-label="Dark mode" title="Switch between dark and light"><svg class="i-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
     <a class="btn" href="#enquiry">Book a chat</a>
   </div>
 </header>
@@ -122,6 +123,11 @@
 <script>
 (function(d){
   'use strict';
+  /* light and dark: the choice is kept across the site (tp05-theme), never set by the time of day */
+  var tb = d.querySelector('.theme-btn'), root = d.documentElement, tc = d.querySelector('meta[name=theme-color]');
+  function setTheme(t, save){ root.setAttribute('data-theme', t); if (tb) tb.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false'); if (tc) tc.setAttribute('content', t === 'dark' ? '#01111c' : '#FBF9F4'); if (save) { try { localStorage.setItem('tp05-theme', t); } catch (x) {} } }
+  setTheme(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+  if (tb) tb.addEventListener('click', function(){ setTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light', true); });
   /* menu (phones and small laptops) */
   var m = d.querySelector('.menu-btn'), n = d.getElementById('site-nav');
   function setMenu(o){ m.setAttribute('aria-expanded', o); m.setAttribute('aria-label', o ? 'Close menu' : 'Open menu'); n.classList.toggle('open', o); }

@@ -439,6 +439,8 @@ html.js .faq details.is-open .ans{grid-template-rows:1fr}
 /* progress ring with the chapter name, and the chapter cursor (full-effects mode) */
 .ring{display:none}
 html.fx .ring{display:flex;position:fixed;right:16px;bottom:16px;z-index:55;align-items:center;gap:10px;padding:5px 18px 5px 5px;background:var(--ivory);border:1px solid var(--line);border-radius:999px;font:600 14px/1 var(--sans);color:var(--ink);pointer-events:none}
+html.fx .ring{transition:opacity .6s ease,visibility 0s}
+html.fx .ring.off{opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s .6s}
 .ring svg{width:46px;height:46px;transform:rotate(-90deg)}
 .ring circle{fill:none;stroke-width:2;vector-effect:non-scaling-stroke}
 .r-bg{stroke:rgba(14,28,38,.14)}
@@ -1104,6 +1106,9 @@ html.js .rv.in{opacity:1;transform:none}
       rn.textContent = el.dataset.ch; rt.textContent = el.dataset.name; if (cn) cn.textContent = el.dataset.ch;
     }
     G.to('.r-fg', {strokeDashoffset: 0, ease: 'none', scrollTrigger: {start: 0, end: 'max', scrub: .3}});
+    /* the timeline runs edge to edge, so the ring steps aside while it is on screen and no text ever sits under it */
+    var tlSec = d.querySelector('.tl');
+    if (tlSec && 'IntersectionObserver' in window) new IntersectionObserver(function(es){ ring.classList.toggle('off', es[0].isIntersecting); }, {threshold: 0}).observe(tlSec);
     var lastY = -1, frame = 0;
     G.ticker.add(function(){ if (++frame % 6) return; var y = scrollY; if (y === lastY) return; lastY = y; setCh(); });
     if (!tab && matchMedia('(pointer: fine)').matches) {
