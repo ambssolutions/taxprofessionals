@@ -236,7 +236,7 @@ html.js:not(.fx):not(.ph) .squares i{transform:scale(0);transform-origin:100% 0;
 @media (max-height:560px){.bk{height:calc(100svh - var(--hdr) - 100px);min-height:0}.bk-ph,.bk-no,.bk-folio{display:none}.bk-paper h3{font-size:22px;margin-top:0}.bk-paper p{font-size:14px}}
 
 /* the one-page book (phones): a tall track with a sticky stage, pages turn one at a time */
-.pbk-track{position:relative;height:calc(100svh + var(--pages) * 60svh);margin-top:22px}
+.pbk-track{position:relative;height:calc(100svh + var(--pages) * 24svh);margin-top:22px}
 .pbk-sticky{position:sticky;top:calc(var(--hdr) + 34px);height:calc(100svh - var(--hdr) - 34px - 70px - env(safe-area-inset-bottom));display:flex;flex-direction:column;justify-content:center;padding-block:10px 6px}
 .pbk{position:relative;flex:1;min-height:0;max-height:660px;perspective:1600px}
 .pbk::before,.pbk::after{content:"";position:absolute;left:6px;right:-4px;top:5px;bottom:-5px;border-radius:16px;background:#dce4eb}
@@ -257,7 +257,7 @@ html.js:not(.fx):not(.ph) .squares i{transform:scale(0);transform-origin:100% 0;
 .pbk .bk-more{margin-top:auto;min-height:44px;padding:0 18px;font-size:14.5px}
 .pbk-back{display:grid;place-items:center;background:#f3f6f8!important}
 .pbk-back span:first-child{font:600 18px/1 var(--display);letter-spacing:-.01em;color:#b4c2cd}
-.pbk-nav{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:14px}
+.pbk-nav{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:20px;margin-top:14px}
 .pbk-nav button{width:46px;height:46px;border-radius:50%;border:1px solid var(--ink);background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer}
 .pbk-nav button:disabled{opacity:.35}
 .pbk-count{font:600 14px/1 var(--sans);letter-spacing:.14em;color:var(--muted);min-width:70px;text-align:center;font-variant-numeric:tabular-nums}
@@ -295,8 +295,10 @@ html.js:not(.fx):not(.ph) .squares i{transform:scale(0);transform-origin:100% 0;
 /* full-effects mode (laptops with headroom, or ?fx) */
 html.fx .fig{opacity:1;transition:none;background:var(--soft)}
 html.fx .fig figcaption{opacity:1;transition:none}
-html.fx .ch{display:block;min-height:0;padding-block:0 clamp(80px,14vh,150px)}
-html.fx .op{display:flex;flex-direction:column;justify-content:center;height:calc(100vh - var(--hdr));padding-bottom:6vh}
+html.fx .ch{display:block;min-height:0;padding-block:0 clamp(64px,10vh,120px)}
+html.fx .op{display:flex;flex-direction:column;justify-content:center;padding-block:clamp(48px,8vh,96px) clamp(28px,5vh,56px)}
+html.fx .op-n{font-size:clamp(96px,21vh,210px)}
+html.fx .op-t{font-size:clamp(40px,min(4.6vw,8.4vh),84px)}
 .op-n{display:block;font:600 clamp(120px,30vh,300px)/.8 var(--display);letter-spacing:-.06em;color:var(--blue);transform-origin:0 100%;font-variant-numeric:tabular-nums}
 .op-t{display:block;margin-top:3vh;font:600 clamp(44px,min(5.4vw,10vh),100px)/1 var(--display);letter-spacing:-.035em;max-width:10ch}
 
@@ -338,7 +340,7 @@ html.fx .tl-head{margin-bottom:3vh}
 html.fx .tl-view{position:relative;flex:1;min-height:0;width:100%;max-width:none;margin:0;padding:0;overflow:hidden}
 html.fx .tl-line{display:block;position:absolute;left:0;right:0;top:calc(clamp(56px,min(7vw,13vh),136px) * .45);height:1px;background:var(--blue);transform:scaleX(0);transform-origin:0 50%}
 html.fx .tl-track{position:relative;z-index:1;display:flex;gap:0;width:max-content;height:100%;padding-inline:var(--pad) 12vw}
-html.fx .tl-p{flex:none;width:min(72vw,960px);padding:0 clamp(40px,5vw,80px) 0 0;border-top:0}
+html.fx .tl-p{flex:none;width:min(56vw,780px);padding:0 clamp(40px,5vw,80px) 0 0;border-top:0}
 html.fx .tl-p::before{display:none}
 html.fx .yr{display:inline-block;background:var(--white);padding-right:22px}
 html.fx .tl-b{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,3vw,48px);align-items:start;margin-top:3.4vh}
@@ -350,7 +352,6 @@ html.fx .tl-b{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,3
 .pq .lit{font:500 clamp(25px,min(3.3vw,5.6vh),54px)/1.2 var(--display);letter-spacing:-.022em}
 .pq .lit .key{color:var(--green-l)}
 .pq figcaption{margin-top:clamp(18px,3.6vh,32px);font-weight:600;font-size:19px;color:var(--ivory)}
-html.fx .pq{height:100vh;display:grid;place-items:center;padding:var(--hdr) 0 0}
 
 /* sections */
 .sec{padding-block:clamp(72px,12vh,132px)}
@@ -460,7 +461,7 @@ html.fx .op{align-items:center;text-align:center}
 @keyframes rip{from{transform:scale(0)}to{transform:scale(24);opacity:0}}
 
 /* tablet tier (touch, 768 px and wider): the laptop scenes; portrait keeps one column with inline photos */
-@media (max-width:980px){html.tab .op-n{font-size:clamp(120px,22vh,240px)}html.tab .op{height:calc(78vh - var(--hdr))}}
+@media (max-width:980px){html.tab .op-n{font-size:clamp(96px,16vh,190px)}}
 
 /* phone tier (under 768 px) */
 @media (max-width:760px){
@@ -498,7 +499,7 @@ html.ph .yr{display:inline-block;background:var(--white);padding-right:14px}
 html.ph .tl-b{margin-top:14px;gap:16px}
 html.ph .tl-fig{max-width:min(100%,44svh)}
 html.ph .tl-sq{width:96px}
-html.ph .pq{min-height:100svh;display:grid;place-items:center;padding:calc(var(--hdr) + 40px) 0 24px}
+html.ph .pq{padding-block:72px}
 
 /* gentle reveals for non-story blocks */
 html.js .rv{opacity:0;transform:translateY(16px);transition:opacity 1.1s ease,transform 1.3s var(--ease)}
@@ -944,7 +945,7 @@ html.js .rv.in{opacity:1;transform:none}
     function hdr(){ return top.offsetHeight; }
 
     if (window.Lenis && !tab && !matchMedia('(pointer: coarse)').matches) {
-      var lenis = window.__lenis = new Lenis({lerp:.12});
+      var lenis = window.__lenis = new Lenis({smoothWheel:false,syncTouch:false}) /* native scrolling: the page moves exactly with the wheel or trackpad */;
       lenis.on('scroll', ST.update);
       G.ticker.add(function(t){ lenis.raf(t * 1000); }); G.ticker.lagSmoothing(0);
       h.classList.add('lenis-on');
@@ -967,46 +968,46 @@ html.js .rv.in{opacity:1;transform:none}
       .from('.hero .fade', {y: 18, opacity: 0, duration: 1.2, stagger: .1, ease: 'power2.out'}, .8)
       .from('.cov .squares i', {scale: 0, transformOrigin: '100% 0%', duration: 1.2, stagger: .15}, 1.9)
       .from('.cov figcaption', {opacity: 0, duration: 1}, 2.1);
-    /* pinned and scrubbed: the cover lines part, the photo settles closer */
-    G.timeline({scrollTrigger: {trigger: '.hero', start: 'top top', end: '+=70%', pin: true, scrub: .4}})
+    /* scrubbed as the cover scrolls away (no pin): the cover lines part, the photo settles closer */
+    G.timeline({scrollTrigger: {trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .4}})
       .to(lines, {x: function(i){ return (i % 2 ? 1 : -1) * innerWidth * .1; }, ease: 'none'}, 0)
-      .to('.hero .place, .hero h1, .hero .lede, .hero .cta', {opacity: .12, ease: 'none'}, 0)
+      .to('.hero .place, .hero h1, .hero .lede, .hero .cta', {yPercent: -25, ease: 'none'}, 0)
       .to('.cov', {scale: 1.12, ease: 'none'}, 0);
 
-    /* 2. chapter openers: pinned briefly while the number and title scale in and the photo changes */
+    /* 2. chapter openers: no pin. As each opener comes into view its number and title rise in (time-based),
+       and the sticky photo stage changes to that chapter's photo; scrolling back up changes it back. */
+    function opReveal(op){
+      G.timeline({scrollTrigger: {trigger: op, start: 'top 82%', toggleActions: 'play none none none'}})
+        .fromTo(op.querySelector('.op-n'), {scale: .3, opacity: 0}, {scale: 1, opacity: 1, duration: 1.3, ease: 'power3.out'}, 0)
+        .fromTo(op.querySelector('.op-t'), {yPercent: 70, opacity: 0}, {yPercent: 0, opacity: 1, duration: 1.1, ease: 'power3.out'}, .3);
+    }
     function openers(gr){
       /* touch tablets in portrait have no photo column: each chapter photo wipes open in place instead */
       var inline = tab && getComputedStyle(gr.figs[0].parentNode).display === 'none';
       if (!inline) G.set(gr.figs, {clipPath: 'inset(0% 0% 0% 100%)'});
       gr.marks.forEach(function(m, k){
         var op = m.querySelector('.op'), f = gr.figs[k];
-        var tl = G.timeline({scrollTrigger: {trigger: op, start: function(){ return 'top ' + hdr(); }, end: '+=80%', pin: true, pinSpacing: true, scrub: .4}});
-        tl.fromTo(op.querySelector('.op-n'), {scale: .3, opacity: 0}, {scale: 1, opacity: 1, duration: 1, ease: 'power2.out'}, 0)
-          .fromTo(op.querySelector('.op-t'), {yPercent: 70, opacity: 0}, {yPercent: 0, opacity: 1, duration: .8, ease: 'power2.out'}, .3);
+        opReveal(op);
         if (inline) {
           var ip = m.querySelector('.ch-ph'), st = {trigger: ip, start: 'top 92%', end: 'top 35%', scrub: .4};
           G.fromTo(ip, {clipPath: 'inset(0% 0% 0% 100%)'}, {clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut', scrollTrigger: st});
           G.fromTo(ip.querySelectorAll(':scope > img'), {scale: 1.18, transformOrigin: '50% 100%'}, {scale: 1, ease: 'none', scrollTrigger: st});
-          tl.to({}, {duration: .3});
           return;
         }
-        if (k > 0) tl.to(gr.figs[k - 1], {xPercent: -40, opacity: 0, duration: .9, ease: 'power1.in'}, 0);
-        tl.fromTo(f, {clipPath: 'inset(0% 0% 0% 100%)'}, {clipPath: 'inset(0% 0% 0% 0%)', duration: 1, ease: 'power2.inOut'}, .2)
-          .fromTo(f.querySelectorAll('img'), {scale: 1.18, transformOrigin: '50% 100%'}, {scale: 1, duration: 1.1, ease: 'power2.out'}, .2)
-          .to({}, {duration: .3});
+        var tl = G.timeline({scrollTrigger: {trigger: op, start: 'top 62%', toggleActions: 'play none none reverse'}});
+        if (k > 0) tl.to(gr.figs[k - 1], {xPercent: -40, opacity: 0, duration: 1, ease: 'power1.in'}, 0);
+        tl.fromTo(f, {clipPath: 'inset(0% 0% 0% 100%)'}, {clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'power2.inOut'}, .15)
+          .fromTo(f.querySelectorAll('img'), {scale: 1.18, transformOrigin: '50% 100%'}, {scale: 1, duration: 1.4, ease: 'power2.out'}, .15);
       });
     }
     openers(grids[0]);
 
-    /* 3. chapter 03: the opener, then an open book pinned while each scroll stretch turns a page.
+    /* 3. chapter 03: the opener (revealed, not pinned), then an open book pinned for about 1.4 screens while each short scroll stretch turns a page.
        Left page = a service's words, right page = its photo and what it covers. The right leaf turns over the spine
        and its back lands on the left as the next service's words; the lifting page darkens and casts a shadow. */
     (function(){
       var op = svcSec.querySelector('.op');
-      G.timeline({scrollTrigger: {trigger: op, start: function(){ return 'top ' + hdr(); }, end: '+=80%', pin: true, pinSpacing: true, scrub: .4}})
-        .fromTo(op.querySelector('.op-n'), {scale: .3, opacity: 0}, {scale: 1, opacity: 1, duration: 1, ease: 'power2.out'}, 0)
-        .fromTo(op.querySelector('.op-t'), {yPercent: 70, opacity: 0}, {yPercent: 0, opacity: 1, duration: .8, ease: 'power2.out'}, .3)
-        .to({}, {duration: .3});
+      opReveal(op);
       var bk = d.createElement('div'); bk.className = 'bk'; bk.setAttribute('aria-hidden', 'true');
       var html = '<div class="bk-page bk-left" style="z-index:1">' + bkWords(0) + '</div><div class="bk-page bk-right" style="z-index:1">' + bkPic(SN - 1) + '</div>';
       for (var k = 0; k < SN - 1; k++) html += '<div class="bk-leaf" style="z-index:' + (SN - k + 1) + '"><div class="bk-face bk-front">' + bkPic(k) + SHADE + '</div><div class="bk-face bk-back">' + bkWords(k + 1) + SHADE + '</div></div>';
@@ -1014,7 +1015,7 @@ html.js .rv.in{opacity:1;transform:none}
       svcIn.appendChild(bk); svcSec.classList.add('has-bk'); bookOn(bk);
       var leaves = [].slice.call(bk.querySelectorAll('.bk-leaf'));
       G.from(bk, {opacity: 0, duration: 1.2, ease: 'power2.out', scrollTrigger: {trigger: bk, start: 'top 90%', once: true}});
-      var turn = G.timeline({scrollTrigger: {trigger: svcIn, start: function(){ return 'top ' + (hdr() + 12); }, end: function(){ return '+=' + Math.round(innerHeight * .9 * SN); },
+      var turn = G.timeline({scrollTrigger: {trigger: svcIn, start: function(){ return 'top ' + (hdr() + 12); }, end: function(){ return '+=' + Math.round(innerHeight * 1.4); },
         pin: true, scrub: .4, anticipatePin: 1, invalidateOnRefresh: true}});
       leaves.forEach(function(lf, k){
         var fs = lf.querySelector('.bk-front'), bs = lf.querySelector('.bk-back');
@@ -1027,7 +1028,7 @@ html.js .rv.in{opacity:1;transform:none}
           .to(bk, {'--cast': 0, duration: .5, ease: 'power1.out'}, k + .5)
           .fromTo(nextImg, {scale: 1.1}, {scale: 1, duration: 1, ease: 'power2.out'}, k);
       });
-      turn.to({}, {duration: .8});
+      turn.to({}, {duration: .15});
       /* a page in mid-turn is a moving picture, not reading text: keep it out of the accessibility tree until it lands */
       var mid = leaves.map(function(){ return false; });
       turn.eventCallback('onUpdate', function(){
@@ -1049,16 +1050,16 @@ html.js .rv.in{opacity:1;transform:none}
     })();
     openers(grids[1]);
 
-    /* 4. horizontal pinned timeline: 1998, the 2019 award, today */
+    /* 4. horizontal timeline: 1998, the 2019 award, today. A short pin of under one screen carries the row sideways */
     var track = d.querySelector('.tl-track'), view = d.querySelector('.tl-view'), line = d.querySelector('.tl-line');
     function dist(){ return Math.max(0, track.scrollWidth - view.clientWidth); }
     var tlTween = G.to(track, {x: function(){ return -dist(); }, ease: 'none',
-      scrollTrigger: {trigger: '.tl', start: 'top top', end: function(){ return '+=' + dist(); }, pin: true, scrub: .4, invalidateOnRefresh: true,
+      scrollTrigger: {trigger: '.tl', start: 'top top', end: function(){ return '+=' + Math.round(Math.min(dist(), innerHeight * .9)); }, pin: true, scrub: .4, invalidateOnRefresh: true,
         onUpdate: function(s){ G.set(line, {scaleX: s.progress}); }}});
 
-    /* 5. pull quote: pinned, revealed word by word */
+    /* 5. pull quote: no pin, the words light one by one as the quote scrolls up the screen */
     var pqW = d.querySelectorAll('.pq .w');
-    G.timeline({scrollTrigger: {trigger: '.pq', start: 'top top', end: '+=120%', pin: true, scrub: .4}})
+    G.timeline({scrollTrigger: {trigger: '.pq', start: 'top 72%', end: 'center 42%', scrub: .4}})
       .fromTo(pqW, {opacity: .12}, {opacity: 1, duration: .4, stagger: .06, ease: 'none'}, 0)
       .fromTo('.pq figcaption', {opacity: 0, y: 12}, {opacity: 1, y: 0, duration: .6}, '>-0.2')
       .fromTo('.pq-m', {scale: .6, opacity: 0}, {scale: 1, opacity: 1, duration: .6}, 0);
@@ -1217,11 +1218,11 @@ html.js .rv.in{opacity:1;transform:none}
         G.fromTo(n, {yPercent: 60, opacity: 0}, {yPercent: 0, opacity: 1, duration: 1.1, ease: 'expo.out', scrollTrigger: {trigger: n, start: 'top 88%', toggleActions: 'play none none none'}});
       });
 
-      /* 6. pinned: the 1998 to today timeline runs sideways as you scroll down */
+      /* 6. a short pin (under one screen): the 1998 to today timeline runs sideways as you scroll down */
       var track = d.querySelector('.tl-track'), view = d.querySelector('.tl-view'), line = d.querySelector('.tl-line');
       function dist(){ return Math.max(0, track.scrollWidth - view.clientWidth); }
       var tlTween = G.to(track, {x: function(){ return -dist(); }, ease: 'none',
-        scrollTrigger: {trigger: '.tl', start: 'top top', end: function(){ return '+=' + dist(); }, pin: true, anticipatePin: 1, scrub: .4, invalidateOnRefresh: true,
+        scrollTrigger: {trigger: '.tl', start: 'top top', end: function(){ return '+=' + Math.round(Math.min(dist(), innerHeight * .75)); }, pin: true, anticipatePin: 1, scrub: .4, invalidateOnRefresh: true,
           onUpdate: function(s){ line.style.transform = 'scaleX(' + s.progress + ')'; }}});
       G.utils.toArray('.tl-p').forEach(function(p){
         G.from(p.querySelector('.yr'), {yPercent: 40, opacity: .15, ease: 'none', scrollTrigger: {trigger: p, containerAnimation: tlTween, start: 'left 95%', end: 'left 45%', scrub: true}});
@@ -1230,8 +1231,8 @@ html.js .rv.in{opacity:1;transform:none}
       G.from('.faces li', {scale: .5, opacity: 0, stagger: .1, ease: 'back.out(1.6)', scrollTrigger: {trigger: '.faces', containerAnimation: tlTween, start: 'left 95%', end: 'left 35%', scrub: true}});
       G.from('.tl-sq i', {scale: 0, transformOrigin: '0% 100%', stagger: .2, ease: 'none', scrollTrigger: {trigger: '.tl-sq', containerAnimation: tlTween, start: 'left 100%', end: 'left 60%', scrub: true}});
 
-      /* 7. pinned briefly: the client's words light up one by one */
-      G.timeline({scrollTrigger: {trigger: '.pq', start: 'top top', end: '+=100%', pin: true, anticipatePin: 1, scrub: .4}})
+      /* 7. no pin: the client's words light up one by one as the quote passes */
+      G.timeline({scrollTrigger: {trigger: '.pq', start: 'top 78%', end: 'bottom 62%', scrub: .4}})
         .fromTo('.pq-m', {scale: .6, opacity: 0}, {scale: 1, opacity: 1, duration: .5}, 0)
         .fromTo('.pq .w', {opacity: .2}, {opacity: 1, duration: .4, stagger: .05, ease: 'none'}, 0)
         .fromTo('.pq figcaption', {opacity: 0, y: 12}, {opacity: 1, y: 0, duration: .5}, '>-0.2');
