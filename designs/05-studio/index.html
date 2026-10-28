@@ -1551,6 +1551,13 @@ document.addEventListener('click',function(e){var b=e.target.closest('.qb-ask');
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ setTimeout(fit, 300); });
 })();
 </script>
+<style>/* chat window in Tax Professionals branding: logo mark, logo blue and green, the page's own type */
+html body .ac-panel{--body:var(--sans);--ac-brand:#04649F}
+html body .ac-panel .ac-av{background:#fff url(../../assets/logo/mark.png) center/34px no-repeat;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(4,100,159,.14)}
+html body .ac-panel .ac-av svg{display:none}
+html body .ac-panel #acTitle{font-family:var(--sans);font-weight:700;color:#04649F;letter-spacing:-.01em}
+html body .ac-panel .ac-head::after{background:linear-gradient(90deg,#04649F,#4CA442);opacity:1}
+</style>
 <!--chat--><script src="/designs/05-studio/chat.js?v=ea4d8a04" data-index="/designs/05-studio/chat-index.json?v=3926c95c" data-label="Ask us" data-langs="en" data-key="taxpro-05-chat" data-color="#04649F" data-nudge="Kia ora. I&#x27;m the Tax Professionals assistant. Can I help with a tax or accounting question?" data-nudge-after="15" data-nudge-open="1" data-avoid=".qb" defer></script><!--/chat-->
 </body>
 </html>
