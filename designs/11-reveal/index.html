@@ -186,7 +186,7 @@ html.lenis-on{scroll-behavior:auto}
 .stage{position:relative;background:var(--night);color:#fff;--cx:50%}
 .stage::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(34% 80% at var(--cx) -8%,rgba(200,226,244,.09),rgba(200,226,244,0) 100%),linear-gradient(180deg,rgba(4,100,159,0) 55%,rgba(4,100,159,.22) 100%)}
 .cc-ch{position:relative;padding-block:clamp(72px,10vw,120px)}
-.cc-ch+.cc-ch{border-top:1px solid rgba(255,255,255,.12)}
+.cc-ch+.cc-ch,.pin-spacer+.cc-ch{border-top:1px solid rgba(255,255,255,.12)}
 .cc-g{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(22px,3.4vh,40px);justify-items:center;align-items:center}
 .cc-ph{border-radius:18px;width:100%;justify-self:center}
 .ch1 .cc-ph{max-width:440px;aspect-ratio:1}
@@ -210,15 +210,14 @@ html.lenis-on{scroll-behavior:auto}
 .svl p{color:rgba(255,255,255,.78);font-size:15px;margin-top:4px;grid-column:2}
 .svl .tlink{grid-column:2;margin-top:0;min-height:40px;font-size:14.5px}
 .cc-doors{display:none}
-html.fx-on .stage{height:100vh;height:100svh;overflow:clip}
-html.fx-on .cc-ch{position:absolute;left:0;right:0;top:var(--hdr);bottom:0;padding-block:clamp(14px,3vh,32px);display:flex;align-items:center;border:0}
-html.fx-on .cc-ch>.wrap{max-height:100%}
-html.fx-on .ch2,html.fx-on .ch3{visibility:hidden;opacity:0}
+html.fx-on .stage{overflow:clip}
+html.fx-on .cc-ch{min-height:calc(100vh - var(--hdr));min-height:calc(100svh - var(--hdr));padding-block:clamp(28px,5vh,56px);display:flex;align-items:center}
+html.fx-on .cc-ch>.wrap{width:100%}
 html.fx-on .stage .dr{display:none}
 html.fx-on .ch1 .cc-ph{max-width:min(440px,33vh)}
 html.fx-on .ch3 figure,html.fx-on .ch3 .cc-ph{max-width:min(560px,58vh)}
 html.fx-on .svl li{padding-block:clamp(8px,1.3vh,16px)}
-html.fx-on .cc-doors{display:block;position:absolute;left:0;right:0;top:var(--hdr);bottom:0;z-index:5;perspective:1700px;perspective-origin:50% 45%;pointer-events:none}
+html.fx-on .cc-pd{display:block;position:absolute;left:0;right:0;top:0;height:calc(100svh - var(--hdr));max-height:100%;z-index:5;perspective:1700px;perspective-origin:50% 45%;overflow:clip;pointer-events:none}
 .cc-d{position:absolute;top:0;bottom:0;width:50%;transform-style:preserve-3d;--th:38px;--sh:0}
 .cc-d.l{left:0;transform-origin:0 50%}
 .cc-d.r{right:0;transform-origin:100% 50%}
@@ -395,7 +394,7 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
   .door.l .de{right:0;transform-origin:100% 50%;transform:rotateY(-90deg);background:linear-gradient(90deg,#022f4f,#0a5d92 60%,#3e86b8)}
   .door.r .de{left:0;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(90deg,#7cc36a,#3d9234 40%,#22661d)}
   html.ph .stage .dr{display:none}
-  html.ph .cc-pd{display:block;position:absolute;left:0;right:0;top:0;height:calc(100svh - var(--hdr));z-index:5;perspective:760px;perspective-origin:50% 45%;overflow:clip;pointer-events:none}
+  html.ph .cc-pd{display:block;position:absolute;left:0;right:0;top:0;height:calc(100svh - var(--hdr));max-height:100%;z-index:5;perspective:760px;perspective-origin:50% 45%;overflow:clip;pointer-events:none}
   html.ph .cc-pd .cc-d{--th:16px}
   html.ph .cc-pd .fc{padding-inline:20px}
   html.ph .cc-pd .cc-d.l .lb{font-size:5.4rem}
@@ -828,21 +827,25 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
       var htl = G.timeline({scrollTrigger: {trigger: hero, start: 'top top', end: 'bottom top', scrub: true}});
       htl.to('.hero-ph img', {scale: 1.12, yPercent: 5, ease: 'none'}).to('.hero-tx', {y: -70, opacity: .15, ease: 'none'}, 0);
 
-      // 3. curtain call: a thick pair of brand panels swings open on each act, pinned briefly
+      // 3. curtain call: a thick pair of brand panels swings open on each act; only the first act pins (briefly), the others open as they arrive
       var st = d.getElementById('stage'), tpl = st.querySelector('.cc-doors'), chs = G.utils.toArray('.cc-ch'), ends = [];
       chs.forEach(function(ch, i){
         var dr = tpl.cloneNode(true); dr.className = 'cc-pd';
         dr.querySelectorAll('.fc').forEach(function(fc){ fc.querySelectorAll('.lb').forEach(function(lb, j){ if (j !== i) lb.remove(); }); });
         ch.appendChild(dr);
         var L = dr.querySelector('.cc-d.l'), R = dr.querySelector('.cc-d.r'), img = ch.querySelector('.cc-ph img');
-        var tl = G.timeline({defaults: {ease: 'power2.inOut'}, scrollTrigger: {trigger: ch, start: function(){ return 'top ' + hdrH(); }, end: '+=90%', pin: true, scrub: .4, anticipatePin: 1}});
-        tl.to({}, {duration: .15})
-          .to(L, {rotationY: -96, '--sh': .45, duration: 1}).to(R, {rotationY: 96, '--sh': .45, duration: 1}, '<')
-          .fromTo(ch.querySelector('.wrap'), {scale: .94}, {scale: 1, duration: 1.1, ease: 'power2.out'}, '<.1')
-          .fromTo(st, {'--cx': '12%'}, {'--cx': '88%', duration: 1.2, ease: 'none'}, '<');
+        var k = i ? 1.4 : 1;
+        var tl = i === 0
+          ? G.timeline({defaults: {ease: 'power2.inOut'}, scrollTrigger: {trigger: ch, start: function(){ return 'top ' + hdrH(); }, end: '+=90%', pin: true, scrub: .4, anticipatePin: 1}})
+          : G.timeline({defaults: {ease: 'power2.inOut'}, scrollTrigger: {trigger: ch, start: 'top 55%', once: true}});
+        if (i === 0) tl.to({}, {duration: .15});
+        tl.to(L, {rotationY: -96, '--sh': .45, duration: k}).to(R, {rotationY: 96, '--sh': .45, duration: k}, '<')
+          .fromTo(ch.querySelector('.wrap'), {scale: .94}, {scale: 1, duration: 1.1 * k, ease: 'power2.out'}, '<.1')
+          .fromTo(st, {'--cx': '12%'}, {'--cx': '88%', duration: 1.2 * k, ease: 'none'}, '<');
         if (img && i === 0) tl.fromTo(img, {scale: 1.15}, {scale: 1, duration: 1.2, ease: 'power2.out'}, '<');
-        tl.set(dr, {autoAlpha: 0}).to({}, {duration: .2});
-        ends.push(tl.scrollTrigger);
+        tl.set(dr, {autoAlpha: 0});
+        if (i === 0) tl.to({}, {duration: .2});
+        ends.push(i === 0 ? tl.scrollTrigger : null);
       });
       // award photo: curtains part as a clip-path wipe from the centre, with a slow inner settle
       var aw = st.querySelector('.ch3 .cc-ph');
@@ -855,7 +858,7 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
       var onClick = function(e){
         var a = e.target.closest('a[href^="#"]'); if (!a) return;
         var t = d.querySelector(a.getAttribute('href')), ci = t ? chs.indexOf(t) : -1; if (ci < 0) return;
-        e.preventDefault(); scrollTo({top: ends[ci].end, behavior: 'smooth'});
+        e.preventDefault(); scrollTo({top: ends[ci] ? ends[ci].end : t.getBoundingClientRect().top + scrollY - hdrH(), behavior: 'smooth'});
       };
       d.addEventListener('click', onClick);
 
@@ -897,24 +900,27 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
     h.classList.add('fx-on');
     var hdrH = function(){ return d.getElementById('top-bar').offsetHeight; };
 
-    // curtain call: one pair of thick panels opens and closes on each chapter, scrubbed and pinned
-    var st = d.getElementById('stage'), chs = G.utils.toArray('.cc-ch'), L = st.querySelector('.cc-d.l'), Rd = st.querySelector('.cc-d.r');
-    var lbL = L.querySelectorAll('.lb'), lbR = Rd.querySelectorAll('.lb'), stops = [];
-    var tl = G.timeline({defaults: {ease: 'power2.inOut'}, scrollTrigger: {trigger: st, start: 'top top', end: '+=360%', pin: true, scrub: .4, anticipatePin: 1}});
-    function open(i){
-      tl.to(L, {rotationY: -96, '--sh': .4, duration: 1}).to(Rd, {rotationY: 96, '--sh': .4, duration: 1}, '<')
-        .fromTo(chs[i], {scale: .94}, {scale: 1, duration: 1.1, ease: 'power2.out'}, '<.15')
-        .fromTo(st, {'--cx': '12%'}, {'--cx': '88%', duration: 1.8, ease: 'none'}, '<');
-      tl.set([L, Rd], {autoAlpha: 0});
-      stops.push(tl.duration() - .6);
-    }
-    function close(){ tl.set([L, Rd], {autoAlpha: 1}).to(L, {rotationY: 0, '--sh': 0, duration: .9}).to(Rd, {rotationY: 0, '--sh': 0, duration: .9}, '<'); }
-    function swap(i){ tl.set(chs[i - 1], {autoAlpha: 0}).set(chs[i], {autoAlpha: 1}).set([lbL[i - 1], lbR[i - 1]], {autoAlpha: 0}).set([lbL[i], lbR[i]], {autoAlpha: 1}); }
-    tl.to({}, {duration: .2});
-    open(0); tl.to({}, {duration: .8}); close(); swap(1);
-    open(1); tl.to({}, {duration: .8}); close(); swap(2);
-    open(2); tl.to({}, {duration: .6});
-    var ccST = tl.scrollTrigger, total = tl.duration(); window.__cc = {st: ccST, stops: stops, total: total};
+    // curtain call: a thick pair of brand panels swings open on each act. The first act is one short scrubbed pin
+    // (under one screen); the next two open on a 1.4s tween as they arrive, so the page keeps moving
+    var st = d.getElementById('stage'), tpl = st.querySelector('.cc-doors'), chs = G.utils.toArray('.cc-ch'), ccST = null;
+    chs.forEach(function(ch, i){
+      var dr = tpl.cloneNode(true); dr.className = 'cc-pd';
+      dr.querySelectorAll('.fc').forEach(function(fc){ fc.querySelectorAll('.lb').forEach(function(lb, j){ if (j !== i) lb.remove(); }); });
+      ch.appendChild(dr);
+      var L = dr.querySelector('.cc-d.l'), Rd = dr.querySelector('.cc-d.r'), k = i ? 1.4 : 1;
+      var tl = i === 0
+        ? G.timeline({defaults: {ease: 'power2.inOut'}, scrollTrigger: {trigger: ch, start: function(){ return 'top ' + hdrH(); }, end: '+=85%', pin: true, scrub: .4, anticipatePin: 1}})
+        : G.timeline({defaults: {ease: 'power2.inOut'}, scrollTrigger: {trigger: ch, start: 'top 55%', once: true}});
+      if (i === 0) tl.to({}, {duration: .15});
+      tl.to(L, {rotationY: -96, '--sh': .4, duration: k}).to(Rd, {rotationY: 96, '--sh': .4, duration: k}, '<')
+        .fromTo(ch.querySelector('.wrap'), {scale: .94}, {scale: 1, duration: 1.1 * k, ease: 'power2.out'}, '<.15')
+        .fromTo(st, {'--cx': '12%'}, {'--cx': '88%', duration: (i ? 1.4 : 1.8), ease: 'none'}, '<');
+      tl.set(dr, {autoAlpha: 0});
+      if (i === 0) { tl.to({}, {duration: .2}); ccST = tl.scrollTrigger; }
+    });
+    window.__cc = {st: ccST};
+    // chapter links: the first act lands on its open stage, the others just below the header
+    function chapterTop(ci){ return ci === 0 ? ccST.end : chs[ci].getBoundingClientRect().top + scrollY - hdrH(); }
 
     // page turn: a brand panel turns away like a page as each major section arrives
     G.utils.toArray('[data-turn]').forEach(function(s){
@@ -930,13 +936,13 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
     if (tab) d.addEventListener('click', function(e){
       var a = e.target.closest('a[href^="#"]'); if (!a) return;
       var t = d.querySelector(a.getAttribute('href')), ci = t ? chs.indexOf(t) : -1; if (ci < 0) return;
-      e.preventDefault(); scrollTo({top: ccST.start + (ccST.end - ccST.start) * (stops[ci] / total), behavior: 'smooth'});
+      e.preventDefault(); scrollTo({top: chapterTop(ci), behavior: 'smooth'});
     });
     if (tab) tapRipple(G);
 
     // smooth scroll
     if (fx && window.Lenis) {
-      var lenis = window.__lenis = new Lenis({lerp:.12});
+      var lenis = window.__lenis = new Lenis({smoothWheel:false,syncTouch:false}) /* native scrolling: the page moves exactly with the wheel or trackpad */;
       lenis.on('scroll', ST.update);
       G.ticker.add(function(t){ lenis.raf(t * 1000); }); G.ticker.lagSmoothing(0);
       h.classList.add('lenis-on');
@@ -946,7 +952,7 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
         var t = d.querySelector(id); if (!t) return;
         e.preventDefault();
         var ci = chs.indexOf(t);
-        if (ci > -1) lenis.scrollTo(ccST.start + (ccST.end - ccST.start) * (stops[ci] / total), {duration: 1.6});
+        if (ci > -1) lenis.scrollTo(chapterTop(ci), {duration: 1.6});
         else lenis.scrollTo(id === '#top' ? 0 : t, {offset: id === '#top' ? 0 : -(hdrH() + 8), duration: 1.6});
         if (id === '#main' || id === '#contact') { t.setAttribute('tabindex', '-1'); setTimeout(function(){ t.focus({preventScroll: true}); }, 900); }
       });
