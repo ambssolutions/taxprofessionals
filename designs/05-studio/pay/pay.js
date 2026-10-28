@@ -1,6 +1,17 @@
 (function(d){
   'use strict';
 
+  /* light and dark: dark is the default; the choice is shared with every 05 page (tp05-theme) */
+  var root = d.documentElement, tgls = [].slice.call(d.querySelectorAll('[data-theme-toggle]')), tc = d.querySelector('meta[name=theme-color]');
+  function setTheme(t, save){
+    root.setAttribute('data-theme', t);
+    tgls.forEach(function(b){ b.setAttribute('aria-checked', t === 'dark' ? 'true' : 'false'); b.title = t === 'dark' ? 'Dark mode on' : 'Dark mode off'; });
+    if (tc) tc.setAttribute('content', t === 'dark' ? '#01111c' : '#FBF9F4');
+    if (save) { try { localStorage.setItem('tp05-theme', t); } catch (x) {} }
+  }
+  setTheme(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+  tgls.forEach(function(b){ b.addEventListener('click', function(){ setTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light', true); }); });
+
   /* menu (phones and small laptops) */
   var mbtn = d.querySelector('.menu-btn'), nav = d.getElementById('site-nav');
   function setMenu(open){ mbtn.setAttribute('aria-expanded', open); mbtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); nav.classList.toggle('open', open); }

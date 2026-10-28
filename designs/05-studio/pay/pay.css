@@ -246,3 +246,81 @@ html:not(.js) .ctrl{display:none}
   .st,.st .n,.nav a::after,.tlink,.qb,html.js .nav{transition:none}
 }
 @media print{.top,.qb,.grain,.ctrl{display:none}.panel[hidden]{display:grid}}
+
+/* ===== light / dark switch: a small pill (sun, moon, sliding knob) in a 44px tap area; on means dark ===== */
+.brand{order:0}.nav{order:1}.tgl{order:2}.top .wrap>.btn{order:3}.menu-btn{order:4}
+.tgl{flex:none;display:grid;place-items:center;width:72px;height:44px;padding:0;border:0;background:none;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tgl-t{position:relative;flex:none;display:flex;align-items:center;justify-content:space-between;width:64px;height:32px;padding:0 7px;border-radius:999px;border:1px solid rgba(243,239,231,.45);background:#03172a;box-shadow:inset 0 1px 3px rgba(0,0,0,.45)}
+.tgl-k{position:absolute;left:3px;top:3px;width:24px;height:24px;border-radius:50%;background:var(--ivory);box-shadow:0 1px 3px rgba(0,0,0,.4);transition:transform .45s var(--ease),background-color .45s}
+[aria-checked=true]>.tgl-t>.tgl-k{transform:translateX(32px)}
+.tgl-t svg{position:relative;z-index:1;width:16px;height:16px;transition:color .45s}
+.tgl-t .i-sun{color:rgba(243,239,231,.7)}
+.tgl-t .i-moon{color:var(--ink)}
+.tgl:hover .tgl-t{border-color:currentColor}
+html:not(.js) .tgl{display:none}
+@media (max-width:1100px){.tgl{margin-left:auto}html.js .menu-btn{margin-left:0}.top .wrap{gap:14px}}
+@media (prefers-reduced-motion:reduce){.tgl-k,.tgl-t svg{transition:none}}
+
+/* ===== the walkthrough fits one laptop screen: heading, steps, illustration and the Back / Next bar together ===== */
+.how{padding-block:clamp(40px,min(7vw,7vh),96px)}
+.how .head{margin-bottom:clamp(20px,3.4vh,36px)}
+.walk{padding:clamp(14px,2vw,24px)}
+.st{min-height:52px}
+.panels{margin-top:clamp(14px,2vh,22px)}
+.ill{min-height:clamp(190px,27vh,250px);padding:34px 20px 18px}
+.ctrl{margin-top:clamp(14px,2vh,22px);padding-top:clamp(12px,1.6vh,18px)}
+@media (max-width:760px){.ill{min-height:200px}.ptxt h3{font-size:1.5rem}}
+.pay-btn{min-height:58px}
+.copy{white-space:nowrap}
+
+/* ===== light mode: paper and ivory surfaces, ink type, the logo blue and green as accents ===== */
+html[data-theme=light]{--soft:#46515a;--line-l:rgba(14,28,38,.14);--card:#fff;color-scheme:light;
+  --emb:0 14px 30px -18px rgba(14,28,38,.32),0 2px 5px -2px rgba(14,28,38,.12);--emb-sm:0 6px 14px -8px rgba(14,28,38,.28),0 1px 2px rgba(14,28,38,.1);
+  --emb-in:inset 0 2px 5px rgba(14,28,38,.2);--emb-green:0 10px 20px -12px rgba(20,80,24,.5),0 2px 4px rgba(14,28,38,.12)}
+html[data-theme=light] body{background:var(--paper);color:var(--ink)}
+html[data-theme=light] .grain{opacity:.03}
+html[data-theme=light] :focus-visible{outline-color:var(--blue)}
+html[data-theme=light] .skip{background:var(--ink);color:#fff}
+html[data-theme=light] .top{background:var(--paper);color:var(--ink);box-shadow:0 1px 0 var(--line-l)}
+html[data-theme=light] .brand{box-shadow:inset 0 0 0 1px rgba(14,28,38,.08)}
+html[data-theme=light] .nav a[aria-current=page]::after{background:#1B8F25}
+html[data-theme=light] .menu-btn,html[data-theme=light] .emb{background:#fff;color:var(--ink);border-color:rgba(14,28,38,.3)}
+@media (max-width:1100px){html[data-theme=light].js .nav{background:var(--paper);color:var(--ink);box-shadow:0 1px 0 var(--line-l)}}
+html[data-theme=light] .tgl-t{background:#fff;border-color:rgba(14,28,38,.32);box-shadow:inset 0 1px 2px rgba(14,28,38,.15)}
+html[data-theme=light] .tgl-k{background:var(--blue);box-shadow:0 1px 3px rgba(14,28,38,.35)}
+html[data-theme=light] .tgl-t .i-sun{color:#fff}
+html[data-theme=light] .tgl-t .i-moon{color:#4b555e}
+html[data-theme=light] .pay-hero{background:radial-gradient(ellipse 70% 60% at 50% 0,#fff,var(--paper) 70%)}
+html[data-theme=light] .paybox{border-color:var(--line-l)}
+html[data-theme=light] .ref-row input{background:#fff;color:var(--ink);border-color:rgba(14,28,38,.35)}
+html[data-theme=light] .ref-row input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(4,100,159,.2)}
+html[data-theme=light] .copy{border-color:rgba(14,28,38,.35)}
+html[data-theme=light] .copy:hover{border-color:var(--ink)}
+html[data-theme=light] .copy-status.ok{color:#17701F}
+html[data-theme=light] .leave .lock{color:#17701F}
+html[data-theme=light] .cards-note{color:#4b555e}
+html[data-theme=light] .how,html[data-theme=light] .faq{background:#F3EFE7}
+html[data-theme=light] .opts{background:var(--paper)}
+html[data-theme=light] .st{background:#F3EFE7;color:#33414b}
+html[data-theme=light] .st:hover{color:var(--ink);border-color:var(--line-l)}
+html[data-theme=light] .st .n{border-color:rgba(14,28,38,.4)}
+html[data-theme=light] .st.past .n{border-color:#1B8F25;color:#17701F}
+html[data-theme=light] .st[aria-current=step]{background:var(--blue);color:#fff}
+html[data-theme=light] .st[aria-current=step] .n{background:#fff;border-color:#fff;color:var(--ink)}
+html[data-theme=light] .ptxt .pn{color:#17701F}
+html[data-theme=light] .nb{border-color:rgba(14,28,38,.3)}
+html[data-theme=light] .ill{background:#DCEAF4;border-color:var(--line-l)}
+html[data-theme=light] .tag{color:#33414b}
+html[data-theme=light] .inv,html[data-theme=light] .win{box-shadow:0 12px 24px -14px rgba(14,28,38,.45)}
+html[data-theme=light] .inv{background:#fff}
+html[data-theme=light] .opt .tlink,html[data-theme=light] .faq .ans a{color:var(--ink)}
+html[data-theme=light] .opt dt{color:#4b555e}
+html[data-theme=light] .faq summary::after{border-color:#1B8F25}
+html[data-theme=light] .foot{background:#F3EFE7;color:#26323b;border-top-color:var(--line-l)}
+html[data-theme=light] .foot .brand{box-shadow:inset 0 0 0 1px rgba(14,28,38,.1)}
+html[data-theme=light] .f-ct a,html[data-theme=light] .f-cols a:hover{color:var(--ink)}
+html[data-theme=light] .f-cols h2,html[data-theme=light] .legal{color:#4b555e}
+@media (max-width:760px){
+  html[data-theme=light] .qb{background:var(--paper);border-top-color:var(--line-l)}
+  html[data-theme=light] .qb a+a{background:#fff;color:var(--ink);border-color:rgba(14,28,38,.4)}
+}
