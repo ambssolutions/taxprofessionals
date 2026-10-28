@@ -1368,7 +1368,7 @@ html.js .rv.in{opacity:1;transform:none}
   if (reduce) terms.classList.add('still');
   function termsStrip(G, ST){
     var tr = terms.querySelector('.terms-track'), lean = terms.querySelector('.terms-lean');
-    var loop = G.to(tr, {xPercent:-50, ease:'none', duration:38, repeat:-1});
+    var loop = G.to(tr, {xPercent:-50, ease:'none', duration:14, repeat:-1});
     var sk = G.quickTo(lean, 'skewX', {duration:.5, ease:'power3'}), ts = {v:1};
     var st = ST.create({trigger:terms, start:'top bottom', end:'bottom top',
       onToggle:function(s){ if (s.isActive) loop.play(); else loop.pause(); },
