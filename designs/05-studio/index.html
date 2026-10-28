@@ -1181,7 +1181,7 @@ html.js .rv.in{opacity:1;transform:none}
             <g class="map-tag"><rect x="282" y="134" width="44" height="24" rx="12" fill="#F3EFE7"/><text x="304" y="151" text-anchor="middle" font-family="Inter Tight,system-ui,sans-serif" font-size="13" font-weight="600" fill="#01111c">620</text></g>
           </svg></div>
         </div>
-        <form class="form" id="enquiry" novalidate>
+        <form class="form" id="enquiry" data-w3f="" novalidate>
           <div><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
           <div><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
           <div><label for="f-phone">Phone <span>(optional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
@@ -1474,9 +1474,27 @@ html.js .rv.in{opacity:1;transform:none}
     });
     if (bad.length) { status.className = 'status err'; status.textContent = 'Please add ' + bad.join(', ') + '.'; form.querySelector('[aria-invalid=true]').focus(); return; }
     var body = 'Name: ' + form.name.value.trim() + '\nEmail: ' + form.email.value.trim() + (form.phone.value.trim() ? '\nPhone: ' + form.phone.value.trim() : '') + (form.topic.value ? '\nRegarding: ' + form.topic.value : '') + '\n\n' + form.message.value.trim();
-    status.className = 'status';
-    status.textContent = 'Your email app should open with your note ready to send. If it does not, email info@taxprofessionals.co.nz.';
-    location.href = 'mailto:info@taxprofessionals.co.nz?subject=' + encodeURIComponent('Website enquiry from ' + form.name.value.trim()) + '&body=' + encodeURIComponent(body);
+    var subject = 'Website enquiry from ' + form.name.value.trim();
+    function byEmail(){
+      status.className = 'status';
+      status.textContent = 'Your email app should open with your note ready to send. If it does not, email info@taxprofessionals.co.nz.';
+      location.href = 'mailto:info@taxprofessionals.co.nz?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+    /* sends through Web3Forms once the access key is set on the form (data-w3f); until then, or if sending fails, the email app opens */
+    var key = form.getAttribute('data-w3f');
+    if (!key || !window.fetch) { byEmail(); return; }
+    var btn = form.querySelector('[type=submit]'); if (btn) btn.disabled = true;
+    status.className = 'status'; status.textContent = 'Sending your message...';
+    fetch('https://api.web3forms.com/submit', {method:'POST', headers:{'Content-Type':'application/json', 'Accept':'application/json'},
+      body: JSON.stringify({access_key:key, subject:subject, from_name:'Tax Professionals website', name:form.name.value.trim(), email:form.email.value.trim(),
+        phone:form.phone.value.trim(), topic:form.topic.value, message:form.message.value.trim(), botcheck:''})})
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if (!j || !j.success) throw new Error('not sent');
+        status.className = 'status ok'; status.textContent = 'Thanks. Your message is with the team, and we will be in touch soon.'; form.reset();
+      })
+      .catch(function(){ byEmail(); })
+      .then(function(){ if (btn) btn.disabled = false; });
   });
 
   /* dates: the next standard due date on split-flap digits (live), and the tax year as a reel of film frames */
@@ -1981,6 +1999,6 @@ html body .ac-panel .ac-av svg{display:none}
 html body .ac-panel #acTitle{font-family:var(--sans);font-weight:700;color:#04649F;letter-spacing:-.01em}
 html body .ac-panel .ac-head::after{background:linear-gradient(90deg,#04649F,#4CA442);opacity:1}
 </style>
-<!--chat--><script src="/designs/05-studio/chat.js?v=ea4d8a04" data-index="/designs/05-studio/chat-index.json?v=3926c95c" data-label="Ask us" data-langs="en" data-key="taxpro-05-chat" data-color="#04649F" data-nudge="Kia ora. I&#x27;m the Tax Professionals assistant. Can I help with a tax or accounting question?" data-nudge-after="15" data-nudge-open="1" data-avoid=".qb" defer></script><!--/chat-->
+<!--chat--><script src="/designs/05-studio/chat.js?v=ea4d8a04" data-index="/designs/05-studio/chat-index.json?v=3926c95c" data-label="Ask us" data-langs="en" data-key="taxpro-05-chat" data-color="#04649F" data-avoid=".qb" defer></script><!--/chat-->
 </body>
 </html>
