@@ -559,12 +559,22 @@ html.js .map:not(.drop) .map-sh{transform:scale(.2)}
 .foot{background:var(--film);color:rgba(243,239,231,.8);text-align:center;padding:clamp(56px,8vw,96px) 0 36px;font-size:15px}
 .foot .brand{display:inline-flex;margin:0 auto 14px;padding:10px 18px}
 .foot .tag{max-width:46ch;margin:0 auto}
-.foot .tag a{white-space:nowrap}
+.f-ct{display:flex;flex-wrap:wrap;justify-content:center;gap:0 22px;margin-top:4px}
+.f-ct a{display:inline-flex;align-items:center;min-height:40px;white-space:nowrap;color:var(--ivory);text-underline-offset:4px}
 .foot :focus-visible{outline-color:var(--ivory)}
-.f-cols{display:flex;justify-content:center;gap:clamp(40px,8vw,120px);margin:44px auto 40px;flex-wrap:wrap}
-.f-cols h2{font:500 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(243,239,231,.6);margin-bottom:12px}
+/* three short, even columns on wider screens; on phones the two short link lists sit side by side */
+.f-cols{display:grid;grid-template-columns:repeat(3,auto);justify-content:center;gap:28px clamp(40px,7vw,104px);margin:40px auto 36px}
+.f-cols h2{font:500 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(243,239,231,.6);margin-bottom:12px}
 .f-cols a{display:flex;justify-content:center;align-items:center;min-height:36px;text-decoration:none;max-width:260px;margin-inline:auto;line-height:1.3}
 .f-cols a:hover{color:#fff}
+@media (min-width:761px){.foot{padding-bottom:76px}}
+@media (max-width:760px){
+  .f-cols{grid-template-columns:1fr 1fr;gap:28px 12px;margin:32px auto 28px}
+  .f-cols nav:first-child{grid-column:1 / -1}
+  .f-cols h2{font-size:14px}
+  .f-cols a{min-height:44px}
+  .foot .legal{font-size:14px}
+}
 .legal{border-top:1px solid var(--line-l);padding-top:22px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 28px;font-size:13.5px;color:rgba(243,239,231,.62)}
 
 /* phone quick bar */
@@ -575,7 +585,7 @@ html.js .map:not(.drop) .map-sh{transform:scale(.2)}
   .qb a+a{background:transparent;color:var(--ivory);border:1px solid rgba(243,239,231,.6)}
   html.js .qb{transform:translateY(110%)}
   html.js .qb.on{transform:none}
-  .foot{padding-bottom:calc(160px + env(safe-area-inset-bottom))}
+  .foot{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
 }
 
 /* full layer opening, centred: the slideshow steps back behind the welcome, which sits on the centre line */
@@ -998,10 +1008,12 @@ html.js .rv.in{opacity:1;transform:none}
 <footer class="foot">
   <div class="wrap">
     <a class="brand" href="#top"><img src="../../assets/logo/logo.webp" width="220" height="40" alt="Tax Professionals" loading="lazy" decoding="async"></a>
-    <p class="tag">620 Manukau Road, Epsom, Auckland 1023 · <a href="tel:+6496250035">09 625 0035</a></p>
+    <p class="tag">620 Manukau Road, Epsom, Auckland 1023</p>
+    <p class="f-ct"><a href="tel:+6496250035">09 625 0035</a><a href="mailto:info@taxprofessionals.co.nz">info@taxprofessionals.co.nz</a></p>
     <div class="f-cols">
       <nav aria-labelledby="fs-t"><h2 id="fs-t">Services</h2><a href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">Taxation &amp; Accounting Compliance</a><a href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">Business Advisory &amp; Planning</a><a href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">Employment &amp; HR Advisory</a><a href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">Property Investment &amp; Development</a></nav>
-      <nav aria-labelledby="fe-t"><h2 id="fe-t">Explore</h2><a href="#promises">Five promises</a><a href="#people">People</a><a href="#dates">Dates to know</a><a href="#questions">Questions</a><a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">Client resources</a><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">Insights</a><a href="https://www.taxprofessionals.co.nz/pay-an-invoice" target="_blank" rel="noopener">Pay an invoice</a><a href="https://www.facebook.com/TaxProfessionalsNZ/" target="_blank" rel="noopener">Facebook</a><a href="https://nz.linkedin.com/company/tax-professionals-limited" target="_blank" rel="noopener">LinkedIn</a></nav>
+      <nav aria-labelledby="fe-t"><h2 id="fe-t">On this page</h2><a href="#promises">Five promises</a><a href="#people">People</a><a href="#dates">Dates to know</a><a href="#questions">Questions</a></nav>
+      <nav aria-labelledby="fm-t"><h2 id="fm-t">More</h2><a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">Client resources</a><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">Insights</a><a href="https://www.taxprofessionals.co.nz/pay-an-invoice" target="_blank" rel="noopener">Pay an invoice</a><a href="https://www.facebook.com/TaxProfessionalsNZ/" target="_blank" rel="noopener">Facebook</a><a href="https://nz.linkedin.com/company/tax-professionals-limited" target="_blank" rel="noopener">LinkedIn</a></nav>
     </div>
     <div class="legal"><span>© 2026 Tax Professionals</span><span>Some images may be stock images.</span><span>Proudly designed by AMBS Solutions</span></div>
   </div>
