@@ -74,6 +74,26 @@
     new IntersectionObserver(function (es) { wrap.classList.toggle('off', !es[0].isIntersecting); }).observe(wrap);
   }
   document.addEventListener('visibilitychange', function () { wrap.classList.toggle('off', document.hidden); });
+
+  /* the logo passing the middle of the strip shows in full colour; the rest stay a soft grey */
+  var hl = document.createElement('style');
+  hl.textContent =
+    '.tp-marquee>ul>li img{filter:grayscale(1)!important;opacity:.55!important;transition:filter .6s ease,opacity .6s ease!important}' +
+    '.tp-marquee>ul>li.mid img{filter:none!important;opacity:1!important}';
+  document.head.appendChild(hl);
+  var items = Array.prototype.slice.call(list.children), on = false, raf = 0;
+  function tick() {
+    raf = 0; if (!on) return;
+    var r = wrap.getBoundingClientRect(), mid = r.left + r.width / 2;
+    items.forEach(function (li) {
+      var b = li.getBoundingClientRect(), c = b.left + b.width / 2;
+      li.classList.toggle('mid', Math.abs(c - mid) < b.width * 0.75);
+    });
+    raf = requestAnimationFrame(tick);
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { on = es[0].isIntersecting; if (on && !raf) raf = requestAnimationFrame(tick); }).observe(wrap);
+  }
 })();
 
 /* 2. Falling headings: each word of a section heading drops softly into place as it scrolls into view.
