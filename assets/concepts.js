@@ -322,8 +322,10 @@ window.TP_CONCEPTS = [
         set: function (v) { var tg = document.querySelector('[data-theme-toggle]'); if ((document.documentElement.getAttribute('data-theme') || 'dark') !== v) { if (tg) tg.click(); else { document.documentElement.setAttribute('data-theme', v); lss('tp05-theme', v); } } } });
       G.push({ k: 'accent', t: 'Accent colour', o: [['', 'Green'], ['blue', 'Blue'], ['ivory', 'Ivory']], cur: document.documentElement.getAttribute('data-accent') || '',
         set: function (v) { if (v) document.documentElement.setAttribute('data-accent', v); else document.documentElement.removeAttribute('data-accent'); lss('tp05-accent', v); } });
-      G.push({ k: 'intro', t: 'Opening', o: [['title', 'Title card'], ['photo', 'Straight to photos']], cur: lsg('tp05-intro', 'title'), reload: true,
-        set: function (v) { lss('tp05-intro', v); } });
+      /* Hero: the title card (default), straight to the photo slideshow, or one of three openings. tp05-intro is kept in step for older pages */
+      G.push({ k: 'hero', t: 'Hero', o: [['title', 'Title card'], ['photo', 'Photos only'], ['a', 'Aperture'], ['b', 'Ledger'], ['c', 'Split panels']],
+        cur: lsg('tp05-hero', lsg('tp05-intro', 'title') === 'photo' ? 'photo' : 'title'), reload: true,
+        set: function (v) { lss('tp05-hero', v); lss('tp05-intro', v === 'photo' ? 'photo' : 'title'); } });
       G.push({ k: 'motion', t: 'Motion', o: [['full', 'Full'], ['calm', 'Calm']], cur: lsg('tp05-motion', 'full'), reload: true,
         set: function (v) { lss('tp05-motion', v); } });
     }
@@ -345,7 +347,7 @@ window.TP_CONCEPTS = [
   czm.addEventListener('click', function (e) {
     e.stopPropagation();
     if (e.target.closest('.czr')) {
-      ['tp05-accent', 'tp05-intro', 'tp05-motion'].forEach(function (k) { try { localStorage.removeItem(k); } catch (x) {} });
+      ['tp05-accent', 'tp05-intro', 'tp05-hero', 'tp05-motion'].forEach(function (k) { try { localStorage.removeItem(k); } catch (x) {} });
       if (window.TP_FONT) window.TP_FONT.set(0); if (window.TP_BTN) window.TP_BTN.set(0); if (window.TP_BAR) window.TP_BAR.set(0);
       if (is05) { lss('tp05-theme', 'dark'); location.reload(); } else paintCz();
       return;
