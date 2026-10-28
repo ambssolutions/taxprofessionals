@@ -979,7 +979,7 @@ addEventListener('DOMContentLoaded',function(){
     });
     /* the client quote, word by word */
     if(window.SplitText)SplitText.create('#quote-p',{type:'words',aria:'none',autoSplit:true,onSplit:function(s){
-      return G.fromTo(s.words,{opacity:.3},{opacity:1,ease:'none',stagger:.05,scrollTrigger:{trigger:'#quote-p',start:'top 85%',end:'bottom 55%',scrub:true}});
+      return G.fromTo(s.words,{opacity:.55},{opacity:1,ease:'none',stagger:.05,scrollTrigger:{trigger:'#quote-p',start:'top 85%',end:'bottom 55%',scrub:true}});
     }});
     return function(){H.classList.remove('tfx-p');track.classList.remove('free');if(nowPanel)track.scrollLeft=centreOf(nowPanel)};
   }
