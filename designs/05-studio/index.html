@@ -19,8 +19,8 @@
      fx = full cinematic layer: laptops with a fine pointer and more than 4 cores, or forced with ?fx.
      fx tablet = the same scenes on touch tablets 768px and wider, without smooth scroll or the cursor.
      mo = the portrait tier for phones and everything else. -->
-<script>(function(h){h.classList.add('js');try{var r=matchMedia('(prefers-reduced-motion: reduce)').matches,q=/[?&]fx(=|&|$)/.test(location.search);if(r)return;if(q||(matchMedia('(pointer:fine) and (min-width:1024px) and (min-height:600px)').matches&&(navigator.hardwareConcurrency||8)>4))h.classList.add('fx');else if(matchMedia('(pointer:coarse) and (min-width:768px)').matches)h.classList.add('fx','tablet');else h.classList.add('mo');if(!location.hash)h.classList.add('intro','hold')}catch(e){}})(document.documentElement)</script>
-<script>(function(h){var t='dark';try{if(localStorage.getItem('tp05-theme')==='light')t='light'}catch(e){}h.setAttribute('data-theme',t)})(document.documentElement)</script>
+<script>(function(h){h.classList.add('js');try{var r=matchMedia('(prefers-reduced-motion: reduce)').matches;try{if(localStorage.getItem('tp05-motion')==='calm'){h.classList.add('calm');r=true}}catch(x){}var q=/[?&]fx(=|&|$)/.test(location.search);if(r)return;if(q||(matchMedia('(pointer:fine) and (min-width:1024px) and (min-height:600px)').matches&&(navigator.hardwareConcurrency||8)>4))h.classList.add('fx');else if(matchMedia('(pointer:coarse) and (min-width:768px)').matches)h.classList.add('fx','tablet');else h.classList.add('mo');if(!location.hash&&localStorage.getItem('tp05-intro')!=='photo')h.classList.add('intro','hold')}catch(e){}})(document.documentElement)</script>
+<script>(function(h){var t='dark',a='';try{if(localStorage.getItem('tp05-theme')==='light')t='light';a=localStorage.getItem('tp05-accent')||''}catch(e){}h.setAttribute('data-theme',t);if(a)h.setAttribute('data-accent',a)})(document.documentElement)</script>
 <style>
 :root{
   --ink:#0e1c26;--navy:#033F66;--navy-2:#04507f;--blue:#04649F;--green:#4CA442;--green-d:#1B8F25;--green-l:#62B444;--ivory:#F3EFE7;--ivory-2:#E9E3D7;--paper:#FBF9F4;--blue-soft:#DCEAF4;--green-soft:#E3F1DF;
@@ -1050,6 +1050,12 @@ html[data-theme=light] .legal{color:var(--lt-mut);border-top-color:var(--line)}
 }
 @media (max-width:767px){html[data-theme=light] .qb-ask{background:#fff;color:var(--lt-tx);border-color:rgba(14,28,38,.4)}}
 html[data-theme=light] .prog{background:var(--lt-green)}
+
+/* customise: accent colour for buttons and highlights (logo green is the original) */
+html[data-accent=blue]{--green-l:#4ea3e6;--green:#3d8fd1;--green-d:#04649F}
+html[data-accent=ivory]{--green-l:#F3EFE7;--green:#E9E3D7;--green-d:#04649F}
+html[data-accent=ivory][data-theme=light]{--green-l:#0e1c26;--green:#033F66;--green-d:#033F66}
+html[data-accent=ivory][data-theme=light] .btn{color:#F3EFE7}
 </style>
 </head>
 <body>
@@ -1470,7 +1476,7 @@ html[data-theme=light] .prog{background:var(--lt-green)}
    (transform and opacity) that plays once as its section arrives, CSS sticky does the stacking, and loops pause off screen. */
 (function(){
   var d = document, h = d.documentElement;
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('calm');
   var FX = h.classList.contains('fx'), TAB = h.classList.contains('tablet'), MO = h.classList.contains('mo');
   var MOTION = (FX || MO) && !reduce && 'IntersectionObserver' in window;
   /* the page runs its own motion, so the shared motion layer (assets/motion.js) leaves the headings and photos alone */

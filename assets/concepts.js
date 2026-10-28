@@ -245,6 +245,17 @@ window.TP_CONCEPTS = [
     '.dvs{display:flex;gap:2px;margin-left:4px;padding-left:6px;border-left:1px solid rgba(255,255,255,.14)}' +
     '.dvb{gap:6px;padding:0 9px;font-size:12.5px;opacity:.78}.dvb:hover,.dvb:focus-visible{opacity:1}.dvb[aria-current]{opacity:1;background:rgba(109,171,60,.22)}' +
     '@media (max-width:900px){.dvb span{display:none}.dvb{padding:0 8px}}' +
+    '.cz{gap:6px;padding:0 10px;font-weight:600}' +
+    '.czm{min-width:300px;max-width:min(340px,calc(100vw - 24px));max-height:min(70vh,560px);overflow:auto}' +
+    '.czh{margin:4px 12px 4px;color:#A9B8AE;font-size:12px}' +
+    '.czg{border:0;margin:0;padding:8px 10px 6px}.czg legend{padding:0;margin-bottom:6px;font-size:12.5px;font-weight:600;color:#e9efe9}.czg legend small{font-weight:400;color:#8f9e94;margin-left:4px}' +
+    '.czo{display:flex;flex-wrap:wrap;gap:5px}' +
+    '.czo button{height:30px;padding:0 11px;border-radius:999px;border:1px solid rgba(255,255,255,.16);font-size:12.5px;width:auto}' +
+    '.czo button[aria-pressed=true]{background:#8BC75A;border-color:#8BC75A;color:#0e1611;font-weight:600}' +
+    '.czr{margin:6px 10px 8px;height:30px;font-size:12.5px;color:#8BC75A;text-decoration:underline;text-underline-offset:3px;width:auto;padding:0 2px}' +
+    '@media (max-width:900px){.cz span{display:none}.cz{padding:0 8px}}' +
+    '@media (max-width:380px){.dvb{padding:0 6px}.dvs{margin-left:2px;padding-left:4px}.cz{padding:0 6px}}' +
+    '@media (max-width:760px){.aa,.bs{display:none}.czm{left:0;right:0;min-width:0;max-width:none;width:auto;max-height:calc(100vh - 170px)}}' +
     '.bs{width:34px;padding:0;justify-content:center}.bmenu{min-width:260px}.bmenu p{margin:4px 12px 8px;color:#A9B8AE;font-size:12px}' +
     '.bmenu button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;box-sizing:border-box;height:auto;padding:10px 12px;border-radius:10px}' +
     '.bmenu button[aria-checked=true]{background:rgba(109,171,60,.22)}' +
@@ -265,6 +276,8 @@ window.TP_CONCEPTS = [
     '<span class="tag">' + pad(i) + '</span> ' + cur[1] + '<span class="sub">&nbsp;&middot; ' + cur[2] + '</span> <span aria-hidden="true">&#9662;</span></button>' +
     '<a class="arrow" href="' + href(next) + '" aria-label="Next concept: ' + next[1] + '">&#8250;</a>' +
     '<button type="button" class="fav" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.1 1 5.85L12 16.9l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/></svg></button>' +
+    '<button type="button" class="cz" aria-haspopup="true" aria-expanded="false" title="Customise this design">' +
+      '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg><span>Customise</span></button>' +
     (window.TP_FONT ? '<button type="button" class="aa" aria-haspopup="true" aria-expanded="false" aria-label="Font style" title="Font style">Aa</button>' : '') +
     (window.TP_BTN ? '<button type="button" class="bs" aria-haspopup="true" aria-expanded="false" aria-label="Button style" title="Button style">' +
       '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="7" width="19" height="10" rx="5"/><path d="M8 12h8"/></svg></button>' : '') +
@@ -275,6 +288,7 @@ window.TP_CONCEPTS = [
         return '<a class="dvb" data-d="' + d[0] + '" href="' + new URL('preview.html?c=' + cur[0].slice(0, 2) + '&d=' + d[0], base).href + '" title="View as ' + d[1].toLowerCase() + '">' +
           '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true">' + d[2] + '</svg><span>' + d[1] + '</span></a>';
       }).join('') + '</span>' +
+    '<div class="menu czm" role="dialog" aria-label="Customise this design"><p class="czh">Customise this design</p><div class="czb"></div><button type="button" class="czr">Reset to the original</button></div>' +
     '<div class="menu" role="menu">' +
     '<a role="menuitem" href="' + base.href + '">All concepts <small>gallery &amp; send your pick</small></a><hr>' +
     '<div class="list"></div>' +
@@ -296,6 +310,51 @@ window.TP_CONCEPTS = [
 
   var bar = root.querySelector('.bar'), btn = root.querySelector('button.label'), menu = root.querySelector('.menu'), fav = root.querySelector('.fav');
   var aa = root.querySelector('.aa'), fmenu = root.querySelector('.fmenu'), dmenu = null;
+  /* Customise: every choice for this design in one panel. 05 Studio adds theme, accent, hero opening and motion. */
+  var czb = root.querySelector('.cz'), czm = root.querySelector('.czm'), czBody = czm.querySelector('.czb');
+  var is05 = document.documentElement.getAttribute('data-concept') === '05-studio';
+  function lsg(k, d) { try { return localStorage.getItem(k) || d; } catch (e) { return d; } }
+  function lss(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function groups() {
+    var G = [];
+    if (is05) {
+      G.push({ k: 'theme', t: 'Mode', o: [['dark', 'Dark'], ['light', 'Light']], cur: document.documentElement.getAttribute('data-theme') || 'dark',
+        set: function (v) { var tg = document.querySelector('[data-theme-toggle]'); if ((document.documentElement.getAttribute('data-theme') || 'dark') !== v) { if (tg) tg.click(); else { document.documentElement.setAttribute('data-theme', v); lss('tp05-theme', v); } } } });
+      G.push({ k: 'accent', t: 'Accent colour', o: [['', 'Green'], ['blue', 'Blue'], ['ivory', 'Ivory']], cur: document.documentElement.getAttribute('data-accent') || '',
+        set: function (v) { if (v) document.documentElement.setAttribute('data-accent', v); else document.documentElement.removeAttribute('data-accent'); lss('tp05-accent', v); } });
+      G.push({ k: 'intro', t: 'Opening', o: [['title', 'Title card'], ['photo', 'Straight to photos']], cur: lsg('tp05-intro', 'title'), reload: true,
+        set: function (v) { lss('tp05-intro', v); } });
+      G.push({ k: 'motion', t: 'Motion', o: [['full', 'Full'], ['calm', 'Calm']], cur: lsg('tp05-motion', 'full'), reload: true,
+        set: function (v) { lss('tp05-motion', v); } });
+    }
+    if (window.TP_FONT) G.push({ k: 'font', t: 'Font', o: window.TP_FONT.list.map(function (f, i) { return [String(i), i ? f[1] : 'Original']; }), cur: String(window.TP_FONT.current()), set: function (v) { window.TP_FONT.set(+v); } });
+    if (window.TP_BTN) G.push({ k: 'btn', t: 'Buttons', o: window.TP_BTN.list.map(function (b, i) { return [String(i), b[0]]; }), cur: String(window.TP_BTN.current()), set: function (v) { window.TP_BTN.set(+v); } });
+    if (window.TP_BAR) G.push({ k: 'bar', t: 'Phone Call / Book bar', o: window.TP_BAR.list.map(function (b, i) { return [String(i), b[0]]; }), cur: String(window.TP_BAR.current()), set: function (v) { window.TP_BAR.set(+v); } });
+    return G;
+  }
+  function paintCz() {
+    czBody.innerHTML = groups().map(function (g) {
+      return '<fieldset class="czg"><legend>' + g.t + (g.reload ? ' <small>reloads the page</small>' : '') + '</legend><div class="czo">' +
+        g.o.map(function (o) { return '<button type="button" data-g="' + g.k + '" data-v="' + o[0] + '" aria-pressed="' + (o[0] === g.cur) + '">' + o[1] + '</button>'; }).join('') + '</div></fieldset>';
+    }).join('');
+  }
+  czb.addEventListener('click', function (e) {
+    e.stopPropagation(); var open = !czm.classList.contains('open'); close();
+    if (open) { paintCz(); czm.classList.add('open'); czb.setAttribute('aria-expanded', 'true'); }
+  });
+  czm.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (e.target.closest('.czr')) {
+      ['tp05-accent', 'tp05-intro', 'tp05-motion'].forEach(function (k) { try { localStorage.removeItem(k); } catch (x) {} });
+      if (window.TP_FONT) window.TP_FONT.set(0); if (window.TP_BTN) window.TP_BTN.set(0); if (window.TP_BAR) window.TP_BAR.set(0);
+      if (is05) { lss('tp05-theme', 'dark'); location.reload(); } else paintCz();
+      return;
+    }
+    var b = e.target.closest('button[data-g]'); if (!b) return;
+    var g = groups().filter(function (x) { return x.k === b.dataset.g; })[0]; if (!g) return;
+    g.set(b.dataset.v);
+    if (g.reload) location.reload(); else paintCz();
+  });
   var bsb = root.querySelector('.bs'), bmenu = root.querySelector('.bmenu');
   if (bsb) {
     var paintBtn = function () { bmenu.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-checked', String(b.dataset.bar != null ? (window.TP_BAR && +b.dataset.bar === window.TP_BAR.current()) : +b.dataset.k === window.TP_BTN.current())); }); };
@@ -368,6 +427,7 @@ window.TP_CONCEPTS = [
   function close() {
     menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false');
     if (fmenu) { fmenu.classList.remove('open'); aa.setAttribute('aria-expanded', 'false'); }
+    if (czm) { czm.classList.remove('open'); czb.setAttribute('aria-expanded', 'false'); }
     if (bmenu) { bmenu.classList.remove('open'); bsb.setAttribute('aria-expanded', 'false'); }
   }
   if (aa) {
@@ -406,7 +466,7 @@ window.TP_CONCEPTS = [
   // phones and tablets: the bar never sits over the page; it lives in a small numbered tab at the left edge,
   // opens on a tap and tucks away again after a few seconds or as soon as the page scrolls
   var tab = root.querySelector('.tab'), tabT = 0;
-  function tuckAway() { if (menu.classList.contains('open') || (fmenu && fmenu.classList.contains('open')) || (bmenu && bmenu.classList.contains('open'))) return; bar.classList.add('gone'); tab.classList.add('show'); }
+  function tuckAway() { if (menu.classList.contains('open') || (fmenu && fmenu.classList.contains('open')) || (bmenu && bmenu.classList.contains('open')) || (czm && czm.classList.contains('open'))) return; bar.classList.add('gone'); tab.classList.add('show'); }
   function showBar() { bar.classList.remove('gone'); tab.classList.remove('show'); clearTimeout(tabT); tabT = setTimeout(tuckAway, 6000); }
   tab.addEventListener('click', function (e) { e.stopPropagation(); showBar(); });
   root.addEventListener('click', function () { if (phone.matches && !bar.classList.contains('gone')) { clearTimeout(tabT); tabT = setTimeout(tuckAway, 6000); } });
