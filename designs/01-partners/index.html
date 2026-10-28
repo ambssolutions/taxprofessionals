@@ -113,6 +113,8 @@ ul,ol{margin:0;padding:0;list-style:none}
 /* sections */
 .sec{padding:clamp(72px,11vw,150px) 0;position:relative}
 .tint{background:var(--ivory-2)}
+/* laptops and tablets: calmer section spacing keeps the page short */
+.fx .sec{padding:clamp(48px,10vh,100px) 0}
 .sh{text-align:center;max-width:780px;margin:0 auto clamp(40px,6vw,72px)}
 .sh h2{font-size:var(--h2);line-height:1.12;color:var(--deep)}
 .sh p{margin-top:18px;color:var(--muted);font-size:1.08rem}
@@ -144,11 +146,17 @@ ul,ol{margin:0;padding:0;list-style:none}
   html:not(.fx) .gal-hint{display:none}
 }
 .fx .gal-stage{height:calc(100svh - var(--hh));display:flex;flex-direction:column;padding:clamp(28px,5vh,56px) 0 clamp(56px,9vh,90px);overflow:hidden}
-.fx .gal-head{margin-bottom:0}
+.fx .gal-head{margin-bottom:0;max-width:1100px}
+.fx .gal-head p{margin-top:10px}
 .fx .gal-hint{display:none}
-.fx .gal-track{flex:1;display:flex;align-items:center;gap:0;width:max-content;overflow:visible;scroll-snap-type:none;padding:0 12vw 0 max(var(--pad),calc((100vw - 1200px)/2))}
-.fx .panel{flex:0 0 clamp(780px,64vw,1020px);grid-template-columns:300px minmax(0,1fr);gap:clamp(36px,4vw,64px);align-items:center;align-content:center;padding-right:clamp(40px,6vw,110px)}
-.fx .g-num{display:block;position:absolute;left:-.12em;top:50%;margin-top:-.55em;font:400 clamp(11rem,19vw,17rem)/1 var(--serif);color:transparent;-webkit-text-stroke:1px rgba(247,243,234,.16);pointer-events:none;z-index:0}
+/* laptops and tablets: one row of five portrait cards that drifts sideways through a short pin */
+.fx .gal-track{flex:none;margin-block:auto;display:flex;align-items:flex-start;gap:clamp(40px,4vw,64px);width:max-content;overflow:visible;scroll-snap-type:none;padding:0 max(var(--pad),calc((100vw - 1200px)/2))}
+.fx .panel{flex:0 0 clamp(320px,26vw,390px);gap:clamp(12px,2vh,20px);align-content:center}
+.fx .g-shot{width:min(100% - 6.5rem,300px,calc((100svh - var(--hh)) * .3))}
+.fx .g-name{font-size:clamp(1.9rem,2.6vw,2.5rem);margin-top:6px}
+.fx .g-cred{margin-top:10px;font-size:.98rem;line-height:1.5}
+.fx .g-mail{margin-top:4px}
+.fx .g-num{display:block;position:absolute;right:0;top:-.08em;font:400 clamp(4rem,6vw,6rem)/1 var(--serif);color:transparent;-webkit-text-stroke:1px rgba(247,243,234,.2);pointer-events:none;z-index:0}
 .fx .g-shot,.fx .g-text{position:relative;z-index:1}
 .fx .gal-bar{display:block;position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(28px,5vh,48px);height:1px;background:var(--line-i)}
 .fx .gal-bar i{position:absolute;inset:0;background:var(--ivory);transform-origin:left;transform:scaleX(0)}
@@ -184,10 +192,19 @@ ul,ol{margin:0;padding:0;list-style:none}
 .pr-slide h3{font-size:clamp(2.3rem,5.6vw,5.6rem);line-height:1.1;max-width:17ch;margin:0 auto}
 .pr-slide p{margin:clamp(18px,3vh,30px) auto 0;font-size:1.5rem;line-height:1.4;max-width:34ch;color:var(--ivory)}
 @media (prefers-reduced-motion:reduce){.pr-slide{position:relative;top:auto}}
-.fx .pr-stage{height:calc(100svh - var(--hh));overflow:hidden}
-.fx .pr-stage>h2{position:absolute;z-index:5;left:0;right:0;top:0;padding:clamp(18px,4vh,36px) var(--pad) 0;font-size:clamp(1.6rem,2.4vw,2.2rem);color:var(--ivory);pointer-events:none}
-.fx .pr-slide{position:absolute;inset:0;min-height:0}
-.fx .pr-in{padding-top:clamp(60px,10vh,100px)}
+/* laptops and tablets: opaque cards stack with native CSS sticky under the pinned heading; each card's number and title stay in view */
+.fx .pr{--sh:clamp(88px,13vh,124px);--peek:clamp(58px,8vh,76px);padding:clamp(40px,7vh,80px) 0 clamp(56px,9vh,100px)}
+.fx .pr-stage{width:min(1100px,100% - 2*var(--pad));margin:0 auto}
+.fx .pr-stage>h2{position:sticky;top:var(--hh);z-index:6;height:var(--sh);display:flex;align-items:center;justify-content:center;padding:0;background:var(--ivory)}
+/* every card ends on the same line, so the finished stack leaves together and no card slides over another's title */
+.fx .pr-stage{--ch:clamp(210px,calc(100svh - var(--hh) - var(--sh) - 4 * var(--peek) - 28px),270px)}
+.fx .pr-slide{--i:0;top:calc(var(--hh) + var(--sh) + var(--i) * var(--peek));height:calc(var(--ch) + (4 - var(--i)) * var(--peek));margin-bottom:0;min-height:0;border-radius:4px;overflow:hidden;display:block}
+.fx .pr-slide:nth-child(3){--i:1}.fx .pr-slide:nth-child(4){--i:2}.fx .pr-slide:nth-child(5){--i:3}.fx .pr-slide:nth-child(6){--i:4}
+.fx .pr-in{width:auto;height:var(--ch);margin:0;padding:0 clamp(20px,3vw,44px);display:grid;grid-template-columns:5.5rem minmax(0,1fr) 5.5rem;grid-template-rows:var(--peek) minmax(0,1fr)}
+.fx .pr-n{grid-column:1;grid-row:1;align-self:center;justify-self:start;margin:0;font-size:1rem;letter-spacing:.12em}
+.fx .pr-slide h3{grid-column:2;grid-row:1;align-self:center;max-width:none;font-size:clamp(1.3rem,2.1vw,2rem);line-height:1.15}
+.fx .pr-slide p{grid-column:1/-1;grid-row:2;align-self:center;margin:0 auto;padding-bottom:var(--peek);border-top:0;max-width:34ch;font:italic 400 clamp(1.25rem,1.9vw,1.75rem)/1.4 var(--serif);color:rgba(247,243,234,.92)}
+.fx .pr-in::before{content:"";grid-column:1/-1;grid-row:1;align-self:end;height:1px;background:rgba(247,243,234,.24)}
 
 /* services */
 .svc{max-width:1200px;margin:0 auto;border-top:1px solid var(--line)}
@@ -279,8 +296,6 @@ ul,ol{margin:0;padding:0;list-style:none}
 .aw p{margin:20px auto 0;color:var(--muted);max-width:min(62ch,100%)}
 .aw-frame{overflow:hidden;border-radius:2px;width:min(100%,530px,calc((100svh - var(--hh)) * .62))}
 .aw-frame img{width:100%;aspect-ratio:800/488;object-fit:cover;transform-origin:42% 0%}
-.fx .aw{padding:0}
-.fx .aw-stage{height:calc(100svh - var(--hh));display:flex;align-items:center}
 
 /* testimonial */
 .quote{max-width:980px;margin:0 auto;text-align:center}
@@ -403,8 +418,6 @@ html.ph-gal .g-num{display:block;position:absolute;right:14px;top:-.12em;font:40
 html.ph-gal .g-shot,html.ph-gal .g-text{position:relative;z-index:1}
 html.ph-gal .gal-bar{display:block;position:relative;order:1;flex:none;margin:0 var(--pad) clamp(6px,1.4svh,16px);height:1px;background:var(--line-i)}
 html.ph-gal .gal-track{order:2}
-/* touch tablets: each portrait panel fits inside the screen, its text column wraps */
-html.tab.fx .panel{flex-basis:min(clamp(780px,64vw,1020px),calc(100vw - 2*var(--pad)));grid-template-columns:min(300px,34vw) minmax(0,1fr);gap:clamp(28px,3.4vw,48px);padding-right:clamp(56px,6vw,96px)}
 html.ph-gal .gal-bar i{position:absolute;inset:0;background:var(--ivory);transform-origin:left;transform:scaleX(0)}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation:none!important}html{scroll-behavior:auto}}
@@ -796,7 +809,7 @@ document.addEventListener('DOMContentLoaded', function () {
       svcStage.appendChild(bk); svcStage.classList.add('has-bk'); bookOn(bk);
       var leaves = $$('.bk-leaf', bk);
       gsap.from(bk, { opacity: 0, duration: 1.2, ease: 'power2.out', scrollTrigger: { trigger: svcStage, start: 'top 80%', once: true } });
-      var turn = gsap.timeline({ scrollTrigger: { trigger: svcStage, start: function () { return 'top ' + hh() }, end: function () { return '+=' + Math.round(innerHeight * 0.9 * SN) }, pin: true, scrub: .4, anticipatePin: 1, invalidateOnRefresh: true } });
+      var turn = gsap.timeline({ scrollTrigger: { trigger: svcStage, start: function () { return 'top ' + hh() }, end: function () { return '+=' + Math.round(innerHeight * 1.4) }, pin: true, scrub: .4, anticipatePin: 1, invalidateOnRefresh: true } });
       leaves.forEach(function (lf, k) {
         var fs = $('.bk-front', lf), bs = $('.bk-back', lf);
         var nextImg = k < SN - 2 ? $('.bk-front .bk-ph img', leaves[k + 1]) : $('.bk-right .bk-ph img', bk);
@@ -808,7 +821,7 @@ document.addEventListener('DOMContentLoaded', function () {
           .to(bk, {'--cast': 0, duration: 0.5, ease: 'power1.out' }, k + 0.5)
           .fromTo(nextImg, { scale: 1.1 }, { scale: 1, duration: 1, ease: 'power2.out' }, k);
       });
-      turn.to({}, { duration: 0.8 });
+      turn.to({}, { duration: 0.2 });
       /* a page in mid-turn is a moving picture, not reading text: keep it out of the accessibility tree until it lands */
       var mid = leaves.map(function () { return false });
       turn.eventCallback('onUpdate', function () {
@@ -898,7 +911,7 @@ document.addEventListener('DOMContentLoaded', function () {
       H.classList.add('fx');
       var lenis = null, raf, onA;
       if (useLenis && window.Lenis) {
-        lenis = new Lenis({ lerp: .12 });
+        lenis = new Lenis({smoothWheel:false,syncTouch:false}) /* native scrolling: the page moves exactly with the wheel or trackpad */;
         lenis.on('scroll', ScrollTrigger.update);
         raf = function (t) { lenis.raf(t * 1000) };
         gsap.ticker.add(raf); gsap.ticker.lagSmoothing(0);
@@ -921,24 +934,23 @@ document.addEventListener('DOMContentLoaded', function () {
         hero.style.setProperty('--S', g.S + 'px');
       }
       geo();
-      gsap.timeline({ scrollTrigger: { trigger: hero, start: function () { return 'top ' + hh() }, end: '+=95%', pin: true, scrub: .4, invalidateOnRefresh: true, onRefreshInit: geo } })
+      gsap.timeline({ scrollTrigger: { trigger: hero, start: function () { return 'top ' + hh() }, end: '+=55%', pin: true, scrub: .4, invalidateOnRefresh: true, onRefreshInit: geo } })
         .fromTo(field, { clipPath: function () { return 'inset(' + g.y + 'px ' + (g.W - g.x - g.s) + 'px ' + (g.H - g.y - g.s) + 'px ' + g.x + 'px)' } }, { clipPath: 'inset(0px 0px 0px 0px)', ease: 'power2.inOut', duration: 0.8 }, 0)
         .fromTo(photo, { x: function () { return g.x + g.s / 2 - g.W / 2 }, y: function () { return g.y + g.s / 2 - g.H / 2 }, scale: function () { return g.s / g.S } }, { x: 0, y: 0, scale: 1, ease: 'power2.inOut', duration: 1 }, 0)
         .fromTo(h1, { yPercent: 0, opacity: 1 }, { yPercent: -60, opacity: 0, ease: 'power1.in', duration: 0.35, immediateRender: false }, 0)
         .fromTo(['.hero .lede', '.hero .act'], { y: 0, opacity: 1 }, { y: -40, opacity: 0, ease: 'power1.in', duration: 0.25, immediateRender: false }, 0)
         .fromTo('.hero-cap', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.28 }, 0.72);
 
-      /* the signature: a pinned horizontal portrait gallery with three parallax depths */
+      /* the signature: a row of portraits that drifts sideways through a short pin (under one screen), with a gentle parallax */
       var stage = $('.gal-stage'), track = $('.gal-track');
       var dist = function () { return Math.max(0, track.scrollWidth - stage.clientWidth) };
+      var len = function () { return Math.max(1, Math.min(dist(), innerHeight * 0.9)) };
       track.removeAttribute('tabindex');
-      var tw = gsap.to(track, { x: function () { return -dist() }, ease: 'none', scrollTrigger: { trigger: stage, start: function () { return 'top ' + hh() }, end: function () { return '+=' + dist() }, pin: true, scrub: true, invalidateOnRefresh: true } });
-      gsap.fromTo('.gal-bar i', { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: stage, start: function () { return 'top ' + hh() }, end: function () { return '+=' + dist() }, scrub: .4, invalidateOnRefresh: true } });
+      var tw = gsap.to(track, { x: function () { return -dist() }, ease: 'none', scrollTrigger: { trigger: stage, start: function () { return 'top ' + hh() }, end: function () { return '+=' + len() }, pin: true, scrub: .4, anticipatePin: 1, invalidateOnRefresh: true } });
+      gsap.fromTo('.gal-bar i', { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: stage, start: function () { return 'top ' + hh() }, end: function () { return '+=' + len() }, scrub: .4, invalidateOnRefresh: true } });
       $$('.panel').forEach(function (p, i) {
         var ca = { trigger: p, containerAnimation: tw, start: 'left right', end: 'right left', scrub: true };
-        gsap.fromTo($('.g-num', p), { xPercent: 70 }, { xPercent: -70, ease: 'none', scrollTrigger: ca });
-        gsap.fromTo($('.g-shot', p), { x: 90, y: i % 2 ? 36 : -36 }, { x: -90, y: i % 2 ? -36 : 36, ease: 'none', scrollTrigger: ca });
-        gsap.fromTo($('.g-text', p), { x: -50 }, { x: 50, ease: 'none', scrollTrigger: ca });
+        gsap.fromTo($('.g-num', p), { xPercent: 24 }, { xPercent: -24, ease: 'none', scrollTrigger: ca });
         var s = SplitText.create($$('.g-role, .g-name, .g-cred', p), { type: 'lines', mask: 'lines', aria: 'none' });
         var txt = $('.g-text', p), show = function (v) { gsap.to(txt, { autoAlpha: v, duration: 0.35, overwrite: 'auto' }) };
         gsap.set(txt, { autoAlpha: 0 });
@@ -951,26 +963,23 @@ document.addEventListener('DOMContentLoaded', function () {
           onEnterBack: function () { show(1) }, onLeaveBack: function () { show(0) } });
       });
 
-      /* promises: each one fills the screen in turn */
-      var pst = $('.pr-stage'), slides = $$('.pr-slide');
-      var ptl = gsap.timeline({ scrollTrigger: { trigger: pst, start: function () { return 'top ' + hh() }, end: function () { return '+=' + (slides.length - 1) * innerHeight * 0.8 }, pin: true, scrub: .4, invalidateOnRefresh: true } });
-      slides.forEach(function (s, i) {
+      /* promises: opaque cards stack with CSS sticky (no pin); each title rises word by word as its card arrives */
+      var prH = SplitText.create('#why-h', { type: 'lines', mask: 'lines', aria: 'none' });
+      gsap.from(prH.lines, { yPercent: 105, duration: 1.4, ease: 'expo.out', stagger: 0.1, scrollTrigger: { trigger: '#why', start: 'top 80%', once: true } });
+      $$('.pr-slide').forEach(function (s) {
         var w = SplitText.create($('h3', s), { type: 'words', mask: 'words', aria: 'none' });
-        if (!i) { gsap.from(w.words, { yPercent: 105, duration: 1.2, ease: 'expo.out', stagger: 0.04, scrollTrigger: { trigger: pst, start: 'top 60%', once: true } }); return }
-        ptl.fromTo(s, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut', duration: 1 }, i - 1)
-          .to($('.pr-in', slides[i - 1]), { yPercent: -14, opacity: 0.2, ease: 'none', duration: 1 }, i - 1)
-          .from(w.words, { yPercent: 105, ease: 'power3.out', duration: 0.5, stagger: 0.04 }, i - 0.6)
-          .from($$('p, .pr-n', s), { y: 30, opacity: 0, ease: 'power3.out', duration: 0.4 }, i - 0.45);
+        gsap.timeline({ scrollTrigger: { trigger: s, start: 'top 82%', toggleActions: 'play none none reverse' } })
+          .from(w.words, { yPercent: 105, duration: 1.1, ease: 'expo.out', stagger: 0.04 })
+          .from($$('p, .pr-n', s), { y: 24, opacity: 0, duration: 1, ease: 'expo.out' }, 0.2);
       });
-      ptl.to({}, { duration: 0.4 });
 
       /* services: the open book (created here so the pins stay in page order) */
       var unBook = book();
 
-      /* award: the photo zooms out from a close crop */
-      gsap.timeline({ scrollTrigger: { trigger: '#award .aw-stage', start: function () { return 'top ' + hh() }, end: '+=60%', pin: true, scrub: .4 } })
-        .fromTo('.aw-frame', { clipPath: 'inset(14% 18% 14% 18%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut' }, 0)
-        .fromTo('.aw-frame img', { scale: 1.4 }, { scale: 1, ease: 'power2.inOut' }, 0);
+      /* award: the photo opens from a close crop as it arrives (time-based, no pin) */
+      gsap.timeline({ scrollTrigger: { trigger: '.aw-frame', start: 'top 85%', toggleActions: 'play none none reverse' } })
+        .fromTo('.aw-frame', { clipPath: 'inset(14% 18% 14% 18%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'expo.inOut' }, 0)
+        .fromTo('.aw-frame img', { scale: 1.4 }, { scale: 1, duration: 1.6, ease: 'expo.out' }, 0);
 
       return function () {
         unBook(); H.classList.remove('fx');
@@ -1012,7 +1021,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (pinned) {
         track.removeAttribute('tabindex');
         var dist = function () { return Math.max(0, track.scrollWidth - stage.clientWidth) };
-        var len = function () { return Math.min(dist(), innerHeight * 1.45) };
+        var len = function () { return Math.min(dist(), innerHeight * 0.95) };
         var tw = gsap.to(track, { x: function () { return -dist() }, ease: 'none', scrollTrigger: { trigger: stage, start: function () { return 'top ' + hh() }, end: function () { return '+=' + len() }, pin: true, scrub: .4, anticipatePin: 1, invalidateOnRefresh: true } });
         gsap.fromTo('.gal-bar i', { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: stage, start: function () { return 'top ' + hh() }, end: function () { return '+=' + len() }, scrub: .4, invalidateOnRefresh: true } });
         panels.forEach(function (p) {
