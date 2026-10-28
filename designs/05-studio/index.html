@@ -19,7 +19,7 @@
      fx = full cinematic layer: laptops with a fine pointer and more than 4 cores, or forced with ?fx.
      fx tablet = the same scenes on touch tablets 768px and wider, without smooth scroll or the cursor.
      mo = the portrait tier for phones and everything else. -->
-<script>(function(h){h.classList.add('js');try{var r=matchMedia('(prefers-reduced-motion: reduce)').matches,q=/[?&]fx(=|&|$)/.test(location.search);if(r)return;if(q||(matchMedia('(pointer:fine) and (min-width:1024px) and (min-height:600px)').matches&&(navigator.hardwareConcurrency||8)>4))h.classList.add('fx');else if(matchMedia('(pointer:coarse) and (min-width:768px)').matches)h.classList.add('fx','tablet');else h.classList.add('mo')}catch(e){}})(document.documentElement)</script>
+<script>(function(h){h.classList.add('js');try{var r=matchMedia('(prefers-reduced-motion: reduce)').matches,q=/[?&]fx(=|&|$)/.test(location.search);if(r)return;if(q||(matchMedia('(pointer:fine) and (min-width:1024px) and (min-height:600px)').matches&&(navigator.hardwareConcurrency||8)>4))h.classList.add('fx');else if(matchMedia('(pointer:coarse) and (min-width:768px)').matches)h.classList.add('fx','tablet');else h.classList.add('mo');if(!location.hash)h.classList.add('intro')}catch(e){}})(document.documentElement)</script>
 <style>
 :root{
   --ink:#0e1c26;--navy:#033F66;--navy-2:#04507f;--blue:#04649F;--green:#4CA442;--green-d:#1B8F25;--green-l:#62B444;--ivory:#F3EFE7;--ivory-2:#E9E3D7;--paper:#FBF9F4;--blue-soft:#DCEAF4;--green-soft:#E3F1DF;
@@ -135,6 +135,7 @@ html.fx .cur.big span{opacity:1}
 .slide{position:absolute;inset:0;opacity:0;transition:opacity 2.4s ease}
 .slide.on{opacity:1}
 .slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+html.fx .slide img,html.mo .slide img{top:-4%;height:108%}
 .grade{position:absolute;inset:0;pointer-events:none;background:
   radial-gradient(ellipse 80% 70% at 50% 46%,rgba(1,17,28,0) 35%,rgba(1,17,28,.5) 100%),
   linear-gradient(180deg,rgba(1,17,28,.66) 0,rgba(1,17,28,.18) 28%,rgba(3,40,66,.42) 58%,rgba(1,17,28,.95) 100%)}
@@ -154,13 +155,14 @@ html.js .lb::before{top:0}
 html.js .lb::after{bottom:0;animation-name:lbbot}
 @keyframes lbtop{to{transform:translateY(-101%)}}
 @keyframes lbbot{to{transform:translateY(101%)}}
+html.intro .lb::before,html.intro .lb::after{height:12%;animation-duration:1.5s;animation-delay:2.05s}
 .copy{position:relative;z-index:2;text-align:center;padding-top:calc(var(--hdr) + 24px);padding-bottom:clamp(84px,12vh,112px);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-height:100vh;min-height:100svh}
 .hero h1{font-size:clamp(2.6rem,min(5.2vw,9.6vh),4.5rem);line-height:1}
 .ln{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
 .ln>span{display:block}
 html.js .ln>span{animation:rise 1.4s var(--ease) both}
-html.js .ln:nth-child(1)>span{animation-delay:1s}
-html.js .ln:nth-child(2)>span{animation-delay:1.2s}
+html.js .ln:nth-child(1)>span{animation-delay:calc(var(--in) + 1s)}
+html.js .ln:nth-child(2)>span{animation-delay:calc(var(--in) + 1.18s)}
 @keyframes rise{from{transform:translateY(105%)}}
 .hero .lede{margin-top:clamp(14px,2.4vh,24px);max-width:58ch;font-size:clamp(16px,1.35vw,19px);color:rgba(243,239,231,.88);text-wrap:balance}
 .hero .acts{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 28px;margin-top:clamp(18px,3.2vh,32px);width:100%}
@@ -169,7 +171,39 @@ html.js .ln:nth-child(2)>span{animation-delay:1.2s}
 .strip li{padding-inline:clamp(12px,2vw,24px)}
 .strip li+li{border-left:1px solid var(--line-l)}
 html.js .hero .lede,html.js .hero .acts,html.js .hero .strip,html.js .reel{animation:up 1.4s var(--ease) both}
-html.js .hero .lede{animation-delay:1.45s}html.js .hero .acts{animation-delay:1.6s}html.js .hero .strip{animation-delay:1.75s}html.js .reel{animation-delay:1.9s}
+html.js .hero .lede{animation-delay:calc(var(--in) + 1.45s)}html.js .hero .acts{animation-delay:calc(var(--in) + 1.6s)}html.js .hero .strip{animation-delay:calc(var(--in) + 1.75s)}html.js .reel{animation-delay:calc(var(--in) + 1.9s)}
+/* ===== title card (motion tiers, first load): the firm's name set large, the office photo seen through the letters.
+   The photo warms up inside the letters, then the dark lifts and the letters swell past the viewer onto the full frame.
+   Transform and opacity only; one composited layer. Reduced motion and deep links skip it. ===== */
+:root{--in:0s}
+html.intro{--in:1.45s}
+html.intro-skip{--in:0s}
+.ttl{display:none}
+html.intro .ttl{display:block;position:absolute;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+html.intro-done .ttl{display:none}
+.ttl-f{position:absolute;inset:0;animation:ttlFade .85s cubic-bezier(.45,0,.7,.4) 1.75s both}
+.ttl-z{position:absolute;inset:0;transform-origin:var(--ox,50%) var(--oy,45%);will-change:transform;animation:ttlZoom 1.5s cubic-bezier(.6,0,.2,1) 1.45s both}
+.ttl svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.ttl text{font-family:var(--serif);font-weight:400}
+.ttl .ttl-o text{fill:none;stroke:rgba(243,239,231,.4);stroke-width:1px;vector-effect:non-scaling-stroke}
+.ttl .ttl-o{animation:ttlFade .6s ease 1.25s both}
+@keyframes ttlZoom{to{transform:scale(2.7)}}
+@keyframes ttlFade{to{opacity:0}}
+.ttl-cr{position:absolute;left:0;right:0;top:var(--cy,78%);text-align:center;font:600 12.5px/1.4 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:rgba(243,239,231,.8);animation:ttlCr .9s ease .55s both,ttlFade .5s ease 1.45s forwards}
+.ttl-cr::before{content:"";display:block;width:56px;height:2px;margin:0 auto 14px;background:var(--green-l);transform-origin:50% 50%;animation:ttlRule 1.1s var(--ease) .45s both}
+@keyframes ttlCr{from{opacity:0;transform:translateY(8px)}}
+@keyframes ttlRule{from{transform:scaleX(0)}}
+html.intro .frame{animation:ttlIn 1.3s ease .1s both}
+@keyframes ttlIn{from{opacity:0}}
+html.intro .slide:first-child img{animation:ttlDrift 4.6s cubic-bezier(.2,.6,.2,1) both}
+@keyframes ttlDrift{from{scale:1.16}}
+html.intro .grade{animation:ttlGrade 1.6s ease 1.6s both}
+@keyframes ttlGrade{from{opacity:.2}}
+html.intro .top{animation:ttlTop 1.1s ease 2.4s both}
+@keyframes ttlTop{from{opacity:0;visibility:hidden}}
+html.intro-skip .ttl{opacity:0;transition:opacity .45s ease}
+html.intro-skip .top,html.intro-skip .frame,html.intro-skip .grade{animation:none}
+@media (prefers-reduced-motion:reduce){.ttl{display:none!important}}
 @keyframes up{from{opacity:0;transform:translateY(14px)}}
 /* reel controls: play/pause, slide number, caption */
 .reel{position:absolute;left:0;right:0;bottom:14px;z-index:3}
@@ -351,6 +385,45 @@ html.fx .welcome .since{color:var(--green-l)}
   .step-h{height:auto;padding-block:16px}
 }
 
+/* ===== from shoebox to sorted: loose paperwork, as flat clips, settles onto four tracks (the four services) while
+   you scroll. A CSS sticky stage on a short track (no pin); scrubbed transforms only. Without motion: the sorted state. ===== */
+.sort .head{margin-bottom:clamp(18px,3.4vh,36px)}
+.so-panel{position:relative;--lw:330px;max-width:940px;margin:0 auto;background:#03080d;border:1px solid rgba(243,239,231,.08);border-radius:12px;padding:12px clamp(14px,1.8vw,22px) 14px;box-shadow:var(--emb)}
+.so-ruler{position:relative;height:16px;margin:0 0 6px var(--lw,300px);background:repeating-linear-gradient(90deg,rgba(243,239,231,.22) 0 1px,transparent 1px 44px) 0 100%/100% 6px no-repeat}
+.so-fill{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--green-l);transform-origin:0 50%}
+.so-head{position:absolute;left:100%;bottom:-3px;width:10px;height:10px;margin-left:-5px;border-radius:2px;background:var(--green-l)}
+html.so-run .so-fill{transform:scaleX(0)}
+.so-tracks{display:grid}
+.so-t{display:grid;grid-template-columns:var(--lw,300px) minmax(0,1fr);align-items:center;gap:0 16px;padding-block:clamp(6px,1.1vh,10px);border-top:1px solid rgba(243,239,231,.07)}
+.so-l{font:500 clamp(16px,1.2vw,17.5px)/1.3 var(--sans);letter-spacing:0;color:var(--ivory);display:flex;align-items:baseline;gap:12px}
+.so-l span{font:600 12px/1 var(--sans);letter-spacing:.2em;color:var(--green-l)}
+.so-c{position:relative;display:flex;flex-wrap:wrap;gap:10px;min-height:56px;padding:7px 8px;border-radius:8px;background:#071623;--on:1;box-shadow:inset 0 0 0 1px rgba(243,239,231,.05),inset 3px 0 0 color-mix(in srgb,var(--k) calc(var(--on) * 70%),transparent)}
+.so-c li{position:relative;z-index:2;display:inline-flex;align-items:center;height:42px;padding:0 18px 0 15px;border-radius:7px;white-space:nowrap;font:500 16px/1 var(--sans);color:var(--ivory);background:#0e2638;background:color-mix(in srgb,var(--k) 17%,#08192a);border-left:3px solid var(--k);box-shadow:var(--emb-sm)}
+.so-end{text-align:center;margin-top:clamp(18px,3.4vh,36px)}
+.so-line{max-width:46ch;margin:0 auto;font:400 clamp(1.25rem,1.75vw,1.6rem)/1.35 var(--serif);color:var(--ivory);text-wrap:balance}
+.so-end .btn{margin-top:clamp(14px,2.4vh,24px)}
+/* the stage: one screen, sticky on a track about one and a half screens tall */
+html.so-run .sort{height:calc(150vh + var(--hdr));height:calc(150svh + var(--hdr));padding:0}
+html.so-run .so-stage{position:sticky;top:var(--hdr);height:calc(100vh - var(--hdr));height:calc(100svh - var(--hdr));display:flex;flex-direction:column;justify-content:center;padding-block:clamp(10px,2.4vh,28px);overflow:hidden}
+html.so-run .so-c li{will-change:transform}
+@media (max-width:1100px){.so-panel{--lw:260px}}
+@media (max-height:780px) and (min-width:761px){.so-c{min-height:50px}.so-c li{height:38px}.so-t{padding-block:5px}}
+@media (max-width:760px){
+  .so-panel{padding:8px 6px 8px;margin-inline:-6px}
+  .so-ruler{margin:0 4px 4px}
+  .so-t{grid-template-columns:1fr;gap:5px;padding-block:6px}
+  .so-l{font-size:15px;gap:10px;padding-inline:4px}
+  .so-c{gap:5px;min-height:0;padding:5px;flex-wrap:nowrap}
+  .so-c li{height:34px;padding:0 9px 0 8px;font-size:14px}
+  .so-line{font-size:1.2rem;max-width:30ch}
+  html.so-run .sort{height:calc(120svh + var(--hdr))}
+  html.so-run .so-stage{height:calc(100svh - var(--hdr) - 66px - env(safe-area-inset-bottom));padding-block:8px}
+  html.so-run .sort .head p{display:none}
+  .sort .head{margin-bottom:14px}
+  .so-end{margin-top:14px}
+  .so-end .btn{min-height:50px;margin-top:12px}
+}
+
 /* ===== leaders: three portraits as film frames in a centred row (one column on narrow screens); they reveal as they enter ===== */
 .leaders .head p{color:rgba(243,239,231,.74)}
 .lr-view{position:relative;width:min(1180px,calc(100% - 2 * max(var(--pad),env(safe-area-inset-left))));margin:0 auto;background:#03080d;border-radius:6px;padding:clamp(34px,5vh,48px) 0}
@@ -465,6 +538,20 @@ html:not(.js) .cd-row{display:none}
 /* the tax year as a film strip: frames April to March, a line that draws itself */
 /* the next 60 days: an always-current list worked out from today's date */
 .nx{max-width:760px;margin:0 auto clamp(36px,6vh,56px)}
+.nx-cal:empty{display:none}
+.nx-more{margin-top:16px;text-align:center;color:rgba(243,239,231,.5)}
+.nx-more .tlink{color:var(--ivory);margin-inline:6px}
+@media (min-width:1024px){
+  .nx.split{max-width:1180px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:clamp(24px,3vw,44px);align-items:start}
+  .nx.split .nx-open#calOpen{display:none}
+  .nx.split .nx-side{max-height:640px;overflow:auto;padding-right:4px;scrollbar-width:thin}
+  .nx.split .nx-h{min-height:44px;justify-content:center}
+  .cal.inline{position:static;display:block;width:auto;max-height:none;margin:0;border-radius:16px;overflow:visible}
+  .cal.inline .cal-x{display:none}
+  .cal.inline .cal-top{justify-content:center}
+  .cal.inline .cal-in{padding:clamp(16px,2vw,24px)}
+  .cal.inline .cal-g button{min-height:46px}
+}
 .nx-h{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;margin-bottom:18px}
 .nx-h h3{font:400 clamp(1.4rem,2vw,1.75rem)/1.1 var(--serif);color:var(--ivory)}
 .nx-open{min-height:44px;padding:0 20px;border-radius:999px;border:1px solid rgba(243,239,231,.4);background:transparent;color:var(--ivory);font:600 15px/1 var(--sans);cursor:pointer;box-shadow:var(--emb-sm)}
@@ -767,6 +854,14 @@ html.js .rv.in{opacity:1;transform:none}
         
       </div>
       <div class="lb" aria-hidden="true"></div>
+      <div class="ttl" aria-hidden="true">
+        <div class="ttl-f"><div class="ttl-z">
+          <svg focusable="false"><defs><mask id="ttl-m" maskUnits="userSpaceOnUse" x="-50%" y="-50%" width="200%" height="200%"><rect x="-50%" y="-50%" width="200%" height="200%" fill="#fff"/><text class="ttl-a" text-anchor="middle" fill="#000">Tax</text><text class="ttl-b" text-anchor="middle" fill="#000">Professionals</text></mask></defs>
+            <rect x="-50%" y="-50%" width="200%" height="200%" fill="#01111c" mask="url(#ttl-m)"/>
+            <g class="ttl-o"><text class="ttl-a" text-anchor="middle">Tax</text><text class="ttl-b" text-anchor="middle">Professionals</text></g></svg>
+        </div></div>
+        <p class="ttl-cr">Manukau Road, Epsom &middot; Since 1998</p>
+      </div>
       <div class="wrap copy">
         <h1 id="hero-t"><span class="ln"><span>Tax, explained</span></span> <span class="ln"><span>in your language.</span></span></h1>
         <p class="lede">At Tax Professionals we believe in quality customer service and explaining things in your language. Working for the community from Manukau Road, Epsom, since 1998.</p>
@@ -794,7 +889,7 @@ html.js .rv.in{opacity:1;transform:none}
       <div class="wrap">
         <div class="wtxt">
           <h2 id="w-t">We understand how important it is for business owners to know how profitable they are at any given&nbsp;instance.</h2>
-          <p>The traditional ways of annual accounting and compliance are clearly inappropriate in today's business environment. Things can get tricky when it comes to tax, so our dedicated team is there to help and get things done thoroughly and professionally, with a smile.</p>
+          <p>The traditional ways of annual accounting and compliance are clearly inappropriate in today's business environment.</p>
           <p class="since">Working for the community since 1998.</p>
         </div>
       </div>
@@ -879,6 +974,30 @@ html.js .rv.in{opacity:1;transform:none}
     </div>
   </section>
 
+  <section class="sec sort film" id="sorted" aria-labelledby="so-t">
+    <div class="so-stage">
+      <div class="wrap">
+        <div class="head">
+          <h2 id="so-t">From shoebox to sorted</h2>
+          <p>Bank statements, invoices, payslips, letters from Inland Revenue. Bring what you have, in whatever state it is in, and we put each piece where it belongs.</p>
+        </div>
+        <div class="so-panel">
+          <div class="so-ruler" aria-hidden="true"><i class="so-fill"></i><i class="so-head"></i></div>
+          <ol class="so-tracks">
+            <li class="so-t" style="--k:#4FA3DD"><h3 class="so-l"><span>01</span>Taxation &amp; Accounting Compliance</h3><ul class="so-c"><li>Bank statements</li><li>GST invoices</li><li>IRD letters</li></ul></li>
+            <li class="so-t" style="--k:#62B444"><h3 class="so-l"><span>02</span>Business Advisory &amp; Planning</h3><ul class="so-c"><li>Sales figures</li><li>Cashflow</li><li>Your goals</li></ul></li>
+            <li class="so-t" style="--k:#F3EFE7"><h3 class="so-l"><span>03</span>Employment &amp; HR Advisory</h3><ul class="so-c"><li>Payslips</li><li>Timesheets</li><li>Agreements</li></ul></li>
+            <li class="so-t" style="--k:#bfe3b4"><h3 class="so-l"><span>04</span>Property Investment &amp; Development</h3><ul class="so-c"><li>Rental income</li><li>Rates notices</li><li>Trust deed</li></ul></li>
+          </ol>
+        </div>
+        <div class="so-end">
+          <p class="so-line">Things can get tricky when it comes to tax, so our dedicated team is there to help and get things done thoroughly and professionally, with a smile.</p>
+          <a class="btn" href="#contact">Book a chat</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="sec leaders film" id="people" aria-labelledby="pp-t">
     <div class="lr-stage">
       <div class="wrap head">
@@ -956,8 +1075,12 @@ html.js .rv.in{opacity:1;transform:none}
         <p class="cd-t"><b id="cd-what">GST, provisional tax, income tax and terminal tax dates</b> <span id="cd-when">are listed below.</span></p>
       </div>
       <div class="nx rv" id="nx">
+        <div class="nx-cal" id="nxCal"></div>
+        <div class="nx-side">
         <div class="nx-h"><h3>The next 60 days</h3><button type="button" class="nx-open" id="calOpen" aria-haspopup="dialog">Open the full calendar</button></div>
         <ol class="nx-l" id="nxList"></ol>
+        <p class="nx-more"><a class="tlink" href="tools/">Tax calculators</a> <span aria-hidden="true">·</span> <a class="tlink" href="pay/">Pay an invoice</a></p>
+        </div>
       </div>
       <div class="dl-g">
         <div class="dcard rv"><h3>Income tax</h3><dl>
@@ -994,7 +1117,7 @@ html.js .rv.in{opacity:1;transform:none}
           <div class="cal-b"><button type="button" class="nx-open" id="calIcs">Add the next 12 months to my calendar</button><p>Standard Inland Revenue dates for a 31 March balance date. Due on a weekend or public holiday? Pay the next working day. We&#8217;ll confirm your own dates.</p></div>
         </div>
       </dialog>
-      <p class="note">General dates from Inland Revenue. Due on a weekend or public holiday? Pay the next working day (GST: the last working day of the period). We&#8217;ll confirm your own dates. Calculators and forms are on our <a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">client resources</a> page.</p>
+      <p class="note">General dates from Inland Revenue. Due on a weekend or public holiday? Pay the next working day (GST: the last working day of the period). We&#8217;ll confirm your own dates. Work out tax, take-home pay, GST and more with our <a href="tools/">calculators</a>.</p>
     </div>
   </section>
 
@@ -1097,7 +1220,7 @@ html.js .rv.in{opacity:1;transform:none}
     <div class="f-cols">
       <nav aria-labelledby="fs-t"><h2 id="fs-t">Services</h2><a href="https://www.taxprofessionals.co.nz/taxation-accounting-compliance" target="_blank" rel="noopener">Taxation &amp; Accounting Compliance</a><a href="https://www.taxprofessionals.co.nz/business-advisory-planning" target="_blank" rel="noopener">Business Advisory &amp; Planning</a><a href="https://www.taxprofessionals.co.nz/employment-hr-advisory" target="_blank" rel="noopener">Employment &amp; HR Advisory</a><a href="https://www.taxprofessionals.co.nz/property-investment-development" target="_blank" rel="noopener">Property Investment &amp; Development</a></nav>
       <nav aria-labelledby="fe-t"><h2 id="fe-t">On this page</h2><a href="#promises">Five promises</a><a href="#people">People</a><a href="#dates">Dates to know</a><a href="#questions">Questions</a></nav>
-      <nav aria-labelledby="fm-t"><h2 id="fm-t">More</h2><a href="https://www.taxprofessionals.co.nz/client-resources" target="_blank" rel="noopener">Client resources</a><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">Insights</a><a href="https://www.taxprofessionals.co.nz/pay-an-invoice" target="_blank" rel="noopener">Pay an invoice</a><a href="https://www.facebook.com/TaxProfessionalsNZ/" target="_blank" rel="noopener">Facebook</a><a href="https://nz.linkedin.com/company/tax-professionals-limited" target="_blank" rel="noopener">LinkedIn</a></nav>
+      <nav aria-labelledby="fm-t"><h2 id="fm-t">More</h2><a href="tools/">Calculators and resources</a><a href="https://www.taxprofessionals.co.nz/insights-/-news" target="_blank" rel="noopener">Insights</a><a href="pay/">Pay an invoice</a><a href="https://www.facebook.com/TaxProfessionalsNZ/" target="_blank" rel="noopener">Facebook</a><a href="https://nz.linkedin.com/company/tax-professionals-limited" target="_blank" rel="noopener">LinkedIn</a></nav>
     </div>
     <div class="legal"><span>© 2026 Tax Professionals</span><span>Some images may be stock images.</span><span>Proudly designed by AMBS Solutions</span></div>
   </div>
@@ -1141,7 +1264,7 @@ html.js .rv.in{opacity:1;transform:none}
     slides[si].classList.remove('on'); si = (i + slides.length) % slides.length; slides[si].classList.add('on');
     num.textContent = '0' + (si + 1); capEl.textContent = slides[si].getAttribute('data-cap');
     swapCopy(si);
-    segs.forEach(function(g, k){ g.classList.toggle('done', k < si); g.classList.remove('now'); });
+    segs.forEach(function(g, k){ g.classList.toggle('done', k < si); g.classList.remove('now'); g.firstElementChild.style.animationDelay = ''; });
     void segs[si].offsetWidth; segs[si].classList.add('now');
     left = T; sync();
   }
@@ -1190,7 +1313,40 @@ html.js .rv.in{opacity:1;transform:none}
   pp.addEventListener('click', function(){ setPlay(!playing); });
   if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ vis = es[0].isIntersecting; sync(); }, {threshold:.02}).observe(d.querySelector('.frame'));
   d.addEventListener('visibilitychange', sync);
+  /* the title card plays first, so the first photo keeps its full time once the headline is up */
+  var INTRO = h.classList.contains('intro') && !reduce;
+  if (INTRO) { left = T + 2400; segs[0].firstElementChild.style.animationDelay = '2.4s'; }
   setPlay(playing);
+
+  /* title card: "Tax" over "Professionals", both lines the same width, as large as the first screen allows */
+  (function titleCard(){
+    var ttl = d.querySelector('.ttl'); if (!ttl) return;
+    if (!INTRO) { h.classList.add('intro-done'); return; }
+    var A = [].slice.call(ttl.querySelectorAll('.ttl-a')), B = [].slice.call(ttl.querySelectorAll('.ttl-b')), cr = ttl.querySelector('.ttl-cr');
+    function lay(){
+      var W = hero.clientWidth, H = hero.clientHeight, ph = W < 700;
+      A.concat(B).forEach(function(t){ t.setAttribute('font-size', 100); });
+      var wa = A[1].getComputedTextLength() / 100 || 1.6, wb = B[1].getComputedTextLength() / 100 || 6, r = wb / wa;
+      var capA = .7, capB = .73, gap = .24;
+      var sb = Math.min(W * (ph ? .88 : .78) / wb, H * (ph ? .4 : .64) / (r * capA + capB + gap)), sa = sb * r;
+      var bh = sa * capA + gap * sb + sb * capB, y0 = (H - bh) / 2 - H * (ph ? .05 : .04), yA = y0 + sa * capA, yB = yA + gap * sb + sb * capB;
+      A.forEach(function(t){ t.setAttribute('font-size', sa.toFixed(1)); t.setAttribute('x', W / 2); t.setAttribute('y', yA.toFixed(1)); t.setAttribute('letter-spacing', (-.01 * sa).toFixed(1)); });
+      B.forEach(function(t){ t.setAttribute('font-size', sb.toFixed(1)); t.setAttribute('x', W / 2); t.setAttribute('y', yB.toFixed(1)); });
+      ttl.style.setProperty('--ox', (W / 2) + 'px'); ttl.style.setProperty('--oy', (yA - sa * capA * .42).toFixed(0) + 'px');
+      ttl.style.setProperty('--cy', (yB + sb * .42 + 18).toFixed(0) + 'px');
+    }
+    lay(); if (d.fonts && d.fonts.ready) d.fonts.ready.then(lay);
+    addEventListener('resize', lay);
+    function done(){ h.classList.add('intro-done'); removeEventListener('resize', lay); off(); }
+    var endT = setTimeout(done, 3300);
+    /* a visitor who starts scrolling straight away gets the page at once */
+    function skip(e){ if (e && e.type === 'keydown' && !/^(ArrowDown|PageDown|End| |Spacebar|Tab)$/.test(e.key)) return;
+      h.classList.add('intro-skip'); clearTimeout(endT); setTimeout(done, 480); off(); }
+    function onScroll(){ if (scrollY > 30) skip(); }
+    function off(){ removeEventListener('wheel', skip); removeEventListener('touchmove', skip); removeEventListener('keydown', skip); removeEventListener('scroll', onScroll); }
+    addEventListener('wheel', skip, {passive:true}); addEventListener('touchmove', skip, {passive:true}); addEventListener('keydown', skip); addEventListener('scroll', onScroll, {passive:true});
+    if (scrollY > 30) skip();
+  })();
 
   /* services: the plain list stays in the page for screen readers (and is what reduced motion sees);
      everyone else gets it as a production book: an open book pinned on laptops and tablets, one page at a time on phones */
@@ -1415,6 +1571,19 @@ html.js .rv.in{opacity:1;transform:none}
     prev.addEventListener('click', function(){ view = new Date(view.getFullYear(), view.getMonth() - 1, 1); picked = null; draw(); });
     next.addEventListener('click', function(){ view = new Date(view.getFullYear(), view.getMonth() + 1, 1); picked = null; draw(); });
     [].forEach.call(dlg.querySelectorAll('.cal-f input'), function(cb){ cb.addEventListener('change', function(){ on[cb.value] = cb.checked ? 1 : 0; draw(); }); });
+    var nxBox = d.getElementById('nx'), home = dlg.parentNode, mark = d.createComment('cal'), slot = d.getElementById('nxCal');
+    home.insertBefore(mark, dlg);
+    var wide = matchMedia('(min-width:1024px)');
+    function layout(){
+      if (wide.matches) {
+        if (dlg.open && dlg.matches(':modal')) dlg.close();
+        slot.appendChild(dlg); dlg.classList.add('inline'); dlg.setAttribute('open', ''); nxBox.classList.add('split'); draw();
+      } else if (dlg.classList.contains('inline')) {
+        dlg.removeAttribute('open'); dlg.classList.remove('inline'); mark.parentNode.insertBefore(dlg, mark.nextSibling); nxBox.classList.remove('split');
+      }
+    }
+    if (wide.addEventListener) wide.addEventListener('change', layout); else wide.addListener(layout);
+    layout();
     open.addEventListener('click', function(){ view = new Date(first); picked = null; draw(); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); });
     d.getElementById('calClose').addEventListener('click', function(){ dlg.close ? dlg.close() : dlg.removeAttribute('open'); open.focus(); });
     dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
@@ -1496,6 +1665,44 @@ html.js .rv.in{opacity:1;transform:none}
       light(0);
     } else { view.style.overflowX = 'auto'; frs.forEach(function(f){ f.classList.add('lit'); }); G.set(line, {scaleX:1}); }
     return function(){ scene.remove(); cardsG.classList.remove('sr'); };
+  }
+
+  /* from shoebox to sorted: the clips are laid out in their sorted places; scroll runs them in from a loose,
+     tilted spread across the stage, track by track, then the ruler runs and the line arrives. Native scroll, scrub only. */
+  var sortSec = d.getElementById('sorted');
+  function sortScene(G, ST){
+    var panel = sortSec.querySelector('.so-panel'), stage = sortSec.querySelector('.so-stage'), end = sortSec.querySelector('.so-end');
+    var tracks = [].slice.call(sortSec.querySelectorAll('.so-t')), labels = sortSec.querySelectorAll('.so-l');
+    var clips = [].slice.call(sortSec.querySelectorAll('.so-c li')), fill = sortSec.querySelector('.so-fill'), head = sortSec.querySelector('.so-head'), ruler = sortSec.querySelector('.so-ruler');
+    h.classList.add('so-run');
+    var S = [], n = clips.length;
+    /* a fixed shuffle, so every visit starts from the same considered mess */
+    var order = [7, 2, 10, 5, 0, 9, 3, 11, 6, 1, 8, 4], tilt = [-9, 6, -4, 11, -7, 3, 8, -12, 5, -3, 10, -6], jx = [.3, -.5, .7, -.2, .5, -.7, .1, .6, -.4, .2, -.6, .4], jy = [-.4, .5, .1, -.6, .3, -.2, .6, -.1, .4, -.5, .2, .7];
+    function measure(){
+      var pr = panel.getBoundingClientRect(), er = end.getBoundingClientRect(), ph = innerWidth < 761;
+      var L = pr.left + 8, T = pr.top + (ph ? 6 : 26), R = pr.right - 8, B = Math.max(pr.bottom, er.bottom - 10);
+      var cols = ph ? 2 : 4, rows = Math.ceil(n / cols), cw = (R - L) / cols, chh = (B - T) / rows;
+      clips.forEach(function(c, i){
+        var lane = c.parentNode.getBoundingClientRect(), fx = lane.left + c.offsetLeft + c.offsetWidth / 2, fy = lane.top + c.offsetTop + c.offsetHeight / 2;
+        var cell = order[i % order.length] % (cols * rows), cx = L + (cell % cols + .5) * cw, cy = T + (Math.floor(cell / cols) + .5) * chh;
+        var mx = Math.max(0, (cw - c.offsetWidth) / 2 - 10), my = Math.max(0, (chh - c.offsetHeight) / 2 - 10);
+        S[i] = {x: cx + jx[i] * mx - fx, y: cy + jy[i] * my - fy, r: tilt[i]};
+      });
+    }
+    measure();
+    var tl = G.timeline({defaults:{ease:'none'}, scrollTrigger:{trigger:sortSec, start:function(){ return 'top ' + (innerWidth < 761 ? '22%' : '36%'); }, end:'bottom bottom', scrub:.6, invalidateOnRefresh:true, onRefreshInit:function(){ G.set(clips, {x:0, y:0, rotation:0}); measure(); }}});
+    tl.set({}, {}, 0);
+    clips.forEach(function(c, i){
+      var t = tracks.indexOf(c.closest('.so-t')), j = [].indexOf.call(c.parentNode.children, c);
+      tl.fromTo(c, {x:function(){ return S[i].x; }, y:function(){ return S[i].y; }, rotation:function(){ return S[i].r; }},
+        {x:0, y:0, rotation:0, duration:.3, ease:'power2.inOut'}, .05 + t * .09 + j * .035);
+    });
+    tracks.forEach(function(tr, t){ tl.fromTo(tr.querySelector('.so-c'), {'--on':0}, {'--on':1, duration:.08}, .33 + t * .09); tl.fromTo(labels[t], {autoAlpha:0, x:-12}, {autoAlpha:1, x:0, duration:.08, ease:'power1.out'}, .33 + t * .09); });
+    tl.fromTo(fill, {scaleX:0}, {scaleX:1, duration:.52}, .18)
+      .fromTo(head, {x:function(){ return -ruler.offsetWidth; }}, {x:0, duration:.52}, .18)
+      .fromTo(end, {autoAlpha:0, y:26}, {autoAlpha:1, y:0, duration:.14, ease:'power2.out'}, .72)
+      .to({}, {duration:.12});
+    return function(){ tl.scrollTrigger && tl.scrollTrigger.kill(); tl.kill(); G.set(clips.concat([].slice.call(labels), [].slice.call(sortSec.querySelectorAll('.so-c')), [fill, head, end]), {clearProps:'all'}); h.classList.remove('so-run'); };
   }
 
   /* leaders: three film frames in a row; as the strip enters, each portrait opens upwards and the words rise (time-based, no pin) */
@@ -1596,6 +1803,9 @@ html.js .rv.in{opacity:1;transform:none}
 
     /* 3. promises: native CSS sticky stacking cards (no script, no pin) */
 
+    /* from shoebox to sorted */
+    sortScene(G, ST);
+
     /* 4. people: the three leaders as film frames that open as they enter, then the wider team comes up as credits */
     if (window.SplitText) G.registerPlugin(window.SplitText);
     leadersReel(G, ST);
@@ -1660,7 +1870,7 @@ html.js .rv.in{opacity:1;transform:none}
       var undo = [], frame = d.querySelector('.frame'), copy = d.querySelector('.copy');
 
       /* 1. title sequence: the reel settles from a slow zoom, then letterboxes shut as you scroll away */
-      gs.from(frame, {scale:1.16, duration:3.2, ease:'power2.out'});
+      if (!h.classList.contains('intro')) gs.from(frame, {scale:1.16, duration:3.2, ease:'power2.out'});
       gs.timeline({scrollTrigger:{trigger:hero, start:'top top', end:'bottom top', scrub:true}})
         .to(frame, {clipPath:'inset(13% 0% 13% 0%)', ease:'none'}, 0)
         .to(copy, {y:-70, opacity:0, ease:'power1.in'}, 0);
@@ -1698,6 +1908,9 @@ html.js .rv.in{opacity:1;transform:none}
       undo.push(svcBook(gs, ST, c.conditions.wide && c.conditions.tall));
 
       /* 5. promises: native CSS sticky stacking cards (no script) */
+
+      /* from shoebox to sorted, in portrait */
+      undo.push(sortScene(gs, ST));
 
       /* 6. people: the leaders' frames open as they enter, then the credits come up row by row */
       undo.push(leadersReel(gs, ST));
