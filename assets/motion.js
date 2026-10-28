@@ -230,3 +230,18 @@ function fallingHeadings() {
   addEventListener('blur', end);
   document.addEventListener('visibilitychange', function () { if (document.hidden) end(); });
 })();
+
+/* The normal mouse pointer, always. Custom cursors hid the real pointer, so it got lost. The pointer stays on every
+   design; only 05 Studio (Play / Pause over the slideshow) and 08 Kinetic (the dot that opens into View) keep a cursor
+   effect, and there it follows alongside the normal pointer. */
+(function () {
+  var slug = document.documentElement.getAttribute('data-concept') || '';
+  var keep = /^(05|08)-/.test(slug);
+  var st = document.createElement('style');
+  st.textContent =
+    'html,html *{cursor:auto!important}' +
+    'html :is(a,button,summary,label,select,[role=button],[data-play],.frame,.pp,.thumb){cursor:pointer!important}' +
+    'html :is(input:not([type=checkbox]):not([type=radio]),textarea){cursor:text!important}' +
+    (keep ? '' : '.cur{display:none!important}');
+  document.head.appendChild(st);
+})();

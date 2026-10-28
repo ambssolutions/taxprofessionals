@@ -220,12 +220,12 @@ html:not(.follow-on) .nm:hover .n,html:not(.follow-on) .nm:focus-visible .n,html
 .aw-ph{overflow:hidden}
 .award figure img{width:100%;aspect-ratio:800/488;object-fit:cover}
 .award figcaption{font-size:14px;margin-top:10px;font-weight:500}
-html.js:not(.rm) .cut{clip-path:inset(0 0 100% 0)}
+html.js:not(.rm) .cut{clip-path:inset(-.3em -.15em 100% -.15em)}
 html.js:not(.rm) .in .cut{animation:cut .5s steps(5,end) forwards}
 html.js:not(.rm) .in .cut:nth-child(2){animation-delay:.18s}
 html.js:not(.rm) .in .cut:nth-child(3){animation-delay:.36s}
 html.js:not(.rm) .in figure.cut{animation-delay:.5s;animation-duration:.6s}
-@keyframes cut{to{clip-path:inset(0 0 0 0)}}
+@keyframes cut{to{clip-path:inset(-.3em -.15em -.3em -.15em)}} /* ends a little past the letters so tall and deep glyphs are never cut */
 
 /* testimonial */
 .words{padding:clamp(100px,16vh,190px) 0;text-align:center}

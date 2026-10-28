@@ -135,6 +135,12 @@ window.TP_CONCEPTS = [
     '.menu.open{display:block}' +
     '.menu a{display:flex;width:100%;box-sizing:border-box;height:auto;padding:9px 12px;border-radius:10px;justify-content:space-between;gap:16px}' +
     '.menu a[aria-current]{background:rgba(109,171,60,.22)}' +
+    '.menu .row{display:flex;align-items:center;gap:2px}.menu .row a{flex:1;min-width:0}' +
+    '.menu .mv{width:28px;height:28px;padding:0;justify-content:center;border-radius:8px;font-size:14px;opacity:.45;flex:none}' +
+    '.menu .row:hover .mv,.menu .mv:focus-visible{opacity:1}.menu .mv:disabled{opacity:.12;cursor:default;background:none}' +
+    '.menu .mvtip{margin:6px 12px 4px;color:#A9B8AE;font-size:11.5px;line-height:1.35;white-space:normal}' +
+    '.menu .reset{margin:2px 8px 6px;height:30px;font-size:12.5px;color:#8BC75A;text-decoration:underline;text-underline-offset:3px}' +
+    '.menu .reset[hidden]{display:none}' +
     '.menu small{color:#A9B8AE;font-weight:400}' +
     '.menu hr{border:0;border-top:1px solid rgba(255,255,255,.12);margin:6px 4px}' +
     '.fav{width:34px;padding:0;justify-content:center}.fav svg{width:17px;height:17px}' +
@@ -155,9 +161,9 @@ window.TP_CONCEPTS = [
     (window.TP_FONT ? '<button type="button" class="aa" aria-haspopup="true" aria-expanded="false" aria-label="Font style" title="Font style">Aa</button>' : '') +
     '<div class="menu" role="menu">' +
     '<a role="menuitem" href="' + base.href + '">All concepts <small>gallery &amp; send your pick</small></a><hr>' +
-    CONCEPTS.map(function (c, k) {
-      return '<a role="menuitem" href="' + href(c) + '"' + (k === i ? ' aria-current="page"' : '') + '>' + pad(k) + ' &nbsp;' + c[1] + ' <small>' + c[2] + '</small></a>';
-    }).join('') +
+    '<div class="list"></div>' +
+    '<p class="mvtip">Use &#8593; &#8595; to change the order (kept in this browser, same as the gallery)</p>' +
+    '<button type="button" class="reset" hidden>Reset to our order</button>' +
     '</div>' +
     (window.TP_FONT ? '<div class="menu fmenu" role="menu" aria-label="Font style"><p>Font style for this design</p>' +
       window.TP_FONT.list.map(function (f, k) {
@@ -168,6 +174,42 @@ window.TP_CONCEPTS = [
 
   var bar = root.querySelector('.bar'), btn = root.querySelector('button.label'), menu = root.querySelector('.menu'), fav = root.querySelector('.fav');
   var aa = root.querySelector('.aa'), fmenu = root.querySelector('.fmenu');
+
+  // the menu doubles as an order list: arrows move a design up or down; the order is shared with the gallery
+  var listEl = root.querySelector('.list'), resetB = root.querySelector('.reset'), arrows = root.querySelectorAll('a.arrow'), tagEl = root.querySelector('.tag');
+  var idOf = function (c) { return c[0].slice(0, 2); };
+  function saved() { try { return JSON.parse(localStorage.getItem('tp-order') || 'null'); } catch (e) { return null; } }
+  function saveOrder() {
+    var ids = CONCEPTS.map(idOf);
+    try { if (ids.join() === (window.TP_DEFAULT_ORDER || []).join()) localStorage.removeItem('tp-order'); else localStorage.setItem('tp-order', JSON.stringify(ids)); } catch (e) {}
+  }
+  function sortBy(ids) { CONCEPTS.sort(function (a, b) { var x = ids.indexOf(idOf(a)), y = ids.indexOf(idOf(b)); return (x < 0 ? 99 : x) - (y < 0 ? 99 : y); }); }
+  function paint() {
+    i = CONCEPTS.findIndex(function (c) { return c[0] === current; });
+    n = CONCEPTS.length; cur = CONCEPTS[i]; prev = CONCEPTS[(i + n - 1) % n]; next = CONCEPTS[(i + 1) % n];
+    tagEl.textContent = pad(i);
+    arrows[0].href = href(prev); arrows[0].setAttribute('aria-label', 'Previous concept: ' + prev[1]);
+    arrows[1].href = href(next); arrows[1].setAttribute('aria-label', 'Next concept: ' + next[1]);
+    listEl.innerHTML = CONCEPTS.map(function (c, k) {
+      return '<div class="row"><a role="menuitem" href="' + href(c) + '"' + (k === i ? ' aria-current="page"' : '') + '>' + pad(k) + ' &nbsp;' + c[1] + ' <small>' + c[2] + '</small></a>' +
+        '<button type="button" class="mv" data-k="' + k + '" data-d="-1" aria-label="Move ' + c[1] + ' up"' + (k === 0 ? ' disabled' : '') + '>&#8593;</button>' +
+        '<button type="button" class="mv" data-k="' + k + '" data-d="1" aria-label="Move ' + c[1] + ' down"' + (k === n - 1 ? ' disabled' : '') + '>&#8595;</button></div>';
+    }).join('');
+    resetB.hidden = !saved();
+  }
+  listEl.addEventListener('click', function (e) {
+    var b = e.target.closest('.mv'); if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    var k = +b.dataset.k, d = +b.dataset.d, j = k + d;
+    if (j < 0 || j >= CONCEPTS.length) return;
+    var t = CONCEPTS[k]; CONCEPTS[k] = CONCEPTS[j]; CONCEPTS[j] = t;
+    saveOrder(); paint();
+    var nb = listEl.querySelector('.mv[data-k="' + j + '"][data-d="' + d + '"]');
+    (nb && !nb.disabled ? nb : listEl.querySelector('.mv[data-k="' + j + '"]:not([disabled])')).focus();
+  });
+  resetB.addEventListener('click', function (e) { e.stopPropagation(); try { localStorage.removeItem('tp-order'); } catch (err) {} sortBy(window.TP_DEFAULT_ORDER || []); paint(); });
+  addEventListener('storage', function (e) { if (e.key === 'tp-order') { sortBy(saved() || window.TP_DEFAULT_ORDER || []); paint(); } });
+  paint();
 
   // shortlist, shared with the gallery (same key and id format)
   var KEY = 'tp-shortlist';
