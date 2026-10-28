@@ -187,15 +187,12 @@ html:not(.flaps) .flap{background:#fff;color:var(--deep);padding:.07em .1em;bord
 .yr-ctl button:hover{border-color:var(--blue)}
 html:not(.js) .yr-ctl{display:none}
 @media (max-width:699px){.months a{font-size:.58rem;padding-left:3px;min-height:28px;letter-spacing:0}.today::after{height:11px}}
-/* pinned (laptops) */
-html.pin .yr-stage{height:100vh;display:flex;flex-direction:column;overflow:hidden;padding-top:calc(var(--hh) + 10px);padding-bottom:0}
-html.pin .track{overflow:visible;scroll-snap-type:none;flex:1;min-height:0;padding-top:18px;padding-bottom:clamp(20px,3.5vh,36px);will-change:transform}
-html.pin .mo{flex-basis:min(60vw,860px);min-height:0;height:100%}
-html.pin .yr-ctl{display:none}
-html.pin .flap{font-size:clamp(3rem,1.2rem + 4.2vw,6.25rem)}
+/* laptops and tablets: a sideways row that scrolls on its own and rolls to this month as it enters */
+html.row .mo{flex-basis:min(60vw,860px)}
+html.row .flap{font-size:clamp(3rem,1.2rem + 4.2vw,6.25rem)}
+html.row .stage-k{display:flex}
+.track.free{scroll-snap-type:none}
 .stage-k{display:none;margin:0 var(--pad);justify-content:space-between;padding-top:6px}
-html.pin .stage-k{display:flex}
-@media (max-height:760px){html.pin .mo h3{margin:10px 0}html.pin .due p{font-size:var(--t-s)}}
 
 /* services */
 .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:stretch}
@@ -348,7 +345,7 @@ html.tfx .ins a::after{content:"";position:absolute;left:0;right:0;bottom:-1px;h
 html.tfx .ins a.seen::after{transform:none}
 html.tfx .track.free{scroll-snap-type:none}
 html.tfx-p .svc figure img,html.tfx-p .leader img{transition:none}
-@media (orientation:portrait){html.pin .mo{flex-basis:min(80vw,860px)}html.pin .track{flex:0 1 auto;height:min(100%,640px);margin-block:auto}}
+@media (orientation:portrait){html.row .mo{flex-basis:min(80vw,860px)}}
 
 /* quick bar */
 .qbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:45;display:none;gap:8px;padding:6px;background:#fff;border:1px solid var(--line);border-radius:999px;transform:translateY(160%);transition:transform .6s var(--ease)}
@@ -381,6 +378,7 @@ html.tfx-p .svc figure img,html.tfx-p .leader img{transition:none}
 .roster{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;border:0!important;padding:0;margin-top:20px}
 .roster li{display:flex!important;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:18px 12px!important;border:1px solid var(--line,rgba(0,0,0,.1))!important;border-radius:14px;background:var(--surface,#fff);grid-template-columns:none!important}
 .roster li .av{margin:0 auto 4px!important;width:56px!important;height:56px!important;flex:none;border-radius:50%;overflow:hidden;background:#E3ECF3}
+.roster li .av:not(:has(img)){background:#033F66!important;color:#fff!important}
 .roster li .av img{width:100%!important;height:100%!important;object-fit:cover;object-position:50% 20%;display:block}
 .roster li .role,.roster li a{margin:0!important;justify-self:center;text-align:center}
 @media (max-width:899px){.roster{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -452,7 +450,7 @@ html.tfx-p .svc figure img,html.tfx-p .leader img{transition:none}
       </div>
     </div>
     <div class="yr-stage" id="yr-stage">
-      <div class="stage-k k"><span>Tax year <span class="ty">2026–27</span></span><span>Scroll to move through the months</span></div>
+      <div class="stage-k k"><span>Tax year <span class="ty">2026–27</span></span><span>Move with the buttons or the month names</span></div>
       <div class="axis">
         <div class="axis-line"></div>
         <div class="axis-fill" id="axis-fill"></div>
@@ -763,7 +761,7 @@ addEventListener('DOMContentLoaded',function(){
   var G=window.gsap, ST=window.ScrollTrigger;
   var fine=matchMedia('(pointer: fine)').matches, coarse=matchMedia('(pointer: coarse)').matches;
   var hw=navigator.hardwareConcurrency||8;
-  // three tiers: laptops (pinned year with smooth scroll), touch tablets (the same scenes on native scroll),
+  // three tiers: laptops (sideways year row, native scroll), touch tablets (the same scenes on native scroll),
   // phones (portrait versions). Reduced motion keeps the static carousel. ?fx forces the laptop tier.
   var MM=!!(G&&ST)&&!R, FX=/[?&]fx\b/.test(location.search);
   var LAPQ=FX?'(min-width: 768px)':'(min-width: 900px) and (pointer: fine) and (min-height: 560px)';
@@ -837,26 +835,24 @@ addEventListener('DOMContentLoaded',function(){
   var track=d.getElementById('track'), fill=d.getElementById('axis-fill'), stage=d.getElementById('yr-stage'), nowPanel=d.getElementById('m-'+curM);
   function setActive(i){links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')})}
 
-  var lenis=null, yrTw=null;
+  var lenis=null;
   function goY(y){if(lenis)lenis.scrollTo(y,{duration:1.4});else scrollTo({top:y,behavior:R?'auto':'smooth'})}
   function hh(){return d.querySelector('.site-head').offsetHeight}
   function centreOf(pn){return Math.max(0,Math.min(track.scrollWidth-track.clientWidth,pn.offsetLeft-(track.clientWidth-pn.offsetWidth)/2))}
 
   /* carousel: swipe or buttons (phones, portrait fallback, reduced motion) */
   var raf=0;
-  track.addEventListener('scroll',function(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;if(yrTw)return;var mx=track.scrollWidth-track.clientWidth;var p=mx>0?track.scrollLeft/mx:0;fill.style.transform='scaleX('+p.toFixed(4)+')';setActive(Math.round(p*11))})},{passive:true});
+  track.addEventListener('scroll',function(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;var mx=track.scrollWidth-track.clientWidth;var p=mx>0?track.scrollLeft/mx:0;fill.style.transform='scaleX('+p.toFixed(4)+')';setActive(Math.round(p*11))})},{passive:true});
   var step=function(dir){track.scrollBy({left:dir*(panels[0].offsetWidth+16),behavior:R?'auto':'smooth'})};
   d.getElementById('yr-prev').addEventListener('click',function(){step(-1)});
   d.getElementById('yr-next').addEventListener('click',function(){step(1)});
   links.forEach(function(a,i){a.addEventListener('click',function(e){
     e.preventDefault();var pn=panels[i];
-    if(yrTw){var st=yrTw.scrollTrigger,pl=parseFloat(getComputedStyle(track).paddingLeft),dd=yrDist();goY(st.start+Math.min(1,Math.max(0,(pn.offsetLeft-pl)/dd))*(st.end-st.start))}
-    else track.scrollTo({left:centreOf(pn),behavior:R?'auto':'smooth'});
+    track.scrollTo({left:centreOf(pn),behavior:R?'auto':'smooth'});
   })});
   if(nowPanel)track.scrollLeft=centreOf(nowPanel);
   if(R||!('IntersectionObserver' in window))panels.forEach(roll);
   else{var pio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){roll(e.target);pio.unobserve(e.target)}})},{threshold:.35});panels.forEach(function(pn){pio.observe(pn)})}
-  function yrDist(){var last=panels[panels.length-1];return Math.max(0,last.offsetLeft+last.offsetWidth+parseFloat(getComputedStyle(track).paddingRight)-track.clientWidth)}
 
   /* ---------- hero intro ---------- */
   var intro=[].slice.call(d.querySelectorAll('.intro')), counting=false;
@@ -893,21 +889,26 @@ addEventListener('DOMContentLoaded',function(){
   function scenes(useLenis){
     var lr=null, sg=d.getElementById('svc-grid');
     if(useLenis&&window.Lenis&&hw>4){
-      lenis=new Lenis({lerp:.12,smoothWheel:true});
+      lenis=new Lenis({smoothWheel:false,syncTouch:false}) /* native scrolling: the page moves exactly with the wheel or trackpad */;
       lenis.on('scroll',ST.update);
       lr=function(t){lenis.raf(t*1000)};
       G.ticker.add(lr);G.ticker.lagSmoothing(0);
     }
-    /* pinned horizontal year */
-    H.classList.add('pin');
+    /* the year: a normal sideways row; as it enters, it rolls from April to this month on its own (no pin) */
+    H.classList.add('row');
     track.scrollLeft=0;
-    yrTw=G.to(track,{x:function(){return -yrDist()},ease:'none',scrollTrigger:{trigger:stage,start:'top top',end:function(){return '+='+yrDist()},pin:true,scrub:.4,invalidateOnRefresh:true,anticipatePin:1,
-      onUpdate:function(s){fill.style.transform='scaleX('+s.progress.toFixed(4)+')';setActive(Math.round(s.progress*11))}}});
+    var rollTw=null, o={x:0};
+    function stopRoll(){if(rollTw){rollTw.kill();rollTw=null;track.classList.remove('free')}}
+    ['pointerdown','wheel','touchstart','keydown'].forEach(function(ev){track.addEventListener(ev,stopRoll,{passive:true})});
+    ST.create({trigger:stage,start:'top 70%',once:true,onEnter:function(){
+      var T=nowPanel?centreOf(nowPanel):0; if(!T)return;
+      o.x=track.scrollLeft; track.classList.add('free');
+      rollTw=G.to(o,{x:T,duration:Math.min(3.2,1.4+T/4000),ease:'power2.inOut',onUpdate:function(){track.scrollLeft=o.x},onComplete:function(){rollTw=null;track.classList.remove('free')}});
+    }});
     panels.forEach(function(pn){
-      ST.create({trigger:pn,containerAnimation:yrTw,start:'left 80%',onEnter:function(){roll(pn)}});
-      G.from(pn.querySelector('h3'),{xPercent:14,opacity:.25,ease:'none',scrollTrigger:{trigger:pn,containerAnimation:yrTw,start:'left right',end:'left 45%',scrub:true}});
+      var h=pn.querySelector('h3');
+      ST.create({trigger:stage,start:'top 70%',once:true,onEnter:function(){G.from(h,{xPercent:10,opacity:.25,duration:1.4,ease:'expo.out',delay:.1})}});
     });
-    roll(panels[0]);
     /* services: a stacked deck that fans out with Flip */
     if(window.Flip&&innerWidth>=1100){
       sg.style.minHeight=sg.offsetHeight+'px';
@@ -931,7 +932,7 @@ addEventListener('DOMContentLoaded',function(){
     if(window.SplitText)SplitText.create('#quote-p',{type:'lines',mask:'lines',aria:'none',autoSplit:true,onSplit:function(q){return G.from(q.lines,{yPercent:105,duration:1.4,ease:'expo.out',stagger:.08,scrollTrigger:{trigger:'#quote-p',start:'top 85%'}})}});
     G.from('.leader',{y:40,opacity:0,duration:1.3,ease:'expo.out',stagger:.1,scrollTrigger:{trigger:'.leaders',start:'top 82%'}});
     return function(){
-      H.classList.remove('pin');yrTw=null;
+      H.classList.remove('row');stopRoll();
       if(lenis){G.ticker.remove(lr);lenis.destroy();lenis=null}
       sg.classList.remove('stacked');sg.style.minHeight='';
       if(nowPanel)track.scrollLeft=centreOf(nowPanel);
@@ -944,11 +945,11 @@ addEventListener('DOMContentLoaded',function(){
     /* hero photo settles, then drifts as the hero leaves */
     G.from('.hero-media img',{scale:1.15,duration:2.4,ease:'expo.out',transformOrigin:'60% 40%'});
     G.to('.hero-media',{yPercent:16,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
-    /* the year: a short pin that rolls the months from April to this month */
+    /* the year: a short pin (at most one screen) that rolls the months from April to this month */
     var T=0, o={p:0}, steps=Math.max(1,panels.indexOf(nowPanel));
     track.scrollLeft=0;
     G.to(o,{p:1,ease:'none',onUpdate:function(){track.scrollLeft=o.p*T},
-      scrollTrigger:{trigger:stage,start:function(){return 'top '+hh()},end:function(){return '+='+Math.round(innerHeight*Math.min(1.5,.45+steps*.17))},pin:true,anticipatePin:1,scrub:.4,invalidateOnRefresh:true,
+      scrollTrigger:{trigger:stage,start:function(){return 'top '+hh()},end:function(){return '+='+Math.round(innerHeight*Math.min(1,.4+steps*.1))},pin:true,anticipatePin:1,scrub:.4,invalidateOnRefresh:true,
         onRefresh:function(){T=nowPanel?centreOf(nowPanel):0;track.scrollLeft=o.p*T},
         onToggle:function(s){track.classList.toggle('free',s.isActive)}}});
     G.from('#today',{yPercent:-120,opacity:0,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:stage,start:'top 70%'}});
