@@ -404,6 +404,25 @@ html.fx-on [data-turn]{position:relative;overflow:clip}
   html.ph .qb a{position:relative;overflow:hidden;isolation:isolate}
   .rp{position:absolute;left:0;top:0;width:90px;height:90px;margin:-45px 0 0 -45px;border-radius:50%;background:rgba(255,255,255,.5);pointer-events:none;z-index:-1}
 }
+/* polish: section spacing follows the screen height, so headings and their content share the screen */
+.sec{padding-block:clamp(64px,min(10vw,11.5vh),128px)}
+/* leader portraits: a shorter frame keeps each card and its words on one screen; faces stay in view */
+.leader .pv{aspect-ratio:3/2}
+.leader .pv img{height:100%;object-fit:cover;object-position:50% 12%}
+@media (min-width:901px){
+  #people .head{margin-bottom:clamp(28px,4.4vh,48px)}
+  .leader-b{padding:16px 20px 20px}
+  .team{margin-top:clamp(32px,5vh,52px)}
+  .dcard{padding:20px 22px}
+  .dcard dl div{padding:7px 0}
+  #dates .head,#contact .head{margin-bottom:clamp(28px,4.4vh,48px)}
+  .form textarea{min-height:104px}
+  .form{gap:12px 16px;padding:24px 26px}
+  .c-dl{gap:12px}
+}
+@media (max-width:760px){
+  .team span.t,.dcard dd small,.ins-g .r,.c-dl dt,.priv,.foot small,.foot .legal span{font-size:14px}
+}
 </style>
 </head>
 <body>

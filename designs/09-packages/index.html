@@ -380,6 +380,37 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);bo
 }
 @media (max-width:600px){.wrap{padding:0 16px}.face{padding:26px 20px 22px}dl .r{grid-template-columns:1fr;gap:2px}.dates li{grid-template-columns:1fr;gap:6px}}
 
+/* polish: sections sized so the heading and its content share the screen */
+.sec{padding:clamp(64px,min(10vw,11.5vh),132px) 0}
+/* the four areas: closed cards keep their lead line and show an open sign, so they read as balanced tabs */
+.pin-on .pil:not(.act) .bd{opacity:1;visibility:visible;transform:none;min-width:0;transition:none}
+.pin-on .pil:not(.act) .bd ul,.pin-on .pil:not(.act) .bd .more{display:none}
+.pin-on .pil:not(.act) .bd p{font-size:.94rem;line-height:1.5;color:var(--muted)}
+.pin-on .pil:not(.act)::after{content:"";position:absolute;left:20px;bottom:20px;width:36px;height:36px;border-radius:50%;background:rgba(3,63,102,.05) no-repeat center/14px 14px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 1v12M1 7h12' stroke='%2304649F' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");box-shadow:inset 2px 2px 4px rgba(3,63,102,.16),inset -2px -2px 4px rgba(255,255,255,.75);transition:background-color .4s}
+.pin-on .pil:not(.act):hover{border-color:rgba(4,100,159,.35)}
+.pin-on .pil:not(.act):hover::after{background-color:rgba(4,100,159,.12)}
+@media (min-width:1024px){
+  .pkgs-sec .sec-head{margin-bottom:18px}
+  .ctl{margin:-4px 0 16px}
+  .face{gap:10px;padding:18px 22px 18px}
+  .fee{padding:12px 16px}
+  .fee b{font-size:1.3rem}
+  .inc{gap:9px}
+  .back .inc{gap:7px}
+  .back .inc li{font-size:.94rem;line-height:1.4}
+  .back{gap:10px}
+  .pk-note{margin-top:22px}
+  .plogos{margin-top:32px}
+  .team-top{grid-template-columns:minmax(0,440px) minmax(0,1fr);align-items:center;gap:48px;max-width:1040px;margin:0 auto 48px}
+  .team-top .tx{justify-self:center}
+  .leadc{padding:20px 20px 22px}
+  .leadc img{max-width:150px}
+  .staff{margin-top:20px}
+  .rec{max-width:1100px;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:stretch}
+  .award{align-content:start}
+  .award figcaption{padding:16px 20px}
+}
+@media (max-width:859px){.leadc img{max-width:168px}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
@@ -881,7 +912,8 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);bo
         var id=a.getAttribute('href');if(id.length<2)return;
         var tg=d.querySelector(id);if(!tg)return;
         e.preventDefault();
-        lenis.scrollTo(id==='#top'?0:tg,{offset:id==='#top'?0:-84,duration:1.6});
+        var pt=tg.classList.contains('sec')?Math.max(0,(parseFloat(getComputedStyle(tg).paddingTop)||0)-4):0; /* land on the heading, not on the section's top padding */
+        lenis.scrollTo(id==='#top'?0:tg,{offset:id==='#top'?0:-84+pt,duration:1.6});
         if(id==='#main'||id==='#contact'){tg.setAttribute('tabindex','-1');setTimeout(function(){tg.focus({preventScroll:true})},900)}
       });
     }

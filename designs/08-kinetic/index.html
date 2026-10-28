@@ -361,6 +361,35 @@ html.js:not(.rm) .rv.in{opacity:1;transform:none}
   body.in-hero .qbar{transform:translateY(110%)}
   .foot{padding-bottom:80px}
 }
+/* polish: each section's heading and content share one laptop screen */
+@media (min-width:1001px){
+  .follow-on .names{max-width:1280px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(6,auto);grid-auto-flow:column;column-gap:64px;border-top:0}
+  .follow-on .names li:nth-child(1),.follow-on .names li:nth-child(7){border-top:1px solid var(--hair)}
+  .follow-on .nm{grid-template-columns:1fr minmax(0,300px);padding:11px 4px;min-height:68px}
+  .award-in{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;gap:clamp(40px,5vw,88px)}
+  .award figure{width:100%}
+  .board th{padding:12px 20px}
+  .board td{padding:8px 20px}
+  #dates .head p{margin-top:14px}
+  .board-note{margin-top:18px;max-width:118ch}
+  #team{padding-top:clamp(56px,8vh,96px)}
+  .fc{font-size:clamp(20px,1.6vw,25px)}
+  #dates .head,#contact .head{margin-bottom:clamp(28px,4.4vh,48px)}
+  .contact dl>div{padding:12px 0}
+  .f textarea{min-height:112px}
+}
+@media (max-width:700px){
+  .reel-track{padding-bottom:clamp(36px,6vh,56px)}
+  .sec{padding-block:clamp(64px,9vh,84px)}
+  .words{padding-block:clamp(80px,11vh,104px)}
+  html:not(.follow-on) .names li{flex:0 0 50%}
+  html:not(.follow-on) .nm{padding:22px 6px;gap:8px}
+  html:not(.follow-on) .nm .av{width:84px;height:84px}
+  html:not(.follow-on) .nm .av .mono{font-size:34px}
+  html:not(.follow-on) .nm .n{font-size:22px}
+  html:not(.follow-on) .nm .r{font-size:14px}
+  .card .go,.mq-links small,.partners h2,.contact dt,.lbl,.f small,.legal{font-size:14px}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .mq-track{animation:none;width:auto;flex-wrap:wrap;justify-content:center}

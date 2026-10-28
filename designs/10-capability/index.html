@@ -413,6 +413,24 @@ html.motion:not(.ready) .hero-copy,html.motion:not(.ready) .glance{opacity:0}
   .tbl td[data-label]::before{content:attr(data-label);display:block;font:400 .7rem/1.4 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-top:6px}
   .tbl .num{white-space:normal}
 }
+/* polish: section spacing follows the screen height, and wide screens set media beside its text */
+.sec{padding:clamp(64px,min(10vw,11.5vh),128px) 0}
+@media (min-width:981px){
+  .lead .ph{max-width:180px}
+  .lead h3{margin-top:14px}
+  .team{margin-top:32px}
+  .team li{padding:16px 10px}
+  .community{grid-template-columns:minmax(0,400px) minmax(0,1fr);align-items:center;max-width:1000px;gap:48px}
+  .community .clipw{max-width:400px}
+  .award{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center;max-width:1080px;gap:48px}
+  .award .clipw{max-width:none;width:100%}
+  .quote{margin-top:clamp(48px,7vh,80px)}
+}
+@media (max-width:760px){
+  .team .r,.lead .cred,.tbl small,.tbl td.due,.award .meta,.fine{font-size:14px}
+  .tbl td[data-label]::before{font-size:13px}
+  .lead .ph{max-width:176px}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:.01ms!important;transition-delay:0s!important;animation:none!important}
