@@ -58,7 +58,7 @@ ul,ol{padding:0;list-style:none}
 .k{font:500 var(--t-xs)/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 
 /* header */
-.site-head{position:fixed;inset:0 0 auto;z-index:50;height:var(--hh);background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}
+.site-head{position:fixed;inset:0 0 auto;z-index:50;height:var(--hh);background:#fff;border-bottom:1px solid var(--line)}
 .site-head .wrap{height:100%;display:flex;align-items:center;gap:24px}
 .brand img{height:38px;width:auto}
 .nav{margin-left:auto}
@@ -382,6 +382,20 @@ html.tfx-p .svc figure img,html.tfx-p .leader img{transition:none}
 .roster li .av img{width:100%!important;height:100%!important;object-fit:cover;object-position:50% 20%;display:block}
 .roster li .role,.roster li a{margin:0!important;justify-self:center;text-align:center}
 @media (max-width:899px){.roster{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* tablets and laptops: one calm type scale (headings <=48px, hero <=72px, long lines <=28px) */
+@media (min-width:761px){
+  :root{--t-h2:clamp(1.9rem,3.4vw,3rem);--t-num:clamp(2.5rem,3.4vw,3rem)}
+  .quote blockquote p{font-size:clamp(1.2rem,1.85vw,1.75rem)}
+  .mo h3{font-size:clamp(2.1rem,3.2vw,3rem)}
+  .flap,html.row .flap{font-size:clamp(2.6rem,3.6vw,3.6rem)}
+  .plist li{font-size:clamp(1.2rem,1.75vw,1.6rem)}
+}
+/* four service cards in a row: titles, intros and lists start on the same lines */
+@media (min-width:1100px){
+  .svc-grid:not(.stacked) .svc h3{min-height:2lh}
+  .svc-grid:not(.stacked) .svc-b>p{min-height:3lh}
+  .svc-grid:not(.stacked) .svc ul{margin-top:4px}
+}
 </style>
 </head>
 <body>
@@ -925,7 +939,6 @@ addEventListener('DOMContentLoaded',function(){
     G.fromTo(why,{clipPath:'inset(0% 4% 0% 4% round 28px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:{trigger:why,start:'top bottom',end:'top 25%',scrub:true}});
     d.querySelectorAll('.plist li').forEach(function(li){
       G.fromTo(li,{'--lw':'0%'},{'--lw':'100%',ease:'none',scrollTrigger:{trigger:li,start:'top 85%',end:'top 50%',scrub:true}});
-      G.fromTo(li.querySelector('.n'),{xPercent:-40},{xPercent:0,ease:'none',scrollTrigger:{trigger:li,start:'top 85%',end:'top 55%',scrub:true}});
     });
     /* award photo wipes open, the quote rises line by line */
     G.fromTo('#award-fig img',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'none',scrollTrigger:{trigger:'#award-fig',start:'top 85%',end:'top 40%',scrub:true}});

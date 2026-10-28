@@ -59,7 +59,7 @@ section[id]{scroll-margin-top:88px}
 .tlink:hover svg{transform:translateX(4px)}
 
 /* header */
-.site-header{position:fixed;inset:0 0 auto;z-index:50;height:var(--hd);background:rgba(255,255,255,.97);border-bottom:1px solid var(--hair)}
+.site-header{position:fixed;inset:0 0 auto;z-index:50;height:var(--hd);background:#fff;border-bottom:1px solid var(--hair)}
 .hd{height:100%;max-width:1320px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:24px}
 .brand{flex:none;display:block}
 .brand img{width:220px;height:auto}
@@ -95,10 +95,10 @@ section[id]{scroll-margin-top:88px}
 .fly{position:relative}
 .hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;background:var(--land)}
 .cam{position:absolute;inset:0;overflow:hidden;background:linear-gradient(180deg,#DCE9F0 0%,#EAF0EE 34%,var(--land) 60%)}
-.plane{position:absolute;left:50%;top:50%;width:2400px;height:1600px;transform-origin:0 0;transform:scale(.66) translate(-1000px,-640px)}
+.plane{position:absolute;left:50%;top:50%;width:2400px;height:1600px;transform-origin:0 0;transform:scale(.66) translate(-880px,-640px)}
 .plane>svg{width:2400px;height:1600px;max-width:none}
 .grain{display:none} /* a live noise filter over the 3D map redrew the whole map every frame */
-.hero-wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(247,244,236,.97) 0%,rgba(247,244,236,.9) 40%,rgba(247,244,236,0) 70%);pointer-events:none}
+.hero-wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(247,244,236,.97) 0%,rgba(247,244,236,.93) 60%,rgba(247,244,236,0) 92%);pointer-events:none}
 .hero-copy{position:relative;z-index:3;max-width:980px;margin:0 auto;padding:calc(var(--hd) + 9vh) 24px 0;text-align:center}
 .hero h1{margin:0 auto;max-width:15ch}
 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
@@ -145,9 +145,9 @@ section[id]{scroll-margin-top:88px}
 .fx .hero{position:absolute;inset:0;min-height:0}
 .fx .cam{perspective:1000px;perspective-origin:50% 30%}
 .fx .plane{will-change:transform;transform-style:preserve-3d}
-.fx .arrive{position:absolute;inset:0;z-index:4;display:flex;align-items:center;padding:calc(var(--hd) + 20px) 0 32px;clip-path:circle(0% at 50% 42%)}
+.fx .arrive{position:absolute;inset:0;z-index:4;display:flex;align-items:center;padding:calc(var(--hd) + 20px) 0 76px;clip-path:circle(0% at 50% 42%)}
 .fx .arrive-in{width:100%;gap:24px}
-.fx .arrive-photo{width:max(200px,min(520px,calc(100vh - var(--hd) - 370px)));flex:none}
+.fx .arrive-photo{width:max(200px,min(520px,calc(100vh - var(--hd) - 420px)));flex:none}
 .fx .pin-rise{transform:scale(0);opacity:0}
 .fx .pin-card{opacity:0}
 .fx .map-note{left:auto;right:24px}
@@ -191,7 +191,7 @@ section[id]{scroll-margin-top:88px}
 
 /* services */
 .services{position:relative;z-index:5;background:#fff;border-radius:36px 36px 0 0}
-.fx .services{margin-top:-18vh}
+.fx .services{margin-top:-36px}
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;max-width:1100px;margin:0 auto}
 .card{background:var(--bg);border:1px solid var(--line);border-radius:28px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .5s,box-shadow .6s var(--ease)}
 .card:hover{border-color:#cfc4ad;box-shadow:0 30px 60px -40px rgba(3,63,102,.45)}
@@ -253,7 +253,7 @@ section[id]{scroll-margin-top:88px}
 .pr-list b{flex:none;font:800 .9375rem/1 var(--f-d);color:var(--green-d);letter-spacing:.08em;width:2.2em}
 .fx .pr-list li{color:#5C7080}
 .fx .pr-list li::before{border-color:#C9BFA9}
-.fx .pr-list li.on{color:var(--deep);transform:translateX(10px)}
+.fx .pr-list li.on{color:var(--deep)}
 .fx .pr-list li.on::before,.fx .pr-list li.done::before{border-color:var(--green-d)}
 .fx .pr-list li.on::before{background:var(--green-l);transform:scale(1.25)}
 
@@ -326,6 +326,7 @@ section[id]{scroll-margin-top:88px}
 .form{background:#fff;border:1px solid var(--line);border-radius:28px;padding:30px;display:grid;gap:16px}
 .form h3{margin-bottom:2px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row:has(select){grid-template-columns:1fr}
 .field{display:grid;gap:6px}
 .field label{font-weight:600;color:var(--deep)}
 .field small{font-weight:400;color:var(--mute)}
@@ -423,6 +424,13 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--blue);outline-of
   .js-fold .fold{transition-duration:.01s}
   .js:not(.fx) .card-media img{transform:none;transition:none}
 }
+/* tablets and laptops: one calm type scale (headings <=48px, hero <=72px, long lines <=28px) */
+@media (min-width:761px){
+  h1{font-size:clamp(2.4rem,5.2vw,4.5rem)}
+  h2{font-size:clamp(2rem,3.4vw,3rem)}
+  .pr-list li{font-size:clamp(1.2rem,1.8vw,1.75rem)}
+  .quote blockquote p{font-size:clamp(1.2rem,1.85vw,1.75rem)}
+}
 </style>
 </head>
 <body class="in-hero">
@@ -497,7 +505,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--blue);outline-of
         <g class="m-fade" style="--t:1.8s">
           <text class="m-onroad"><textPath href="#route" startOffset="18%">MANUKAU ROAD</textPath></text>
           <text class="m-onroad m-r2"><textPath href="#route" startOffset="70%">MANUKAU ROAD</textPath></text>
-          <text class="m-lab" x="510" y="860" font-size="76" text-anchor="middle" fill-opacity=".9">EPSOM</text>
+          <text class="m-lab" x="400" y="860" font-size="76" text-anchor="middle" fill-opacity=".9">EPSOM</text>
           <text class="m-lab" x="1980" y="760" font-size="46" text-anchor="middle">GREENLANE</text>
           <text class="m-lab" x="1830" y="1520" font-size="30" text-anchor="middle" fill="#0F3B14">MAUNGAKIEKIE</text>
           <text class="m-lab" x="1830" y="1560" font-size="24" text-anchor="middle" fill="#0F3B14">ONE TREE HILL</text>
@@ -829,7 +837,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var plane=d.querySelector('.plane'),bb=d.querySelector('.pin-bb'),rise=d.querySelector('.pin-rise'),card=d.querySelector('.pin-card'),capEl=d.querySelector('.fly-cap'),route=d.getElementById('route');
   var L=route.getTotalLength(),PIN={x:1224,y:888},fp=0,best=1e12;
   for(var i=0;i<=600;i++){var q=route.getPointAtLength(L*i/600),dd=(q.x-1200)*(q.x-1200)+(q.y-900)*(q.y-900);if(dd<best){best=dd;fp=L*i/600}}
-  var f0=L*.93,rp=route.getPointAtLength(fp),O0={x:1000,y:640};
+  var f0=L*.93,rp=route.getPointAtLength(fp),O0={x:880,y:640};
   var S={rx:0,w:0,u:0,s:Math.max(.66,innerWidth/1900,innerHeight/1150)};
   function render(){
     var fl=f0+(fp-f0)*S.u,p=route.getPointAtLength(fl),p2=route.getPointAtLength(Math.max(0,fl-40));
@@ -850,6 +858,7 @@ document.addEventListener('DOMContentLoaded',function(){
     .to(S,{u:1,duration:.48,ease:'power1.inOut',onUpdate:render},.16)
     .fromTo(rise,{scale:0,y:80,autoAlpha:0},{scale:1,y:0,autoAlpha:1,duration:.1,ease:'back.out(1.8)'},.56)
     .fromTo(card,{autoAlpha:0,x:-16},{autoAlpha:1,x:0,duration:.06},.64)
+    .to(card,{autoAlpha:0,duration:.04},.73)
     .fromTo('.arrive',{clipPath:'circle(0% at 50% 42%)'},{clipPath:'circle(80% at 50% 42%)',duration:.2,ease:'power2.in'},.76)
     .fromTo('.arrive-photo img',{scale:1.3},{scale:1,duration:.24,ease:'power2.out'},.76)
     .fromTo('.arrive-copy > *',{y:40,autoAlpha:0},{y:0,autoAlpha:1,stagger:.025,duration:.08},.86)
